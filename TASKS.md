@@ -66,6 +66,22 @@ cross-team needs under **Blockers / requests**.
   geometry + crop history + purity flags) already exists in the pipeline's own interim
   format if that helps you prototype — but do not treat it as contract-shaped.
 
+- ~~**person 1 → person 2: NASA-data depth for judging ("Relevance" criterion)**~~ —
+  **items 1 and 2 done (2026-11-14); item 3 not done (optional).**
+  - GRACE-FO: `data/interim/grace_water_storage.json` — 259 months, 2002-04..2026-09, area
+    mean over the county's 4 grid cells. Trend **-0.86 cm/yr TWS (R² 0.80)** full period,
+    **-0.80 cm/yr** over the last 10 years (R² 0.52), so the decline is not an artifact of
+    the start date. One 46 MB netCDF, no new dependency. **It is total water storage, not
+    groundwater** — soil moisture, snow and surface water are included; splitting them out
+    needs a land-surface model we do not run. Mascons are ~300 km, so treat it as regional.
+  - Frost: `data/interim/frost_windows.json` + `.csv` — last spring / first fall frost and
+    frost-free days per year, with p10/p50/p90 over 1995-2025, same shape as the heat
+    windows. Caveat recorded in the file: a MERRA-2 cell smooths cold nights, so the season
+    reads long (~199 d p50 vs ~155-170 documented for Garden City) — use it for relative
+    risk between years, not absolute planting dates.
+  - GPM IMERG (optional, item 3) not done — say the word.
+  - **`Makefile` needs `grace`, `groundwater` and `frost` added to `PIPELINE_STEPS`** (root
+    file, yours) or `make data` will not produce them.
 - **person 1 → person 2: NASA-data depth for judging ("Relevance" criterion)** — the brief
   names SMAP, GPM, GRACE/GRACE-FO, ECOSTRESS, Landsat; we currently show POWER, MODIS, SRTM.
   In priority order, each as a small static JSON in `data/interim/` (person 1 wires the UI):

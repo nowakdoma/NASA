@@ -1,4 +1,4 @@
-"""CLI: python -m pipeline {power,ndvi,smap,srtm,cdl,ssurgo,heat,all}"""
+"""CLI: python -m pipeline {power,srtm,cdl,ssurgo,grace,heat,frost,groundwater,...}"""
 
 from __future__ import annotations
 

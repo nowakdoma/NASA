@@ -17,6 +17,9 @@ uv run python -m pipeline ssurgo     # SSURGO map units for the county
 uv run python -m pipeline soil       # texture, OM, K, AWC per field
 uv run python -m pipeline heat       # heat-stress windows from POWER Tmax
 uv run python -m pipeline ndvi       # bare-soil periods from MODIS MOD13Q1
+uv run python -m pipeline grace      # GRACE/GRACE-FO mascon netCDF (46 MB, one file)
+uv run python -m pipeline groundwater  # water-storage series + trend from it
+uv run python -m pipeline frost      # frost dates + percentiles from POWER Tmin
 uv run python -m pipeline assemble   # contract-shaped fields.geojson
 ```
 
@@ -35,6 +38,8 @@ per map unit, and NDVI composites are cached per date, so an interrupted run res
 | `heat_stress_windows.csv` | Tmax ≥ 35 °C runs, county-wide |
 | `field_ndvi.json`, `field_bare_periods.csv` | NDVI series and bare windows per field |
 | `fields.geojson` + `.meta.json` | **the hand-off**: validates against `contracts/fields.schema.json` |
+| `frost_windows.csv` / `.json` | last spring / first fall frost per year + p10-p90 |
+| `grace_water_storage.json` | monthly TWS anomaly + trend, 2002-2026 (regional, ~300 km) |
 
 ## Rules this package follows
 

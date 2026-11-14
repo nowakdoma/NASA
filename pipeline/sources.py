@@ -15,6 +15,7 @@ import rasterio
 
 from pipeline.config import INTERIM, RAW, Config
 from pipeline.fields import cdl_tif
+from pipeline.grace import fetch_grace as grace_fetch
 from pipeline.net import download
 from pipeline.soil import fetch_ssurgo as soil_fetch_ssurgo
 from pipeline.terrain import fetch_srtm as terrain_fetch_srtm
@@ -186,10 +187,16 @@ def fetch_ssurgo(cfg: Config, *, force: bool = False) -> Path:
     return soil_fetch_ssurgo(cfg, force=force)
 
 
+def fetch_grace(cfg: Config, *, force: bool = False):
+    """GRACE/GRACE-FO mascon terrestrial water storage (one 46 MB netCDF)."""
+    return grace_fetch(cfg, force=force)
+
+
 SOURCES = {
     "power": fetch_power,
     "smap": fetch_smap,
     "srtm": fetch_srtm,
     "cdl": fetch_cdl,
     "ssurgo": fetch_ssurgo,
+    "grace": fetch_grace,
 }
