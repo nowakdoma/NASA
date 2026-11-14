@@ -22,9 +22,9 @@ cross-team needs under **Blockers / requests**.
 | `done` income model (price source per crop, placeholder) | `done` SRTM slope per field                                 | `done` P(best) + "verify locally" box copy                      |
 | `→P3` MCDA + Dirichlet weights, P(best) in export       | `done` MODIS NDVI → bare-soil periods per field-year        | `done` mobile layout / accessibility pass                       |
 | `done` `engine.export` → contracts format                | `done` SMAP → water stress (superseded, see note)           | `done` "about the data" / uncertainty page                      |
-| `todo` pitch deck + demo script                          | `done` heat-stress windows (POWER Tmax > threshold)         | `done` deploy static build                                      |
-| `todo` pitch only (rest reassigned to person 3, 2026-11-14)  |                                                             | `todo` (from P1) P(best): close as "computed live in web", keep `engine/mcda.py` in sync with `src/lib/ranking.ts` |
-|                                                          |                                                             | `todo` (from P1) crops.csv contract proposal for triticale, double crops, oats, other hay (see Blockers) |
+| `done` pitch deck + demo script (in reports/)            | `done` heat-stress windows (POWER Tmax > threshold)         | `done` deploy static build                                      |
+| `done` pitch deck (7 slides) + 3-min live demo script    |                                                             | `done` (from P1) P(best): closed live in web, engine/mcda.py synced |
+|                                                          |                                                             | `done` (from P1) crops.csv v0.2 proposal in reports/CONTRACT_PROPOSAL_CROPS_V0.2.md |
 
 ## Blockers / requests
 
@@ -95,3 +95,7 @@ cross-team needs under **Blockers / requests**.
 - `make export` now runs the engine; `python -m engine.export --mock` copies the hand mocks.
 - `make data` = `pipeline all` (downloads) + derivations `heat fields terrain soil ndvi
   assemble` (person 2 request); change the order in `PIPELINE_STEPS` in the Makefile.
+- 2026-11-14 17:15: P(best) closed as computed live in web client; engine/mcda.py augmented
+  with rank_strategies and test parity. Contract proposal for crops.csv v0.2 (triticale, oats,
+  other hay, double crops) documented in reports/CONTRACT_PROPOSAL_CROPS_V0.2.md. Pitch deck
+  (7 slides) & 3-minute live demo script written in reports/PITCH_AND_DEMO_SCRIPT.md.
