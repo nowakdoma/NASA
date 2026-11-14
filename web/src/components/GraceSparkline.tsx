@@ -62,6 +62,11 @@ export function GraceSparkline({ grace }: { grace: GraceFile }) {
           since {first}, every month measured from orbit (trend fits{' '}
           {Math.round(grace.trend.r2 * 100)} % of the variation)
         </span>
+        {grace.mock && (
+          <span className="grace-mock" role="note">
+            Sample data (mock file, yearly points), not the measured monthly series.
+          </span>
+        )}
       </figcaption>
       <div className="grace-plot">
         <svg

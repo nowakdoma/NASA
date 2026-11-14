@@ -1358,3 +1358,13 @@
     grid-template-columns: minmax(0, 7rem) minmax(0, 1fr) 4.5rem;
   }
 }
+
+.grace-mock {
+  margin-top: 4px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: #fbefe9;
+  color: var(--cta);
+  font-size: 0.78rem;
+  font-weight: 600;
+}

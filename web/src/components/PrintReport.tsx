@@ -163,6 +163,7 @@ export function PrintReport({
             Regional water storage (NASA GRACE/GRACE-FO): {grace.trend.cm_per_year.toFixed(2)} cm
             per year since {grace.series[0].date.slice(0, 4)}. A ~300 km regional signal of total
             water storage, not this well.
+            {grace.mock ? ' (Sample data, not the measured series.)' : ''}
           </p>
         )}
       </section>

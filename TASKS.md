@@ -44,6 +44,10 @@ cross-team needs under **Blockers / requests**.
   card whenever `web/public/data/grace_water_storage.json` exists, and hides it otherwise.
   After approval:
   - **person 2:** `pipeline grace` writes `"schema_version": "0.3"` at the top level.
+    **Still open and now blocking (18:30):** without it `make export` falls back to the
+    *mock* GRACE file (22 yearly points, `mock: true`), which is what is in
+    `web/public/data/` now. The web labels it "sample data", but the demo needs the real
+    259-month series. After the fix: `make data` (or `pipeline grace`) then `make export`.
   - ~~**person 3:** `engine.export` copies `data/interim/grace_water_storage.json` to
     `web/public/data/`; `engine.validate` checks it against `grace.schema.json` in
     `make check`; `SCHEMA_VERSION = "0.3"`.~~ — **done (person 3)**: `engine.export`

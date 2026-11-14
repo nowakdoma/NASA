@@ -109,7 +109,10 @@ export function AboutModal({ isOpen, onClose, grace, ranked, fieldId, weatherYea
           agency: 'NASA',
           what: `Changes in all water stored in the region → ${grace.trend.cm_per_year.toFixed(2)} cm per year since ${grace.series[0].date.slice(0, 4)}.`,
           detail: '~300 km mascons, monthly',
-          limit: 'Total storage (soil moisture included), regional. Not your well.',
+          limit: grace.mock
+            ? 'This build shows a mock sample of the series, not the measured file. Regional, not your well.'
+            : 'Total storage (soil moisture included), regional. Not your well.',
+          pending: grace.mock,
         }
       : {
           name: 'GRACE / GRACE-FO',
