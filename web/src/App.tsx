@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { MapErrorBoundary } from './components/MapErrorBoundary';
 import { loadData, type AppData } from './data/load';
 import { MapView } from './components/MapView';
@@ -78,6 +78,7 @@ export default function App() {
     return rankStrategies(strategies, data.strategies.metric_meta, priorities);
   }, [data, selectedId, priorities]);
 
+  const closeAbout = useCallback(() => setIsAboutOpen(false), []);
   const presetLabel = (presetName(priorities) ?? 'your custom').toLowerCase();
 
   const handleSelectField = (fieldId: string) => {
@@ -128,7 +129,7 @@ export default function App() {
           }}
           onOpenAbout={() => setIsAboutOpen(true)}
         />
-        <AboutModal isOpen={isAboutOpen} onClose={() => setIsAboutOpen(false)} />
+        <AboutModal isOpen={isAboutOpen} onClose={closeAbout} grace={data.grace} />
       </>
     );
   }
@@ -339,7 +340,14 @@ export default function App() {
       </main>
 
       {/* About & Uncertainty Dialog */}
-      <AboutModal isOpen={isAboutOpen} onClose={() => setIsAboutOpen(false)} />
+      <AboutModal
+        isOpen={isAboutOpen}
+        onClose={closeAbout}
+        grace={data.grace}
+        ranked={ranked}
+        fieldId={selectedId}
+        weatherYears={data.strategies.weather_years}
+      />
 
       {/* Printable PDF Report (rendered in print media only) */}
       {selected && (
