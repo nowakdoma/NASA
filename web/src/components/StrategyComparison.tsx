@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { METRIC_KEYS, type MetricKey, type MetricMeta } from '../types/contracts';
 import type { RankedStrategy } from '../lib/ranking';
 import { cropLabel } from '../lib/colors';
+import { US } from '../lib/units';
 import {
   IconAlertTriangle,
   IconArrowRight,
@@ -262,9 +263,11 @@ export function StrategyComparison({ ranked, meta, weatherYears, onOpenAbout }: 
 
         <div className="plots-list">
           {(activeMetricTab === 'all' ? METRIC_KEYS : [activeMetricTab]).map((m) => {
-            const currentP50 = currentRanked.strategy.metrics[m].p50;
+            const u = US[m].f;
+            const currentP50 = u(currentRanked.strategy.metrics[m].p50);
             const rows: IntervalRow[] = ranked.map(({ strategy, pBest }) => {
-              const q = strategy.metrics[m];
+              const raw = strategy.metrics[m];
+              const q = { p10: u(raw.p10), p50: u(raw.p50), p90: u(raw.p90) };
               const deltaP50 = q.p50 - currentP50;
               const deltaPct =
                 currentP50 !== 0 ? Math.round((deltaP50 / Math.abs(currentP50)) * 100) : 0;
@@ -281,7 +284,7 @@ export function StrategyComparison({ ranked, meta, weatherYears, onOpenAbout }: 
               };
             });
 
-            return <IntervalPlot key={m} rows={rows} meta={meta[m]} />;
+            return <IntervalPlot key={m} rows={rows} meta={{ ...meta[m], unit: US[m].unit }} />;
           })}
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { usVal } from '../lib/units';
 import type { GraceFile } from '../data/load';
 import type { RankedStrategy } from '../lib/ranking';
 import { IconClose } from './Icons';
@@ -222,14 +223,14 @@ export function AboutModal({ isOpen, onClose, grace, ranked, fieldId, weatherYea
             </div>
             {water && water.length > 0 && (
               <figure className="about-figure">
-                <figcaption>Irrigation water, {fieldId}, mm per year</figcaption>
+                <figcaption>Irrigation water, {fieldId}, inches per year</figcaption>
                 {water.map((w) => (
                   <div className="about-bar-row" key={w.name}>
                     <span className="about-bar-name">{w.name}</span>
                     <span
                       className="card-bar-track"
                       role="img"
-                      aria-label={`${w.name}: ${Math.round(w.q.p10)} to ${Math.round(w.q.p90)} mm, typical ${Math.round(w.q.p50)}`}
+                      aria-label={`${w.name}: ${usVal('water_use_mm', w.q.p10)} to ${usVal('water_use_mm', w.q.p90)} in, typical ${usVal('water_use_mm', w.q.p50)}`}
                     >
                       <span
                         className="card-bar-range"
@@ -242,8 +243,8 @@ export function AboutModal({ isOpen, onClose, grace, ranked, fieldId, weatherYea
                     </span>
                     <span className="card-bar-val">
                       {w.q.p10 === w.q.p90
-                        ? Math.round(w.q.p50)
-                        : `${Math.round(w.q.p10)}–${Math.round(w.q.p90)}`}
+                        ? usVal('water_use_mm', w.q.p50)
+                        : `${usVal('water_use_mm', w.q.p10)}–${usVal('water_use_mm', w.q.p90)}`}
                     </span>
                   </div>
                 ))}

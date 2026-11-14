@@ -3,6 +3,7 @@ import { METRIC_KEYS, PRIORITY_KEYS } from '../types/contracts';
 import type { RankedStrategy, Priorities } from '../lib/ranking';
 import type { GraceFile } from '../data/load';
 import { cropLabel, cropShort } from '../lib/colors';
+import { METRIC_FOOTNOTE, US, acres, fieldDollars, usVal } from '../lib/units';
 import { outOfTen, tenths, type LeadExplanation } from '../lib/explain';
 import { bareHeadline, bareSummary, DAYS_PER_MONTH } from '../lib/bare';
 import { WATER_FLAG_TEXT, waterFlag, waterLimitLabel, type WaterLimitIn } from '../lib/flow';
@@ -26,12 +27,6 @@ const PRIORITY_LABEL: Record<(typeof PRIORITY_KEYS)[number], string> = {
   soil: 'Soil organic matter',
   erosion: 'Less erosion',
   labour: 'Less labour',
-};
-
-const fmt = (x: number) => {
-  if (Math.abs(x) >= 100) return x.toFixed(0);
-  if (Math.abs(x) >= 10) return x.toFixed(1);
-  return x.toFixed(2);
 };
 
 /**
@@ -95,8 +90,7 @@ export function PrintReport({
               <th>Field</th>
               <td>
                 <strong>{p.field_id}</strong>
-                {p.name ? ` (${p.name})` : ''} · {p.area_ha.toFixed(1)} ha (
-                {Math.round(p.area_ha * 2.47105)} ac) ·{' '}
+                {p.name ? ` (${p.name})` : ''} · {acres(p.area_ha)} ac ({p.area_ha.toFixed(1)} ha) ·{' '}
                 {p.irrigation_type === 'center_pivot'
                   ? 'centre pivot'
                   : p.irrigated
@@ -108,7 +102,8 @@ export function PrintReport({
               <th>Soil (USDA SSURGO)</th>
               <td>
                 {p.soil.map_unit ?? p.soil.texture} · {p.soil.om_pct} % organic matter · holds{' '}
-                {p.soil.awc_mm} mm · slope {p.soil.slope_pct.toFixed(1)} % (NASA SRTM)
+                {(p.soil.awc_mm / 25.4).toFixed(1)} in ({p.soil.awc_mm} mm) · slope{' '}
+                {p.soil.slope_pct.toFixed(1)} % (NASA SRTM)
               </td>
             </tr>
             <tr>
@@ -203,7 +198,7 @@ export function PrintReport({
               {METRIC_KEYS.map((m) => (
                 <th key={m}>
                   {meta[m].label}
-                  <small className="th-unit"> ({meta[m].unit})</small>
+                  <small className="th-unit"> ({US[m].unit})</small>
                 </th>
               ))}
             </tr>
@@ -215,6 +210,9 @@ export function PrintReport({
                   <strong>{s.name}</strong>
                   {s.is_current && <span className="print-pill current">now</span>}
                   <div className="print-rot-col">{s.rotation.map(cropLabel).join(' → ')}</div>
+                  <div className="print-rot-col">
+                    ≈ {fieldDollars(s.metrics.income_usd_ha.p50, p.area_ha)} net for the field
+                  </div>
                 </td>
                 <td>
                   <strong>{tenths(pBest)}</strong>
@@ -223,9 +221,9 @@ export function PrintReport({
                   const q = s.metrics[m];
                   return (
                     <td key={m} className="interval-td">
-                      <div className="p50-val">{fmt(q.p50)}</div>
+                      <div className="p50-val">{usVal(m, q.p50)}</div>
                       <div className="range-val">
-                        [{fmt(q.p10)} – {fmt(q.p90)}]
+                        [{usVal(m, q.p10)} – {usVal(m, q.p90)}]
                       </div>
                     </td>
                   );
@@ -315,6 +313,9 @@ export function PrintReport({
           This summary shows ranges and trade-offs under the weather of {weatherYears[0]}–
           {weatherYears[1]}. It supports, and does not replace, your judgment and local expertise.
         </p>
+        <div>
+          Net return is {US.income_usd_ha.note}. {METRIC_FOOTNOTE}
+        </div>
         <div>Data: {sources.join(' · ')}.</div>
         <div>
           FieldShift · NASA Space Apps Challenge 2026 ·{' '}

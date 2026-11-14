@@ -40,7 +40,7 @@ do?" with "nothing". Priority order within each owner = list order. `[ ]` open, 
   exceeds the limit cannot be "best"; headline adds why the winner wins ("mainly on soil score
   and labour; alfalfa–corn needs ~17 in, over your 8 in"). Small tolerance (±5 %) before
   flagging (459 mm vs 457 mm limit was flagged).
-- [ ] **W2 US units** on cards, compare and print: in/yr, $/ac, t/ac; "≈ $X for this N-ac field";
+- [x] **W2 US units** on cards, compare and print: in/yr, $/ac, t/ac; "≈ $X for this N-ac field";
   label net return "before land rent & pivot/well costs". Metric in print footnote.
 - [ ] **W3 Plain wording**: "came out on top in about 5 of every 10 runs" (not "49 % of
   samples"); "months without green cover" (NDVI < 0.3 includes dormant alfalfa and standing

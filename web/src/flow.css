@@ -370,6 +370,17 @@
   font-variant-numeric: tabular-nums;
 }
 
+.card-total {
+  margin: 8px 0 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.card-total strong {
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+}
+
 .card-details {
   margin-top: 8px;
 }

@@ -46,7 +46,7 @@ export function FieldStep({ field, year, onSelectYear }: Props) {
     },
     {
       label: 'Water the soil can hold',
-      value: `${p.soil.awc_mm} mm in the root zone`,
+      value: `${(p.soil.awc_mm / 25.4).toFixed(1)} in (${p.soil.awc_mm} mm) in the root zone`,
       src: 'USDA SSURGO',
     },
     { label: 'Slope', value: `${p.soil.slope_pct.toFixed(1)} %`, src: 'NASA SRTM 30 m' },

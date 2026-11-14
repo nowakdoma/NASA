@@ -277,6 +277,7 @@ export default function App() {
                       presetLabel={presetLabel}
                       waterLimitIn={waterLimitIn}
                       explanation={explanation}
+                      areaHa={selected.properties.area_ha}
                       onOpenAbout={() => setIsAboutOpen(true)}
                     />
                     <details className="flow-details flow-details-wide">

@@ -2,6 +2,7 @@ import type { MetricKey, MetricMeta, Strategy } from '../types/contracts';
 import type { RankedStrategy } from '../lib/ranking';
 import { outOfTen, tenths, type LeadExplanation } from '../lib/explain';
 import { cropLabel } from '../lib/colors';
+import { US, acres, fieldDollars, usVal } from '../lib/units';
 import {
   MM_PER_IN,
   WATER_FLAG_TEXT,
@@ -17,6 +18,7 @@ interface Props {
   presetLabel: string;
   waterLimitIn: WaterLimitIn;
   explanation: LeadExplanation;
+  areaHa: number;
   onOpenAbout: () => void;
 }
 
@@ -54,12 +56,6 @@ function TraitChips({ s }: { s: Strategy }) {
 
 const SHOWN: MetricKey[] = ['water_use_mm', 'income_usd_ha', 'erosion_t_ha'];
 
-const fmt = (m: MetricKey, x: number) => {
-  if (m === 'income_usd_ha') return `${x < 0 ? '−' : ''}$${Math.abs(Math.round(x))}`;
-  if (m === 'water_use_mm') return String(Math.round(x));
-  return x.toFixed(2);
-};
-
 /** Step 3: one card per rotation, shared scales so bars compare across cards. */
 export function CompareStep({
   ranked,
@@ -68,6 +64,7 @@ export function CompareStep({
   presetLabel,
   waterLimitIn,
   explanation,
+  areaHa,
   onOpenAbout,
 }: Props) {
   if (ranked.length === 0) return <p className="flow-sub">No rotations computed for this field.</p>;
@@ -166,12 +163,12 @@ export function CompareStep({
                     <div className="card-bar-row" key={m}>
                       <span className="card-bar-label">
                         {meta[m].label}
-                        <small> {meta[m].unit}</small>
+                        <small> {US[m].unit}</small>
                       </span>
                       <span
                         className="card-bar-track"
                         role="img"
-                        aria-label={`${meta[m].label}: ${fmt(m, q.p10)} to ${fmt(m, q.p90)}, typical ${fmt(m, q.p50)} ${meta[m].unit}`}
+                        aria-label={`${meta[m].label}: ${usVal(m, q.p10)} to ${usVal(m, q.p90)}, typical ${usVal(m, q.p50)} ${US[m].unit}`}
                       >
                         <span
                           className="card-bar-range"
@@ -187,12 +184,18 @@ export function CompareStep({
                         )}
                       </span>
                       <span className="card-bar-val">
-                        {q.p10 === q.p90 ? fmt(m, q.p50) : `${fmt(m, q.p10)}–${fmt(m, q.p90)}`}
+                        {q.p10 === q.p90
+                          ? usVal(m, q.p50)
+                          : `${usVal(m, q.p10)}–${usVal(m, q.p90)}`}
                       </span>
                     </div>
                   );
                 })}
               </div>
+              <p className="card-total">
+                Typical year ≈ <strong>{fieldDollars(s.metrics.income_usd_ha.p50, areaHa)}</strong>{' '}
+                net for this {acres(areaHa)}-ac field, {US.income_usd_ha.note}.
+              </p>
 
               <details className="card-details">
                 <summary>
