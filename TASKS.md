@@ -26,11 +26,18 @@ cross-team needs under **Blockers / requests**.
 
 ## Blockers / requests
 
-- **pipeline:** `rasterio==1.4.4` + `pyproj==3.7.2` + `shapely==2.2.0` approved and added
-  (GDAL 3.10.3 wheels import cleanly on Windows). CDL zonal stats, SSURGO and SRTM are
-  unblocked.
-- **pipeline:** MODIS NDVI + SMAP + SRTM downloads still need `EARTHDATA_USERNAME` /
-  `EARTHDATA_PASSWORD` in `.env`. POWER and SSURGO (Soil Data Access JSON) need no login.
+- **pipeline:** Earthdata credentials verified **working** — NSIDC SMAP listings
+  (`daacdata.apps.nsidc.org/pub/SMAP/SPL3SMP_E/`) return 200 with them. Note EDL rejects
+  HTTP Basic on `/api/users/self` by design, so a 401 there does not mean bad credentials.
+- **pipeline:** LP DAAC cloud (`data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/`,
+  where MOD13Q1 and SRTMGL1 now live) returns **401 for username/password** — protected
+  data there needs an EDL bearer token + S3 credentials. Legacy `e4ftl01.cr.usgs.gov`
+  paths are decommissioned (only `ASTT` remains). Workarounds verified: MOD13Q1 NDVI is
+  readable anonymously from the Planetary Computer mirror via `/api/sas/v1/sign` (206),
+  and SRTM GL1 needs no login at all from the public `elevation-tiles-prod` skadi bucket.
+- **pipeline:** open question for person 1 — if the pitch should credit LP DAAC directly
+  (rather than a mirror), someone with the account must generate an EDL token and we add
+  `boto3` for S3 access.
 
 ## Decisions log
 
