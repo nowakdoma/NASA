@@ -994,3 +994,142 @@
   color: var(--muted);
   background: #f1eee4;
 }
+
+/* Printed adviser summary (Topo look, ink on white) */
+@media print {
+  .start,
+  .map-fallback {
+    display: none !important;
+  }
+
+  .print-report-container {
+    font-family: Inter, system-ui, sans-serif;
+    color: #1c2a39;
+    font-size: 9.5pt;
+    line-height: 1.4;
+  }
+
+  .print-header {
+    border-bottom: 1.5pt solid #1c2a39;
+  }
+
+  .print-logo-mark {
+    font-family: Fraunces, Georgia, serif;
+    color: #2b7a9b;
+  }
+
+  .print-h1 {
+    margin: 0;
+    font-family: Fraunces, Georgia, serif;
+    font-size: 17pt;
+    font-weight: 700;
+  }
+
+  .print-url {
+    max-width: 220pt;
+    font-size: 7pt;
+    color: #4e5d6c;
+    word-break: break-all;
+  }
+
+  .print-card {
+    break-inside: avoid;
+    margin-bottom: 9pt;
+  }
+
+  .print-card h2 {
+    font-family: Fraunces, Georgia, serif;
+    font-size: 12pt;
+    margin: 0 0 4pt;
+  }
+
+  .print-card h3 {
+    font-size: 10.5pt;
+    margin: 0 0 3pt;
+  }
+
+  .print-card h4 {
+    font-size: 9pt;
+    margin: 0 0 2pt;
+  }
+
+  .print-card ul,
+  .print-card ol {
+    margin: 0;
+    padding-left: 14pt;
+  }
+
+  .print-card p {
+    margin: 0 0 4pt;
+  }
+
+  .print-finding {
+    font-size: 10.5pt;
+  }
+
+  .print-history th,
+  .print-history td {
+    padding: 2pt 3pt;
+    font-size: 7.5pt;
+    text-align: center;
+  }
+
+  .print-history tbody th {
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  .print-strategy {
+    border-left: 2.5pt solid #2b7a9b;
+    padding-left: 8pt;
+  }
+
+  .print-two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10pt;
+  }
+
+  .print-flag {
+    color: #b04a24;
+    font-weight: 600;
+  }
+
+  .print-muted {
+    color: #4e5d6c;
+    font-size: 8.5pt;
+  }
+
+  .print-callout {
+    border-left: 3pt solid #b04a24;
+    padding-left: 8pt;
+    background: none;
+  }
+
+  .print-footer {
+    font-size: 7.5pt;
+    color: #4e5d6c;
+    border-top: 0.75pt solid #d6d0c2;
+    padding-top: 5pt;
+  }
+
+  .print-footer a {
+    color: inherit;
+  }
+}
+
+@media print {
+  html,
+  body,
+  #root,
+  .app {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    background: #ffffff !important;
+  }
+
+  .print-callout ol + .print-muted {
+    margin-top: 6pt;
+  }
+}

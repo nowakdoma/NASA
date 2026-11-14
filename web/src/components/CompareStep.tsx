@@ -26,7 +26,10 @@ function TraitChips({ s }: { s: Strategy }) {
   const chips: { label: string; title: string }[] = [];
   if (t.n_fixing_years > 0)
     chips.push({
-      label: `Fixes nitrogen · ${t.n_fixing_years} of ${s.rotation.length} yrs`,
+      label:
+        t.n_fixing_years >= s.rotation.length
+          ? 'Fixes nitrogen · every year'
+          : `Fixes nitrogen · ${t.n_fixing_years} of ${s.rotation.length} yrs`,
       title: 'Legume years that add nitrogen for the next crop',
     });
   if (t.pest_break)

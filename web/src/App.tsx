@@ -345,11 +345,14 @@ export default function App() {
       {selected && (
         <PrintReport
           field={selected}
-          year={year}
+          county={data.fields.county}
           priorities={priorities}
+          presetLabel={presetLabel}
+          waterLimitIn={waterLimitIn}
           ranked={ranked}
           meta={data.strategies.metric_meta}
           weatherYears={data.strategies.weather_years}
+          grace={data.grace}
         />
       )}
     </div>
