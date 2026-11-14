@@ -804,14 +804,9 @@
 }
 
 .start-map-hint {
-  position: absolute;
-  left: 12px;
-  right: 12px;
-  bottom: 12px;
   padding: 10px 14px;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.95);
-  border: 1px solid var(--border);
+  background: var(--panel, #fff);
+  border-bottom: 1px solid var(--border);
   font-size: 0.88rem;
   pointer-events: none;
 }
@@ -1474,5 +1469,66 @@
   .tab-item {
     min-height: 44px;
     padding: 0.25rem;
+  }
+}
+
+/* Map tools (W5): background toggle + zoom buttons, under the county badge. */
+.map-tools {
+  position: absolute;
+  top: 48px;
+  left: 12px;
+  z-index: 3;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-width: calc(100% - 70px);
+}
+
+.map-tools > button,
+.map-tools .seg button {
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--border-dark);
+  background: rgba(250, 249, 245, 0.96);
+  color: var(--fg);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.map-tools .seg {
+  display: inline-flex;
+}
+
+.map-tools .seg button {
+  border-radius: 0;
+}
+
+.map-tools .seg button:first-child {
+  border-radius: 6px 0 0 6px;
+}
+
+.map-tools .seg button:last-child {
+  border-radius: 0 6px 6px 0;
+  border-left: none;
+}
+
+.map-tools .seg button.on {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+.map-tools button:focus-visible {
+  outline: 2px solid var(--cta);
+  outline-offset: 2px;
+}
+
+@media (pointer: coarse) {
+  .map-tools > button,
+  .map-tools .seg button {
+    min-height: 44px;
   }
 }

@@ -54,7 +54,7 @@ do?" with "nothing". Priority order within each owner = list order. `[ ]` open, 
   `lib/flow.ts:49` uses `replaceState`); phone reload/share link opens the saved step tab, not
   the map; no scroll-zoom on the map until tapped; header + stepper + tabs use ~215/844 px on
   phone.
-- [ ] **W5 Finding your field**: satellite/labelled basemap toggle, zoom to selected field,
+- [x] **W5 Finding your field**: satellite/labelled basemap toggle, zoom to selected field,
   hint above the map (dots cover it), "50 sample pivots — if yours isn't here pick one with
   similar soil".
 - [ ] **W6 Clean leftovers**: "Season-by-season detail" still has a second field dropdown, a
@@ -107,6 +107,9 @@ do?" with "nothing". Priority order within each owner = list order. `[ ]` open, 
   costs (breaking/establishing alfalfa, N credit) visible in data for the printout.
 
 ### Person 2 — pipeline
+- [ ] P5 (info, from W5 satellite view) FIN-001: a pivot track is visible under the circle but
+  USGS imagery shows rangeland while CDL 2025 says grain sorghum. Spot-check a few fields'
+  CDL vs imagery (imagery date unknown; could be an abandoned or fallowed pivot).
 - [x] **P1 GRACE `schema_version: "0.3"`** — the pipeline was already writing 0.3; what was
   stale was the export, so `web/public/data/grace_water_storage.json` still held the 22-month
   mock. Re-ran `engine.export`: web now carries the real **259-month** series,

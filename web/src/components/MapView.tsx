@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { fieldLabel } from '../lib/units';
 import maplibregl from 'maplibre-gl';
 import { MapboxOverlay } from '@deck.gl/mapbox';
@@ -9,6 +9,33 @@ import { IconPin } from './Icons';
 
 // Free vector basemap; if it fails to load (offline demo) we fall back to a plain background.
 const BASEMAP = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
+// Satellite view: USGS National Map imagery with roads and place names (US public domain, no
+// key). Lets a farmer recognise their own pivot by the roads and farmstead around it.
+const SATELLITE: maplibregl.StyleSpecification = {
+  version: 8,
+  sources: {
+    usgs: {
+      type: 'raster',
+      tiles: [
+        'https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryTopo/MapServer/tile/{z}/{y}/{x}',
+      ],
+      tileSize: 256,
+      maxzoom: 16,
+      attribution: 'Imagery: USGS The National Map',
+    },
+  },
+  layers: [{ id: 'usgs', type: 'raster', source: 'usgs' }],
+};
+type Base = 'map' | 'satellite';
+const BASE_KEY = 'fieldshift.basemap';
+const readBase = (): Base => {
+  try {
+    return localStorage.getItem(BASE_KEY) === 'satellite' ? 'satellite' : 'map';
+  } catch {
+    return 'map';
+  }
+};
+
 const BLANK: maplibregl.StyleSpecification = {
   version: 8,
   sources: {},
@@ -54,6 +81,9 @@ interface Props {
 export function MapView({ fields, year, selectedId, onSelect, highlightCrop }: Props) {
   const container = useRef<HTMLDivElement>(null);
   const overlay = useRef<MapboxOverlay | null>(null);
+  const mapObj = useRef<maplibregl.Map | null>(null);
+  const [base, setBase] = useState<Base>(readBase);
+  const baseRef = useRef(base);
   const onSelectRef = useRef(onSelect);
   onSelectRef.current = onSelect;
   const [isMapLoading, setIsMapLoading] = useState(true);
@@ -101,7 +131,7 @@ export function MapView({ fields, year, selectedId, onSelect, highlightCrop }: P
     const [minLon, minLat, maxLon, maxLat] = fields.county.bbox;
     const map = new maplibregl.Map({
       container: container.current,
-      style: BASEMAP,
+      style: baseRef.current === 'satellite' ? SATELLITE : BASEMAP,
       bounds: [
         [minLon, minLat],
         [maxLon, maxLat],
@@ -126,6 +156,7 @@ export function MapView({ fields, year, selectedId, onSelect, highlightCrop }: P
       setIsMapLoading(false);
       setZoom(map.getZoom());
     });
+    mapObj.current = map;
     let raf = 0;
     map.on('zoom', () => {
       cancelAnimationFrame(raf);
@@ -176,9 +207,55 @@ export function MapView({ fields, year, selectedId, onSelect, highlightCrop }: P
       el.removeEventListener('wheel', onWheel);
       cancelAnimationFrame(raf);
       overlay.current = null;
+      mapObj.current = null;
       map.remove();
     };
   }, [fields.county.bbox]);
+
+  // Basemap toggle (remembered per browser).
+  useEffect(() => {
+    if (baseRef.current === base) return;
+    baseRef.current = base;
+    mapObj.current?.setStyle(base === 'satellite' ? SATELLITE : BASEMAP);
+    try {
+      localStorage.setItem(BASE_KEY, base);
+    } catch {
+      /* private mode: toggle still works for this visit */
+    }
+  }, [base]);
+
+  // Zoom to the chosen field so the farmer can check it is really theirs.
+  const selectedBounds = useMemo(() => {
+    const f = fields.features.find((x) => x.properties.field_id === selectedId);
+    if (!f) return null;
+    const c = f.geometry.coordinates;
+    const ring =
+      f.geometry.type === 'Polygon' ? (c as number[][][])[0] : (c as number[][][][])[0][0];
+    const xs = ring.map((c) => c[0]);
+    const ys = ring.map((c) => c[1]);
+    return [
+      [Math.min(...xs), Math.min(...ys)],
+      [Math.max(...xs), Math.max(...ys)],
+    ] as [[number, number], [number, number]];
+  }, [fields.features, selectedId]);
+  const zoomToField = useCallback(
+    (duration = 700) => {
+      if (selectedBounds)
+        mapObj.current?.fitBounds(selectedBounds, { padding: 60, maxZoom: 14, duration });
+    },
+    [selectedBounds],
+  );
+  useEffect(() => zoomToField(), [zoomToField]);
+  const showCounty = () => {
+    const [a, b, c, d] = fields.county.bbox;
+    mapObj.current?.fitBounds(
+      [
+        [a, b],
+        [c, d],
+      ],
+      { padding: 30, duration: 700 },
+    );
+  };
 
   useEffect(() => {
     const key = String(year);
@@ -209,7 +286,9 @@ export function MapView({ fields, year, selectedId, onSelect, highlightCrop }: P
           const crop = f.properties.crop_history[key];
           const rgb = cropColor(crop);
           // If a crop is highlighted in legend, dim other crops slightly
-          const alpha = highlightCrop && crop !== highlightCrop ? 75 : 220;
+          // On satellite the fill is see-through so the farmer can check what is under it.
+          const full = base === 'satellite' ? 90 : 220;
+          const alpha = highlightCrop && crop !== highlightCrop ? 60 : full;
           return [...rgb, alpha];
         },
         getLineColor: (f) =>
@@ -217,7 +296,7 @@ export function MapView({ fields, year, selectedId, onSelect, highlightCrop }: P
         getLineWidth: (f) => (f.properties.field_id === selectedId ? 4 : 1),
         lineWidthUnits: 'pixels',
         updateTriggers: {
-          getFillColor: [key, highlightCrop],
+          getFillColor: [key, highlightCrop, base],
           getLineColor: selectedId,
           getLineWidth: selectedId,
         },
@@ -311,7 +390,7 @@ export function MapView({ fields, year, selectedId, onSelect, highlightCrop }: P
         };
       },
     });
-  }, [fields, year, selectedId, highlightCrop, countyGeoJson, markers, zoom]);
+  }, [fields, year, selectedId, highlightCrop, countyGeoJson, markers, zoom, base]);
 
   return (
     <div className="map-wrapper">
@@ -327,6 +406,30 @@ export function MapView({ fields, year, selectedId, onSelect, highlightCrop }: P
       )}
 
       <div ref={container} className="map" />
+      <div className="map-tools" role="group" aria-label="Map view">
+        <div className="seg" role="radiogroup" aria-label="Background">
+          {(['map', 'satellite'] as const).map((b) => (
+            <button
+              key={b}
+              type="button"
+              role="radio"
+              aria-checked={base === b}
+              className={base === b ? 'on' : ''}
+              onClick={() => setBase(b)}
+            >
+              {b === 'map' ? 'Map' : 'Satellite'}
+            </button>
+          ))}
+        </div>
+        {selectedBounds && (
+          <button type="button" onClick={() => zoomToField()}>
+            Zoom to field
+          </button>
+        )}
+        <button type="button" onClick={showCounty}>
+          Whole county
+        </button>
+      </div>
       {!armed && (
         <div className={`map-gesture-hint${hint ? ' show' : ''}`} aria-hidden="true">
           {window.matchMedia('(pointer: coarse)').matches

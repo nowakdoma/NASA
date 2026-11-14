@@ -3,6 +3,7 @@ import { MapErrorBoundary } from './MapErrorBoundary';
 import type { AppData } from '../data/load';
 import { STEPS } from '../lib/flow';
 import { MapView } from './MapView';
+import { fieldLabel } from '../lib/units';
 import { GraceSparkline } from './GraceSparkline';
 import { IconSatellite, IconSprout } from './Icons';
 
@@ -20,6 +21,8 @@ export function StartScreen({ data, exampleId, onStart, onOpenAbout }: Props) {
   const [y0, y1] = data.fields.years;
   const [w0, w1] = data.strategies.weather_years;
   const year = y1;
+  const ex = data.fields.features.find((f) => f.properties.field_id === exampleId);
+  const exampleLabel = ex ? fieldLabel(ex.properties).replace(/ \(.*\)$/, '') : exampleId;
 
   const findField = () => {
     setPickHint(true);
@@ -72,7 +75,7 @@ export function StartScreen({ data, exampleId, onStart, onOpenAbout }: Props) {
               className="btn-secondary btn-lg"
               onClick={() => onStart(exampleId)}
             >
-              Try an example field ({exampleId})
+              Try an example field ({exampleLabel})
             </button>
           </div>
           <p className="start-fine">
@@ -102,6 +105,12 @@ export function StartScreen({ data, exampleId, onStart, onOpenAbout }: Props) {
           className={`start-map${pickHint ? ' picking' : ''}`}
           aria-label="Map of fields. Click your field to start."
         >
+          <div className="start-map-hint" aria-live="polite">
+            <strong>{pickHint ? 'Click your field to start.' : 'Click any field to start.'}</strong>{' '}
+            {data.fields.features.length} sample pivots, coloured by the {year} crop. Switch to
+            Satellite to spot your pivot by its roads and yard. If yours isn't here, pick one with
+            similar soil nearby.
+          </div>
           <MapErrorBoundary>
             <MapView
               fields={data.fields}
@@ -111,11 +120,6 @@ export function StartScreen({ data, exampleId, onStart, onOpenAbout }: Props) {
               highlightCrop={null}
             />
           </MapErrorBoundary>
-          <div className="start-map-hint" aria-live="polite">
-            {pickHint
-              ? `Click your field to start. Colours show the ${year} crop.`
-              : `Colours show the ${year} crop (USDA crop map). Click any field to start.`}
-          </div>
         </section>
       </main>
     </div>
