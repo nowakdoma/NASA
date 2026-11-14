@@ -49,6 +49,12 @@ export const fieldDollars = (usdPerHa: number, areaHa: number) => {
 
 export const acres = (ha: number) => Math.round(ha * AC_PER_HA);
 
+/** "Field 1 (137 ac)" instead of the internal id "FIN-001". */
+export const fieldLabel = (p: { field_id: string; area_ha: number }) => {
+  const n = /-(\d+)$/.exec(p.field_id);
+  return `${n ? `Field ${Number(n[1])}` : p.field_id} (${acres(p.area_ha)} ac)`;
+};
+
 /** Footnote for print: how to get back to the engine's metric numbers. */
 export const METRIC_FOOTNOTE =
   'Model works in metric; shown here in US units. 1 in = 25.4 mm · $1/ac = $2.47/ha · 1 ton/ac = 2.24 t/ha.';

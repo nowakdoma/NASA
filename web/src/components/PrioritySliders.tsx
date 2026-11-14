@@ -26,7 +26,7 @@ export const PRESETS: { name: string; desc: string; priorities: Priorities }[] =
   },
   {
     name: 'Save Water',
-    desc: 'Prioritize water conservation for GMD3 limits',
+    desc: 'Prioritize staying within your groundwater district (GMD3) allocation',
     priorities: { water: 5, income: 2, soil: 4, erosion: 3, labour: 2 },
   },
   {

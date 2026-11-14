@@ -42,7 +42,7 @@ do?" with "nothing". Priority order within each owner = list order. `[ ]` open, 
   flagging (459 mm vs 457 mm limit was flagged).
 - [x] **W2 US units** on cards, compare and print: in/yr, $/ac, t/ac; "≈ $X for this N-ac field";
   label net return "before land rent & pivot/well costs". Metric in print footnote.
-- [ ] **W3 Plain wording**: "came out on top in about 5 of every 10 runs" (not "49 % of
+- [x] **W3 Plain wording**: "came out on top in about 5 of every 10 runs" (not "49 % of
   samples"); "months without green cover" (NDVI < 0.3 includes dormant alfalfa and standing
   stalks) instead of "bare soil … most erodible state"; drop "every number comes from open
   data" (cover factors, pivot capacity, SCI thresholds, labour are judgement values); GRACE

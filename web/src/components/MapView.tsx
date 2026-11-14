@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { fieldLabel } from '../lib/units';
 import maplibregl from 'maplibre-gl';
 import { MapboxOverlay } from '@deck.gl/mapbox';
 import { GeoJsonLayer, ScatterplotLayer } from '@deck.gl/layers';
@@ -246,7 +247,7 @@ export function MapView({ fields, year, selectedId, onSelect, highlightCrop }: P
           html: `
             <div style="font-family: system-ui, -apple-system, sans-serif; font-size: 12px; line-height: 1.45; min-width: 190px;">
               <div style="font-size: 13px; font-weight: 700; color: #fdfdfd; border-bottom: 1px solid #38463c; padding-bottom: 4px; margin-bottom: 6px;">
-                ${p.field_id} ${p.name ? `<span style="font-weight: 400; color: #b4c2b8; font-size: 11px;"> · ${p.name}</span>` : ''}
+                ${fieldLabel(p)} ${p.name ? `<span style="font-weight: 400; color: #b4c2b8; font-size: 11px;"> · ${p.name}</span>` : ''}
               </div>
               <div style="display: grid; grid-template-columns: auto 1fr; gap: 2px 8px; margin-bottom: 4px;">
                 <span style="color: #9cb0a2;">Crop (${year}):</span>
@@ -287,7 +288,7 @@ export function MapView({ fields, year, selectedId, onSelect, highlightCrop }: P
           <div className="map-loader-card">
             <div className="map-spinner" />
             <div className="map-loader-text">Loading Finney County satellite layers…</div>
-            <div className="map-loader-sub">NASA POWER · MODIS · SMAP · CDL</div>
+            <div className="map-loader-sub">NASA POWER · MODIS · GRACE · USDA crop map</div>
           </div>
         </div>
       )}

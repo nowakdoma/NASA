@@ -59,8 +59,9 @@ export function GraceSparkline({ grace }: { grace: GraceFile }) {
           {grace.trend.cm_per_year.toFixed(2).replace('-', '−')} cm per year
         </span>
         <span className="grace-sub">
-          since {first}, every month measured from orbit (trend fits{' '}
-          {Math.round(grace.trend.r2 * 100)} % of the variation)
+          since {first}
+          {grace.mock ? '' : ', measured monthly from orbit'} (the trend line explains{' '}
+          {Math.round(grace.trend.r2 * 100)} % of the ups and downs)
         </span>
         {grace.mock && (
           <span className="grace-mock" role="note">

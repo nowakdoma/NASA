@@ -58,10 +58,10 @@ export function StartScreen({ data, exampleId, onStart, onOpenAbout }: Props) {
             What could a different rotation do for <span>your field</span>?
           </h1>
           <p className="start-lede">
-            The water under these pivots is going down, and satellites show many fields lying bare
-            for months. Pick your field to see its satellite history and compare four rotations
-            across {w1 - w0 + 1} years of NASA weather. You get ranges, not promises, plus what to
-            check on the ground.
+            The water under these pivots is going down, and satellites show many fields without
+            green cover for months. Pick your field to see its satellite history and compare four
+            rotations across {w1 - w0 + 1} years of NASA weather. You get ranges, not promises, plus
+            what to check on the ground.
           </p>
           <div className="start-actions">
             <button type="button" className="btn-cta btn-lg" onClick={findField}>
@@ -114,7 +114,7 @@ export function StartScreen({ data, exampleId, onStart, onOpenAbout }: Props) {
           <div className="start-map-hint" aria-live="polite">
             {pickHint
               ? `Click your field to start. Colours show the ${year} crop.`
-              : `Colours show the ${year} crop (USDA CDL). Click any field to start.`}
+              : `Colours show the ${year} crop (USDA crop map). Click any field to start.`}
           </div>
         </section>
       </main>

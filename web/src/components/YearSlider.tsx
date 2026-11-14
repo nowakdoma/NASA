@@ -55,7 +55,7 @@ export function YearSlider({ min, max, value, onChange }: Props) {
         </button>
 
         <div className="year-display">
-          <span className="year-sub">CDL Year</span>
+          <span className="year-sub">Crop map year</span>
           <strong className="year-val">{value}</strong>
         </div>
       </div>

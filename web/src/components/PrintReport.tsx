@@ -3,7 +3,7 @@ import { METRIC_KEYS, PRIORITY_KEYS } from '../types/contracts';
 import type { RankedStrategy, Priorities } from '../lib/ranking';
 import type { GraceFile } from '../data/load';
 import { cropLabel, cropShort } from '../lib/colors';
-import { METRIC_FOOTNOTE, US, acres, fieldDollars, usVal } from '../lib/units';
+import { METRIC_FOOTNOTE, US, acres, fieldDollars, fieldLabel, usVal } from '../lib/units';
 import { outOfTen, tenths, type LeadExplanation } from '../lib/explain';
 import { bareHeadline, bareSummary, DAYS_PER_MONTH } from '../lib/bare';
 import { WATER_FLAG_TEXT, waterFlag, waterLimitLabel, type WaterLimitIn } from '../lib/flow';
@@ -89,7 +89,7 @@ export function PrintReport({
             <tr>
               <th>Field</th>
               <td>
-                <strong>{p.field_id}</strong>
+                <strong>{fieldLabel(p)}</strong> · id {p.field_id}
                 {p.name ? ` (${p.name})` : ''} · {acres(p.area_ha)} ac ({p.area_ha.toFixed(1)} ha) ·{' '}
                 {p.irrigation_type === 'center_pivot'
                   ? 'centre pivot'
@@ -125,7 +125,8 @@ export function PrintReport({
         <h2>What the satellites show for this field</h2>
         {head && (
           <p className="print-finding">
-            <strong>{head.title}.</strong> {head.compare} (NASA MODIS NDVI &lt; 0.3, 16-day, 250 m)
+            <strong>{head.title}.</strong> {head.compare} (NASA MODIS NDVI &lt; 0.3, 16-day, 250 m;
+            includes dormant alfalfa and standing stalks)
           </p>
         )}
         <table className="print-table print-history">
@@ -139,14 +140,14 @@ export function PrintReport({
           </thead>
           <tbody>
             <tr>
-              <th>Crop (CDL)</th>
+              <th>Crop (USDA map)</th>
               {years.map((y) => (
                 <td key={y}>{cropShort(p.crop_history[y])}</td>
               ))}
             </tr>
             {bare && (
               <tr>
-                <th>Bare months</th>
+                <th>Months without green cover</th>
                 {years.map((y) => (
                   <td key={y}>
                     {((bare.daysByYear.get(Number(y)) ?? 0) / DAYS_PER_MONTH).toFixed(1)}

@@ -3,6 +3,7 @@ import { METRIC_KEYS, type MetricKey, type MetricMeta } from '../types/contracts
 import type { RankedStrategy } from '../lib/ranking';
 import { cropLabel } from '../lib/colors';
 import { US } from '../lib/units';
+import { outOfTen, tenths } from '../lib/explain';
 import {
   IconAlertTriangle,
   IconArrowRight,
@@ -19,12 +20,6 @@ interface Props {
   onOpenAbout?: () => void;
 }
 
-const fmt = (x: number) => {
-  if (Math.abs(x) >= 100) return x.toFixed(0);
-  if (Math.abs(x) >= 10) return x.toFixed(1);
-  return x.toFixed(2);
-};
-
 interface IntervalRow {
   id: string;
   name: string;
@@ -38,7 +33,15 @@ interface IntervalRow {
 }
 
 /** SVG interval chart displaying [p10, p90] uncertainty span with p50 median tick */
-function IntervalPlot({ rows, meta }: { rows: IntervalRow[]; meta: MetricMeta }) {
+function IntervalPlot({
+  rows,
+  meta,
+  fmt,
+}: {
+  rows: IntervalRow[];
+  meta: MetricMeta;
+  fmt: (x: number) => string;
+}) {
   const minVal = Math.min(...rows.map((r) => r.p10));
   const maxVal = Math.max(...rows.map((r) => r.p90));
 
@@ -86,9 +89,11 @@ function IntervalPlot({ rows, meta }: { rows: IntervalRow[]; meta: MetricMeta })
                         : 'unfavorable'
                     }`}
                   >
-                    {r.deltaP50 > 0 ? '+' : ''}
-                    {fmt(r.deltaP50)} {meta.unit} ({r.deltaPct! > 0 ? '+' : ''}
-                    {r.deltaPct}%)
+                    {r.deltaP50 > 0 ? '+' : r.deltaP50 < 0 ? '−' : ''}
+                    {fmt(Math.abs(r.deltaP50))}{' '}
+                    {meta.unit.startsWith('score')
+                      ? 'vs now'
+                      : `${meta.unit} (${r.deltaPct! > 0 ? '+' : ''}${r.deltaPct} %)`}
                   </span>
                 )}
               </div>
@@ -104,24 +109,24 @@ function IntervalPlot({ rows, meta }: { rows: IntervalRow[]; meta: MetricMeta })
                     left: `${leftPct}%`,
                     width: `${widthPct}%`,
                   }}
-                  title={`Strategy: ${r.name}\np10: ${fmt(r.p10)} · p50: ${fmt(r.p50)} · p90: ${fmt(r.p90)} ${meta.unit}`}
+                  title={`${r.name}\n1-in-10 low: ${fmt(r.p10)} · typical: ${fmt(r.p50)} · 1-in-10 high: ${fmt(r.p90)} ${meta.unit}`}
                 />
 
                 {/* Median marker (p50) */}
                 <div
                   className="interval-median-marker"
                   style={{ left: `${midPct}%` }}
-                  title={`Median (p50): ${fmt(r.p50)} ${meta.unit}`}
+                  title={`Typical year: ${fmt(r.p50)} ${meta.unit}`}
                 />
               </div>
 
               {/* Exact numeric readout */}
               <div className="interval-row-values">
-                <span className="val-p10">p10: {fmt(r.p10)}</span>
-                <span className="val-p50" title="Median (p50)">
-                  p50: <strong>{fmt(r.p50)}</strong>
+                <span className="val-p10">low {fmt(r.p10)}</span>
+                <span className="val-p50" title="Typical year (median)">
+                  typical <strong>{fmt(r.p50)}</strong>
                 </span>
-                <span className="val-p90">p90: {fmt(r.p90)}</span>
+                <span className="val-p90">high {fmt(r.p90)}</span>
               </div>
             </div>
           );
@@ -131,7 +136,9 @@ function IntervalPlot({ rows, meta }: { rows: IntervalRow[]; meta: MetricMeta })
       {/* Axis markers */}
       <div className="interval-axis-row">
         <span>{fmt(domainMin)}</span>
-        <span className="axis-title">1995–2025 Climate Interval (p10 · p50 · p90)</span>
+        <span className="axis-title">
+          1-in-10 low · typical · 1-in-10 high year (1995–2025 weather)
+        </span>
         <span>{fmt(domainMax)}</span>
       </div>
     </div>
@@ -175,8 +182,9 @@ export function StrategyComparison({ ranked, meta, weatherYears, onOpenAbout }: 
         </div>
         <div className="box-content">
           <div className="box-lead-text">
-            Under active priorities, <strong>{lead.strategy.name}</strong> scores highest in{' '}
-            <strong>{Math.round(lead.pBest * 100)}%</strong> of 2,000 weather × weight scenarios.
+            Under these priorities, <strong>{lead.strategy.name}</strong> came out on top in{' '}
+            <strong>{outOfTen(lead.pBest)}</strong> (2,000 runs of weather years and slightly varied
+            priorities).
           </div>
           <div className="disclaimer">
             Decision support, not a prescription. Final decisions rest with farm management
@@ -192,8 +200,8 @@ export function StrategyComparison({ ranked, meta, weatherYears, onOpenAbout }: 
             <tr>
               <th>Strategy</th>
               <th>Rotation Sequence</th>
-              <th title="Probability of achieving highest composite score under current priorities">
-                P(best)
+              <th title="Out of 10 runs (weather year and slightly varied priorities), how often this rotation came first">
+                On top (of 10 runs)
               </th>
             </tr>
           </thead>
@@ -226,10 +234,10 @@ export function StrategyComparison({ ranked, meta, weatherYears, onOpenAbout }: 
                   <td className="pbest-cell">
                     <div
                       className="pbest-gauge"
-                      title={`${Math.round(pBest * 100)}% probability of highest score`}
+                      title={`Came first in ${Math.round(pBest * 2000).toLocaleString('en-US')} of 2,000 runs`}
                     >
                       <div className="pbest-fill" style={{ width: `${pBest * 100}%` }} />
-                      <span className="pbest-percent">{Math.round(pBest * 100)}%</span>
+                      <span className="pbest-percent">{tenths(pBest)}</span>
                     </div>
                   </td>
                 </tr>
@@ -284,7 +292,14 @@ export function StrategyComparison({ ranked, meta, weatherYears, onOpenAbout }: 
               };
             });
 
-            return <IntervalPlot key={m} rows={rows} meta={{ ...meta[m], unit: US[m].unit }} />;
+            return (
+              <IntervalPlot
+                key={m}
+                rows={rows}
+                meta={{ ...meta[m], unit: US[m].unit }}
+                fmt={US[m].fmt}
+              />
+            );
           })}
         </div>
       </div>
@@ -300,7 +315,7 @@ export function StrategyComparison({ ranked, meta, weatherYears, onOpenAbout }: 
             aria-expanded={expandedSection === 'verify'}
           >
             <span className="trigger-label">
-              <IconPin className="section-icon" /> Verify Locally (GMD3 · K-State · NRCS)
+              <IconPin className="section-icon" /> Check locally (water district · K-State · NRCS)
             </span>
             <span className="accordion-toggle-indicator">
               {expandedSection === 'verify' ? '−' : '+'}
@@ -310,8 +325,10 @@ export function StrategyComparison({ ranked, meta, weatherYears, onOpenAbout }: 
             <div className="accordion-content">
               <ul className="clean-bullet-list">
                 <li>
-                  <strong>GMD3 (Garden City):</strong> Confirm authorized well appropriation & flow
-                  meter limits.
+                  <strong>
+                    Southwest Kansas Groundwater Management District 3 (GMD3, Garden City):
+                  </strong>{' '}
+                  Confirm authorized well appropriation & flow meter limits.
                 </li>
                 <li>
                   <strong>K-State SW Center:</strong> Review local variety trial yields, planting
@@ -383,8 +400,9 @@ export function StrategyComparison({ ranked, meta, weatherYears, onOpenAbout }: 
           {expandedSection === 'evidence' && (
             <div className="accordion-content">
               <p className="evidence-summary">
-                Powered by NASA POWER (weather), MODIS NDVI (bare soil), SMAP (moisture), SRTM
-                (slope), and USDA CDL / SSURGO.
+                Built on NASA POWER (weather), NASA MODIS (green cover), NASA SRTM (slope), NASA
+                GRACE/GRACE-FO (regional water storage), the USDA crop map (CDL) and USDA soil
+                survey (SSURGO).
               </p>
               <button type="button" className="text-link-btn" onClick={onOpenAbout}>
                 <IconInfo /> View Complete Methodology & Dataset Documentation

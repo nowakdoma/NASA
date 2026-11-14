@@ -134,7 +134,7 @@ export function CompareStep({
                 </span>
                 <span
                   className="card-pct"
-                  title={`On top in ${Math.round(pBest * 100)} % of 2,000 runs (31 weather years × slightly varied priorities)`}
+                  title={`Came first in ${Math.round(pBest * 2000).toLocaleString('en-US')} of 2,000 runs (31 weather years × slightly varied priorities)`}
                 >
                   {tenths(pBest)}
                   <small> in 10 runs</small>

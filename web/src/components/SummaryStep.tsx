@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { FieldFeature } from '../types/contracts';
 import type { RankedStrategy } from '../lib/ranking';
+import { fieldLabel } from '../lib/units';
 import { outOfTen, type LeadExplanation } from '../lib/explain';
 import { WATER_FLAG_TEXT, waterFlag, waterLimitLabel, type WaterLimitIn } from '../lib/flow';
 
@@ -34,8 +35,7 @@ export function SummaryStep({ field, ranked, presetLabel, waterLimitIn, explanat
       <h2 className="flow-title">Your field summary is ready</h2>
       <ul className="summary-list">
         <li>
-          Field <strong>{field.properties.field_id}</strong>, {field.properties.area_ha.toFixed(0)}{' '}
-          ha, {field.properties.soil.texture}
+          <strong>{fieldLabel(field.properties)}</strong>, {field.properties.soil.texture}
         </li>
         <li>
           Priorities: <strong>{presetLabel}</strong> · water limit:{' '}

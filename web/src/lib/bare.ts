@@ -1,4 +1,4 @@
-// Bare-soil months per year from MODIS bare periods (shared by screen step 1 and the printout).
+// Months without green cover (MODIS NDVI < 0.3) per year from MODIS bare periods (shared by screen step 1 and the printout).
 import type { FieldFeature } from '../types/contracts';
 
 const DAY = 86_400_000;
@@ -41,7 +41,7 @@ export function bareSummary(field: FieldFeature): BareSummary | null {
 
 export const roundMonths = (x: number) => (x < 1 ? 'under 1' : x.toFixed(0));
 
-/** One plain sentence pair, e.g. "Bare soil about 6 months a year in 2021–2025" + comparison. */
+/** One plain sentence pair, e.g. "No green cover about 6 months a year in 2021–2025" + comparison. */
 export function bareHeadline(s: BareSummary): { title: string; compare: string } {
   const r = s.recent;
   const e = s.early;
@@ -49,11 +49,11 @@ export function bareHeadline(s: BareSummary): { title: string; compare: string }
   return {
     title:
       s.recentMonths < 1
-        ? `Bare soil under 1 month a year in ${r[0]}–${r[r.length - 1]}`
-        : `Bare soil about ${roundMonths(s.recentMonths)} month${s.recentMonths >= 1.5 ? 's' : ''} a year in ${r[0]}–${r[r.length - 1]}`,
+        ? `No green cover under 1 month a year in ${r[0]}–${r[r.length - 1]}`
+        : `No green cover about ${roundMonths(s.recentMonths)} month${s.recentMonths >= 1.5 ? 's' : ''} a year in ${r[0]}–${r[r.length - 1]}`,
     compare:
       Math.abs(diff) >= 1
-        ? `${diff > 0 ? 'Up' : 'Down'} from about ${roundMonths(s.earlyMonths)} in ${e[0]}–${e[e.length - 1]}.`
+        ? `${diff > 0 ? 'Up' : 'Down'} from about ${roundMonths(s.earlyMonths)} month${s.earlyMonths >= 1.5 ? 's' : ''} in ${e[0]}–${e[e.length - 1]}.`
         : `Similar to ${e[0]}–${e[e.length - 1]}.`,
   };
 }

@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { fieldLabel } from '../lib/units';
 import type { FieldFeature } from '../types/contracts';
 import { cropCss, cropLabel } from '../lib/colors';
 import { FieldHeadline } from './FieldHeadline';
@@ -59,12 +60,12 @@ export function FieldStep({ field, year, onSelectYear }: Props) {
 
   return (
     <div className="flow-step">
-      <div className="flow-eyebrow">Step 1 · Your field</div>
+      <div className="flow-eyebrow">Step 1 · {fieldLabel(p)}</div>
       <FieldHeadline field={field} />
 
       <div>
         <div className="strip-head">
-          <span>Crop each year · USDA CDL</span>
+          <span>Crop each year · USDA crop map (CDL)</span>
           <span>
             {years[0]} → {lastYear}
           </span>
@@ -99,7 +100,7 @@ export function FieldStep({ field, year, onSelectYear }: Props) {
         </div>
 
         <div className="strip-head" style={{ marginTop: 14 }}>
-          <span>Months of bare soil · MODIS NDVI &lt; 0.3</span>
+          <span>Months without green cover · NASA MODIS</span>
           <span className="strip-key">
             <span className="swatch bare-hi" aria-hidden="true" /> 5+ months
           </span>
@@ -108,7 +109,7 @@ export function FieldStep({ field, year, onSelectYear }: Props) {
           className="bare-bars"
           style={{ gridTemplateColumns: `repeat(${years.length}, minmax(0, 1fr))` }}
           role="img"
-          aria-label={`Bare-soil months per year: ${years
+          aria-label={`Months without green cover per year: ${years
             .map((y) => `${y} ${((bareDays.get(y) ?? 0) / 30.4).toFixed(1)}`)
             .join(', ')}`}
         >
@@ -120,7 +121,7 @@ export function FieldStep({ field, year, onSelectYear }: Props) {
                 key={y}
                 className={`bare-bar${mo >= 5 ? ' hi' : ''}`}
                 style={{ height: `${Math.max(3, (d / maxBare) * 100)}%` }}
-                title={`${y}: about ${mo.toFixed(1)} months bare`}
+                title={`${y}: about ${mo.toFixed(1)} months without green cover`}
               />
             );
           })}

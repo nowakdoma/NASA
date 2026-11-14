@@ -57,8 +57,8 @@ const JUDGE = [
 
 const SCALE: [string, string, string, string][] = [
   ['Weather', 'NASA POWER', 'NASA POWER', 'NASA POWER'],
-  ['Bare soil, slope, water storage', 'MODIS · SRTM · GRACE-FO', 'same', 'same'],
-  ['Crop history', 'USDA CDL', 'USDA CDL', 'ESA WorldCereal'],
+  ['Green cover, slope, water storage', 'MODIS · SRTM · GRACE-FO', 'same', 'same'],
+  ['Crop history', 'USDA crop map (CDL)', 'USDA crop map (CDL)', 'ESA WorldCereal'],
   ['Soil', 'USDA SSURGO', 'USDA SSURGO', 'ISRIC SoilGrids'],
   ['Prices and costs', 'K-State budgets', 'State extension budgets', 'Local extension / FAO'],
 ];
@@ -93,9 +93,10 @@ export function AboutModal({ isOpen, onClose, grace, ranked, fieldId, weatherYea
     {
       name: 'MODIS NDVI',
       agency: 'NASA',
-      what: 'Greenness every 16 days since 2007 → the months your field lies bare.',
+      what: 'Greenness every 16 days since 2007 → the months your field has no green cover.',
       detail: '250 m, 16-day (MOD13Q1)',
-      limit: 'A pivot is only ~10 pixels; light residue can read as bare.',
+      limit:
+        'A pivot is only ~10 pixels; dormant alfalfa and standing stalks also read as no green cover.',
     },
     {
       name: 'SRTM elevation',
@@ -176,8 +177,9 @@ export function AboutModal({ isOpen, onClose, grace, ranked, fieldId, weatherYea
 
         <div className="modal-body about-body">
           <p className="about-lede">
-            Every number in FieldShift comes from open data. Here is where each one comes from, how
-            fine-grained it is, and where it can be wrong.
+            The field data come from open NASA and USDA datasets. Some model settings (crop cover,
+            pivot capacity, soil-score thresholds, labour) are expert judgement, not measurements.
+            Here is where each input comes from, how fine-grained it is, and where it can be wrong.
           </p>
 
           <section aria-labelledby="ab-data">
