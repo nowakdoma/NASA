@@ -24,7 +24,7 @@ setup: ## install python + web deps, pre-commit hook
 data: ## run the data pipeline (stubs for now)
 	$(UV) run python -m pipeline all
 
-export: ## engine outputs -> web/public/data (currently copies contracts/mock)
+export: ## run engine -> web/public/data (falls back to mock fields / synthetic weather)
 	$(UV) run python -m engine.export
 
 dev: ## web dev server

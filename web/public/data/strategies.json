@@ -1,7 +1,7 @@
 {
  "schema_version": "0.1",
  "mock": true,
- "generated_by": "mock generator (hand-tuned heuristics, not engine)",
+ "generated_by": "engine.export 9a40c12 (SYNTHETIC weather) (mock fields)",
  "generated_at": "2026-11-14",
  "weather_years": [
   1995,
@@ -43,60 +43,64 @@
   "FIN-001": [
    {
     "id": "current",
-    "name": "Current: corn–corn–corn–wheat",
-    "description": "Rotation observed in CDL over recent years.",
+    "name": "Current: Corn",
+    "description": "Rotation observed in CDL over recent years (irrigated, full).",
     "is_current": true,
     "rotation": [
-     "corn",
-     "corn",
-     "corn",
-     "winter_wheat"
+     "corn"
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 301.0,
-      "p50": 385.0,
-      "p90": 470.0
+      "p10": 314.0,
+      "p50": 493.0,
+      "p90": 589.0
      },
      "erosion_t_ha": {
-      "p10": 0.39,
-      "p50": 0.86,
-      "p90": 1.81
+      "p10": 0.74,
+      "p50": 1.44,
+      "p90": 2.39
      },
      "soil_index": {
-      "p10": -0.0,
-      "p50": 0.09,
-      "p90": 0.16
+      "p10": 0.64,
+      "p50": 0.67,
+      "p90": 0.69
      },
      "income_usd_ha": {
-      "p10": 122.0,
-      "p50": 350.0,
-      "p90": 504.0
+      "p10": 473.0,
+      "p50": 666.0,
+      "p90": 874.0
      },
      "labour_index": {
-      "p10": 0.49,
-      "p50": 0.54,
-      "p90": 0.6
+      "p10": 0.6,
+      "p50": 0.66,
+      "p90": 0.7
      }
     },
     "evidence": [
      {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Ulysses silt loam, 0 to 1 percent slopes: AWC 190 mm, K 0.43, slope 0.6 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered."
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
     ],
     "verify_locally": [
      "Does your water right / well capacity support this rotation in a dry year?",
@@ -105,9 +109,9 @@
     ]
    },
    {
-    "id": "wsf_limited",
-    "name": "Wheat–sorghum–fallow (limited irrigation)",
-    "description": "Lower-water rotation common in western Kansas.",
+    "id": "wsf_dryland",
+    "name": "Wheat–sorghum–fallow (dryland)",
+    "description": "No irrigation; relies on fallow-stored soil water and rainfall.",
     "is_current": false,
     "rotation": [
      "winter_wheat",
@@ -116,194 +120,210 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 116.0,
-      "p50": 149.0,
-      "p90": 181.0
-     },
-     "erosion_t_ha": {
-      "p10": 0.66,
-      "p50": 1.46,
-      "p90": 3.07
-     },
-     "soil_index": {
-      "p10": -0.16,
-      "p50": -0.07,
+      "p10": 0.0,
+      "p50": 0.0,
       "p90": 0.0
      },
-     "income_usd_ha": {
-      "p10": -4.0,
-      "p50": 120.0,
-      "p90": 206.0
-     },
-     "labour_index": {
-      "p10": 0.23,
-      "p50": 0.28,
-      "p90": 0.34
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
-     }
-    ],
-    "data_gaps": [
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Yield response to deficit irrigation is from literature, not this field."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence.",
-     "Fallow-year weed control and residue management plan."
-    ]
-   },
-   {
-    "id": "corn_soy",
-    "name": "Corn–soybean",
-    "description": "Adds a legume; needs full irrigation.",
-    "is_current": false,
-    "rotation": [
-     "corn",
-     "soybeans"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 314.0,
-      "p50": 402.0,
-      "p90": 491.0
-     },
      "erosion_t_ha": {
-      "p10": 0.56,
-      "p50": 1.24,
-      "p90": 2.6
+      "p10": 1.58,
+      "p50": 2.14,
+      "p90": 2.8
      },
      "soil_index": {
-      "p10": -0.09,
-      "p50": 0.0,
-      "p90": 0.07
+      "p10": 0.09,
+      "p50": 0.12,
+      "p90": 0.15
      },
      "income_usd_ha": {
-      "p10": 153.0,
-      "p50": 406.0,
-      "p90": 578.0
+      "p10": 45.0,
+      "p50": 110.0,
+      "p90": 214.0
      },
      "labour_index": {
-      "p10": 0.5,
-      "p50": 0.55,
-      "p90": 0.61
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
-     }
-    ],
-    "data_gaps": [
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Soybean yield under SW Kansas heat not calibrated."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence.",
-     "Soybean cyst nematode and iron-deficiency chlorosis history."
-    ]
-   },
-   {
-    "id": "alfalfa_corn_wheat",
-    "name": "Alfalfa (3 yr)–corn–wheat",
-    "description": "Perennial legume phase for soil building.",
-    "is_current": false,
-    "rotation": [
-     "alfalfa",
-     "alfalfa",
-     "alfalfa",
-     "corn",
-     "winter_wheat"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 383.0,
-      "p50": 491.0,
-      "p90": 599.0
-     },
-     "erosion_t_ha": {
       "p10": 0.19,
-      "p50": 0.43,
-      "p90": 0.9
-     },
-     "soil_index": {
-      "p10": 0.18,
-      "p50": 0.27,
-      "p90": 0.34
-     },
-     "income_usd_ha": {
-      "p10": 159.0,
-      "p50": 416.0,
-      "p90": 591.0
-     },
-     "labour_index": {
-      "p10": 0.65,
-      "p50": 0.7,
-      "p90": 0.76
+      "p50": 0.19,
+      "p90": 0.19
      }
     },
     "evidence": [
      {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Ulysses silt loam, 0 to 1 percent slopes: AWC 190 mm, K 0.43, slope 0.6 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Alfalfa irrigation demand is the highest of all options; stand life uncertain."
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
+    ],
+    "verify_locally": [
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "How you will keep residue on the fallow to limit wind erosion."
+    ]
+   },
+   {
+    "id": "corn_wheat_sorghum",
+    "name": "Corn–wheat–sorghum (full irrigation)",
+    "description": "Three crops with different water peaks; spreads workload over the year.",
+    "is_current": false,
+    "rotation": [
+     "corn",
+     "winter_wheat",
+     "sorghum"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 303.0,
+      "p50": 373.0,
+      "p90": 420.0
+     },
+     "erosion_t_ha": {
+      "p10": 1.18,
+      "p50": 1.57,
+      "p90": 1.89
+     },
+     "soil_index": {
+      "p10": 0.48,
+      "p50": 0.49,
+      "p90": 0.5
+     },
+     "income_usd_ha": {
+      "p10": 348.0,
+      "p50": 442.0,
+      "p90": 516.0
+     },
+     "labour_index": {
+      "p10": 0.43,
+      "p50": 0.46,
+      "p90": 0.47
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Ulysses silt loam, 0 to 1 percent slopes: AWC 190 mm, K 0.43, slope 0.6 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
+    ],
+    "verify_locally": [
+     "Does your water right / well capacity support this rotation in a dry year?",
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence."
+    ]
+   },
+   {
+    "id": "alfalfa_corn",
+    "name": "Alfalfa (3 yr)–corn (2 yr) (full irrigation)",
+    "description": "Perennial forage builds soil; needs hay market and more labour.",
+    "is_current": false,
+    "rotation": [
+     "alfalfa",
+     "alfalfa",
+     "alfalfa",
+     "corn",
+     "corn"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 388.0,
+      "p50": 489.0,
+      "p90": 535.0
+     },
+     "erosion_t_ha": {
+      "p10": 0.49,
+      "p50": 0.71,
+      "p90": 0.99
+     },
+     "soil_index": {
+      "p10": 0.41,
+      "p50": 0.42,
+      "p90": 0.43
+     },
+     "income_usd_ha": {
+      "p10": 499.0,
+      "p50": 567.0,
+      "p90": 662.0
+     },
+     "labour_index": {
+      "p10": 0.83,
+      "p50": 0.86,
+      "p90": 0.88
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Ulysses silt loam, 0 to 1 percent slopes: AWC 190 mm, K 0.43, slope 0.6 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
     ],
     "verify_locally": [
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
-     "Hay buyer within hauling distance.",
-     "Cutting labour and equipment."
+     "Hay buyers, storage and haul distance; stand establishment cost."
     ]
    }
   ],
   "FIN-002": [
    {
     "id": "current",
-    "name": "Current: corn–wheat",
-    "description": "Rotation observed in CDL over recent years.",
+    "name": "Current: Corn–Winter wheat",
+    "description": "Rotation observed in CDL over recent years (irrigated, full).",
     "is_current": true,
     "rotation": [
      "corn",
@@ -311,49 +331,56 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 251.0,
-      "p50": 322.0,
-      "p90": 393.0
+      "p10": 314.0,
+      "p50": 400.0,
+      "p90": 493.0
      },
      "erosion_t_ha": {
-      "p10": 0.28,
-      "p50": 0.62,
-      "p90": 1.3
+      "p10": 0.67,
+      "p50": 1.05,
+      "p90": 1.39
      },
      "soil_index": {
-      "p10": 0.03,
-      "p50": 0.12,
-      "p90": 0.18
+      "p10": 0.48,
+      "p50": 0.5,
+      "p90": 0.51
      },
      "income_usd_ha": {
-      "p10": 97.0,
-      "p50": 304.0,
-      "p90": 445.0
+      "p10": 319.0,
+      "p50": 449.0,
+      "p90": 546.0
      },
      "labour_index": {
-      "p10": 0.42,
-      "p50": 0.47,
-      "p90": 0.53
+      "p10": 0.46,
+      "p50": 0.49,
+      "p90": 0.52
      }
     },
     "evidence": [
      {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Richfield silt loam, 0 to 1 percent slopes: AWC 210 mm, K 0.37, slope 0.5 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered."
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
     ],
     "verify_locally": [
      "Does your water right / well capacity support this rotation in a dry year?",
@@ -362,9 +389,9 @@
     ]
    },
    {
-    "id": "wsf_limited",
-    "name": "Wheat–sorghum–fallow (limited irrigation)",
-    "description": "Lower-water rotation common in western Kansas.",
+    "id": "wsf_dryland",
+    "name": "Wheat–sorghum–fallow (dryland)",
+    "description": "No irrigation; relies on fallow-stored soil water and rainfall.",
     "is_current": false,
     "rotation": [
      "winter_wheat",
@@ -373,194 +400,213 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 111.0,
-      "p50": 142.0,
-      "p90": 173.0
+      "p10": 0.0,
+      "p50": 0.0,
+      "p90": 0.0
      },
      "erosion_t_ha": {
-      "p10": 0.51,
-      "p50": 1.13,
-      "p90": 2.37
+      "p10": 1.18,
+      "p50": 1.6,
+      "p90": 2.09
      },
      "soil_index": {
-      "p10": -0.12,
-      "p50": -0.03,
-      "p90": 0.04
+      "p10": 0.11,
+      "p50": 0.13,
+      "p90": 0.17
      },
      "income_usd_ha": {
-      "p10": 1.0,
-      "p50": 130.0,
-      "p90": 219.0
+      "p10": 60.0,
+      "p50": 124.0,
+      "p90": 227.0
      },
      "labour_index": {
+      "p10": 0.19,
+      "p50": 0.19,
+      "p90": 0.19
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Richfield silt loam, 0 to 1 percent slopes: AWC 210 mm, K 0.37, slope 0.5 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
+    ],
+    "verify_locally": [
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "How you will keep residue on the fallow to limit wind erosion."
+    ]
+   },
+   {
+    "id": "alfalfa_corn",
+    "name": "Alfalfa (3 yr)–corn (2 yr) (full irrigation)",
+    "description": "Perennial forage builds soil; needs hay market and more labour.",
+    "is_current": false,
+    "rotation": [
+     "alfalfa",
+     "alfalfa",
+     "alfalfa",
+     "corn",
+     "corn"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 383.0,
+      "p50": 484.0,
+      "p90": 534.0
+     },
+     "erosion_t_ha": {
+      "p10": 0.36,
+      "p50": 0.53,
+      "p90": 0.74
+     },
+     "soil_index": {
+      "p10": 0.42,
+      "p50": 0.43,
+      "p90": 0.43
+     },
+     "income_usd_ha": {
+      "p10": 504.0,
+      "p50": 575.0,
+      "p90": 669.0
+     },
+     "labour_index": {
+      "p10": 0.83,
+      "p50": 0.86,
+      "p90": 0.88
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Richfield silt loam, 0 to 1 percent slopes: AWC 210 mm, K 0.37, slope 0.5 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
+    ],
+    "verify_locally": [
+     "Does your water right / well capacity support this rotation in a dry year?",
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "Hay buyers, storage and haul distance; stand establishment cost."
+    ]
+   },
+   {
+    "id": "sorghum_wheat_cover",
+    "name": "Sorghum–wheat–cover crop (limited irrigation)",
+    "description": "Cover crop replaces fallow to protect soil; uses some stored water.",
+    "is_current": false,
+    "rotation": [
+     "sorghum",
+     "winter_wheat",
+     "rye_cover"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 100.0,
+      "p50": 100.0,
+      "p90": 100.0
+     },
+     "erosion_t_ha": {
+      "p10": 0.7,
+      "p50": 0.92,
+      "p90": 1.16
+     },
+     "soil_index": {
       "p10": 0.23,
       "p50": 0.28,
-      "p90": 0.34
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
-     }
-    ],
-    "data_gaps": [
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Yield response to deficit irrigation is from literature, not this field."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence.",
-     "Fallow-year weed control and residue management plan."
-    ]
-   },
-   {
-    "id": "corn_soy",
-    "name": "Corn–soybean",
-    "description": "Adds a legume; needs full irrigation.",
-    "is_current": false,
-    "rotation": [
-     "corn",
-     "soybeans"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 298.0,
-      "p50": 382.0,
-      "p90": 466.0
-     },
-     "erosion_t_ha": {
-      "p10": 0.42,
-      "p50": 0.94,
-      "p90": 1.98
-     },
-     "soil_index": {
-      "p10": -0.05,
-      "p50": 0.04,
-      "p90": 0.11
+      "p90": 0.32
      },
      "income_usd_ha": {
-      "p10": 148.0,
-      "p50": 396.0,
-      "p90": 565.0
+      "p10": 4.0,
+      "p50": 134.0,
+      "p90": 222.0
      },
      "labour_index": {
-      "p10": 0.5,
-      "p50": 0.55,
-      "p90": 0.61
+      "p10": 0.24,
+      "p50": 0.24,
+      "p90": 0.24
      }
     },
     "evidence": [
      {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Richfield silt loam, 0 to 1 percent slopes: AWC 210 mm, K 0.37, slope 0.5 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Soybean yield under SW Kansas heat not calibrated."
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index.",
+     "Limited irrigation assumed capped at 150 mm/yr.",
+     "Cover crop modelled as a winter rye season; termination timing and its effect on the next crop's water are simplified."
     ],
     "verify_locally": [
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
-     "Soybean cyst nematode and iron-deficiency chlorosis history."
-    ]
-   },
-   {
-    "id": "alfalfa_corn_wheat",
-    "name": "Alfalfa (3 yr)–corn–wheat",
-    "description": "Perennial legume phase for soil building.",
-    "is_current": false,
-    "rotation": [
-     "alfalfa",
-     "alfalfa",
-     "alfalfa",
-     "corn",
-     "winter_wheat"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 378.0,
-      "p50": 485.0,
-      "p90": 592.0
-     },
-     "erosion_t_ha": {
-      "p10": 0.14,
-      "p50": 0.32,
-      "p90": 0.67
-     },
-     "soil_index": {
-      "p10": 0.22,
-      "p50": 0.31,
-      "p90": 0.38
-     },
-     "income_usd_ha": {
-      "p10": 170.0,
-      "p50": 436.0,
-      "p90": 617.0
-     },
-     "labour_index": {
-      "p10": 0.65,
-      "p50": 0.7,
-      "p90": 0.76
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
-     }
-    ],
-    "data_gaps": [
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Alfalfa irrigation demand is the highest of all options; stand life uncertain."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence.",
-     "Hay buyer within hauling distance.",
-     "Cutting labour and equipment."
+     "Cover crop seed cost and termination rules for crop insurance."
     ]
    }
   ],
   "FIN-003": [
    {
     "id": "current",
-    "name": "Current: wheat–sorghum–fallow",
-    "description": "Rotation observed in CDL over recent years.",
+    "name": "Current: Winter wheat–Grain sorghum–Fallow / idle cropland",
+    "description": "Rotation observed in CDL over recent years (irrigated, full).",
     "is_current": true,
     "rotation": [
      "winter_wheat",
@@ -569,124 +615,68 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 124.0,
-      "p50": 159.0,
-      "p90": 194.0
+      "p10": 181.0,
+      "p50": 235.0,
+      "p90": 275.0
      },
      "erosion_t_ha": {
-      "p10": 0.74,
-      "p50": 1.65,
-      "p90": 3.47
+      "p10": 1.94,
+      "p50": 2.62,
+      "p90": 3.43
      },
      "soil_index": {
-      "p10": -0.24,
-      "p50": -0.15,
-      "p90": -0.08
+      "p10": 0.22,
+      "p50": 0.24,
+      "p90": 0.25
      },
      "income_usd_ha": {
-      "p10": -21.0,
-      "p50": 89.0,
-      "p90": 166.0
+      "p10": 144.0,
+      "p50": 186.0,
+      "p90": 237.0
      },
      "labour_index": {
-      "p10": 0.23,
-      "p50": 0.28,
-      "p90": 0.34
+      "p10": 0.25,
+      "p50": 0.27,
+      "p90": 0.29
      }
     },
     "evidence": [
      {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Las Animas-Lincoln complex: AWC 110 mm, K 0.24, slope 1.4 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence."
-    ]
-   },
-   {
-    "id": "wsc_cover",
-    "name": "Wheat–sorghum + rye cover (no fallow)",
-    "description": "Replaces the fallow year with a cereal-rye cover crop.",
-    "is_current": false,
-    "rotation": [
-     "winter_wheat",
-     "sorghum",
-     "rye_cover"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 204.0,
-      "p50": 262.0,
-      "p90": 320.0
-     },
-     "erosion_t_ha": {
-      "p10": 0.36,
-      "p50": 0.8,
-      "p90": 1.67
-     },
-     "soil_index": {
-      "p10": 0.0,
-      "p50": 0.09,
-      "p90": 0.16
-     },
-     "income_usd_ha": {
-      "p10": 18.0,
-      "p50": 159.0,
-      "p90": 257.0
-     },
-     "labour_index": {
-      "p10": 0.36,
-      "p50": 0.41,
-      "p90": 0.47
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
-     }
-    ],
-    "data_gaps": [
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Cover-crop water use in dry springs is uncertain."
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
     ],
     "verify_locally": [
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
-     "Termination timing vs. stored soil water before sorghum."
+     "How you will keep residue on the fallow to limit wind erosion."
     ]
    },
    {
     "id": "corn_soy",
-    "name": "Corn–soybean",
-    "description": "Adds a legume; needs full irrigation.",
+    "name": "Corn–soybean (full irrigation)",
+    "description": "Adds a nitrogen-fixing legume; breaks corn pest cycles.",
     "is_current": false,
     "rotation": [
      "corn",
@@ -694,196 +684,286 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 340.0,
-      "p50": 436.0,
-      "p90": 533.0
+      "p10": 381.0,
+      "p50": 502.0,
+      "p90": 544.0
      },
      "erosion_t_ha": {
-      "p10": 0.62,
-      "p50": 1.38,
-      "p90": 2.89
+      "p10": 1.73,
+      "p50": 2.46,
+      "p90": 3.79
      },
      "soil_index": {
-      "p10": -0.17,
-      "p50": -0.08,
-      "p90": -0.01
+      "p10": 0.36,
+      "p50": 0.38,
+      "p90": 0.4
      },
      "income_usd_ha": {
-      "p10": 127.0,
-      "p50": 358.0,
-      "p90": 515.0
+      "p10": 360.0,
+      "p50": 467.0,
+      "p90": 624.0
      },
      "labour_index": {
-      "p10": 0.5,
-      "p50": 0.55,
-      "p90": 0.61
+      "p10": 0.52,
+      "p50": 0.56,
+      "p90": 0.58
      }
     },
     "evidence": [
      {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Las Animas-Lincoln complex: AWC 110 mm, K 0.24, slope 1.4 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Soybean yield under SW Kansas heat not calibrated."
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
     ],
     "verify_locally": [
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
-     "Soybean cyst nematode and iron-deficiency chlorosis history."
+     "Soybean yield on your soil (iron-deficiency chlorosis on high-pH soils)."
     ]
    },
    {
-    "id": "alfalfa_corn_wheat",
-    "name": "Alfalfa (3 yr)–corn–wheat",
-    "description": "Perennial legume phase for soil building.",
+    "id": "alfalfa_corn",
+    "name": "Alfalfa (3 yr)–corn (2 yr) (full irrigation)",
+    "description": "Perennial forage builds soil; needs hay market and more labour.",
     "is_current": false,
     "rotation": [
      "alfalfa",
      "alfalfa",
      "alfalfa",
      "corn",
-     "winter_wheat"
+     "corn"
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 428.0,
-      "p50": 549.0,
-      "p90": 669.0
+      "p10": 421.0,
+      "p50": 515.0,
+      "p90": 548.0
      },
      "erosion_t_ha": {
-      "p10": 0.21,
-      "p50": 0.47,
-      "p90": 0.99
+      "p10": 0.6,
+      "p50": 0.87,
+      "p90": 1.21
      },
      "soil_index": {
-      "p10": 0.1,
-      "p50": 0.19,
-      "p90": 0.26
+      "p10": 0.4,
+      "p50": 0.41,
+      "p90": 0.42
      },
      "income_usd_ha": {
-      "p10": 148.0,
-      "p50": 396.0,
-      "p90": 565.0
+      "p10": 460.0,
+      "p50": 523.0,
+      "p90": 627.0
      },
      "labour_index": {
-      "p10": 0.65,
-      "p50": 0.7,
-      "p90": 0.76
+      "p10": 0.84,
+      "p50": 0.87,
+      "p90": 0.88
      }
     },
     "evidence": [
      {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Las Animas-Lincoln complex: AWC 110 mm, K 0.24, slope 1.4 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Alfalfa irrigation demand is the highest of all options; stand life uncertain."
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
     ],
     "verify_locally": [
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
-     "Hay buyer within hauling distance.",
-     "Cutting labour and equipment."
+     "Hay buyers, storage and haul distance; stand establishment cost."
+    ]
+   },
+   {
+    "id": "sorghum_wheat_cover",
+    "name": "Sorghum–wheat–cover crop (limited irrigation)",
+    "description": "Cover crop replaces fallow to protect soil; uses some stored water.",
+    "is_current": false,
+    "rotation": [
+     "sorghum",
+     "winter_wheat",
+     "rye_cover"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 100.0,
+      "p50": 100.0,
+      "p90": 100.0
+     },
+     "erosion_t_ha": {
+      "p10": 1.15,
+      "p50": 1.51,
+      "p90": 1.9
+     },
+     "soil_index": {
+      "p10": 0.22,
+      "p50": 0.26,
+      "p90": 0.29
+     },
+     "income_usd_ha": {
+      "p10": -21.0,
+      "p50": 85.0,
+      "p90": 169.0
+     },
+     "labour_index": {
+      "p10": 0.24,
+      "p50": 0.24,
+      "p90": 0.24
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Las Animas-Lincoln complex: AWC 110 mm, K 0.24, slope 1.4 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index.",
+     "Limited irrigation assumed capped at 150 mm/yr.",
+     "Cover crop modelled as a winter rye season; termination timing and its effect on the next crop's water are simplified."
+    ],
+    "verify_locally": [
+     "Does your water right / well capacity support this rotation in a dry year?",
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "Cover crop seed cost and termination rules for crop insurance."
     ]
    }
   ],
   "FIN-004": [
    {
     "id": "current",
-    "name": "Current: alfalfa–alfalfa–alfalfa–alfalfa–corn–wheat",
-    "description": "Rotation observed in CDL over recent years.",
+    "name": "Current: Winter wheat–Alfalfa–Alfalfa–Corn–Corn",
+    "description": "Rotation observed in CDL over recent years (irrigated, full).",
     "is_current": true,
     "rotation": [
-     "alfalfa",
-     "alfalfa",
+     "winter_wheat",
      "alfalfa",
      "alfalfa",
      "corn",
-     "winter_wheat"
+     "corn"
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 381.0,
-      "p50": 488.0,
-      "p90": 596.0
+      "p10": 360.0,
+      "p50": 443.0,
+      "p90": 488.0
      },
      "erosion_t_ha": {
-      "p10": 0.12,
-      "p50": 0.27,
-      "p90": 0.57
+      "p10": 0.53,
+      "p50": 0.64,
+      "p90": 0.9
      },
      "soil_index": {
-      "p10": 0.26,
-      "p50": 0.35,
-      "p90": 0.42
+      "p10": 0.43,
+      "p50": 0.44,
+      "p90": 0.44
      },
      "income_usd_ha": {
-      "p10": 185.0,
-      "p50": 464.0,
-      "p90": 654.0
+      "p10": 474.0,
+      "p50": 507.0,
+      "p90": 602.0
      },
      "labour_index": {
-      "p10": 0.67,
+      "p10": 0.69,
       "p50": 0.72,
-      "p90": 0.78
+      "p90": 0.74
      }
     },
     "evidence": [
      {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Bridgeport silt loam, occasionally flooded: AWC 230 mm, K 0.43, slope 0.4 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered."
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
     ],
     "verify_locally": [
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence."
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "Hay buyers, storage and haul distance; stand establishment cost."
     ]
    },
    {
-    "id": "wsf_limited",
-    "name": "Wheat–sorghum–fallow (limited irrigation)",
-    "description": "Lower-water rotation common in western Kansas.",
+    "id": "wsf_dryland",
+    "name": "Wheat–sorghum–fallow (dryland)",
+    "description": "No irrigation; relies on fallow-stored soil water and rainfall.",
     "is_current": false,
     "rotation": [
      "winter_wheat",
@@ -892,62 +972,67 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 110.0,
-      "p50": 141.0,
-      "p90": 172.0
+      "p10": 0.0,
+      "p50": 0.0,
+      "p90": 0.0
      },
      "erosion_t_ha": {
-      "p10": 0.49,
-      "p50": 1.09,
-      "p90": 2.29
+      "p10": 1.17,
+      "p50": 1.58,
+      "p90": 2.07
      },
      "soil_index": {
-      "p10": -0.1,
-      "p50": -0.01,
-      "p90": 0.06
+      "p10": 0.11,
+      "p50": 0.14,
+      "p90": 0.17
      },
      "income_usd_ha": {
-      "p10": 8.0,
-      "p50": 142.0,
-      "p90": 234.0
+      "p10": 74.0,
+      "p50": 138.0,
+      "p90": 239.0
      },
      "labour_index": {
-      "p10": 0.23,
-      "p50": 0.28,
-      "p90": 0.34
+      "p10": 0.19,
+      "p50": 0.19,
+      "p90": 0.19
      }
     },
     "evidence": [
      {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Bridgeport silt loam, occasionally flooded: AWC 230 mm, K 0.43, slope 0.4 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Yield response to deficit irrigation is from literature, not this field."
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
     ],
     "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
-     "Fallow-year weed control and residue management plan."
+     "How you will keep residue on the fallow to limit wind erosion."
     ]
    },
    {
     "id": "corn_soy",
-    "name": "Corn–soybean",
-    "description": "Adds a legume; needs full irrigation.",
+    "name": "Corn–soybean (full irrigation)",
+    "description": "Adds a nitrogen-fixing legume; breaks corn pest cycles.",
     "is_current": false,
     "rotation": [
      "corn",
@@ -955,129 +1040,142 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 301.0,
-      "p50": 386.0,
-      "p90": 471.0
+      "p10": 336.0,
+      "p50": 480.0,
+      "p90": 550.0
      },
      "erosion_t_ha": {
-      "p10": 0.41,
-      "p50": 0.92,
-      "p90": 1.93
+      "p10": 1.04,
+      "p50": 1.48,
+      "p90": 2.28
      },
      "soil_index": {
-      "p10": -0.03,
-      "p50": 0.06,
-      "p90": 0.13
+      "p10": 0.4,
+      "p50": 0.41,
+      "p90": 0.42
      },
      "income_usd_ha": {
-      "p10": 162.0,
-      "p50": 422.0,
-      "p90": 598.0
+      "p10": 451.0,
+      "p50": 537.0,
+      "p90": 686.0
      },
      "labour_index": {
-      "p10": 0.5,
-      "p50": 0.55,
-      "p90": 0.61
+      "p10": 0.51,
+      "p50": 0.56,
+      "p90": 0.58
      }
     },
     "evidence": [
      {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Bridgeport silt loam, occasionally flooded: AWC 230 mm, K 0.43, slope 0.4 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Soybean yield under SW Kansas heat not calibrated."
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
     ],
     "verify_locally": [
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
-     "Soybean cyst nematode and iron-deficiency chlorosis history."
+     "Soybean yield on your soil (iron-deficiency chlorosis on high-pH soils)."
     ]
    },
    {
-    "id": "corn_sorg_cover",
-    "name": "Corn–sorghum + rye cover",
-    "description": "Exits alfalfa; covers protect soil in winter.",
+    "id": "sorghum_wheat_cover",
+    "name": "Sorghum–wheat–cover crop (limited irrigation)",
+    "description": "Cover crop replaces fallow to protect soil; uses some stored water.",
     "is_current": false,
     "rotation": [
-     "corn",
-     "rye_cover",
      "sorghum",
+     "winter_wheat",
      "rye_cover"
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 292.0,
-      "p50": 374.0,
-      "p90": 456.0
+      "p10": 100.0,
+      "p50": 100.0,
+      "p90": 100.0
      },
      "erosion_t_ha": {
-      "p10": 0.19,
-      "p50": 0.41,
-      "p90": 0.87
+      "p10": 0.69,
+      "p50": 0.91,
+      "p90": 1.14
      },
      "soil_index": {
-      "p10": 0.25,
-      "p50": 0.34,
-      "p90": 0.41
+      "p10": 0.24,
+      "p50": 0.29,
+      "p90": 0.33
      },
      "income_usd_ha": {
-      "p10": 98.0,
-      "p50": 306.0,
-      "p90": 448.0
+      "p10": 8.0,
+      "p50": 139.0,
+      "p90": 231.0
      },
      "labour_index": {
-      "p10": 0.53,
-      "p50": 0.58,
-      "p90": 0.64
+      "p10": 0.24,
+      "p50": 0.24,
+      "p90": 0.24
      }
     },
     "evidence": [
      {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Bridgeport silt loam, occasionally flooded: AWC 230 mm, K 0.43, slope 0.4 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Soil benefit of ending the alfalfa stand is not quantified."
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index.",
+     "Limited irrigation assumed capped at 150 mm/yr.",
+     "Cover crop modelled as a winter rye season; termination timing and its effect on the next crop's water are simplified."
     ],
     "verify_locally": [
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
-     "Hay market access lost if alfalfa is dropped."
+     "Cover crop seed cost and termination rules for crop insurance."
     ]
    }
   ],
   "FIN-005": [
    {
     "id": "current",
-    "name": "Current: corn–soybeans",
-    "description": "Rotation observed in CDL over recent years.",
+    "name": "Current: Corn–Soybeans",
+    "description": "Rotation observed in CDL over recent years (irrigated, full).",
     "is_current": true,
     "rotation": [
      "corn",
@@ -1085,60 +1183,68 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 304.0,
-      "p50": 390.0,
-      "p90": 475.0
+      "p10": 346.0,
+      "p50": 483.0,
+      "p90": 550.0
      },
      "erosion_t_ha": {
-      "p10": 0.55,
-      "p50": 1.23,
-      "p90": 2.57
+      "p10": 1.38,
+      "p50": 1.96,
+      "p90": 3.02
      },
      "soil_index": {
-      "p10": -0.06,
-      "p50": 0.03,
-      "p90": 0.1
+      "p10": 0.38,
+      "p50": 0.4,
+      "p90": 0.41
      },
      "income_usd_ha": {
-      "p10": 151.0,
-      "p50": 401.0,
-      "p90": 572.0
+      "p10": 433.0,
+      "p50": 524.0,
+      "p90": 673.0
      },
      "labour_index": {
-      "p10": 0.5,
-      "p50": 0.55,
-      "p90": 0.61
+      "p10": 0.51,
+      "p50": 0.56,
+      "p90": 0.58
      }
     },
     "evidence": [
      {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Richfield silt loam, 0 to 1 percent slopes: AWC 205 mm, K 0.37, slope 0.7 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered."
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
     ],
     "verify_locally": [
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence."
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "Soybean yield on your soil (iron-deficiency chlorosis on high-pH soils)."
     ]
    },
    {
-    "id": "wsf_limited",
-    "name": "Wheat–sorghum–fallow (limited irrigation)",
-    "description": "Lower-water rotation common in western Kansas.",
+    "id": "wsf_dryland",
+    "name": "Wheat–sorghum–fallow (dryland)",
+    "description": "No irrigation; relies on fallow-stored soil water and rainfall.",
     "is_current": false,
     "rotation": [
      "winter_wheat",
@@ -1147,244 +1253,268 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 111.0,
-      "p50": 142.0,
-      "p90": 174.0
+      "p10": 0.0,
+      "p50": 0.0,
+      "p90": 0.0
      },
      "erosion_t_ha": {
-      "p10": 0.67,
-      "p50": 1.49,
-      "p90": 3.14
+      "p10": 1.55,
+      "p50": 2.09,
+      "p90": 2.73
      },
      "soil_index": {
-      "p10": -0.13,
-      "p50": -0.04,
-      "p90": 0.03
+      "p10": 0.09,
+      "p50": 0.12,
+      "p90": 0.15
      },
      "income_usd_ha": {
-      "p10": 0.0,
-      "p50": 128.0,
-      "p90": 216.0
+      "p10": 56.0,
+      "p50": 121.0,
+      "p90": 223.0
      },
      "labour_index": {
-      "p10": 0.23,
-      "p50": 0.28,
-      "p90": 0.34
+      "p10": 0.19,
+      "p50": 0.19,
+      "p90": 0.19
      }
     },
     "evidence": [
      {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Richfield silt loam, 0 to 1 percent slopes: AWC 205 mm, K 0.37, slope 0.7 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Yield response to deficit irrigation is from literature, not this field."
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
     ],
     "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
-     "Fallow-year weed control and residue management plan."
+     "How you will keep residue on the fallow to limit wind erosion."
     ]
    },
    {
-    "id": "corn_sorg",
-    "name": "Corn–sorghum",
-    "description": "Swaps soybeans for drought-tolerant sorghum.",
+    "id": "corn_wheat_sorghum",
+    "name": "Corn–wheat–sorghum (full irrigation)",
+    "description": "Three crops with different water peaks; spreads workload over the year.",
     "is_current": false,
     "rotation": [
      "corn",
+     "winter_wheat",
      "sorghum"
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 259.0,
-      "p50": 333.0,
-      "p90": 406.0
+      "p10": 301.0,
+      "p50": 371.0,
+      "p90": 420.0
      },
      "erosion_t_ha": {
-      "p10": 0.43,
-      "p50": 0.95,
-      "p90": 2.0
+      "p10": 1.15,
+      "p50": 1.54,
+      "p90": 1.85
      },
      "soil_index": {
-      "p10": 0.06,
-      "p50": 0.15,
-      "p90": 0.22
+      "p10": 0.48,
+      "p50": 0.49,
+      "p90": 0.5
      },
      "income_usd_ha": {
-      "p10": 115.0,
-      "p50": 337.0,
-      "p90": 488.0
+      "p10": 351.0,
+      "p50": 446.0,
+      "p90": 519.0
      },
      "labour_index": {
-      "p10": 0.45,
-      "p50": 0.5,
-      "p90": 0.56
+      "p10": 0.43,
+      "p50": 0.46,
+      "p90": 0.47
      }
     },
     "evidence": [
      {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Richfield silt loam, 0 to 1 percent slopes: AWC 205 mm, K 0.37, slope 0.7 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered."
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
     ],
     "verify_locally": [
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence.",
-     "Sorghum harvest timing vs. wheat planting."
+     "Herbicide carryover restrictions between the crops in this sequence."
     ]
    },
    {
-    "id": "alfalfa_corn_wheat",
-    "name": "Alfalfa (3 yr)–corn–wheat",
-    "description": "Perennial legume phase for soil building.",
+    "id": "alfalfa_corn",
+    "name": "Alfalfa (3 yr)–corn (2 yr) (full irrigation)",
+    "description": "Perennial forage builds soil; needs hay market and more labour.",
     "is_current": false,
     "rotation": [
      "alfalfa",
      "alfalfa",
      "alfalfa",
      "corn",
-     "winter_wheat"
+     "corn"
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 386.0,
-      "p50": 495.0,
-      "p90": 604.0
+      "p10": 384.0,
+      "p50": 485.0,
+      "p90": 534.0
      },
      "erosion_t_ha": {
-      "p10": 0.19,
-      "p50": 0.41,
-      "p90": 0.86
+      "p10": 0.48,
+      "p50": 0.69,
+      "p90": 0.97
      },
      "soil_index": {
-      "p10": 0.21,
-      "p50": 0.3,
-      "p90": 0.37
+      "p10": 0.42,
+      "p50": 0.42,
+      "p90": 0.43
      },
      "income_usd_ha": {
-      "p10": 163.0,
-      "p50": 423.0,
-      "p90": 600.0
+      "p10": 502.0,
+      "p50": 572.0,
+      "p90": 668.0
      },
      "labour_index": {
-      "p10": 0.65,
-      "p50": 0.7,
-      "p90": 0.76
+      "p10": 0.83,
+      "p50": 0.86,
+      "p90": 0.88
      }
     },
     "evidence": [
      {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Richfield silt loam, 0 to 1 percent slopes: AWC 205 mm, K 0.37, slope 0.7 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Alfalfa irrigation demand is the highest of all options; stand life uncertain."
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
     ],
     "verify_locally": [
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
-     "Hay buyer within hauling distance.",
-     "Cutting labour and equipment."
+     "Hay buyers, storage and haul distance; stand establishment cost."
     ]
    }
   ],
   "FIN-006": [
    {
     "id": "current",
-    "name": "Current: sorghum–sorghum–wheat",
-    "description": "Rotation observed in CDL over recent years.",
+    "name": "Current: Grain sorghum–Winter wheat–Grain sorghum",
+    "description": "Rotation observed in CDL over recent years (irrigated, full).",
     "is_current": true,
     "rotation": [
      "sorghum",
-     "sorghum",
-     "winter_wheat"
+     "winter_wheat",
+     "sorghum"
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 180.0,
-      "p50": 230.0,
-      "p90": 281.0
+      "p10": 267.0,
+      "p50": 339.0,
+      "p90": 386.0
      },
      "erosion_t_ha": {
-      "p10": 1.13,
-      "p50": 2.52,
-      "p90": 5.28
+      "p10": 4.11,
+      "p50": 5.48,
+      "p90": 6.79
      },
      "soil_index": {
-      "p10": 0.01,
-      "p50": 0.1,
-      "p90": 0.17
+      "p10": 0.34,
+      "p50": 0.36,
+      "p90": 0.38
      },
      "income_usd_ha": {
-      "p10": 55.0,
-      "p50": 227.0,
-      "p90": 346.0
+      "p10": 307.0,
+      "p50": 361.0,
+      "p90": 424.0
      },
      "labour_index": {
-      "p10": 0.33,
+      "p10": 0.35,
       "p50": 0.38,
-      "p90": 0.44
+      "p90": 0.39
      }
     },
     "evidence": [
      {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Ulysses silt loam, 1 to 3 percent slopes: AWC 180 mm, K 0.43, slope 2.1 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered."
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
     ],
     "verify_locally": [
      "Does your water right / well capacity support this rotation in a dry year?",
@@ -1393,9 +1523,78 @@
     ]
    },
    {
-    "id": "wsf_limited",
-    "name": "Wheat–sorghum–fallow (limited irrigation)",
-    "description": "Lower-water rotation common in western Kansas.",
+    "id": "corn_soy",
+    "name": "Corn–soybean (full irrigation)",
+    "description": "Adds a nitrogen-fixing legume; breaks corn pest cycles.",
+    "is_current": false,
+    "rotation": [
+     "corn",
+     "soybeans"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 352.0,
+      "p50": 486.0,
+      "p90": 554.0
+     },
+     "erosion_t_ha": {
+      "p10": 4.8,
+      "p50": 6.84,
+      "p90": 10.54
+     },
+     "soil_index": {
+      "p10": 0.24,
+      "p50": 0.3,
+      "p90": 0.34
+     },
+     "income_usd_ha": {
+      "p10": 418.0,
+      "p50": 514.0,
+      "p90": 655.0
+     },
+     "labour_index": {
+      "p10": 0.51,
+      "p50": 0.56,
+      "p90": 0.58
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Ulysses silt loam, 1 to 3 percent slopes: AWC 180 mm, K 0.43, slope 2.1 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
+    ],
+    "verify_locally": [
+     "Does your water right / well capacity support this rotation in a dry year?",
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "Soybean yield on your soil (iron-deficiency chlorosis on high-pH soils)."
+    ]
+   },
+   {
+    "id": "wsf_dryland",
+    "name": "Wheat–sorghum–fallow (dryland)",
+    "description": "No irrigation; relies on fallow-stored soil water and rainfall.",
     "is_current": false,
     "rotation": [
      "winter_wheat",
@@ -1404,256 +1603,213 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 118.0,
-      "p50": 151.0,
-      "p90": 184.0
+      "p10": 0.0,
+      "p50": 0.0,
+      "p90": 0.0
      },
      "erosion_t_ha": {
-      "p10": 1.78,
-      "p50": 3.96,
-      "p90": 8.31
+      "p10": 5.39,
+      "p50": 7.29,
+      "p90": 9.53
      },
      "soil_index": {
-      "p10": -0.18,
-      "p50": -0.09,
-      "p90": -0.02
-     },
-     "income_usd_ha": {
-      "p10": -4.0,
-      "p50": 119.0,
-      "p90": 205.0
-     },
-     "labour_index": {
-      "p10": 0.23,
-      "p50": 0.28,
-      "p90": 0.34
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
-     }
-    ],
-    "data_gaps": [
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Yield response to deficit irrigation is from literature, not this field."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence.",
-     "Fallow-year weed control and residue management plan."
-    ]
-   },
-   {
-    "id": "corn_soy",
-    "name": "Corn–soybean",
-    "description": "Adds a legume; needs full irrigation.",
-    "is_current": false,
-    "rotation": [
-     "corn",
-     "soybeans"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 306.0,
-      "p50": 392.0,
-      "p90": 478.0
-     },
-     "erosion_t_ha": {
-      "p10": 1.52,
-      "p50": 3.38,
-      "p90": 7.09
-     },
-     "soil_index": {
-      "p10": -0.11,
-      "p50": -0.02,
+      "p10": -0.03,
+      "p50": 0.02,
       "p90": 0.05
      },
      "income_usd_ha": {
-      "p10": 151.0,
-      "p50": 401.0,
-      "p90": 571.0
+      "p10": 37.0,
+      "p50": 100.0,
+      "p90": 207.0
      },
      "labour_index": {
-      "p10": 0.5,
-      "p50": 0.55,
-      "p90": 0.61
+      "p10": 0.19,
+      "p50": 0.19,
+      "p90": 0.19
      }
     },
     "evidence": [
      {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Ulysses silt loam, 1 to 3 percent slopes: AWC 180 mm, K 0.43, slope 2.1 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Soybean yield under SW Kansas heat not calibrated."
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
     ],
     "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
-     "Soybean cyst nematode and iron-deficiency chlorosis history."
+     "How you will keep residue on the fallow to limit wind erosion."
     ]
    },
    {
-    "id": "alfalfa_corn_wheat",
-    "name": "Alfalfa (3 yr)–corn–wheat",
-    "description": "Perennial legume phase for soil building.",
+    "id": "alfalfa_corn",
+    "name": "Alfalfa (3 yr)–corn (2 yr) (full irrigation)",
+    "description": "Perennial forage builds soil; needs hay market and more labour.",
     "is_current": false,
     "rotation": [
      "alfalfa",
      "alfalfa",
      "alfalfa",
      "corn",
-     "winter_wheat"
+     "corn"
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 382.0,
-      "p50": 490.0,
-      "p90": 597.0
+      "p10": 390.0,
+      "p50": 492.0,
+      "p90": 534.0
      },
      "erosion_t_ha": {
-      "p10": 0.53,
-      "p50": 1.18,
-      "p90": 2.47
+      "p10": 1.67,
+      "p50": 2.41,
+      "p90": 3.38
      },
      "soil_index": {
-      "p10": 0.16,
-      "p50": 0.25,
-      "p90": 0.32
+      "p10": 0.38,
+      "p50": 0.39,
+      "p90": 0.4
      },
      "income_usd_ha": {
-      "p10": 156.0,
-      "p50": 411.0,
-      "p90": 585.0
+      "p10": 495.0,
+      "p50": 559.0,
+      "p90": 661.0
      },
      "labour_index": {
-      "p10": 0.65,
-      "p50": 0.7,
-      "p90": 0.76
+      "p10": 0.83,
+      "p50": 0.86,
+      "p90": 0.88
      }
     },
     "evidence": [
      {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Ulysses silt loam, 1 to 3 percent slopes: AWC 180 mm, K 0.43, slope 2.1 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Alfalfa irrigation demand is the highest of all options; stand life uncertain."
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
     ],
     "verify_locally": [
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
-     "Hay buyer within hauling distance.",
-     "Cutting labour and equipment."
+     "Hay buyers, storage and haul distance; stand establishment cost."
     ]
    }
   ],
   "FIN-007": [
    {
     "id": "current",
-    "name": "Current: corn–corn–wheat",
-    "description": "Rotation observed in CDL over recent years.",
+    "name": "Current: Corn–Fallow / idle cropland–Corn–Corn–Winter wheat",
+    "description": "Rotation observed in CDL over recent years (irrigated, full).",
     "is_current": true,
     "rotation": [
+     "corn",
+     "fallow",
      "corn",
      "corn",
      "winter_wheat"
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 285.0,
-      "p50": 365.0,
-      "p90": 446.0
+      "p10": 282.0,
+      "p50": 337.0,
+      "p90": 385.0
      },
      "erosion_t_ha": {
-      "p10": 0.42,
-      "p50": 0.94,
-      "p90": 1.97
+      "p10": 1.66,
+      "p50": 2.12,
+      "p90": 2.61
      },
      "soil_index": {
-      "p10": 0.01,
-      "p50": 0.1,
-      "p90": 0.17
+      "p10": 0.43,
+      "p50": 0.45,
+      "p90": 0.46
      },
      "income_usd_ha": {
-      "p10": 114.0,
-      "p50": 334.0,
-      "p90": 484.0
+      "p10": 368.0,
+      "p50": 443.0,
+      "p90": 517.0
      },
      "labour_index": {
-      "p10": 0.47,
-      "p50": 0.52,
-      "p90": 0.58
+      "p10": 0.45,
+      "p50": 0.47,
+      "p90": 0.49
      }
     },
     "evidence": [
      {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Keith silt loam, 0 to 1 percent slopes: AWC 200 mm, K 0.37, slope 0.8 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered."
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
     ],
     "verify_locally": [
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence."
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "How you will keep residue on the fallow to limit wind erosion."
     ]
    },
    {
-    "id": "wsf_limited",
-    "name": "Wheat–sorghum–fallow (limited irrigation)",
-    "description": "Lower-water rotation common in western Kansas.",
+    "id": "wsf_dryland",
+    "name": "Wheat–sorghum–fallow (dryland)",
+    "description": "No irrigation; relies on fallow-stored soil water and rainfall.",
     "is_current": false,
     "rotation": [
      "winter_wheat",
@@ -1662,194 +1818,213 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 111.0,
-      "p50": 142.0,
-      "p90": 173.0
+      "p10": 0.0,
+      "p50": 0.0,
+      "p90": 0.0
      },
      "erosion_t_ha": {
-      "p10": 0.72,
-      "p50": 1.6,
-      "p90": 3.36
+      "p10": 1.74,
+      "p50": 2.35,
+      "p90": 3.07
      },
      "soil_index": {
-      "p10": -0.14,
-      "p50": -0.05,
-      "p90": 0.02
+      "p10": 0.09,
+      "p50": 0.12,
+      "p90": 0.15
+     },
+     "income_usd_ha": {
+      "p10": 52.0,
+      "p50": 117.0,
+      "p90": 220.0
+     },
+     "labour_index": {
+      "p10": 0.19,
+      "p50": 0.19,
+      "p90": 0.19
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Keith silt loam, 0 to 1 percent slopes: AWC 200 mm, K 0.37, slope 0.8 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
+    ],
+    "verify_locally": [
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "How you will keep residue on the fallow to limit wind erosion."
+    ]
+   },
+   {
+    "id": "alfalfa_corn",
+    "name": "Alfalfa (3 yr)–corn (2 yr) (full irrigation)",
+    "description": "Perennial forage builds soil; needs hay market and more labour.",
+    "is_current": false,
+    "rotation": [
+     "alfalfa",
+     "alfalfa",
+     "alfalfa",
+     "corn",
+     "corn"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 385.0,
+      "p50": 488.0,
+      "p90": 534.0
+     },
+     "erosion_t_ha": {
+      "p10": 0.54,
+      "p50": 0.78,
+      "p90": 1.09
+     },
+     "soil_index": {
+      "p10": 0.41,
+      "p50": 0.42,
+      "p90": 0.43
+     },
+     "income_usd_ha": {
+      "p10": 501.0,
+      "p50": 567.0,
+      "p90": 666.0
+     },
+     "labour_index": {
+      "p10": 0.83,
+      "p50": 0.86,
+      "p90": 0.88
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Keith silt loam, 0 to 1 percent slopes: AWC 200 mm, K 0.37, slope 0.8 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
+    ],
+    "verify_locally": [
+     "Does your water right / well capacity support this rotation in a dry year?",
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "Hay buyers, storage and haul distance; stand establishment cost."
+    ]
+   },
+   {
+    "id": "sorghum_wheat_cover",
+    "name": "Sorghum–wheat–cover crop (limited irrigation)",
+    "description": "Cover crop replaces fallow to protect soil; uses some stored water.",
+    "is_current": false,
+    "rotation": [
+     "sorghum",
+     "winter_wheat",
+     "rye_cover"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 100.0,
+      "p50": 100.0,
+      "p90": 100.0
+     },
+     "erosion_t_ha": {
+      "p10": 1.03,
+      "p50": 1.35,
+      "p90": 1.7
+     },
+     "soil_index": {
+      "p10": 0.23,
+      "p50": 0.28,
+      "p90": 0.31
      },
      "income_usd_ha": {
       "p10": 2.0,
       "p50": 130.0,
-      "p90": 220.0
+      "p90": 217.0
      },
      "labour_index": {
-      "p10": 0.23,
-      "p50": 0.28,
-      "p90": 0.34
+      "p10": 0.24,
+      "p50": 0.24,
+      "p90": 0.24
      }
     },
     "evidence": [
      {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Keith silt loam, 0 to 1 percent slopes: AWC 200 mm, K 0.37, slope 0.8 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Yield response to deficit irrigation is from literature, not this field."
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index.",
+     "Limited irrigation assumed capped at 150 mm/yr.",
+     "Cover crop modelled as a winter rye season; termination timing and its effect on the next crop's water are simplified."
     ],
     "verify_locally": [
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
-     "Fallow-year weed control and residue management plan."
-    ]
-   },
-   {
-    "id": "corn_soy",
-    "name": "Corn–soybean",
-    "description": "Adds a legume; needs full irrigation.",
-    "is_current": false,
-    "rotation": [
-     "corn",
-     "soybeans"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 298.0,
-      "p50": 382.0,
-      "p90": 466.0
-     },
-     "erosion_t_ha": {
-      "p10": 0.59,
-      "p50": 1.31,
-      "p90": 2.76
-     },
-     "soil_index": {
-      "p10": -0.07,
-      "p50": 0.02,
-      "p90": 0.09
-     },
-     "income_usd_ha": {
-      "p10": 150.0,
-      "p50": 401.0,
-      "p90": 571.0
-     },
-     "labour_index": {
-      "p10": 0.5,
-      "p50": 0.55,
-      "p90": 0.61
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
-     }
-    ],
-    "data_gaps": [
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Soybean yield under SW Kansas heat not calibrated."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence.",
-     "Soybean cyst nematode and iron-deficiency chlorosis history."
-    ]
-   },
-   {
-    "id": "alfalfa_corn_wheat",
-    "name": "Alfalfa (3 yr)–corn–wheat",
-    "description": "Perennial legume phase for soil building.",
-    "is_current": false,
-    "rotation": [
-     "alfalfa",
-     "alfalfa",
-     "alfalfa",
-     "corn",
-     "winter_wheat"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 375.0,
-      "p50": 481.0,
-      "p90": 587.0
-     },
-     "erosion_t_ha": {
-      "p10": 0.21,
-      "p50": 0.46,
-      "p90": 0.97
-     },
-     "soil_index": {
-      "p10": 0.2,
-      "p50": 0.29,
-      "p90": 0.36
-     },
-     "income_usd_ha": {
-      "p10": 164.0,
-      "p50": 426.0,
-      "p90": 604.0
-     },
-     "labour_index": {
-      "p10": 0.65,
-      "p50": 0.7,
-      "p90": 0.76
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
-     }
-    ],
-    "data_gaps": [
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Alfalfa irrigation demand is the highest of all options; stand life uncertain."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence.",
-     "Hay buyer within hauling distance.",
-     "Cutting labour and equipment."
+     "Cover crop seed cost and termination rules for crop insurance."
     ]
    }
   ],
   "FIN-008": [
    {
     "id": "current",
-    "name": "Current: cotton–cotton–sorghum",
-    "description": "Rotation observed in CDL over recent years.",
+    "name": "Current: Cotton–Cotton–Grain sorghum",
+    "description": "Rotation observed in CDL over recent years (irrigated, full).",
     "is_current": true,
     "rotation": [
      "cotton",
@@ -1858,49 +2033,56 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 209.0,
-      "p50": 268.0,
-      "p90": 327.0
+      "p10": 367.0,
+      "p50": 448.0,
+      "p90": 510.0
      },
      "erosion_t_ha": {
-      "p10": 1.24,
-      "p50": 2.75,
-      "p90": 5.77
+      "p10": 4.66,
+      "p50": 6.03,
+      "p90": 7.5
      },
      "soil_index": {
-      "p10": -0.3,
-      "p50": -0.21,
-      "p90": -0.14
+      "p10": 0.04,
+      "p50": 0.07,
+      "p90": 0.1
      },
      "income_usd_ha": {
-      "p10": 77.0,
-      "p50": 266.0,
-      "p90": 396.0
+      "p10": 480.0,
+      "p50": 549.0,
+      "p90": 638.0
      },
      "labour_index": {
       "p10": 0.55,
-      "p50": 0.6,
-      "p90": 0.66
+      "p50": 0.58,
+      "p90": 0.6
      }
     },
     "evidence": [
      {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Manter fine sandy loam, 1 to 3 percent slopes: AWC 140 mm, K 0.24, slope 2.4 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered."
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
     ],
     "verify_locally": [
      "Does your water right / well capacity support this rotation in a dry year?",
@@ -1909,9 +2091,9 @@
     ]
    },
    {
-    "id": "wsf_limited",
-    "name": "Wheat–sorghum–fallow (limited irrigation)",
-    "description": "Lower-water rotation common in western Kansas.",
+    "id": "wsf_dryland",
+    "name": "Wheat–sorghum–fallow (dryland)",
+    "description": "No irrigation; relies on fallow-stored soil water and rainfall.",
     "is_current": false,
     "rotation": [
      "winter_wheat",
@@ -1920,62 +2102,67 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 118.0,
-      "p50": 152.0,
-      "p90": 185.0
+      "p10": 0.0,
+      "p50": 0.0,
+      "p90": 0.0
      },
      "erosion_t_ha": {
-      "p10": 1.14,
-      "p50": 2.52,
-      "p90": 5.3
+      "p10": 3.5,
+      "p50": 4.73,
+      "p90": 6.19
      },
      "soil_index": {
-      "p10": -0.22,
-      "p50": -0.13,
-      "p90": -0.06
+      "p10": 0.01,
+      "p50": 0.05,
+      "p90": 0.09
      },
      "income_usd_ha": {
-      "p10": -13.0,
-      "p50": 104.0,
-      "p90": 185.0
+      "p10": 8.0,
+      "p50": 59.0,
+      "p90": 178.0
      },
      "labour_index": {
-      "p10": 0.23,
-      "p50": 0.28,
-      "p90": 0.34
+      "p10": 0.19,
+      "p50": 0.19,
+      "p90": 0.19
      }
     },
     "evidence": [
      {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Manter fine sandy loam, 1 to 3 percent slopes: AWC 140 mm, K 0.24, slope 2.4 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Yield response to deficit irrigation is from literature, not this field."
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
     ],
     "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
-     "Fallow-year weed control and residue management plan."
+     "How you will keep residue on the fallow to limit wind erosion."
     ]
    },
    {
     "id": "corn_soy",
-    "name": "Corn–soybean",
-    "description": "Adds a legume; needs full irrigation.",
+    "name": "Corn–soybean (full irrigation)",
+    "description": "Adds a nitrogen-fixing legume; breaks corn pest cycles.",
     "is_current": false,
     "rotation": [
      "corn",
@@ -1983,123 +2170,131 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 325.0,
-      "p50": 417.0,
-      "p90": 509.0
+      "p10": 368.0,
+      "p50": 493.0,
+      "p90": 550.0
      },
      "erosion_t_ha": {
-      "p10": 0.95,
-      "p50": 2.1,
-      "p90": 4.41
+      "p10": 3.12,
+      "p50": 4.44,
+      "p90": 6.85
      },
      "soil_index": {
-      "p10": -0.15,
-      "p50": -0.06,
-      "p90": 0.01
+      "p10": 0.31,
+      "p50": 0.35,
+      "p90": 0.37
      },
      "income_usd_ha": {
-      "p10": 136.0,
-      "p50": 374.0,
-      "p90": 536.0
+      "p10": 390.0,
+      "p50": 489.0,
+      "p90": 641.0
      },
      "labour_index": {
-      "p10": 0.5,
-      "p50": 0.55,
-      "p90": 0.61
+      "p10": 0.52,
+      "p50": 0.56,
+      "p90": 0.58
      }
     },
     "evidence": [
      {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Manter fine sandy loam, 1 to 3 percent slopes: AWC 140 mm, K 0.24, slope 2.4 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Soybean yield under SW Kansas heat not calibrated."
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
     ],
     "verify_locally": [
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
-     "Soybean cyst nematode and iron-deficiency chlorosis history."
+     "Soybean yield on your soil (iron-deficiency chlorosis on high-pH soils)."
     ]
    },
    {
-    "id": "alfalfa_corn_wheat",
-    "name": "Alfalfa (3 yr)–corn–wheat",
-    "description": "Perennial legume phase for soil building.",
+    "id": "corn_wheat_sorghum",
+    "name": "Corn–wheat–sorghum (full irrigation)",
+    "description": "Three crops with different water peaks; spreads workload over the year.",
     "is_current": false,
     "rotation": [
-     "alfalfa",
-     "alfalfa",
-     "alfalfa",
      "corn",
-     "winter_wheat"
+     "winter_wheat",
+     "sorghum"
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 411.0,
-      "p50": 527.0,
-      "p90": 642.0
+      "p10": 318.0,
+      "p50": 390.0,
+      "p90": 429.0
      },
      "erosion_t_ha": {
-      "p10": 0.33,
-      "p50": 0.74,
-      "p90": 1.56
+      "p10": 2.6,
+      "p50": 3.48,
+      "p90": 4.18
      },
      "soil_index": {
-      "p10": 0.12,
-      "p50": 0.21,
-      "p90": 0.28
+      "p10": 0.43,
+      "p50": 0.45,
+      "p90": 0.47
      },
      "income_usd_ha": {
-      "p10": 152.0,
-      "p50": 403.0,
-      "p90": 574.0
+      "p10": 333.0,
+      "p50": 428.0,
+      "p90": 494.0
      },
      "labour_index": {
-      "p10": 0.65,
-      "p50": 0.7,
-      "p90": 0.76
+      "p10": 0.44,
+      "p50": 0.46,
+      "p90": 0.48
      }
     },
     "evidence": [
      {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
+      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Manter fine sandy loam, 1 to 3 percent slopes: AWC 140 mm, K 0.24, slope 2.4 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Alfalfa irrigation demand is the highest of all options; stand life uncertain."
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
     ],
     "verify_locally": [
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence.",
-     "Hay buyer within hauling distance.",
-     "Cutting labour and equipment."
+     "Herbicide carryover restrictions between the crops in this sequence."
     ]
    }
   ]
