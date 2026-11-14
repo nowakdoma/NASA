@@ -1,7 +1,7 @@
 # contracts/ — the integration point
 
 Everything that crosses a team boundary is defined here. **Changes need explicit approval
-from all three humans** (see `AGENTS.md`). Current version: **0.1**.
+from all three humans** (see `AGENTS.md`). Current version: **0.2**.
 
 | File                     | Producer                     | Consumer          |
 | ------------------------ | ---------------------------- | ----------------- |
@@ -41,3 +41,18 @@ l_ini_d, l_dev_d, l_mid_d, l_late_d, residue_t_ha, price_source, placeholder, so
 
 Kc and stage lengths (days) follow FAO-56 Tables 11–12; `placeholder=true` rows still need
 local calibration (K-State extension / KS NASS).
+
+### v0.2 — CDL classes that were missing
+
+Added `triticale`, `potatoes`, `other_hay`, `other_crops`, plus the four double-crop
+rotations that really occur in Finney County: `winwht_corn` (CDL 225), `triticale_corn`
+(228), `winwht_sorghum` (236), `winwht_soybeans` (26). Without these rows the pipeline had
+to drop a field whose history contained one of them, which cost 34 of 60 fields.
+
+**Double-crop convention:** one `crop_code` per field-year, so a double-cropped year is
+represented by its **summer** crop only (corn/sorghum/soybeans), with Kc taken from that
+crop. The winter-wheat/triticale phase is not separately modelled, which understates
+water use for those years; they are `placeholder=true` and say so in `source`.
+
+Non-crop CDL classes (shrubland 152, developed, water) are deliberately **not** added: a
+year of shrubland is not a crop, and coercing it to one would falsify the rotation.

@@ -44,12 +44,19 @@ cross-team needs under **Blockers / requests**.
   - `data/interim/fields.geojson`: real fields in `contracts/fields.schema.json` format.
     `make export` reads it, adds `strategies.json`, writes both to `web/public/data/` and
     validates them.
-- **pipeline → person 3 (was person 1):** `contracts/crops.csv` has no row for crops that really grow here:
-  triticale (CDL 205, 23,709 ac in this county), double-crop rotations (225 winwht/corn,
-  228 triticale/corn, 236 winwht/sorghum), oats (28), other hay (37). They are currently
-  reported raw in `crop_history_cdl` + `unknown_cdl_years` instead of being forced into an
-  existing code. Adding them needs contracts approval (3 humans) and a `schema_version`
-  bump — until then ~7% of field-years have no crop_code.
+- ~~**pipeline → person 3 (was person 1):** `contracts/crops.csv` has no row for crops that
+  really grow here~~ — **resolved in v0.2** (all three approved). Added `triticale` (205),
+  `potatoes` (43), `other_hay` (37), `other_crops` (44) and the four double-crop rotations
+  (`winwht_corn` 225, `triticale_corn` 228, `winwht_sorghum` 236, `winwht_soybeans` 26),
+  with a documented double-crop convention (summer crop only, winter phase not modelled,
+  `placeholder=true`). The pipeline now emits **all 60 fields** with complete histories.
+- **pipeline → person 1 (action needed):** `engine/params.py → CROPS` still lacks those 8
+  crops, so `engine.export` excludes the affected fields (24 of 60 reach the web) and prints
+  which crops are missing. Adding them needs economic params (ym_t_ha, price_usd_t,
+  var_cost_usd_ha, dry_var_cost_usd_ha, c_factor, disturbance, labour_h_ha) that I will not
+  invent — the K-State budget numbers are yours. `engine/export.py` now skips unsupported
+  fields gracefully instead of raising `KeyError`, so this is a data-volume limit, not a bug.
+
 - ~~**pipeline → person 1:**~~ resolved — `fields.geojson` landed (26 fields). The contract requires every year in `crop_history` and requires
   `soil`, `season_calendar` and `stress_index_by_year` per field, so `fields.geojson` can
   only land once SSURGO/SRTM/NDVI/SMAP are in. `data/interim/fields_raw.geojson` (60 pivots,

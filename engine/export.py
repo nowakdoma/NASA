@@ -21,7 +21,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-from engine import CONTRACTS, REPO_ROOT, WEB_DATA
+from engine import CONTRACTS, REPO_ROOT, WEB_DATA, params
 from engine.crops import load_crop_traits
 from engine.strategies import WeatherYears, field_strategies
 from engine.validate import validate_all
@@ -30,7 +30,7 @@ from engine.weather import get_weather
 FILES = ("fields.geojson", "strategies.json")
 INTERIM_FIELDS = REPO_ROOT / "data" / "interim" / "fields.geojson"
 WEATHER_YEARS = (1995, 2025)
-SCHEMA_VERSION = "0.1"
+SCHEMA_VERSION = "0.2"
 
 
 def export_mock(out_dir: Path = WEB_DATA) -> None:
@@ -69,6 +69,26 @@ def build(fields_path: Path, weather_path: Path | None = None) -> tuple[dict, di
 
     per_field = {}
     cache: dict = {}  # identical (rotation, irrigation, soil) -> metrics
+    # The engine can only model crops it has parameters for (engine/params.py). A crop that
+    # exists in contracts/crops.csv but not in params must not crash the export, and must not
+    # be silently kept either — its metrics would be invented. Such fields are excluded and
+    # reported, so fields and strategies stay consistent for the contract validator.
+    modelled = set(params.CROPS)
+    supported, unsupported = [], []
+    for feat in fields["features"]:
+        codes = set(feat["properties"]["crop_history"].values())
+        (supported if codes <= modelled else unsupported).append(feat)
+    if unsupported:
+        missing = sorted(
+            {c for feat in unsupported for c in feat["properties"]["crop_history"].values()}
+            - modelled
+        )
+        print(
+            f"  skipped {len(unsupported)} field(s): no engine parameters for {missing} "
+            f"(add them to engine/params.py to include these fields)"
+        )
+    fields["features"] = supported
+
     for feat in fields["features"]:
         props = feat["properties"]
         per_field[props["field_id"]] = field_strategies(
