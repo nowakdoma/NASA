@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { MapErrorBoundary } from './MapErrorBoundary';
 import type { AppData } from '../data/load';
 import { STEPS } from '../lib/flow';
 import { MapView } from './MapView';
@@ -101,13 +102,15 @@ export function StartScreen({ data, exampleId, onStart, onOpenAbout }: Props) {
           className={`start-map${pickHint ? ' picking' : ''}`}
           aria-label="Map of fields. Click your field to start."
         >
-          <MapView
-            fields={data.fields}
-            year={year}
-            selectedId={null}
-            onSelect={onStart}
-            highlightCrop={null}
-          />
+          <MapErrorBoundary>
+            <MapView
+              fields={data.fields}
+              year={year}
+              selectedId={null}
+              onSelect={onStart}
+              highlightCrop={null}
+            />
+          </MapErrorBoundary>
           <div className="start-map-hint" aria-live="polite">
             {pickHint
               ? `Click your field to start. Colours show the ${year} crop.`

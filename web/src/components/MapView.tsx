@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import maplibregl from 'maplibre-gl';
 import { MapboxOverlay } from '@deck.gl/mapbox';
-import { GeoJsonLayer } from '@deck.gl/layers';
+import { GeoJsonLayer, ScatterplotLayer } from '@deck.gl/layers';
 import type { FieldCollection, FieldFeature } from '../types/contracts';
 import { cropColor, cropLabel } from '../lib/colors';
 import { IconPin } from './Icons';
@@ -13,6 +13,34 @@ const BLANK: maplibregl.StyleSpecification = {
   sources: {},
   layers: [{ id: 'bg', type: 'background', paint: { 'background-color': '#eef0ea' } }],
 };
+
+// Each field also gets a marker drawn at its real size (radius from area) but never smaller
+// than MARKER_MIN_PX, so zoomed out a ~850 m pivot stays clickable (Fitts: the start screen
+// asks users to click their field) and zoomed in the marker matches the field's footprint.
+// Past MARKER_MAX_ZOOM the field is far larger than the minimum and the polygon takes over.
+const MARKER_MIN_PX = 7;
+const MARKER_MAX_ZOOM = 12;
+
+interface Marker {
+  position: [number, number];
+  properties: FieldFeature['properties'];
+}
+
+/** Mean of the outer ring; good enough for compact pivot polygons. */
+function centroid(f: FieldFeature): [number, number] {
+  const c = f.geometry.coordinates as number[][][] | number[][][][];
+  const ring = (
+    f.geometry.type === 'MultiPolygon' ? (c as number[][][][])[0][0] : (c as number[][][])[0]
+  ) as number[][];
+  const n = ring.length - 1 || 1;
+  let x = 0;
+  let y = 0;
+  for (let i = 0; i < n; i++) {
+    x += ring[i][0];
+    y += ring[i][1];
+  }
+  return [x / n, y / n];
+}
 
 interface Props {
   fields: FieldCollection;
@@ -28,6 +56,11 @@ export function MapView({ fields, year, selectedId, onSelect, highlightCrop }: P
   const onSelectRef = useRef(onSelect);
   onSelectRef.current = onSelect;
   const [isMapLoading, setIsMapLoading] = useState(true);
+  const [zoom, setZoom] = useState(0);
+  const markers = useMemo<Marker[]>(
+    () => fields.features.map((f) => ({ position: centroid(f), properties: f.properties })),
+    [fields.features],
+  );
 
   // County boundary polygon from bbox
   const countyGeoJson = useMemo<GeoJSON.FeatureCollection>(() => {
@@ -71,9 +104,12 @@ export function MapView({ fields, year, selectedId, onSelect, highlightCrop }: P
       fitBoundsOptions: { padding: 30 },
     });
 
+    // Only swap to the blank style if the basemap never loaded (offline demo). Tile errors
+    // after load (e.g. fast zooming) must not wipe the basemap.
     let fellBack = false;
+    let loaded = false;
     map.on('error', () => {
-      if (!fellBack && !map.isStyleLoaded()) {
+      if (!fellBack && !loaded) {
         fellBack = true;
         map.setStyle(BLANK);
       }
@@ -81,7 +117,14 @@ export function MapView({ fields, year, selectedId, onSelect, highlightCrop }: P
     });
 
     map.on('load', () => {
+      loaded = true;
       setIsMapLoading(false);
+      setZoom(map.getZoom());
+    });
+    let raf = 0;
+    map.on('zoom', () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => setZoom(map.getZoom()));
     });
 
     // Fallback timeout to ensure loader smoothly dismisses even if tile network is slow
@@ -92,11 +135,12 @@ export function MapView({ fields, year, selectedId, onSelect, highlightCrop }: P
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
     map.addControl(new maplibregl.ScaleControl({ unit: 'imperial' }), 'bottom-left');
 
-    overlay.current = new MapboxOverlay({ interleaved: false, layers: [] });
+    overlay.current = new MapboxOverlay({ interleaved: false, layers: [], pickingRadius: 6 });
     map.addControl(overlay.current);
 
     return () => {
       clearTimeout(timer);
+      cancelAnimationFrame(raf);
       overlay.current = null;
       map.remove();
     };
@@ -141,6 +185,35 @@ export function MapView({ fields, year, selectedId, onSelect, highlightCrop }: P
         updateTriggers: {
           getFillColor: [key, highlightCrop],
           getLineColor: selectedId,
+          getLineWidth: selectedId,
+        },
+        onClick: (info) => {
+          const id = info.object?.properties?.field_id;
+          if (id) onSelectRef.current(id);
+        },
+      }),
+      new ScatterplotLayer<Marker>({
+        id: 'field-markers',
+        data: markers,
+        visible: zoom < MARKER_MAX_ZOOM,
+        pickable: true,
+        autoHighlight: true,
+        highlightColor: [255, 255, 255, 110],
+        stroked: true,
+        filled: true,
+        radiusUnits: 'meters',
+        radiusMinPixels: MARKER_MIN_PX,
+        lineWidthUnits: 'pixels',
+        getPosition: (m) => m.position,
+        getRadius: (m) => Math.sqrt((m.properties.area_ha * 10_000) / Math.PI),
+        getFillColor: (m) => {
+          const crop = m.properties.crop_history[key];
+          return [...cropColor(crop), highlightCrop && crop !== highlightCrop ? 75 : 235];
+        },
+        getLineColor: [28, 42, 57, 230],
+        getLineWidth: (m) => (m.properties.field_id === selectedId ? 3 : 1.25),
+        updateTriggers: {
+          getFillColor: [key, highlightCrop],
           getLineWidth: selectedId,
         },
         onClick: (info) => {
@@ -204,7 +277,7 @@ export function MapView({ fields, year, selectedId, onSelect, highlightCrop }: P
         };
       },
     });
-  }, [fields, year, selectedId, highlightCrop, countyGeoJson]);
+  }, [fields, year, selectedId, highlightCrop, countyGeoJson, markers, zoom]);
 
   return (
     <div className="map-wrapper">

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { MapErrorBoundary } from './components/MapErrorBoundary';
 import { loadData, type AppData } from './data/load';
 import { MapView } from './components/MapView';
 import { YearSlider } from './components/YearSlider';
@@ -202,13 +203,15 @@ export default function App() {
           className={`map-col${mobileTab !== 'map' ? ' mobile-hidden' : ''}`}
           aria-label="Interactive map view"
         >
-          <MapView
-            fields={data.fields}
-            year={year}
-            selectedId={selectedId}
-            onSelect={handleSelectField}
-            highlightCrop={highlightCrop}
-          />
+          <MapErrorBoundary>
+            <MapView
+              fields={data.fields}
+              year={year}
+              selectedId={selectedId}
+              onSelect={handleSelectField}
+              highlightCrop={highlightCrop}
+            />
+          </MapErrorBoundary>
           <div className="map-controls">
             <YearSlider
               min={data.fields.years[0]}
