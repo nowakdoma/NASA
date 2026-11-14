@@ -76,7 +76,9 @@ def evaluate(
     ls = ls_factor(soil["slope_pct"])
     residue = np.array([float(traits.loc[c, "residue_t_ha"]) for c in rotation])
     disturbance = float(np.mean([cp.disturbance for cp in cps]))
-    labour_h = sum(cp.labour_h_ha for cp in cps)
+    dry = irrigation == "dryland"
+    labour_h = sum(cp.dry_labour_h_ha if dry else cp.labour_h_ha for cp in cps)
+    var_cost = sum(cp.dry_var_cost_usd_ha if dry else cp.var_cost_usd_ha for cp in cps)
 
     out = {m: [] for m in METRICS}
     n_w = len(wy.years)
@@ -94,7 +96,7 @@ def evaluate(
 
         revenue = sum(cp.ym_t_ha * r * cp.price_usd_t + cp.other_revenue_usd_ha
                       for cp, r in zip(cps, ratio, strict=True))  # fmt: skip
-        costs = sum(cp.var_cost_usd_ha for cp in cps) + irr_total * params.PUMPING_COST_USD_HA_MM
+        costs = var_cost + irr_total * params.PUMPING_COST_USD_HA_MM
         erosion = np.mean([rusle_annual(wy.r_factor[y], k_si, ls, cover_factor(c))
                            for y, c in zip(ys, rotation, strict=True)])  # fmt: skip
         # residue scales with how well the crop grew (yield ratio; 1 for non-yield crops)
@@ -166,8 +168,13 @@ def data_gaps(rotation: list[str], irrigation: str, weather_synthetic: bool) -> 
         gaps.append("Weather is SYNTHETIC until NASA POWER data is loaded: intervals are "
                     "illustrative only.")  # fmt: skip
     gaps += [
-        "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); "
-        "price risk is not in the intervals.",
+        "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their "
+        "prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the "
+        "intervals.",
+        "Income is return over direct (variable) costs: land rent and pivot/well capital "
+        "(~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+        "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel "
+        "(natural gas, 300 ft) are not known for this field.",
         "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can "
         "dominate on bare soil.",
         "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",

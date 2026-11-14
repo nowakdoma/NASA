@@ -1,7 +1,7 @@
 {
  "schema_version": "0.1",
  "mock": true,
- "generated_by": "engine.export d651201 (mock fields)",
+ "generated_by": "engine.export f8204aa (mock fields)",
  "generated_at": "2026-11-14",
  "weather_years": [
   1995,
@@ -51,9 +51,9 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 282.0,
-      "p50": 422.0,
-      "p90": 570.0
+      "p10": 275.0,
+      "p50": 394.0,
+      "p90": 513.0
      },
      "erosion_t_ha": {
       "p10": 0.8,
@@ -61,19 +61,19 @@
       "p90": 2.74
      },
      "soil_index": {
-      "p10": 0.64,
-      "p50": 0.67,
-      "p90": 0.7
+      "p10": 0.58,
+      "p50": 0.64,
+      "p90": 0.68
      },
      "income_usd_ha": {
-      "p10": 407.0,
-      "p50": 722.0,
-      "p90": 894.0
+      "p10": 747.0,
+      "p50": 1090.0,
+      "p90": 1304.0
      },
      "labour_index": {
-      "p10": 0.59,
-      "p50": 0.64,
-      "p90": 0.69
+      "p10": 0.37,
+      "p50": 0.45,
+      "p90": 0.53
      }
     },
     "evidence": [
@@ -96,7 +96,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
@@ -131,18 +133,18 @@
      },
      "soil_index": {
       "p10": 0.09,
-      "p50": 0.11,
+      "p50": 0.12,
       "p90": 0.16
      },
      "income_usd_ha": {
-      "p10": 52.0,
-      "p50": 112.0,
-      "p90": 196.0
+      "p10": 143.0,
+      "p50": 228.0,
+      "p90": 329.0
      },
      "labour_index": {
-      "p10": 0.19,
-      "p50": 0.19,
-      "p90": 0.19
+      "p10": 0.15,
+      "p50": 0.15,
+      "p90": 0.15
      }
     },
     "evidence": [
@@ -165,7 +167,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
@@ -189,9 +193,9 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 269.0,
-      "p50": 382.0,
-      "p90": 465.0
+      "p10": 257.0,
+      "p50": 362.0,
+      "p90": 439.0
      },
      "erosion_t_ha": {
       "p10": 0.92,
@@ -199,19 +203,19 @@
       "p90": 2.14
      },
      "soil_index": {
-      "p10": 0.47,
-      "p50": 0.49,
-      "p90": 0.5
+      "p10": 0.45,
+      "p50": 0.48,
+      "p90": 0.49
      },
      "income_usd_ha": {
-      "p10": 295.0,
-      "p50": 429.0,
-      "p90": 564.0
+      "p10": 614.0,
+      "p50": 755.0,
+      "p90": 851.0
      },
      "labour_index": {
-      "p10": 0.42,
-      "p50": 0.46,
-      "p90": 0.49
+      "p10": 0.35,
+      "p50": 0.41,
+      "p90": 0.46
      }
     },
     "evidence": [
@@ -234,7 +238,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
@@ -260,9 +266,9 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 364.0,
-      "p50": 457.0,
-      "p90": 516.0
+      "p10": 353.0,
+      "p50": 440.0,
+      "p90": 502.0
      },
      "erosion_t_ha": {
       "p10": 0.43,
@@ -270,19 +276,19 @@
       "p90": 1.12
      },
      "soil_index": {
-      "p10": 0.41,
-      "p50": 0.42,
-      "p90": 0.43
+      "p10": 0.39,
+      "p50": 0.41,
+      "p90": 0.42
      },
      "income_usd_ha": {
-      "p10": 486.0,
-      "p50": 587.0,
-      "p90": 700.0
+      "p10": 948.0,
+      "p50": 1034.0,
+      "p90": 1127.0
      },
      "labour_index": {
-      "p10": 0.82,
-      "p50": 0.85,
-      "p90": 0.87
+      "p10": 0.67,
+      "p50": 0.72,
+      "p90": 0.76
      }
     },
     "evidence": [
@@ -305,7 +311,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
@@ -331,9 +339,9 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 285.0,
-      "p50": 426.0,
-      "p90": 544.0
+      "p10": 286.0,
+      "p50": 418.0,
+      "p90": 524.0
      },
      "erosion_t_ha": {
       "p10": 0.62,
@@ -341,18 +349,18 @@
       "p90": 1.67
      },
      "soil_index": {
-      "p10": 0.47,
-      "p50": 0.5,
-      "p90": 0.51
+      "p10": 0.45,
+      "p50": 0.48,
+      "p90": 0.5
      },
      "income_usd_ha": {
-      "p10": 245.0,
-      "p50": 429.0,
-      "p90": 581.0
+      "p10": 548.0,
+      "p50": 744.0,
+      "p90": 875.0
      },
      "labour_index": {
-      "p10": 0.45,
-      "p50": 0.5,
+      "p10": 0.38,
+      "p50": 0.47,
       "p90": 0.54
      }
     },
@@ -376,7 +384,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
@@ -415,14 +425,14 @@
       "p90": 0.18
      },
      "income_usd_ha": {
-      "p10": 67.0,
-      "p50": 128.0,
-      "p90": 211.0
+      "p10": 163.0,
+      "p50": 245.0,
+      "p90": 348.0
      },
      "labour_index": {
-      "p10": 0.19,
-      "p50": 0.19,
-      "p90": 0.19
+      "p10": 0.15,
+      "p50": 0.15,
+      "p90": 0.15
      }
     },
     "evidence": [
@@ -445,7 +455,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
@@ -471,9 +483,9 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 360.0,
-      "p50": 454.0,
-      "p90": 513.0
+      "p10": 350.0,
+      "p50": 437.0,
+      "p90": 500.0
      },
      "erosion_t_ha": {
       "p10": 0.32,
@@ -481,19 +493,19 @@
       "p90": 0.83
      },
      "soil_index": {
-      "p10": 0.41,
-      "p50": 0.43,
+      "p10": 0.39,
+      "p50": 0.42,
       "p90": 0.43
      },
      "income_usd_ha": {
-      "p10": 493.0,
-      "p50": 592.0,
-      "p90": 706.0
+      "p10": 955.0,
+      "p50": 1041.0,
+      "p90": 1135.0
      },
      "labour_index": {
-      "p10": 0.82,
-      "p50": 0.85,
-      "p90": 0.87
+      "p10": 0.66,
+      "p50": 0.72,
+      "p90": 0.76
      }
     },
     "evidence": [
@@ -516,7 +528,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
@@ -556,14 +570,14 @@
       "p90": 0.34
      },
      "income_usd_ha": {
-      "p10": 18.0,
-      "p50": 122.0,
-      "p90": 259.0
+      "p10": 63.0,
+      "p50": 194.0,
+      "p90": 345.0
      },
      "labour_index": {
-      "p10": 0.24,
-      "p50": 0.24,
-      "p90": 0.24
+      "p10": 0.2,
+      "p50": 0.2,
+      "p90": 0.2
      }
     },
     "evidence": [
@@ -586,7 +600,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
@@ -615,9 +631,9 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 203.0,
-      "p50": 262.0,
-      "p90": 294.0
+      "p10": 194.0,
+      "p50": 257.0,
+      "p90": 292.0
      },
      "erosion_t_ha": {
       "p10": 1.48,
@@ -626,18 +642,18 @@
      },
      "soil_index": {
       "p10": 0.21,
-      "p50": 0.24,
-      "p90": 0.26
+      "p50": 0.23,
+      "p90": 0.25
      },
      "income_usd_ha": {
-      "p10": 124.0,
-      "p50": 152.0,
-      "p90": 215.0
+      "p10": 283.0,
+      "p50": 312.0,
+      "p90": 349.0
      },
      "labour_index": {
-      "p10": 0.26,
-      "p50": 0.28,
-      "p90": 0.29
+      "p10": 0.27,
+      "p50": 0.31,
+      "p90": 0.34
      }
     },
     "evidence": [
@@ -660,7 +676,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
@@ -671,6 +689,77 @@
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
      "How you will keep residue on the fallow to limit wind erosion."
+    ]
+   },
+   {
+    "id": "corn_soy",
+    "name": "Corn–soybean (full irrigation)",
+    "description": "Adds a nitrogen-fixing legume; breaks corn pest cycles.",
+    "is_current": false,
+    "rotation": [
+     "corn",
+     "soybeans"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 343.0,
+      "p50": 394.0,
+      "p90": 486.0
+     },
+     "erosion_t_ha": {
+      "p10": 1.26,
+      "p50": 2.57,
+      "p90": 4.26
+     },
+     "soil_index": {
+      "p10": 0.31,
+      "p50": 0.36,
+      "p90": 0.38
+     },
+     "income_usd_ha": {
+      "p10": 889.0,
+      "p50": 1074.0,
+      "p90": 1221.0
+     },
+     "labour_index": {
+      "p10": 0.39,
+      "p50": 0.42,
+      "p90": 0.48
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Las Animas-Lincoln complex: AWC 110 mm, K 0.24, slope 1.4 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
+    ],
+    "verify_locally": [
+     "Does your water right / well capacity support this rotation in a dry year?",
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "Soybean yield on your soil (iron-deficiency chlorosis on high-pH soils)."
     ]
    },
    {
@@ -687,9 +776,9 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 399.0,
-      "p50": 481.0,
-      "p90": 538.0
+      "p10": 391.0,
+      "p50": 465.0,
+      "p90": 516.0
      },
      "erosion_t_ha": {
       "p10": 0.53,
@@ -697,19 +786,19 @@
       "p90": 1.37
      },
      "soil_index": {
-      "p10": 0.4,
-      "p50": 0.41,
-      "p90": 0.42
+      "p10": 0.38,
+      "p50": 0.4,
+      "p90": 0.41
      },
      "income_usd_ha": {
-      "p10": 443.0,
-      "p50": 546.0,
-      "p90": 658.0
+      "p10": 907.0,
+      "p50": 978.0,
+      "p90": 1092.0
      },
      "labour_index": {
-      "p10": 0.83,
-      "p50": 0.86,
-      "p90": 0.88
+      "p10": 0.69,
+      "p50": 0.74,
+      "p90": 0.77
      }
     },
     "evidence": [
@@ -732,7 +821,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
@@ -743,75 +834,6 @@
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
      "Hay buyers, storage and haul distance; stand establishment cost."
-    ]
-   },
-   {
-    "id": "corn_soy",
-    "name": "Corn–soybean (full irrigation)",
-    "description": "Adds a nitrogen-fixing legume; breaks corn pest cycles.",
-    "is_current": false,
-    "rotation": [
-     "corn",
-     "soybeans"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 352.0,
-      "p50": 419.0,
-      "p90": 541.0
-     },
-     "erosion_t_ha": {
-      "p10": 1.26,
-      "p50": 2.57,
-      "p90": 4.26
-     },
-     "soil_index": {
-      "p10": 0.35,
-      "p50": 0.37,
-      "p90": 0.41
-     },
-     "income_usd_ha": {
-      "p10": 352.0,
-      "p50": 545.0,
-      "p90": 658.0
-     },
-     "labour_index": {
-      "p10": 0.51,
-      "p50": 0.54,
-      "p90": 0.58
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
-      "url": "https://power.larc.nasa.gov/"
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "Current rotation = repeating cycle in the most recent CDL years."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "Las Animas-Lincoln complex: AWC 110 mm, K 0.24, slope 1.4 %."
-     },
-     {
-      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
-      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
-     }
-    ],
-    "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
-     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
-     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence.",
-     "Soybean yield on your soil (iron-deficiency chlorosis on high-pH soils)."
     ]
    },
    {
@@ -841,14 +863,14 @@
       "p90": 0.3
      },
      "income_usd_ha": {
-      "p10": -34.0,
-      "p50": 68.0,
-      "p90": 209.0
+      "p10": -6.0,
+      "p50": 122.0,
+      "p90": 284.0
      },
      "labour_index": {
-      "p10": 0.24,
-      "p50": 0.24,
-      "p90": 0.24
+      "p10": 0.2,
+      "p50": 0.2,
+      "p90": 0.2
      }
     },
     "evidence": [
@@ -871,7 +893,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
@@ -902,9 +926,9 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 348.0,
-      "p50": 434.0,
-      "p90": 499.0
+      "p10": 339.0,
+      "p50": 419.0,
+      "p90": 483.0
      },
      "erosion_t_ha": {
       "p10": 0.45,
@@ -912,19 +936,19 @@
       "p90": 0.98
      },
      "soil_index": {
-      "p10": 0.43,
-      "p50": 0.44,
-      "p90": 0.45
+      "p10": 0.41,
+      "p50": 0.43,
+      "p90": 0.44
      },
      "income_usd_ha": {
-      "p10": 444.0,
-      "p50": 524.0,
-      "p90": 628.0
+      "p10": 846.0,
+      "p50": 930.0,
+      "p90": 1007.0
      },
      "labour_index": {
-      "p10": 0.69,
-      "p50": 0.72,
-      "p90": 0.74
+      "p10": 0.58,
+      "p50": 0.63,
+      "p90": 0.67
      }
     },
     "evidence": [
@@ -947,7 +971,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
@@ -982,19 +1008,19 @@
       "p90": 2.42
      },
      "soil_index": {
-      "p10": 0.11,
+      "p10": 0.12,
       "p50": 0.14,
       "p90": 0.18
      },
      "income_usd_ha": {
-      "p10": 79.0,
-      "p50": 142.0,
-      "p90": 226.0
+      "p10": 181.0,
+      "p50": 262.0,
+      "p90": 367.0
      },
      "labour_index": {
-      "p10": 0.19,
-      "p50": 0.19,
-      "p90": 0.19
+      "p10": 0.15,
+      "p50": 0.15,
+      "p90": 0.15
      }
     },
     "evidence": [
@@ -1017,7 +1043,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
@@ -1040,9 +1068,9 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 301.0,
-      "p50": 410.0,
-      "p90": 541.0
+      "p10": 300.0,
+      "p50": 389.0,
+      "p90": 494.0
      },
      "erosion_t_ha": {
       "p10": 0.76,
@@ -1050,19 +1078,19 @@
       "p90": 2.57
      },
      "soil_index": {
-      "p10": 0.38,
-      "p50": 0.41,
-      "p90": 0.43
+      "p10": 0.35,
+      "p50": 0.4,
+      "p90": 0.41
      },
      "income_usd_ha": {
-      "p10": 430.0,
-      "p50": 606.0,
-      "p90": 711.0
+      "p10": 975.0,
+      "p50": 1161.0,
+      "p90": 1282.0
      },
      "labour_index": {
-      "p10": 0.5,
-      "p50": 0.53,
-      "p90": 0.58
+      "p10": 0.36,
+      "p50": 0.42,
+      "p90": 0.49
      }
     },
     "evidence": [
@@ -1085,7 +1113,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
@@ -1125,14 +1155,14 @@
       "p90": 0.34
      },
      "income_usd_ha": {
-      "p10": 28.0,
-      "p50": 133.0,
-      "p90": 266.0
+      "p10": 76.0,
+      "p50": 205.0,
+      "p90": 352.0
      },
      "labour_index": {
-      "p10": 0.24,
-      "p50": 0.24,
-      "p90": 0.24
+      "p10": 0.2,
+      "p50": 0.2,
+      "p90": 0.2
      }
     },
     "evidence": [
@@ -1155,7 +1185,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
@@ -1183,9 +1215,9 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 310.0,
-      "p50": 413.0,
-      "p90": 538.0
+      "p10": 308.0,
+      "p50": 386.0,
+      "p90": 491.0
      },
      "erosion_t_ha": {
       "p10": 1.0,
@@ -1193,19 +1225,19 @@
       "p90": 3.4
      },
      "soil_index": {
-      "p10": 0.37,
-      "p50": 0.4,
-      "p90": 0.42
+      "p10": 0.34,
+      "p50": 0.39,
+      "p90": 0.4
      },
      "income_usd_ha": {
-      "p10": 418.0,
-      "p50": 597.0,
-      "p90": 702.0
+      "p10": 955.0,
+      "p50": 1142.0,
+      "p90": 1276.0
      },
      "labour_index": {
-      "p10": 0.5,
-      "p50": 0.53,
-      "p90": 0.58
+      "p10": 0.37,
+      "p50": 0.42,
+      "p90": 0.48
      }
     },
     "evidence": [
@@ -1228,7 +1260,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
@@ -1268,14 +1302,14 @@
       "p90": 0.17
      },
      "income_usd_ha": {
-      "p10": 63.0,
-      "p50": 124.0,
-      "p90": 208.0
+      "p10": 158.0,
+      "p50": 241.0,
+      "p90": 343.0
      },
      "labour_index": {
-      "p10": 0.19,
-      "p50": 0.19,
-      "p90": 0.19
+      "p10": 0.15,
+      "p50": 0.15,
+      "p90": 0.15
      }
     },
     "evidence": [
@@ -1298,7 +1332,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
@@ -1322,9 +1358,9 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 265.0,
-      "p50": 382.0,
-      "p90": 463.0
+      "p10": 254.0,
+      "p50": 360.0,
+      "p90": 439.0
      },
      "erosion_t_ha": {
       "p10": 0.9,
@@ -1332,19 +1368,19 @@
       "p90": 2.09
      },
      "soil_index": {
-      "p10": 0.47,
-      "p50": 0.49,
-      "p90": 0.5
+      "p10": 0.45,
+      "p50": 0.48,
+      "p90": 0.49
      },
      "income_usd_ha": {
-      "p10": 304.0,
-      "p50": 436.0,
-      "p90": 566.0
+      "p10": 623.0,
+      "p50": 760.0,
+      "p90": 852.0
      },
      "labour_index": {
-      "p10": 0.42,
-      "p50": 0.46,
-      "p90": 0.49
+      "p10": 0.34,
+      "p50": 0.41,
+      "p90": 0.46
      }
     },
     "evidence": [
@@ -1367,7 +1403,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
@@ -1393,9 +1431,9 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 360.0,
-      "p50": 456.0,
-      "p90": 515.0
+      "p10": 349.0,
+      "p50": 438.0,
+      "p90": 501.0
      },
      "erosion_t_ha": {
       "p10": 0.42,
@@ -1403,19 +1441,19 @@
       "p90": 1.09
      },
      "soil_index": {
-      "p10": 0.41,
-      "p50": 0.42,
-      "p90": 0.43
+      "p10": 0.39,
+      "p50": 0.41,
+      "p90": 0.42
      },
      "income_usd_ha": {
-      "p10": 490.0,
-      "p50": 591.0,
-      "p90": 706.0
+      "p10": 953.0,
+      "p50": 1041.0,
+      "p90": 1132.0
      },
      "labour_index": {
-      "p10": 0.82,
-      "p50": 0.85,
-      "p90": 0.87
+      "p10": 0.66,
+      "p50": 0.72,
+      "p90": 0.76
      }
     },
     "evidence": [
@@ -1438,7 +1476,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
@@ -1465,9 +1505,9 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 226.0,
-      "p50": 343.0,
-      "p90": 429.0
+      "p10": 223.0,
+      "p50": 338.0,
+      "p90": 416.0
      },
      "erosion_t_ha": {
       "p10": 3.31,
@@ -1476,18 +1516,18 @@
      },
      "soil_index": {
       "p10": 0.32,
-      "p50": 0.37,
-      "p90": 0.4
+      "p50": 0.36,
+      "p90": 0.39
      },
      "income_usd_ha": {
-      "p10": 267.0,
-      "p50": 351.0,
-      "p90": 465.0
+      "p10": 584.0,
+      "p50": 645.0,
+      "p90": 702.0
      },
      "labour_index": {
-      "p10": 0.34,
+      "p10": 0.31,
       "p50": 0.38,
-      "p90": 0.41
+      "p90": 0.43
      }
     },
     "evidence": [
@@ -1510,7 +1550,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
@@ -1533,9 +1575,9 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 320.0,
-      "p50": 416.0,
-      "p90": 538.0
+      "p10": 319.0,
+      "p50": 389.0,
+      "p90": 483.0
      },
      "erosion_t_ha": {
       "p10": 3.5,
@@ -1543,19 +1585,19 @@
       "p90": 11.84
      },
      "soil_index": {
-      "p10": 0.24,
-      "p50": 0.3,
-      "p90": 0.36
+      "p10": 0.23,
+      "p50": 0.27,
+      "p90": 0.34
      },
      "income_usd_ha": {
-      "p10": 402.0,
-      "p50": 591.0,
-      "p90": 691.0
+      "p10": 934.0,
+      "p50": 1132.0,
+      "p90": 1267.0
      },
      "labour_index": {
-      "p10": 0.5,
-      "p50": 0.53,
-      "p90": 0.58
+      "p10": 0.37,
+      "p50": 0.42,
+      "p90": 0.48
      }
     },
     "evidence": [
@@ -1578,7 +1620,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
@@ -1618,14 +1662,14 @@
       "p90": 0.06
      },
      "income_usd_ha": {
-      "p10": 43.0,
-      "p50": 103.0,
-      "p90": 187.0
+      "p10": 134.0,
+      "p50": 216.0,
+      "p90": 318.0
      },
      "labour_index": {
-      "p10": 0.19,
-      "p50": 0.19,
-      "p90": 0.19
+      "p10": 0.15,
+      "p50": 0.15,
+      "p90": 0.15
      }
     },
     "evidence": [
@@ -1648,7 +1692,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
@@ -1674,9 +1720,9 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 365.0,
-      "p50": 463.0,
-      "p90": 520.0
+      "p10": 357.0,
+      "p50": 441.0,
+      "p90": 504.0
      },
      "erosion_t_ha": {
       "p10": 1.47,
@@ -1684,19 +1730,19 @@
       "p90": 3.81
      },
      "soil_index": {
-      "p10": 0.37,
-      "p50": 0.39,
-      "p90": 0.4
+      "p10": 0.36,
+      "p50": 0.37,
+      "p90": 0.39
      },
      "income_usd_ha": {
-      "p10": 482.0,
-      "p50": 585.0,
-      "p90": 697.0
+      "p10": 941.0,
+      "p50": 1029.0,
+      "p90": 1126.0
      },
      "labour_index": {
-      "p10": 0.82,
-      "p50": 0.85,
-      "p90": 0.87
+      "p10": 0.67,
+      "p50": 0.72,
+      "p90": 0.77
      }
     },
     "evidence": [
@@ -1719,7 +1765,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
@@ -1748,9 +1796,9 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 268.0,
-      "p50": 328.0,
-      "p90": 411.0
+      "p10": 254.0,
+      "p50": 316.0,
+      "p90": 384.0
      },
      "erosion_t_ha": {
       "p10": 1.52,
@@ -1758,19 +1806,19 @@
       "p90": 2.98
      },
      "soil_index": {
-      "p10": 0.44,
-      "p50": 0.45,
-      "p90": 0.46
+      "p10": 0.41,
+      "p50": 0.43,
+      "p90": 0.44
      },
      "income_usd_ha": {
-      "p10": 347.0,
-      "p50": 442.0,
-      "p90": 522.0
+      "p10": 596.0,
+      "p50": 692.0,
+      "p90": 783.0
      },
      "labour_index": {
-      "p10": 0.45,
-      "p50": 0.47,
-      "p90": 0.5
+      "p10": 0.34,
+      "p50": 0.38,
+      "p90": 0.43
      }
     },
     "evidence": [
@@ -1793,7 +1841,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
@@ -1833,14 +1883,14 @@
       "p90": 0.16
      },
      "income_usd_ha": {
-      "p10": 60.0,
-      "p50": 120.0,
-      "p90": 204.0
+      "p10": 153.0,
+      "p50": 237.0,
+      "p90": 339.0
      },
      "labour_index": {
-      "p10": 0.19,
-      "p50": 0.19,
-      "p90": 0.19
+      "p10": 0.15,
+      "p50": 0.15,
+      "p90": 0.15
      }
     },
     "evidence": [
@@ -1863,7 +1913,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
@@ -1889,9 +1941,9 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 361.0,
-      "p50": 456.0,
-      "p90": 516.0
+      "p10": 349.0,
+      "p50": 438.0,
+      "p90": 501.0
      },
      "erosion_t_ha": {
       "p10": 0.48,
@@ -1899,19 +1951,19 @@
       "p90": 1.23
      },
      "soil_index": {
-      "p10": 0.41,
-      "p50": 0.42,
-      "p90": 0.43
+      "p10": 0.39,
+      "p50": 0.41,
+      "p90": 0.42
      },
      "income_usd_ha": {
-      "p10": 491.0,
-      "p50": 590.0,
-      "p90": 702.0
+      "p10": 949.0,
+      "p50": 1038.0,
+      "p90": 1130.0
      },
      "labour_index": {
-      "p10": 0.82,
-      "p50": 0.85,
-      "p90": 0.87
+      "p10": 0.66,
+      "p50": 0.72,
+      "p90": 0.76
      }
     },
     "evidence": [
@@ -1934,7 +1986,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
@@ -1974,14 +2028,14 @@
       "p90": 0.33
      },
      "income_usd_ha": {
-      "p10": 13.0,
-      "p50": 117.0,
-      "p90": 254.0
+      "p10": 56.0,
+      "p50": 188.0,
+      "p90": 343.0
      },
      "labour_index": {
-      "p10": 0.24,
-      "p50": 0.24,
-      "p90": 0.24
+      "p10": 0.2,
+      "p50": 0.2,
+      "p90": 0.2
      }
     },
     "evidence": [
@@ -2004,7 +2058,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
@@ -2033,9 +2089,9 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 307.0,
-      "p50": 412.0,
-      "p90": 508.0
+      "p10": 295.0,
+      "p50": 391.0,
+      "p90": 479.0
      },
      "erosion_t_ha": {
       "p10": 3.55,
@@ -2043,19 +2099,19 @@
       "p90": 9.39
      },
      "soil_index": {
-      "p10": 0.01,
-      "p50": 0.08,
-      "p90": 0.11
+      "p10": 0.0,
+      "p50": 0.07,
+      "p90": 0.1
      },
      "income_usd_ha": {
-      "p10": 466.0,
-      "p50": 575.0,
-      "p90": 672.0
+      "p10": 943.0,
+      "p50": 1037.0,
+      "p90": 1116.0
      },
      "labour_index": {
-      "p10": 0.53,
-      "p50": 0.57,
-      "p90": 0.6
+      "p10": 0.42,
+      "p50": 0.48,
+      "p90": 0.54
      }
     },
     "evidence": [
@@ -2078,7 +2134,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
@@ -2112,19 +2170,19 @@
       "p90": 7.24
      },
      "soil_index": {
-      "p10": 0.0,
+      "p10": 0.01,
       "p50": 0.05,
       "p90": 0.1
      },
      "income_usd_ha": {
-      "p10": 7.0,
-      "p50": 68.0,
-      "p90": 152.0
+      "p10": 94.0,
+      "p50": 174.0,
+      "p90": 274.0
      },
      "labour_index": {
-      "p10": 0.19,
-      "p50": 0.19,
-      "p90": 0.19
+      "p10": 0.15,
+      "p50": 0.15,
+      "p90": 0.15
      }
     },
     "evidence": [
@@ -2147,7 +2205,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
@@ -2170,9 +2230,9 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 336.0,
-      "p50": 419.0,
-      "p90": 534.0
+      "p10": 332.0,
+      "p50": 386.0,
+      "p90": 486.0
      },
      "erosion_t_ha": {
       "p10": 2.27,
@@ -2180,19 +2240,19 @@
       "p90": 7.69
      },
      "soil_index": {
-      "p10": 0.31,
-      "p50": 0.33,
-      "p90": 0.38
+      "p10": 0.28,
+      "p50": 0.31,
+      "p90": 0.36
      },
      "income_usd_ha": {
-      "p10": 372.0,
-      "p50": 566.0,
-      "p90": 672.0
+      "p10": 903.0,
+      "p50": 1105.0,
+      "p90": 1249.0
      },
      "labour_index": {
-      "p10": 0.51,
-      "p50": 0.54,
-      "p90": 0.57
+      "p10": 0.38,
+      "p50": 0.42,
+      "p90": 0.48
      }
     },
     "evidence": [
@@ -2215,7 +2275,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
@@ -2240,9 +2302,9 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 284.0,
-      "p50": 388.0,
-      "p90": 471.0
+      "p10": 272.0,
+      "p50": 369.0,
+      "p90": 443.0
      },
      "erosion_t_ha": {
       "p10": 2.04,
@@ -2250,19 +2312,19 @@
       "p90": 4.74
      },
      "soil_index": {
-      "p10": 0.42,
-      "p50": 0.45,
-      "p90": 0.47
+      "p10": 0.41,
+      "p50": 0.43,
+      "p90": 0.46
      },
      "income_usd_ha": {
-      "p10": 282.0,
-      "p50": 405.0,
-      "p90": 538.0
+      "p10": 588.0,
+      "p50": 735.0,
+      "p90": 838.0
      },
      "labour_index": {
-      "p10": 0.43,
-      "p50": 0.46,
-      "p90": 0.49
+      "p10": 0.36,
+      "p50": 0.42,
+      "p90": 0.47
      }
     },
     "evidence": [
@@ -2285,7 +2347,9 @@
      }
     ],
     "data_gaps": [
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",

@@ -27,3 +27,6 @@ Thumbs.db
 *:Zone.Identifier
 .idea/
 .vscode/
+
+# deep-research raw notes (the synthesised report in reports/ is committed)
+research_notes/
