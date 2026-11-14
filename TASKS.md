@@ -100,15 +100,22 @@ do?" with "nothing". Priority order within each owner = list order. `[ ]` open, 
   costs (breaking/establishing alfalfa, N credit) visible in data for the printout.
 
 ### Person 2 — pipeline
-- [ ] **P1 GRACE `schema_version: "0.3"`** — still blocking the real 259-month series (see
-  Blockers). Then `make data` → `make export`.
-- [ ] **P2 Heat-stress days are identical (31) for every field** (one POWER cell) and 35 of 50
-  fields are exactly 55.4 ha (idealised circles): mark both as county-level / approximate in
-  the data (`note` or a `data_gaps` entry) so the UI can say so.
+- [x] **P1 GRACE `schema_version: "0.3"`** — the pipeline was already writing 0.3; what was
+  stale was the export, so `web/public/data/grace_water_storage.json` still held the 22-month
+  mock. Re-ran `engine.export`: web now carries the real **259-month** series,
+  `mock: false`, trend -0.86 cm/yr. Committed with the regenerated web data.
+- [x] **P2 Heat-stress days identical for every field / idealised circles** — every
+  `stress_window.note` now says "COUNTY-LEVEL: one NASA POWER grid cell (0.5 x 0.625 deg,
+  ~50 km) for all fields ... not a field measurement". The idealised-circle caveat cannot go
+  in the contract (feature `properties` are closed) so it is in
+  `fields_raw.geojson -> known_limits`; **person 3 (engine)**: to surface it in the UI it
+  needs a `data_gaps` line in `strategies.json`, e.g. "Field shape is an idealised circle at
+  the detected radius; area is approximate to a few percent."
 - [ ] P3 (later) Frost windows into contracts (needs approval of all three) so the UI can show
   frost risk — the brief lists it.
-- [ ] P4 (later) "Bare" definition: NDVI < 0.3 counts dormant alfalfa and standing stalks as
-  bare; consider a residue/dormancy note per period.
+- [x] P4 "Bare" definition — every bare period's `note` now carries the caveat: NDVI sees
+  green canopy, not ground cover, so dormant alfalfa, standing stalks and residue-covered
+  soil all read as "bare" even when the surface is protected from wind erosion.
 
 ### Not doing before the freeze (decided)
 - ECOSTRESS / Landsat / SMAP / GPM integration (mention in "How we know" only).

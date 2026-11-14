@@ -87,3 +87,14 @@ def test_trailing_run_is_closed_at_the_last_composite():
     periods = ndvi.bare_periods(series, dates, ["FIN-001"])
     assert len(periods) == 1
     assert periods[0]["end"] == "2021-10-03"
+
+
+def test_bare_period_note_warns_that_ndvi_is_not_residue():
+    """P4 in the test round: dormant alfalfa and standing stalks read as 'bare'."""
+    dates = ["2020-12-11", "2020-12-27"]
+    series = np.array([[0.2, 0.2]])
+    periods = ndvi.bare_periods(series, dates, ["FIN-001"])
+    note = periods[0]["note"]
+    assert "NDVI" in note
+    assert "dormant alfalfa" in note
+    assert "residue" in note

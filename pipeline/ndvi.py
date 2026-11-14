@@ -337,7 +337,12 @@ def _emit(
                 "ndvi_min": round(float(np.nanmin(values)), 3),
                 "ndvi_mean": round(float(np.nanmean(values)), 3),
                 "source": "MODIS MOD13Q1 NDVI 16-day 250 m (Planetary Computer mirror)",
-                "note": f"NDVI < {threshold} on {len(idxs)} consecutive composites",
+                "note": (
+                    f"NDVI < {threshold} on {len(idxs)} consecutive composites. NDVI sees "
+                    "green canopy, not ground cover: dormant alfalfa, standing stalks and "
+                    "residue-covered soil all read as 'bare' here even though the surface "
+                    "may be well protected from wind erosion."
+                ),
             }
         )
     return records

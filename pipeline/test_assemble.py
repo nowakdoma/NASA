@@ -136,3 +136,21 @@ def test_every_year_is_present_in_emitted_crop_history(tmp_path, monkeypatch):
     )
     assert len(feature["properties"]["stress_index_by_year"]) == len(complete)
     assert meta["data_gaps"]
+
+
+def test_heat_windows_are_labelled_county_level():
+    """P2 in the test round: every field shares one POWER cell, so the note must say so."""
+    import tempfile
+    from pathlib import Path
+
+    with tempfile.TemporaryDirectory() as tmp:
+        path = Path(tmp) / "heat.csv"
+        path.write_text(
+            "year,start,end,days,severity,tmax_peak_c,threshold_c,source\n"
+            "2010,2010-07-01,2010-07-05,5,0.5,40.0,35.0,POWER\n"
+        )
+        windows = assemble.load_heat_windows(path, {2010})
+    note = windows[0]["note"]
+    assert "COUNTY-LEVEL" in note
+    assert "50 km" in note
+    assert "identical" in note

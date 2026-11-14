@@ -418,6 +418,10 @@ def derive_fields(cfg: Config) -> Path:
             "disc/annulus test, so densely packed valley pivots are under-selected even "
             "after stratifying the candidate pool to one per 1.8 km cell. Raise "
             "MAX_SURROUND_FILL or detect pivots from imagery to fix properly.",
+            "Geometry is idealised: every field is a perfect circle at the detected radius, "
+            "so many share an identical area (55.4 ha, 63.6 ha, ...). Real pivots are not "
+            "exact circles and their true corners/edges are not represented; treat area_ha as "
+            "approximate to within a few percent.",
             "Detection favours pivots that are isolated from neighbouring cropland. "
             "Alfalfa is over-represented for the same reason (crop mix is ~44% alfalfa "
             "against 4.7% of county acreage).",

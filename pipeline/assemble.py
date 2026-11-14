@@ -62,7 +62,12 @@ def load_heat_windows(path: Path, years: set[int]) -> list[dict]:
                 "type": "heat",
                 "severity": float(row["severity"]),
                 "source": row["source"],
-                "note": f"Tmax peak {row['tmax_peak_c']} C over {row['days']} days",
+                "note": (
+                    f"Tmax peak {row['tmax_peak_c']} C over {row['days']} days. "
+                    "COUNTY-LEVEL: one NASA POWER grid cell (0.5 x 0.625 deg, ~50 km) for all "
+                    "fields, so this window is identical everywhere and not a field "
+                    "measurement."
+                ),
             }
         )
     return windows
