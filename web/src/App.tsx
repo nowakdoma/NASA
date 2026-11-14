@@ -6,6 +6,7 @@ import { CropLegend } from './components/CropLegend';
 import { FieldPanel } from './components/FieldPanel';
 import { DEFAULT_PRIORITIES } from './components/PrioritySliders';
 import { Stepper } from './components/Stepper';
+import { StartScreen } from './components/StartScreen';
 import { FieldStep } from './components/FieldStep';
 import { PrioritiesStep, presetName } from './components/PrioritiesStep';
 import { CompareStep } from './components/CompareStep';
@@ -34,6 +35,8 @@ export default function App() {
   );
   const [waterLimitIn, setWaterLimitIn] = useState<WaterLimitIn>(initial.waterLimitIn);
   const [step, setStep] = useState<Step>(initial.step);
+  // Screen A until a field is chosen; a shared/reloaded link (#f=…) skips straight to the flow.
+  const [started, setStarted] = useState<boolean>(initial.fieldId !== null);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [mobileTab, setMobileTab] = useState<MobileTab>('map');
   const panelRef = useRef<HTMLDivElement>(null);
@@ -53,8 +56,9 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    if (!started) return;
     writeHash({ fieldId: selectedId, step, priorities, waterLimitIn });
-  }, [selectedId, step, priorities, waterLimitIn]);
+  }, [started, selectedId, step, priorities, waterLimitIn]);
 
   const goTo = (s: Step) => {
     setStep(s);
@@ -105,6 +109,29 @@ export default function App() {
 
   const isMock = data.fields.mock || data.strategies.mock;
 
+  if (!started) {
+    const exampleId =
+      data.fields.features.find((f) => f.properties.field_id === 'FIN-001')?.properties.field_id ??
+      data.fields.features[0]?.properties.field_id ??
+      '';
+    return (
+      <>
+        <StartScreen
+          data={data}
+          exampleId={exampleId}
+          onStart={(id) => {
+            setSelectedId(id);
+            setStep(0);
+            setStarted(true);
+            setMobileTab('steps');
+          }}
+          onOpenAbout={() => setIsAboutOpen(true)}
+        />
+        <AboutModal isOpen={isAboutOpen} onClose={() => setIsAboutOpen(false)} />
+      </>
+    );
+  }
+
   return (
     <div className="app">
       <header className="app-header no-print">
@@ -113,7 +140,16 @@ export default function App() {
             <IconSprout className="logo-svg" />
           </div>
           <div>
-            <h1>FieldShift</h1>
+            <h1>
+              <button
+                type="button"
+                className="brand-home"
+                onClick={() => setStarted(false)}
+                title="Back to the start screen"
+              >
+                FieldShift
+              </button>
+            </h1>
             <span className="subtitle">
               {data.fields.county.name}, {data.fields.county.state} · more regions planned
             </span>
