@@ -16,6 +16,7 @@ from pathlib import Path
 import pandas as pd
 
 from pipeline.config import INTERIM, Config
+from pipeline.fields import derive_fields
 
 # Thresholds for heat stress on the Finney County crops in contracts/crops.csv.
 # 35 C is the commonly used maize/sorghum grain-fill heat threshold; 45 C is used
@@ -136,4 +137,4 @@ def derive_heat_stress(cfg: Config) -> Path:
     return out
 
 
-DERIVATIONS = {"heat": derive_heat_stress}
+DERIVATIONS = {"heat": derive_heat_stress, "fields": derive_fields}

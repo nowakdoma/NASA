@@ -17,7 +17,7 @@ cross-team needs under **Blockers / requests**.
 | -------------------------------------------------------- | ----------------------------------------------------------- | --------------------------------------------------------------- |
 | `done` scaffold, contracts v0.1, mocks                   | `todo` Earthdata login + `.env`                             | `done` scaffold renders mocks                                   |
 | `done` FAO-56 ET0 (POWER daily) + Kc curves → water_use  | `done` NASA POWER daily 1995–2025 for county centroid       | `todo` map polish: legend, hover tooltip, county outline        |
-| `done` simplified RUSLE (R from POWER precip, K, LS, C)  | `todo` CDL 2008–2025 clip to Finney + field polygons        | `todo` passport: timeline of bare/stress windows                |
+| `done` simplified RUSLE (R from POWER precip, K, LS, C)  | `done` CDL 2008–2025 clip to Finney + field polygons        | `todo` passport: timeline of bare/stress windows                |
 | `done` soil-conditioning index (residue, OM, tillage)    | `todo` SSURGO soil props per field (texture, OM, K, AWC)    | `todo` strategy comparison: interval chart per metric           |
 | `done` income model (price source per crop, placeholder) | `todo` SRTM slope per field                                 | `todo` P(best) + "verify locally" box copy                      |
 | `todo` MCDA + Dirichlet weights, P(best) in export       | `todo` MODIS NDVI → bare-soil periods per field-year        | `todo` mobile layout / accessibility pass                       |
@@ -42,6 +42,17 @@ cross-team needs under **Blockers / requests**.
   - `data/interim/fields.geojson`: real fields in `contracts/fields.schema.json` format.
     `make export` reads it, adds `strategies.json`, writes both to `web/public/data/` and
     validates them.
+- **pipeline → person 1:** `contracts/crops.csv` has no row for crops that really grow here:
+  triticale (CDL 205, 23,709 ac in this county), double-crop rotations (225 winwht/corn,
+  228 triticale/corn, 236 winwht/sorghum), oats (28), other hay (37). They are currently
+  reported raw in `crop_history_cdl` + `unknown_cdl_years` instead of being forced into an
+  existing code. Adding them needs contracts approval (3 humans) and a `schema_version`
+  bump — until then ~7% of field-years have no crop_code.
+- **pipeline → person 1:** the contract requires every year in `crop_history` and requires
+  `soil`, `season_calendar` and `stress_index_by_year` per field, so `fields.geojson` can
+  only land once SSURGO/SRTM/NDVI/SMAP are in. `data/interim/fields_raw.geojson` (60 pivots,
+  geometry + crop history + purity flags) already exists in the pipeline's own interim
+  format if that helps you prototype — but do not treat it as contract-shaped.
 
 ## Decisions log
 

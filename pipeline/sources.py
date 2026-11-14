@@ -11,8 +11,10 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 import pandas as pd
+import rasterio
 
 from pipeline.config import INTERIM, RAW, Config
+from pipeline.fields import cdl_tif
 from pipeline.net import download
 
 # POWER daily point API: one row per day, DOY-indexed, no date column.
@@ -155,9 +157,31 @@ def fetch_srtm(cfg: Config) -> None:
     raise NotImplementedError
 
 
-def fetch_cdl(cfg: Config) -> None:
-    """USDA CDL 2008-2025 clipped to cfg.region.bbox."""
-    raise NotImplementedError
+def fetch_cdl(cfg: Config, *, force: bool = False) -> list[Path]:
+    """USDA CDL 2008-2025 clipped to cfg.region.bbox.
+
+    The NASS service returns a county-clipped 30 m GeoTIFF per year (EPSG:5070), which
+    is why no clipping is needed here. Grids shift by fractions of a pixel between
+    years, so consumers must work in coordinates, never pixel indices.
+    """
+    y0, y1 = cfg.crop_years
+    out = []
+    for year in range(y0, y1 + 1):
+        dest = cdl_tif(cfg, year)
+        download(
+            f"https://nassgeodata.gmu.edu/webservice/nass_data_cache/byfips/CDL_{year}_{cfg.region.fips}.tif",
+            dest,
+            timeout=300,
+            force=force,
+        )
+        out.append(dest)
+    with rasterio.open(out[-1]) as src:
+        if src.crs is None:
+            raise RuntimeError(f"{out[-1].name} has no CRS")
+        crs, res = str(src.crs), src.res
+    total_mb = sum(p.stat().st_size for p in out) / 1e6
+    print(f"[cdl] {len(out)} years {y0}-{y1}, {crs} {res[0]:.0f} m, {total_mb:.0f} MB")
+    return out
 
 
 def fetch_ssurgo(cfg: Config) -> None:
