@@ -1,17 +1,18 @@
-// Crop colours loosely follow the USDA CDL legend so farmers recognise them.
+// Earthy, high-contrast agricultural cartographic palette (USGS / USDA inspired).
 export const CROP_COLORS: Record<string, [number, number, number]> = {
-  corn: [255, 211, 0],
-  sorghum: [255, 158, 10],
-  winter_wheat: [166, 112, 0],
-  soybeans: [38, 112, 0],
-  alfalfa: [255, 168, 227],
-  cotton: [255, 38, 38],
-  sunflower: [255, 255, 0],
-  rye_cover: [172, 0, 124],
-  fallow: [191, 191, 122],
-  grass_pasture: [232, 255, 191],
+  corn: [229, 169, 39], // Rich warm maize gold
+  sorghum: [194, 65, 12], // Warm grain terracotta / amber
+  winter_wheat: [168, 117, 43], // Deep bronze wheat / harvest gold
+  soybeans: [46, 125, 50], // Deep healthy agricultural green
+  alfalfa: [142, 92, 163], // Muted clover / heather purple
+  cotton: [212, 107, 78], // Dusty warm coral / desert rose
+  sunflower: [237, 138, 25], // Sunny ochre
+  rye_cover: [21, 94, 53], // Forest pine conservation cover
+  fallow: [168, 160, 149], // Warm sandstone / fallow silt
+  grass_pasture: [122, 158, 126], // Prairie sage / pasture green
 };
-const UNKNOWN: [number, number, number] = [150, 150, 150];
+
+const UNKNOWN: [number, number, number] = [140, 145, 150];
 
 export const cropColor = (crop: string | undefined): [number, number, number] =>
   (crop && CROP_COLORS[crop]) || UNKNOWN;
@@ -19,11 +20,11 @@ export const cropColor = (crop: string | undefined): [number, number, number] =>
 export const cropCss = (crop: string | undefined): string => `rgb(${cropColor(crop).join(',')})`;
 
 const CROP_LABELS: Record<string, string> = {
-  corn: 'Corn',
+  corn: 'Corn (grain)',
   sorghum: 'Grain sorghum',
   winter_wheat: 'Winter wheat',
   soybeans: 'Soybeans',
-  alfalfa: 'Alfalfa',
+  alfalfa: 'Alfalfa (hay)',
   cotton: 'Cotton',
   sunflower: 'Sunflower',
   rye_cover: 'Cereal rye (cover)',

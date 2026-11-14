@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="yieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2d6a4f"/>
+      <stop offset="100%" stop-color="#1b4332"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#yieldGrad)"/>
+  <!-- Central wheat stalk / crop yield graphic -->
+  <path d="M32 54 V20" stroke="#fef08a" stroke-width="3" stroke-linecap="round"/>
+  <!-- Wheat grains / kernels -->
+  <path d="M32 18 C30 12, 34 8, 32 6 C30 8, 34 12, 32 18 Z" fill="url(#goldGrad)"/>
+  <!-- Left grains -->
+  <path d="M32 24 C24 22, 22 16, 26 14 C30 16, 31 21, 32 24 Z" fill="url(#goldGrad)"/>
+  <path d="M32 32 C24 30, 22 24, 26 22 C30 24, 31 29, 32 32 Z" fill="url(#goldGrad)"/>
+  <path d="M32 40 C24 38, 22 32, 26 30 C30 32, 31 37, 32 40 Z" fill="url(#goldGrad)"/>
+  <!-- Right grains -->
+  <path d="M32 24 C40 22, 42 16, 38 14 C34 16, 33 21, 32 24 Z" fill="url(#goldGrad)"/>
+  <path d="M32 32 C40 30, 42 24, 38 22 C34 24, 33 29, 32 32 Z" fill="url(#goldGrad)"/>
+  <path d="M32 40 C40 38, 42 32, 38 30 C34 32, 33 37, 32 40 Z" fill="url(#goldGrad)"/>
+  <!-- Base leaves -->
+  <path d="M32 48 C22 47, 18 52, 17 54 C24 55, 30 52, 32 48 Z" fill="#52b788"/>
+  <path d="M32 46 C42 45, 46 50, 47 52 C40 53, 34 50, 32 46 Z" fill="#74c69d"/>
+</svg>

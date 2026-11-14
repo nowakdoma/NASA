@@ -37,7 +37,7 @@ export function CropLegend({ fields, year, highlightCrop, onHighlightCrop }: Pro
     <div className="crop-legend-container">
       <div className="crop-legend-header">
         <span className="crop-legend-title">Crops in {year}</span>
-        <span className="crop-legend-sub">Click crop to highlight</span>
+        <span className="crop-legend-sub">Filter on map</span>
       </div>
       <ul className="legend" role="list">
         {cropStats.map(({ crop, count, areaHa, areaAc }) => {

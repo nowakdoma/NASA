@@ -7,7 +7,16 @@ import { FieldPanel } from './components/FieldPanel';
 import { PrioritySliders, DEFAULT_PRIORITIES } from './components/PrioritySliders';
 import { StrategyComparison } from './components/StrategyComparison';
 import { AboutModal } from './components/AboutModal';
+import { PrintReport } from './components/PrintReport';
 import { rankStrategies, type Priorities } from './lib/ranking';
+import {
+  IconClipboard,
+  IconMap,
+  IconPrinter,
+  IconSatellite,
+  IconScales,
+  IconSprout,
+} from './components/Icons';
 
 type MobileTab = 'map' | 'passport' | 'strategies';
 
@@ -44,7 +53,6 @@ export default function App() {
 
   const handleSelectField = (fieldId: string) => {
     setSelectedId(fieldId);
-    // On small screens, if on map tab, switch to passport to view details
     if (window.innerWidth < 850 && mobileTab === 'map') {
       setMobileTab('passport');
     }
@@ -76,10 +84,10 @@ export default function App() {
   return (
     <div className="app">
       {/* Top Header */}
-      <header className="app-header">
+      <header className="app-header no-print">
         <div className="header-brand">
-          <div className="logo-icon" aria-hidden="true">
-            🌱
+          <div className="logo-badge" aria-hidden="true">
+            <IconSprout className="logo-svg" />
           </div>
           <div>
             <h1>FieldShift</h1>
@@ -92,13 +100,21 @@ export default function App() {
 
         <div className="header-actions">
           {isMock && (
-            <span
-              className="badge-mock"
-              title="Currently rendering verified contract mocks pending final pipeline run"
-            >
+            <span className="badge-mock" title="Rendering verified contracts v0.1 format">
               MOCK DATA (v{data.fields.schema_version})
             </span>
           )}
+
+          <button
+            type="button"
+            className="print-nav-btn"
+            onClick={() => window.print()}
+            title="Generate printable 1-page Field Report (PDF)"
+            aria-label="Print field dossier"
+          >
+            <IconPrinter />
+            <span>Print Dossier</span>
+          </button>
 
           <button
             type="button"
@@ -106,38 +122,42 @@ export default function App() {
             onClick={() => setIsAboutOpen(true)}
             aria-label="About data, NASA sources, and uncertainty methodology"
           >
-            🛰️ About the Data & Uncertainty
+            <IconSatellite />
+            <span>Data & Uncertainty</span>
           </button>
         </div>
       </header>
 
       {/* Mobile / Tablet Tab Navigation Bar */}
-      <nav className="mobile-tab-nav" aria-label="View sections">
+      <nav className="mobile-tab-nav no-print" aria-label="View sections">
         <button
           type="button"
           className={`tab-item${mobileTab === 'map' ? ' active' : ''}`}
           onClick={() => setMobileTab('map')}
         >
-          🗺️ Field Map
+          <IconMap />
+          <span>Field Map</span>
         </button>
         <button
           type="button"
           className={`tab-item${mobileTab === 'passport' ? ' active' : ''}`}
           onClick={() => setMobileTab('passport')}
         >
-          📋 Passport {selectedId ? `(${selectedId})` : ''}
+          <IconClipboard />
+          <span>Passport {selectedId ? `(${selectedId})` : ''}</span>
         </button>
         <button
           type="button"
           className={`tab-item${mobileTab === 'strategies' ? ' active' : ''}`}
           onClick={() => setMobileTab('strategies')}
         >
-          ⚖️ Priorities & Strategies
+          <IconScales />
+          <span>Priorities & Strategies</span>
         </button>
       </nav>
 
       {/* Main Content Workspace */}
-      <main className="app-main">
+      <main className="app-main no-print">
         {/* Left Column: Interactive Map & Map Controls */}
         <section
           className={`map-col${mobileTab !== 'map' ? ' mobile-hidden' : ''}`}
@@ -174,7 +194,12 @@ export default function App() {
           {selected ? (
             <>
               <div className={mobileTab === 'strategies' ? 'mobile-hidden-section' : ''}>
-                <FieldPanel field={selected} year={year} onSelectYear={setYear} />
+                <FieldPanel
+                  field={selected}
+                  year={year}
+                  onSelectYear={setYear}
+                  onOpenAbout={() => setIsAboutOpen(true)}
+                />
               </div>
 
               <div className={mobileTab === 'passport' ? 'mobile-hidden-section' : ''}>
@@ -183,6 +208,7 @@ export default function App() {
                   ranked={ranked}
                   meta={data.strategies.metric_meta}
                   weatherYears={data.strategies.weather_years}
+                  onOpenAbout={() => setIsAboutOpen(true)}
                 />
               </div>
             </>
@@ -193,11 +219,37 @@ export default function App() {
               </p>
             </div>
           )}
+
+          {/* Subtle footer attribution */}
+          <footer className="side-footer">
+            <span>
+              <a
+                href="https://www.flaticon.com/free-icons/yield"
+                title="yield icons"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Yield icons created by Eucalyp - Flaticon
+              </a>
+            </span>
+          </footer>
         </aside>
       </main>
 
       {/* About & Uncertainty Dialog */}
       <AboutModal isOpen={isAboutOpen} onClose={() => setIsAboutOpen(false)} />
+
+      {/* Printable PDF Report (rendered in print media only) */}
+      {selected && (
+        <PrintReport
+          field={selected}
+          year={year}
+          priorities={priorities}
+          ranked={ranked}
+          meta={data.strategies.metric_meta}
+          weatherYears={data.strategies.weather_years}
+        />
+      )}
     </div>
   );
 }

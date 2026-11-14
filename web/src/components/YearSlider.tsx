@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { IconChevronLeft, IconChevronRight, IconPause, IconPlay } from './Icons';
 
 interface Props {
   min: number;
@@ -29,7 +30,7 @@ export function YearSlider({ min, max, value, onChange }: Props) {
           aria-label="Previous year"
           title="Previous year"
         >
-          ‹
+          <IconChevronLeft />
         </button>
 
         <button
@@ -39,7 +40,7 @@ export function YearSlider({ min, max, value, onChange }: Props) {
           aria-label={isPlaying ? 'Pause animation' : 'Play multi-year animation'}
           title={isPlaying ? 'Pause animation' : 'Play crop history animation (2008–2025)'}
         >
-          {isPlaying ? '⏸' : '▶'}
+          {isPlaying ? <IconPause /> : <IconPlay />}
         </button>
 
         <button
@@ -50,11 +51,11 @@ export function YearSlider({ min, max, value, onChange }: Props) {
           aria-label="Next year"
           title="Next year"
         >
-          ›
+          <IconChevronRight />
         </button>
 
         <div className="year-display">
-          <span className="year-sub">Cropland Data Layer</span>
+          <span className="year-sub">CDL Year</span>
           <strong className="year-val">{value}</strong>
         </div>
       </div>
@@ -78,9 +79,9 @@ export function YearSlider({ min, max, value, onChange }: Props) {
         />
         <div className="year-ticks">
           <span>{min}</span>
-          <span>2012 (drought)</span>
+          <span title="Severe 2012 North American Drought">2012 (drought)</span>
           <span>2018</span>
-          <span>2022</span>
+          <span title="2022 Southwest Kansas Drought">2022</span>
           <span>{max}</span>
         </div>
       </div>

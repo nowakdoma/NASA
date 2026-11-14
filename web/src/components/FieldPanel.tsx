@@ -1,11 +1,13 @@
 import { useMemo } from 'react';
 import type { FieldFeature, BarePeriod, StressWindow } from '../types/contracts';
 import { cropCss, cropLabel } from '../lib/colors';
+import { IconInfo, IconPrinter } from './Icons';
 
 interface Props {
   field: FieldFeature;
   year: number;
   onSelectYear?: (year: number) => void;
+  onOpenAbout?: () => void;
 }
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -27,7 +29,7 @@ function calculateDays(startStr: string, endStr: string): number {
   return Math.max(1, Math.round((end - start) / (1000 * 60 * 60 * 24)));
 }
 
-export function FieldPanel({ field, year, onSelectYear }: Props) {
+export function FieldPanel({ field, year, onSelectYear, onOpenAbout }: Props) {
   const p = field.properties;
   const years = Object.keys(p.crop_history).sort();
   const currentCrop = p.crop_history[String(year)];
@@ -62,6 +64,7 @@ export function FieldPanel({ field, year, onSelectYear }: Props) {
 
   return (
     <section className="panel field-passport" aria-labelledby="passport-title">
+      {/* Header with Title, Chips, and Print Action */}
       <div className="passport-header">
         <div>
           <span className="passport-badge">Field Passport</span>
@@ -69,23 +72,43 @@ export function FieldPanel({ field, year, onSelectYear }: Props) {
             {p.field_id} {p.name && <small className="passport-name">· {p.name}</small>}
           </h2>
         </div>
-        <div className="field-meta-chips">
-          <span className="chip area">
-            {p.area_ha} ha <span className="muted-text">({acres} ac)</span>
-          </span>
-          <span className="chip irrig">
-            {p.irrigation_type === 'center_pivot'
-              ? 'Center Pivot'
-              : (p.irrigation_type ?? (p.irrigated ? 'Irrigated' : 'Dryland'))}
-          </span>
+
+        <div className="passport-header-actions">
+          <button
+            type="button"
+            className="print-btn no-print"
+            onClick={() => window.print()}
+            title="Generate printable 1-page Field Report (PDF)"
+            aria-label="Print field report"
+          >
+            <IconPrinter />
+            <span>Print Dossier</span>
+          </button>
         </div>
       </div>
 
+      <div className="field-meta-chips">
+        <span className="chip area">
+          {p.area_ha} ha <span className="muted-text">({acres} ac)</span>
+        </span>
+        <span className="chip irrig">
+          {p.irrigation_type === 'center_pivot'
+            ? 'Center Pivot'
+            : (p.irrigation_type ?? (p.irrigated ? 'Irrigated' : 'Dryland'))}
+        </span>
+        <span className="chip soil-chip">{p.soil.texture}</span>
+      </div>
+
+      {/* 18-Year Historical Sequence */}
       <div className="crop-history-section">
         <div className="section-title-row">
-          <h3>Historical Crop Sequence (2008–2025)</h3>
-          <span className="hint-label">Click year to inspect</span>
+          <h3>Crop History (2008–2025)</h3>
+          <span className="active-crop-pill">
+            <span className="swatch inline" style={{ background: cropCss(currentCrop) }} />
+            <strong>{year}:</strong> {cropLabel(currentCrop ?? 'n/a')}
+          </span>
         </div>
+
         <div className="history-strip" role="list" aria-label="Crop history by year">
           {years.map((y) => {
             const isCurrent = Number(y) === year;
@@ -98,7 +121,7 @@ export function FieldPanel({ field, year, onSelectYear }: Props) {
                 className={`history-cell${isCurrent ? ' current' : ''}`}
                 style={{ background: cropCss(c) }}
                 onClick={() => onSelectYear?.(Number(y))}
-                title={`${y}: ${cropLabel(c)}`}
+                title={`${y}: ${cropLabel(c)} · Click to switch`}
                 aria-label={`${y}: ${cropLabel(c)}${isCurrent ? ' (selected)' : ''}`}
               >
                 <span className="cell-year">{y.slice(2)}</span>
@@ -106,38 +129,46 @@ export function FieldPanel({ field, year, onSelectYear }: Props) {
             );
           })}
         </div>
-        <div className="active-crop-summary">
-          <strong>{year} Crop:</strong>{' '}
-          <span className="swatch inline" style={{ background: cropCss(currentCrop) }} />
-          <span>{cropLabel(currentCrop ?? 'n/a')}</span>
-        </div>
       </div>
 
+      {/* Soil Characteristics Grid */}
       <div className="soil-profile-section">
-        <h3>Soil Characteristics (SSURGO)</h3>
+        <div className="section-title-row">
+          <h3>Soil Profile (SSURGO)</h3>
+          <button
+            type="button"
+            className="info-icon-btn"
+            onClick={onOpenAbout}
+            title="Learn more about SSURGO data"
+            aria-label="Soil data info"
+          >
+            <IconInfo />
+          </button>
+        </div>
+
         <dl className="kv-grid">
-          <div className="kv-item">
-            <dt>Dominant Texture</dt>
+          <div className="kv-item" title="Dominant USDA soil texture class">
+            <dt>Texture</dt>
             <dd>{p.soil.texture}</dd>
           </div>
-          <div className="kv-item">
-            <dt>Organic Matter (OM)</dt>
+          <div className="kv-item" title="Soil Organic Matter percentage in upper horizon">
+            <dt>Organic Matter</dt>
             <dd>{p.soil.om_pct} %</dd>
           </div>
-          <div className="kv-item">
-            <dt>Erodibility (Kf factor)</dt>
+          <div className="kv-item" title="RUSLE Kf erodibility factor of fine-earth fraction">
+            <dt>Erodibility (Kf)</dt>
             <dd>{p.soil.kffact}</dd>
           </div>
-          <div className="kv-item">
-            <dt>Available Water (AWC)</dt>
+          <div className="kv-item" title="Available Water Capacity in the root zone">
+            <dt>Available Water</dt>
             <dd>{p.soil.awc_mm} mm</dd>
           </div>
-          <div className="kv-item">
-            <dt>Average Slope</dt>
+          <div className="kv-item" title="Average slope percentage derived from SRTM">
+            <dt>Avg Slope</dt>
             <dd>{p.soil.slope_pct} %</dd>
           </div>
           {p.soil.map_unit && (
-            <div className="kv-item">
+            <div className="kv-item" title="SSURGO Map Unit Identifier">
               <dt>Map Unit</dt>
               <dd>{p.soil.map_unit}</dd>
             </div>
@@ -145,9 +176,10 @@ export function FieldPanel({ field, year, onSelectYear }: Props) {
         </dl>
       </div>
 
+      {/* Satellite Season Monitoring Timeline */}
       <div className="season-timeline-section">
         <div className="section-title-row">
-          <h3>Season {year} Satellite Monitoring</h3>
+          <h3>Satellite Season Monitoring ({year})</h3>
           <span
             className={`stress-pill ${
               stressIdx !== undefined && stressIdx > 0.6
@@ -156,19 +188,14 @@ export function FieldPanel({ field, year, onSelectYear }: Props) {
                   ? 'mid'
                   : 'low'
             }`}
+            title="Combined annual stress index (0 = none, 1 = extreme)"
           >
-            Annual Stress Index: {stressIdx !== undefined ? stressIdx.toFixed(2) : 'n/a'}
+            Stress Index: {stressIdx !== undefined ? stressIdx.toFixed(2) : 'n/a'}
           </span>
         </div>
 
-        <p className="timeline-caption muted">
-          MODIS NDVI bare-soil exposure, SMAP root-zone moisture deficits, and NASA POWER heat
-          windows.
-        </p>
-
         {/* Visual Seasonal Timeline Chart */}
         <div className="seasonal-calendar-chart">
-          {/* Months header */}
           <div className="calendar-axis">
             {MONTHS.map((m) => (
               <span key={m} className="month-tick">
@@ -177,11 +204,12 @@ export function FieldPanel({ field, year, onSelectYear }: Props) {
             ))}
           </div>
 
-          {/* Timeline Tracks */}
           <div className="calendar-tracks">
             {/* Bare soil track */}
             <div className="track-row">
-              <span className="track-label">Bare Soil</span>
+              <span className="track-label" title="MODIS 250m NDVI bare soil detection">
+                Bare Soil
+              </span>
               <div className="track-lane">
                 {barePeriods.map((b: BarePeriod, i: number) => {
                   const left = getPctOfYear(b.start, year);
@@ -193,7 +221,7 @@ export function FieldPanel({ field, year, onSelectYear }: Props) {
                       key={`bare-${i}`}
                       className="timeline-bar bare-soil-bar"
                       style={{ left: `${left}%`, width: `${width}%` }}
-                      title={`Bare Soil: ${b.start} → ${b.end} (${days} days)\n${b.source}${b.note ? ` · ${b.note}` : ''}`}
+                      title={`Bare Soil: ${b.start} → ${b.end} (${days}d)\n${b.source}${b.note ? ` · ${b.note}` : ''}`}
                     >
                       <span className="bar-text">{days}d</span>
                     </div>
@@ -204,7 +232,9 @@ export function FieldPanel({ field, year, onSelectYear }: Props) {
 
             {/* Water stress track */}
             <div className="track-row">
-              <span className="track-label">Water Stress</span>
+              <span className="track-label" title="SMAP soil moisture root-zone deficit">
+                Water Deficit
+              </span>
               <div className="track-lane">
                 {waterStress.map((s: StressWindow, i: number) => {
                   const left = getPctOfYear(s.start, year);
@@ -218,9 +248,9 @@ export function FieldPanel({ field, year, onSelectYear }: Props) {
                       style={{
                         left: `${left}%`,
                         width: `${width}%`,
-                        opacity: 0.6 + s.severity * 0.4,
+                        opacity: 0.65 + s.severity * 0.35,
                       }}
-                      title={`Water Stress: ${s.start} → ${s.end} (${days} days)\nSeverity: ${(s.severity * 100).toFixed(0)}%\nSource: ${s.source}`}
+                      title={`Water Stress: ${s.start} → ${s.end} (${days}d)\nSeverity: ${(s.severity * 100).toFixed(0)}%\nSource: ${s.source}`}
                     >
                       <span className="bar-text">Sev {(s.severity * 100).toFixed(0)}%</span>
                     </div>
@@ -231,7 +261,9 @@ export function FieldPanel({ field, year, onSelectYear }: Props) {
 
             {/* Heat stress track */}
             <div className="track-row">
-              <span className="track-label">Heat Stress</span>
+              <span className="track-label" title="NASA POWER air temperature > 35°C">
+                Heat Stress
+              </span>
               <div className="track-lane">
                 {heatStress.map((s: StressWindow, i: number) => {
                   const left = getPctOfYear(s.start, year);
@@ -245,9 +277,9 @@ export function FieldPanel({ field, year, onSelectYear }: Props) {
                       style={{
                         left: `${left}%`,
                         width: `${width}%`,
-                        opacity: 0.6 + s.severity * 0.4,
+                        opacity: 0.65 + s.severity * 0.35,
                       }}
-                      title={`Heat Stress (Tmax > 35°C): ${s.start} → ${s.end} (${days} days)\nSeverity: ${(s.severity * 100).toFixed(0)}%\nSource: ${s.source}`}
+                      title={`Heat Stress (Tmax > 35°C): ${s.start} → ${s.end} (${days}d)\nSeverity: ${(s.severity * 100).toFixed(0)}%\nSource: ${s.source}`}
                     >
                       <span className="bar-text">Sev {(s.severity * 100).toFixed(0)}%</span>
                     </div>
@@ -258,36 +290,39 @@ export function FieldPanel({ field, year, onSelectYear }: Props) {
           </div>
         </div>
 
-        {/* Detailed text event list */}
+        {/* Compact Event Pills */}
         {barePeriods.length + stressWindows.length === 0 ? (
           <p className="no-events-notice">
-            No bare-soil exposure or severe stress windows recorded for {year}.
+            No bare-soil or severe stress anomalies detected for {year}.
           </p>
         ) : (
-          <div className="events-detail-list">
+          <div className="events-compact-grid">
             {barePeriods.map((b, i) => (
-              <div key={`b-${i}`} className="event-item bare">
-                <span className="event-tag bare">Bare Soil</span>
-                <span className="event-dates">
-                  {b.start} → {b.end} ({calculateDays(b.start, b.end)} days)
+              <div
+                key={`b-${i}`}
+                className="compact-event-card bare"
+                title={`${b.source} · ${b.note ?? ''}`}
+              >
+                <span className="tag-pill bare">Bare Soil</span>
+                <span className="event-date-text">
+                  {b.start.slice(5)} → {b.end.slice(5)}
                 </span>
-                <span className="event-meta">
-                  {b.source}
-                  {b.note ? ` · ${b.note}` : ''}
-                </span>
+                <span className="event-duration-badge">{calculateDays(b.start, b.end)}d</span>
               </div>
             ))}
             {stressWindows.map((s, i) => (
-              <div key={`s-${i}`} className={`event-item ${s.type}`}>
-                <span className={`event-tag ${s.type}`}>
-                  {s.type === 'water' ? 'Water Stress' : 'Heat Stress (Tmax > 35°C)'}
+              <div
+                key={`s-${i}`}
+                className={`compact-event-card ${s.type}`}
+                title={`${s.source} · Severity ${(s.severity * 100).toFixed(0)}%`}
+              >
+                <span className={`tag-pill ${s.type}`}>
+                  {s.type === 'water' ? 'Water' : 'Heat'}
                 </span>
-                <span className="event-dates">
-                  {s.start} → {s.end} ({calculateDays(s.start, s.end)} days)
+                <span className="event-date-text">
+                  {s.start.slice(5)} → {s.end.slice(5)}
                 </span>
-                <span className="event-meta">
-                  Severity: <strong>{(s.severity * 100).toFixed(0)}%</strong> · {s.source}
-                </span>
+                <span className="event-duration-badge">{(s.severity * 100).toFixed(0)}% sev</span>
               </div>
             ))}
           </div>
@@ -296,14 +331,14 @@ export function FieldPanel({ field, year, onSelectYear }: Props) {
         {/* Historical 2008–2025 Stress Sparkline */}
         <div className="stress-history-chart">
           <div className="section-title-row">
-            <h4>Historical Stress Index (2008–2025)</h4>
-            <span className="chart-legend-label">Higher = more stress</span>
+            <h4>Multi-Year Stress Trend (2008–2025)</h4>
+            <span className="chart-legend-label">Click bar to select year</span>
           </div>
           <div className="sparkline-wrapper">
             {stressHistory.map((item) => {
               const isSelected = item.year === year;
               const heightPct = Math.max(item.score * 100, 6);
-              const color = item.score > 0.6 ? '#ef4444' : item.score > 0.3 ? '#f59e0b' : '#10b981';
+              const color = item.score > 0.6 ? '#dc2626' : item.score > 0.3 ? '#d97706' : '#16a34a';
               return (
                 <div
                   key={item.year}
