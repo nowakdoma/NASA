@@ -25,9 +25,9 @@ Study area: **Finney County, Kansas** (FIPS 20055, around Garden City).
 All computation runs offline. The web app only reads static JSON/GeoJSON from
 `web/public/data/`.
 
-> **Status: scaffold.** The web app renders realistic **mock** data from
-> `contracts/mock/`. Pipeline downloads and engine models are still stubs (see
-> [`TASKS.md`](TASKS.md)).
+> **Status:** the engine models run (FAO-56 water balance, RUSLE, soil index, income,
+> labour), but on mock fields, SYNTHETIC weather and placeholder economics until the pipeline
+> delivers real data, so outputs are flagged `"mock": true`. See [`TASKS.md`](TASKS.md).
 
 ## Quick start
 
@@ -39,7 +39,7 @@ the Linux filesystem (`~/...`), not `/mnt/c`.
 git clone https://github.com/nowakdoma/NASA fieldshift
 cd fieldshift
 make setup     # uv sync (Python 3.11) + pnpm install + pre-commit hook
-make export    # validate mocks and copy them to web/public/data
+make export    # run the engine -> web/public/data (mock fields + synthetic weather until real data lands)
 make dev       # http://localhost:5173
 ```
 
@@ -51,7 +51,7 @@ Run `make help` to list all targets.
 | ------------- | -------------------------------------------------------------------------------- |
 | `make setup`  | Install Python deps (uv) and web deps (pnpm), and install the pre-commit hook   |
 | `make data`   | Run the data pipeline (`python -m pipeline all`). Stubs for now                  |
-| `make export` | Engine → `web/public/data/*.json`. Currently copies the validated mocks          |
+| `make export` | Run the engine → `web/public/data/*.json`. `python -m engine.export --mock` copies the hand-made mocks |
 | `make dev`    | Start the Vite dev server                                                        |
 | `make check`  | ruff, pytest, contract validation, prettier, tsc, data check and web build. **Must pass before every commit** |
 
