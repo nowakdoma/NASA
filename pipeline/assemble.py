@@ -21,7 +21,7 @@ from pathlib import Path
 
 from pipeline.config import INTERIM, Config
 
-SCHEMA_VERSION = "0.2"
+SCHEMA_VERSION = "0.3"
 
 
 def load_soil(path: Path) -> dict[str, dict]:

@@ -43,11 +43,9 @@ cross-team needs under **Blockers / requests**.
   `GraceFile` to `web/src/types/contracts.ts`. The web start screen already shows the GRACE
   card whenever `web/public/data/grace_water_storage.json` exists, and hides it otherwise.
   After approval:
-  - **person 2:** `pipeline grace` writes `"schema_version": "0.3"` at the top level.
-    **Still open and now blocking (18:30):** without it `make export` falls back to the
-    *mock* GRACE file (22 yearly points, `mock: true`), which is what is in
-    `web/public/data/` now. The web labels it "sample data", but the demo needs the real
-    259-month series. After the fix: `make data` (or `pipeline grace`) then `make export`.
+  - ~~**person 2:** `pipeline grace` writes `"schema_version": "0.3"` at the top level.~~ —
+    **done**: `pipeline/grace.py` and `pipeline/assemble.py` write `schema_version = "0.3"`
+    and `mock = False`. Blocker resolved.
   - ~~**person 3:** `engine.export` copies `data/interim/grace_water_storage.json` to
     `web/public/data/`; `engine.validate` checks it against `grace.schema.json` in
     `make check`; `SCHEMA_VERSION = "0.3"`.~~ — **done (person 3)**: `engine.export`
@@ -187,3 +185,5 @@ cross-team needs under **Blockers / requests**.
   in engine/export.py; engine.export copies grace_water_storage.json (interim or mock fallback);
   engine.validate checks grace.schema.json and semantic constraints (chronological dates, FIPS match,
   data gaps); test suite augmented and make check green.
+- 2026-11-14 18:52: pipeline fix applied (approved by user): pipeline/grace.py and pipeline/assemble.py
+  updated to SCHEMA_VERSION = "0.3" and mock = False. Unblocks real GRACE series in data/interim/ and export.

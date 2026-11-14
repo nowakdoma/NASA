@@ -34,6 +34,7 @@ PRODUCT = "TELLUS_GRAC-GRFO_MASCON_CRI_GRID_RL06.3_V4 (JPL RL06.3Mv04)"
 CMR_GRANULES = "https://cmr.earthdata.nasa.gov/search/granules.json"
 TIME_EPOCH = date(2002, 1, 1)
 TIME_UNITS_DAYS = "days since 2002-01-01"
+SCHEMA_VERSION = "0.3"
 
 
 def grace_file(cfg: Config) -> Path | None:
@@ -201,6 +202,8 @@ def derive_grace(cfg: Config) -> Path:
     trend = linear_trend(years, values)
 
     payload = {
+        "schema_version": SCHEMA_VERSION,
+        "mock": False,
         "source": f"NASA/JPL GRACE & GRACE-FO mascon, {PRODUCT}",
         "file": path.name,
         "units": "cm equivalent water thickness anomaly",
