@@ -150,24 +150,40 @@ def soil_from_rows(rows: list[dict], *, depth_cm: float = PROFILE_DEPTH_CM) -> d
     }
 
 
-def sda_query(sql: str, *, timeout: float = 120.0) -> list[dict]:
-    """Run one SDA SQL statement and return rows as dicts."""
+def sda_query(sql: str, *, timeout: float = 120.0, retries: int = 3) -> list[dict]:
+    """Run one SDA SQL statement and return rows as dicts.
+
+    Retries transient failures. SDA drops connections under load, and a single reset in the
+    middle of a 120-request run would otherwise abort the whole `make data` and leave the
+    next step consuming a half-written CSV.
+    """
+    import time
     import urllib.error
     import urllib.request
 
     body = json.dumps({"query": sql, "format": "JSON+COLUMNNAME"}).encode()
-    request = urllib.request.Request(
-        SDA_URL,
-        data=body,
-        headers={"Content-Type": "application/json", "Accept": "application/json"},
-    )
-    try:
-        with urllib.request.urlopen(request, timeout=timeout) as response:
-            return parse_sda_payload(response.read().decode("utf-8", errors="replace"))
-    except urllib.error.HTTPError as err:
-        raise SoilDataError(
-            f"HTTP {err.code}: {err.read().decode('utf-8', 'replace')[:200]}"
-        ) from err
+    last: Exception | None = None
+    for attempt in range(retries):
+        request = urllib.request.Request(
+            SDA_URL,
+            data=body,
+            headers={"Content-Type": "application/json", "Accept": "application/json"},
+        )
+        try:
+            with urllib.request.urlopen(request, timeout=timeout) as response:
+                return parse_sda_payload(response.read().decode("utf-8", errors="replace"))
+        except urllib.error.HTTPError as err:
+            # A 400 is a SQL error: retrying will not help. 429/5xx are worth a retry.
+            if err.code != 429 and err.code < 500:
+                raise SoilDataError(
+                    f"HTTP {err.code}: {err.read().decode('utf-8', 'replace')[:200]}"
+                ) from err
+            last = err
+        except (urllib.error.URLError, TimeoutError, OSError) as err:
+            last = err
+        if attempt < retries - 1:
+            time.sleep(2.0 * (attempt + 1))
+    raise SoilDataError(f"SDA unreachable after {retries} attempts: {last}") from last
 
 
 def dominant_mukey(geometry: dict) -> str | None:

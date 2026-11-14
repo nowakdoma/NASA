@@ -104,3 +104,62 @@ def test_soil_from_no_rows_is_explicitly_unknown():
     assert result["texture"] == "unknown"
     assert result["map_unit"] is None
     assert result["awc_mm"] == 0.0
+
+
+def test_sda_query_retries_a_transient_connection_error(monkeypatch):
+    """SDA drops connections under load; one reset must not abort a 120-request run."""
+    import urllib.error
+    import urllib.request
+
+    calls = {"n": 0}
+
+    class FakeResponse:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *exc):
+            return False
+
+        def read(self):
+            return b'{"Table":[["mukey"],["123"]]}'
+
+    def fake_urlopen(*args, **kwargs):
+        calls["n"] += 1
+        if calls["n"] < 3:
+            raise urllib.error.URLError("connection reset")
+        return FakeResponse()
+
+    monkeypatch.setattr(urllib.request, "urlopen", fake_urlopen)
+    monkeypatch.setattr("time.sleep", lambda *_a, **_k: None)
+    assert soil.sda_query("SELECT 1") == [{"mukey": "123"}]
+    assert calls["n"] == 3
+
+
+def test_sda_query_gives_up_and_raises_soil_error(monkeypatch):
+    import urllib.error
+    import urllib.request
+
+    def always_fail(*args, **kwargs):
+        raise urllib.error.URLError("down")
+
+    monkeypatch.setattr(urllib.request, "urlopen", always_fail)
+    monkeypatch.setattr("time.sleep", lambda *_a, **_k: None)
+    with pytest.raises(soil.SoilDataError, match="unreachable after"):
+        soil.sda_query("SELECT 1")
+
+
+def test_sql_error_is_not_retried(monkeypatch):
+    """A 400 means the SQL is wrong — retrying just triples the wait."""
+    import urllib.error
+    import urllib.request
+
+    calls = {"n": 0}
+
+    def bad_request(*args, **kwargs):
+        calls["n"] += 1
+        raise urllib.error.HTTPError(soil.SDA_URL, 400, "Bad Request", {}, None)
+
+    monkeypatch.setattr(urllib.request, "urlopen", bad_request)
+    with pytest.raises(soil.SoilDataError, match="HTTP 400"):
+        soil.sda_query("SELECT nope")
+    assert calls["n"] == 1
