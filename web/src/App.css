@@ -168,34 +168,36 @@ body {
   align-items: center;
   gap: 0.4rem;
   border-radius: 6px;
-  padding: 0.38rem 0.75rem;
-  font-size: 0.8rem;
+  padding: 0.42rem 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.15s ease;
   box-shadow: var(--shadow-sm);
 }
 
-.print-nav-btn {
-  background: #f6f5ef;
+/* Primary Action - Von Restorff Effect */
+.print-nav-btn.primary-action {
+  background: var(--primary);
+  color: #ffffff;
+  border: 1px solid var(--primary-hover);
+  box-shadow: 0 2px 5px rgba(45, 106, 79, 0.3);
+}
+
+.print-nav-btn.primary-action:hover {
+  background: var(--primary-hover);
+  box-shadow: 0 3px 8px rgba(45, 106, 79, 0.35);
+}
+
+.about-nav-btn {
+  background: var(--panel-elevated);
   color: #27382f;
   border: 1px solid var(--border-dark);
 }
 
-.print-nav-btn:hover {
+.about-nav-btn:hover {
   background: #eceae1;
   border-color: #a8a497;
-}
-
-.about-nav-btn {
-  background: var(--primary-light);
-  color: var(--primary);
-  border: 1px solid #c2e2d0;
-}
-
-.about-nav-btn:hover {
-  background: #d4ebd9;
-  border-color: #9dd3b3;
 }
 
 /* Mobile Tab Nav */
@@ -369,9 +371,9 @@ body {
 .year-nav-btn {
   background: var(--panel-elevated);
   border: 1px solid var(--border);
-  border-radius: 5px;
-  width: 28px;
-  height: 28px;
+  border-radius: 6px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -395,9 +397,9 @@ body {
   background: var(--primary);
   color: #ffffff;
   border: none;
-  border-radius: 5px;
-  width: 32px;
-  height: 28px;
+  border-radius: 6px;
+  width: 36px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -624,6 +626,44 @@ body {
   align-items: flex-start;
   border-bottom: 1px solid var(--border);
   padding-bottom: 0.65rem;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.passport-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.passport-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.field-quick-select {
+  background: var(--panel-elevated);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 0.22rem 0.55rem;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--fg);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  max-width: 230px;
+  transition: border-color 0.12s ease;
+}
+
+.field-quick-select:hover {
+  border-color: var(--border-dark);
+}
+
+.field-quick-select:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
 }
 
 .passport-badge {
@@ -636,6 +676,12 @@ body {
   padding: 0.15rem 0.5rem;
   border-radius: 4px;
   border: 1px solid #c2e2d0;
+}
+
+.passport-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .passport-id {
@@ -1032,7 +1078,7 @@ body {
   background: var(--panel-elevated);
   border: 1px solid var(--border);
   border-radius: 5px;
-  padding: 0.2rem 0.5rem;
+  padding: 0.22rem 0.55rem;
   font-size: 0.72rem;
   font-weight: 600;
   color: var(--muted);
@@ -1041,9 +1087,15 @@ body {
   transition: all 0.1s ease;
 }
 
-.reset-btn:hover {
+.reset-btn:hover:not(:disabled) {
   background: #ebe8de;
   color: var(--fg);
+}
+
+.reset-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .preset-buttons-row {
@@ -1057,8 +1109,8 @@ body {
   background: var(--panel-elevated);
   border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 0.22rem 0.6rem;
-  font-size: 0.73rem;
+  padding: 0.28rem 0.65rem;
+  font-size: 0.74rem;
   color: #27382f;
   cursor: pointer;
   font-weight: 600;
@@ -1069,6 +1121,13 @@ body {
 .preset-chip:hover {
   background: #ebe8de;
   border-color: var(--border-dark);
+}
+
+.preset-chip.active-preset {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+  box-shadow: 0 1px 4px rgba(45, 106, 79, 0.25);
 }
 
 .sliders-list {
@@ -1115,6 +1174,7 @@ body {
   accent-color: var(--primary);
   cursor: pointer;
   margin: 0.2rem 0 0;
+  height: 24px;
 }
 
 /* Strategy Comparison */
@@ -1303,7 +1363,10 @@ body {
   background: var(--panel-elevated);
   border: 1px solid var(--border);
   border-radius: 5px;
-  padding: 0.25rem 0.6rem;
+  padding: 0.32rem 0.68rem;
+  min-height: 30px;
+  display: inline-flex;
+  align-items: center;
   font-size: 0.75rem;
   font-weight: 600;
   color: var(--muted);

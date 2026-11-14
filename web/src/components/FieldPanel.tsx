@@ -8,6 +8,8 @@ interface Props {
   year: number;
   onSelectYear?: (year: number) => void;
   onOpenAbout?: () => void;
+  allFields?: FieldFeature[];
+  onSelectField?: (fieldId: string) => void;
 }
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -29,7 +31,14 @@ function calculateDays(startStr: string, endStr: string): number {
   return Math.max(1, Math.round((end - start) / (1000 * 60 * 60 * 24)));
 }
 
-export function FieldPanel({ field, year, onSelectYear, onOpenAbout }: Props) {
+export function FieldPanel({
+  field,
+  year,
+  onSelectYear,
+  onOpenAbout,
+  allFields,
+  onSelectField,
+}: Props) {
   const p = field.properties;
   const years = Object.keys(p.crop_history).sort();
   const currentCrop = p.crop_history[String(year)];
@@ -64,10 +73,28 @@ export function FieldPanel({ field, year, onSelectYear, onOpenAbout }: Props) {
 
   return (
     <section className="panel field-passport" aria-labelledby="passport-title">
-      {/* Header with Title, Chips, and Print Action */}
+      {/* Header with Title, Field Selector, and Print Action */}
       <div className="passport-header">
-        <div>
-          <span className="passport-badge">Field Passport</span>
+        <div className="passport-title-wrap">
+          <div className="passport-badge-row">
+            <span className="passport-badge">Field Passport</span>
+            {allFields && allFields.length > 1 && (
+              <select
+                value={p.field_id}
+                onChange={(e) => onSelectField?.(e.target.value)}
+                className="field-quick-select"
+                aria-label="Select active field"
+                title="Switch between Finney County fields"
+              >
+                {allFields.map((f) => (
+                  <option key={f.properties.field_id} value={f.properties.field_id}>
+                    {f.properties.field_id} · {f.properties.name ?? 'Field'} ({f.properties.area_ha}{' '}
+                    ha)
+                  </option>
+                ))}
+              </select>
+            )}
+          </div>
           <h2 id="passport-title" className="passport-id">
             {p.field_id} {p.name && <small className="passport-name">· {p.name}</small>}
           </h2>

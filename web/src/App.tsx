@@ -107,9 +107,9 @@ export default function App() {
 
           <button
             type="button"
-            className="print-nav-btn"
+            className="print-nav-btn primary-action"
             onClick={() => window.print()}
-            title="Generate printable 1-page Field Report (PDF)"
+            title="Generate printable 1-page Field Dossier (PDF)"
             aria-label="Print field dossier"
           >
             <IconPrinter />
@@ -199,6 +199,8 @@ export default function App() {
                   year={year}
                   onSelectYear={setYear}
                   onOpenAbout={() => setIsAboutOpen(true)}
+                  allFields={data.fields.features}
+                  onSelectField={handleSelectField}
                 />
               </div>
 

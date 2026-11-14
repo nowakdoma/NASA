@@ -192,9 +192,9 @@ export function PrintReport({ field, year, priorities, ranked, meta, weatherYear
         )}
       </div>
 
-      {/* Farmer Priority Weights */}
+      {/* Decision Priority Weights */}
       <div className="print-card print-full-width">
-        <h2>Applied Farmer Priorities (0–5 Weight Scale)</h2>
+        <h2>Decision Priorities (0–5 Weight Scale)</h2>
         <div className="print-priorities-summary">
           <span>
             <strong>Save Water:</strong> {priorities.water}/5
