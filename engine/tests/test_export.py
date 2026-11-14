@@ -21,12 +21,16 @@ def test_export_valid_and_files_written(exported):
     assert errors == []
     for name in FILES:
         assert (out / name).exists()
+    assert (out / "grace_water_storage.json").exists()
 
 
 def test_export_strategies_structure(exported):
     out, _ = exported
     s = json.loads((out / "strategies.json").read_text())
     assert s["mock"] is True
+    assert s["schema_version"] == "0.3"
+    f = json.loads((out / "fields.geojson").read_text())
+    assert f["schema_version"] == "0.3"
     assert s["fields"]
     for strategies in s["fields"].values():
         assert len(strategies) == 4

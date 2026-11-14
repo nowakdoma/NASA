@@ -44,9 +44,11 @@ cross-team needs under **Blockers / requests**.
   card whenever `web/public/data/grace_water_storage.json` exists, and hides it otherwise.
   After approval:
   - **person 2:** `pipeline grace` writes `"schema_version": "0.3"` at the top level.
-  - **person 3:** `engine.export` copies `data/interim/grace_water_storage.json` to
+  - ~~**person 3:** `engine.export` copies `data/interim/grace_water_storage.json` to
     `web/public/data/`; `engine.validate` checks it against `grace.schema.json` in
-    `make check`; `SCHEMA_VERSION = "0.3"`.
+    `make check`; `SCHEMA_VERSION = "0.3"`.~~ — **done (person 3)**: `engine.export`
+    handles `grace_water_storage.json` with interim + mock fallback; `engine.validate`
+    runs schema and semantic validation on GRACE; `SCHEMA_VERSION = "0.3"`. Tested & passing.
   - `Makefile` `PIPELINE_STEPS` now includes `grace groundwater frost` (done, person 1).
 
 - **pipeline:** Earthdata access fully verified. `EARTHDATA_TOKEN` unlocks the LP DAAC
@@ -177,3 +179,7 @@ cross-team needs under **Blockers / requests**.
   all claims strictly relative to current field rotation and metrics. Eliminated spurious "low
   water erosion" benefits on dryland fallow rotations; added relative % improvements and
   groundwater/cost savings alternatives. All 50 real fields and mocks pass with 0 contradictions.
+- 2026-11-14 18:27: contracts v0.3 engine follow-up completed (person 3): SCHEMA_VERSION = "0.3"
+  in engine/export.py; engine.export copies grace_water_storage.json (interim or mock fallback);
+  engine.validate checks grace.schema.json and semantic constraints (chronological dates, FIPS match,
+  data gaps); test suite augmented and make check green.

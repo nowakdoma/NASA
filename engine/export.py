@@ -28,20 +28,29 @@ from engine.validate import validate_all
 from engine.weather import get_weather
 
 FILES = ("fields.geojson", "strategies.json")
+GRACE_FILE = "grace_water_storage.json"
 INTERIM_FIELDS = REPO_ROOT / "data" / "interim" / "fields.geojson"
+INTERIM_GRACE = REPO_ROOT / "data" / "interim" / GRACE_FILE
+MOCK_GRACE = CONTRACTS / "mock" / GRACE_FILE
 WEATHER_YEARS = (1995, 2025)
-SCHEMA_VERSION = "0.2"
+SCHEMA_VERSION = "0.3"
 
 
 def export_mock(out_dir: Path = WEB_DATA) -> None:
     """Validate the mocks and copy them to web/public/data."""
-    errors = validate_all(CONTRACTS / "mock" / FILES[0], CONTRACTS / "mock" / FILES[1])
+    all_mock_files = [
+        CONTRACTS / "mock" / name
+        for name in (*FILES, GRACE_FILE)
+        if (CONTRACTS / "mock" / name).exists()
+    ]
+    grace_mock = MOCK_GRACE if MOCK_GRACE.exists() else None
+    errors = validate_all(CONTRACTS / "mock" / FILES[0], CONTRACTS / "mock" / FILES[1], grace_mock)
     if errors:
         raise SystemExit("mock data invalid:\n" + "\n".join(errors))
     out_dir.mkdir(parents=True, exist_ok=True)
-    for name in FILES:
-        shutil.copyfile(CONTRACTS / "mock" / name, out_dir / name)
-        print(f"exported {name} -> {out_dir / name}")
+    for src in all_mock_files:
+        shutil.copyfile(src, out_dir / src.name)
+        print(f"exported {src.name} -> {out_dir / src.name}")
 
 
 def _git_rev() -> str:
@@ -88,6 +97,7 @@ def build(fields_path: Path, weather_path: Path | None = None) -> tuple[dict, di
             f"(add them to engine/params.py to include these fields)"
         )
     fields["features"] = supported
+    fields["schema_version"] = SCHEMA_VERSION
 
     for feat in fields["features"]:
         props = feat["properties"]
@@ -124,9 +134,18 @@ def export(out_dir: Path = WEB_DATA, fields_path: Path | None = None) -> list[st
     (out_dir / FILES[1]).write_text(
         json.dumps(strategies, ensure_ascii=False, indent=1) + "\n", encoding="utf-8"
     )
-    errors = validate_all(out_dir / FILES[0], out_dir / FILES[1])
+    if INTERIM_GRACE.exists():
+        shutil.copyfile(INTERIM_GRACE, out_dir / GRACE_FILE)
+        print(f"copied {INTERIM_GRACE.relative_to(REPO_ROOT)} -> {out_dir / GRACE_FILE}")
+    elif MOCK_GRACE.exists() and not (out_dir / GRACE_FILE).exists():
+        shutil.copyfile(MOCK_GRACE, out_dir / GRACE_FILE)
+        print(f"copied {MOCK_GRACE.relative_to(REPO_ROOT)} (fallback) -> {out_dir / GRACE_FILE}")
+
+    grace_path = out_dir / GRACE_FILE if (out_dir / GRACE_FILE).exists() else None
+    errors = validate_all(out_dir / FILES[0], out_dir / FILES[1], grace_path)
     status = "INVALID" if errors else "valid"
-    print(f"exported {FILES} -> {out_dir} ({status}, mock={strategies['mock']})")
+    exported_files = list(FILES) + ([GRACE_FILE] if grace_path else [])
+    print(f"exported {tuple(exported_files)} -> {out_dir} ({status}, mock={strategies['mock']})")
     return errors
 
 
