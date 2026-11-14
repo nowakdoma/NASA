@@ -150,9 +150,11 @@ def derive_frost(cfg: Config) -> Path:
     json_out.write_text(json.dumps(payload, indent=1) + "\n")
 
     season = summary.get("frost_free_days", {})
+    spring_p50 = summary.get("spring", {}).get("p50", "?")
+    fall_p50 = summary.get("fall", {}).get("p50", "?")
     print(
-        f"[frost] {len(per_year)} years, last spring frost p50 {summary.get('spring', {}).get('p50', '?')}"
-        f", first fall frost p50 {summary.get('fall', {}).get('p50', '?')}, frost-free "
+        f"[frost] {len(per_year)} years, last spring frost p50 {spring_p50}"
+        f", first fall frost p50 {fall_p50}, frost-free "
         f"p10-p90 {season.get('p10', '?')}-{season.get('p90', '?')} d -> {json_out.name}"
     )
     return json_out
