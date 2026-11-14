@@ -102,9 +102,6 @@ do?" with "nothing". Priority order within each owner = list order. `[ ]` open, 
   costs (breaking/establishing alfalfa, N credit) visible in data for the printout.
 - [ ] E9 (info) Web ranking now applies the farmer's water limit (`rankWithLimit` in
   `web/src/lib/ranking.ts`); `engine/mcda.py` parity holds only for the no-limit case.
-- [ ] E7 (later) Export per-weather-year metrics so web can sample whole years (see W8).
-- [ ] E8 (later, adviser asks) Yield & price assumptions per crop (bu/ac, t/ac) and transition
-  costs (breaking/establishing alfalfa, N credit) visible in data for the printout.
 
 ### Person 2 — pipeline
 - [ ] P5 (info, from W5 satellite view) FIN-001: a pivot track is visible under the circle but

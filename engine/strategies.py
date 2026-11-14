@@ -212,6 +212,8 @@ def data_gaps(
         "dominate on bare soil.",
         "Single soil bucket with slope-dependent storm runoff; water use is irrigation "
         "need, not metered pumping.",
+        "Field shape is an idealised circle at detected radius; area is approximate to "
+        "a few percent.",
         "Ogallala aquifer saturated thickness / well capacity and water-right limits "
         "(Kansas WIMAS) not considered.",
         "Soil index is a simplified NRCS Soil Conditioning Index proxy including root "

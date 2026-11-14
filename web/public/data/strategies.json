@@ -1,7 +1,7 @@
 {
  "schema_version": "0.4",
  "mock": false,
- "generated_by": "engine.export 3845189",
+ "generated_by": "engine.export d9fdd72",
  "generated_at": "2026-11-14",
  "weather_years": [
   1995,
@@ -115,6 +115,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -196,6 +197,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -282,6 +284,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -366,6 +369,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass.",
      "Limited irrigation capped at 150 mm/yr (6 in) on cropped seasons (~100 mm/yr rotation average including cover/fallow); wet years may use less.",
@@ -455,6 +459,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass.",
      "Budget proxy: triticale on the winter_wheat budget. No K-State SW Kansas budget exists for these crops, so their yield, price and costs are the proxy crop's. Double-cropped years also count only the summer crop, so their income and water use are understated."
@@ -538,6 +543,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -621,6 +627,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -705,6 +712,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -789,6 +797,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -870,6 +879,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -953,6 +963,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -1037,6 +1048,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -1121,6 +1133,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -1203,6 +1216,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -1286,6 +1300,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -1369,6 +1384,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -1454,6 +1470,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass.",
      "Budget proxy: triticale on the winter_wheat budget. No K-State SW Kansas budget exists for these crops, so their yield, price and costs are the proxy crop's. Double-cropped years also count only the summer crop, so their income and water use are understated."
@@ -1537,6 +1554,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -1620,6 +1638,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -1704,6 +1723,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -1790,6 +1810,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -1871,6 +1892,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -1954,6 +1976,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -2041,6 +2064,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -2125,6 +2149,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -2207,6 +2232,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -2290,6 +2316,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -2373,6 +2400,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -2457,6 +2485,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -2539,6 +2568,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -2622,6 +2652,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -2705,6 +2736,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -2789,6 +2821,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -2870,6 +2903,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -2953,6 +2987,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -3037,6 +3072,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -3124,6 +3160,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass.",
      "Budget proxy: triticale on the winter_wheat budget; winwht_sorghum on the sorghum budget. No K-State SW Kansas budget exists for these crops, so their yield, price and costs are the proxy crop's. Double-cropped years also count only the summer crop, so their income and water use are understated."
@@ -3208,6 +3245,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -3291,6 +3329,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -3375,6 +3414,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -3459,6 +3499,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -3541,6 +3582,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -3624,6 +3666,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -3707,6 +3750,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -3794,6 +3838,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -3875,6 +3920,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -3959,6 +4005,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -4045,6 +4092,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -4132,6 +4180,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass.",
      "Budget proxy: winwht_sorghum on the sorghum budget. No K-State SW Kansas budget exists for these crops, so their yield, price and costs are the proxy crop's. Double-cropped years also count only the summer crop, so their income and water use are understated."
@@ -4216,6 +4265,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -4299,6 +4349,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -4383,6 +4434,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -4467,6 +4519,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -4548,6 +4601,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -4631,6 +4685,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -4716,6 +4771,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -4800,6 +4856,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -4882,6 +4939,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -4965,6 +5023,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -5048,6 +5107,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -5135,6 +5195,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -5217,6 +5278,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -5301,6 +5363,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -5387,6 +5450,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -5475,6 +5539,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -5557,6 +5622,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -5640,6 +5706,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -5723,6 +5790,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -5811,6 +5879,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -5893,6 +5962,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -5976,6 +6046,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -6059,6 +6130,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -6146,6 +6218,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -6228,6 +6301,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -6311,6 +6385,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -6395,6 +6470,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass.",
      "Limited irrigation capped at 150 mm/yr (6 in) on cropped seasons (~100 mm/yr rotation average including cover/fallow); wet years may use less.",
@@ -6485,6 +6561,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -6566,6 +6643,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -6650,6 +6728,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -6736,6 +6815,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -6820,6 +6900,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -6902,6 +6983,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -6985,6 +7067,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -7068,6 +7151,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -7155,6 +7239,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -7236,6 +7321,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -7319,6 +7405,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -7403,6 +7490,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -7487,6 +7575,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -7568,6 +7657,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -7654,6 +7744,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -7738,6 +7829,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass.",
      "Limited irrigation capped at 150 mm/yr (6 in) on cropped seasons (~100 mm/yr rotation average including cover/fallow); wet years may use less.",
@@ -7825,6 +7917,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -7907,6 +8000,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -7990,6 +8084,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -8073,6 +8168,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -8161,6 +8257,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass.",
      "Budget proxy: winwht_sorghum on the sorghum budget. No K-State SW Kansas budget exists for these crops, so their yield, price and costs are the proxy crop's. Double-cropped years also count only the summer crop, so their income and water use are understated."
@@ -8245,6 +8342,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -8328,6 +8426,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -8410,6 +8509,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -8497,6 +8597,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -8579,6 +8680,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -8662,6 +8764,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -8746,6 +8849,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -8831,6 +8935,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -8839,89 +8944,6 @@
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
      "How you will keep residue on the fallow to limit wind erosion."
-    ]
-   },
-   {
-    "id": "corn_soy",
-    "name": "Corn–soybean (full irrigation)",
-    "description": "Adds a nitrogen-fixing legume; breaks corn pest cycles.",
-    "why_considered": "Introduces nitrogen-fixing soybeans to break continuous grass cereal cycles and reduce synthetic fertilizer inputs.",
-    "benefits": [
-     "Breaks monoculture pest and weed cycles by adding broadleaf/legume to grass rotation",
-     "Biological N fixation in 1 of 2 yr cuts synthetic fertilizer",
-     "Higher median return over variable costs (+$759/ha/yr vs current)"
-    ],
-    "soil_health_traits": {
-     "n_fixing_years": 1,
-     "pest_break": true,
-     "forage": false
-    },
-    "is_current": false,
-    "rotation": [
-     "corn",
-     "soybeans"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 346.0,
-      "p50": 391.0,
-      "p90": 489.0
-     },
-     "erosion_t_ha": {
-      "p10": 0.94,
-      "p50": 1.93,
-      "p90": 3.2
-     },
-     "soil_index": {
-      "p10": 0.42,
-      "p50": 0.48,
-      "p90": 0.5
-     },
-     "income_usd_ha": {
-      "p10": 877.0,
-      "p50": 1071.0,
-      "p90": 1215.0
-     },
-     "labour_index": {
-      "p10": 0.39,
-      "p50": 0.42,
-      "p90": 0.48
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
-      "url": "https://power.larc.nasa.gov/"
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "Current rotation = repeating cycle in the most recent CDL years."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "Valent-Vona loamy fine sands, 3 to 15 percent slopes: AWC 106.0 mm, K 0.17, slope 1.48 %."
-     },
-     {
-      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
-      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
-     }
-    ],
-    "data_gaps": [
-     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
-     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
-     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
-     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
-     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence.",
-     "Soybean yield on your soil (iron-deficiency chlorosis on high-pH soils).",
-     "Water allocation check: modelled irrigation need (391 mm/yr) is higher than current baseline (203 mm/yr); check water rights."
     ]
    },
    {
@@ -8999,6 +9021,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -9008,6 +9031,90 @@
      "Herbicide carryover restrictions between the crops in this sequence.",
      "Hay buyers, storage and haul distance; stand establishment cost.",
      "Water allocation check: modelled irrigation need (464 mm/yr) is higher than current baseline (203 mm/yr); check water rights."
+    ]
+   },
+   {
+    "id": "corn_soy",
+    "name": "Corn–soybean (full irrigation)",
+    "description": "Adds a nitrogen-fixing legume; breaks corn pest cycles.",
+    "why_considered": "Introduces nitrogen-fixing soybeans to break continuous grass cereal cycles and reduce synthetic fertilizer inputs.",
+    "benefits": [
+     "Breaks monoculture pest and weed cycles by adding broadleaf/legume to grass rotation",
+     "Biological N fixation in 1 of 2 yr cuts synthetic fertilizer",
+     "Higher median return over variable costs (+$759/ha/yr vs current)"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 1,
+     "pest_break": true,
+     "forage": false
+    },
+    "is_current": false,
+    "rotation": [
+     "corn",
+     "soybeans"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 346.0,
+      "p50": 391.0,
+      "p90": 489.0
+     },
+     "erosion_t_ha": {
+      "p10": 0.94,
+      "p50": 1.93,
+      "p90": 3.2
+     },
+     "soil_index": {
+      "p10": 0.42,
+      "p50": 0.48,
+      "p90": 0.5
+     },
+     "income_usd_ha": {
+      "p10": 877.0,
+      "p50": 1071.0,
+      "p90": 1215.0
+     },
+     "labour_index": {
+      "p10": 0.39,
+      "p50": 0.42,
+      "p90": 0.48
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Valent-Vona loamy fine sands, 3 to 15 percent slopes: AWC 106.0 mm, K 0.17, slope 1.48 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
+    ],
+    "verify_locally": [
+     "Does your water right / well capacity support this rotation in a dry year?",
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "Soybean yield on your soil (iron-deficiency chlorosis on high-pH soils).",
+     "Water allocation check: modelled irrigation need (391 mm/yr) is higher than current baseline (203 mm/yr); check water rights."
     ]
    },
    {
@@ -9083,6 +9190,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass.",
      "Limited irrigation capped at 150 mm/yr (6 in) on cropped seasons (~100 mm/yr rotation average including cover/fallow); wet years may use less.",
@@ -9169,6 +9277,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -9251,6 +9360,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -9334,6 +9444,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -9417,6 +9528,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -9504,6 +9616,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -9585,6 +9698,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -9671,6 +9785,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -9755,6 +9870,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass.",
      "Limited irrigation capped at 150 mm/yr (6 in) on cropped seasons (~100 mm/yr rotation average including cover/fallow); wet years may use less.",
@@ -9842,6 +9958,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -9924,6 +10041,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -10007,6 +10125,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -10090,6 +10209,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -10177,6 +10297,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -10258,6 +10379,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -10344,6 +10466,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -10428,6 +10551,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass.",
      "Limited irrigation capped at 150 mm/yr (6 in) on cropped seasons (~100 mm/yr rotation average including cover/fallow); wet years may use less.",
@@ -10518,6 +10642,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -10599,6 +10724,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -10682,6 +10808,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -10769,6 +10896,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -10853,6 +10981,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -10935,6 +11064,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -11018,6 +11148,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -11101,6 +11232,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -11185,6 +11317,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -11267,6 +11400,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -11350,6 +11484,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -11433,6 +11568,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -11517,6 +11653,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -11599,6 +11736,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -11682,6 +11820,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -11765,6 +11904,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -11852,6 +11992,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -11934,6 +12075,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -12017,6 +12159,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -12100,6 +12243,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -12187,6 +12331,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass.",
      "Budget proxy: triticale on the winter_wheat budget. No K-State SW Kansas budget exists for these crops, so their yield, price and costs are the proxy crop's. Double-cropped years also count only the summer crop, so their income and water use are understated."
@@ -12271,6 +12416,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -12353,6 +12499,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -12437,6 +12584,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -12521,6 +12669,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -12602,6 +12751,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -12685,6 +12835,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -12770,6 +12921,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -12857,6 +13009,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -12938,6 +13091,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -13024,6 +13178,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -13108,6 +13263,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass.",
      "Limited irrigation capped at 150 mm/yr (6 in) on cropped seasons (~100 mm/yr rotation average including cover/fallow); wet years may use less.",
@@ -13194,6 +13350,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -13276,6 +13433,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -13359,6 +13517,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -13442,6 +13601,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -13526,6 +13686,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -13608,6 +13769,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -13691,6 +13853,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -13774,6 +13937,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -13861,6 +14025,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -13942,6 +14107,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -14026,6 +14192,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -14111,6 +14278,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -14195,6 +14363,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -14277,6 +14446,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -14360,6 +14530,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -14443,6 +14614,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -14530,6 +14702,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -14612,6 +14785,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -14698,6 +14872,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -14782,6 +14957,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass.",
      "Limited irrigation capped at 150 mm/yr (6 in) on cropped seasons (~100 mm/yr rotation average including cover/fallow); wet years may use less.",
@@ -14868,6 +15044,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -14949,6 +15126,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -15032,6 +15210,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -15117,6 +15296,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -15201,6 +15381,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -15283,6 +15464,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -15366,6 +15548,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -15449,6 +15632,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -15533,6 +15717,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -15615,6 +15800,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -15698,6 +15884,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -15781,6 +15968,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -15868,6 +16056,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -15950,6 +16139,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -16033,6 +16223,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -16116,6 +16307,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -16203,6 +16395,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass.",
      "Budget proxy: winwht_sorghum on the sorghum budget; triticale on the winter_wheat budget. No K-State SW Kansas budget exists for these crops, so their yield, price and costs are the proxy crop's. Double-cropped years also count only the summer crop, so their income and water use are understated."
@@ -16286,6 +16479,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -16369,6 +16563,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -16455,6 +16650,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -16539,6 +16735,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -16620,6 +16817,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -16703,6 +16901,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
@@ -16788,6 +16987,7 @@
      "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Field shape is an idealised circle at detected radius; area is approximate to a few percent.",
      "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
      "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
