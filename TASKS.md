@@ -50,12 +50,15 @@ cross-team needs under **Blockers / requests**.
   (`winwht_corn` 225, `triticale_corn` 228, `winwht_sorghum` 236, `winwht_soybeans` 26),
   with a documented double-crop convention (summer crop only, winter phase not modelled,
   `placeholder=true`). The pipeline now emits **all 60 fields** with complete histories.
-- **pipeline → person 1 (action needed):** `engine/params.py → CROPS` still lacks those 8
-  crops, so `engine.export` excludes the affected fields (24 of 60 reach the web) and prints
-  which crops are missing. Adding them needs economic params (ym_t_ha, price_usd_t,
-  var_cost_usd_ha, dry_var_cost_usd_ha, c_factor, disturbance, labour_h_ha) that I will not
-  invent — the K-State budget numbers are yours. `engine/export.py` now skips unsupported
-  fields gracefully instead of raising `KeyError`, so this is a data-volume limit, not a bug.
+- **pipeline → person 1 (done, please review):** `engine/params.py` now covers 5 of the 8 new
+  crops via documented budget proxies (`PROXIED_CROPS`): triticale → winter wheat, and the
+  four double-crop rotations → their summer crop. Each proxy is surfaced in `data_gaps` and
+  in `verify_locally`, so the UI says which budget it used. **50 of 60 fields now reach the
+  web.** The remaining 10 need potatoes (9), other hay (1) and other crops (1): there is no
+  K-State SW Kansas budget for them and NASS publishes no Kansas potato price (only the US
+  average, $10.80/cwt 2025), so costing them would mean fabricating the income metric.
+  `engine/export` skips those fields and names the crops. Details in the addendum to
+  `reports/SW Kansas crop budgets.md`.
 
 - ~~**pipeline → person 1:**~~ resolved — `fields.geojson` landed (26 fields). The contract requires every year in `crop_history` and requires
   `soil`, `season_calendar` and `stress_index_by_year` per field, so `fields.geojson` can

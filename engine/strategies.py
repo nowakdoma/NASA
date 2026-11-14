@@ -200,6 +200,14 @@ def data_gaps(
     if irrigation == "limited":
         gaps.append(f"Limited irrigation assumed capped at "
                     f"{params.IRRIGATION_LEVELS['limited']:.0f} mm/yr.")  # fmt: skip
+    proxied = [c for c in dict.fromkeys(rotation) if c in params.PROXIED_CROPS]
+    if proxied:
+        detail = "; ".join(f"{c} on the {params.PROXIED_CROPS[c]} budget" for c in proxied)
+        gaps.append(
+            f"Budget proxy: {detail}. No K-State SW Kansas budget exists for these crops, "
+            "so their yield, price and costs are the proxy crop's. Double-cropped years also "
+            "count only the summer crop, so their income and water use are understated."
+        )  # fmt: skip
     if "rye_cover" in rotation:
         gaps.append("Cover crop modelled as a winter rye season; termination timing and its "
                     "effect on the next crop's water are simplified.")  # fmt: skip
@@ -220,6 +228,12 @@ def verify_locally(rotation: list[str], irrigation: str) -> list[str]:
         checks.append("Hay buyers, storage and haul distance; stand establishment cost.")
     if "soybeans" in rotation:
         checks.append("Soybean yield on your soil (iron-deficiency chlorosis on high-pH soils).")
+    proxied = [c for c in dict.fromkeys(rotation) if c in params.PROXIED_CROPS]
+    if proxied:
+        checks.append(
+            f"Actual price and yield for {', '.join(proxied)}: the model uses the "
+            f"{params.PROXIED_CROPS[proxied[0]]} budget as a proxy."
+        )  # fmt: skip
     if "rye_cover" in rotation:
         checks.append("Cover crop seed cost and termination rules for crop insurance.")
     return checks

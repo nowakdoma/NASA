@@ -9,7 +9,7 @@ Exported strategies list the remaining gaps (fixed prices, unsourced well capaci
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 
 PLACEHOLDER = True  # some values are still [R]; see tags below
 
@@ -154,6 +154,32 @@ CROPS: dict[str, CropParams] = {
         c_factor=0.01, disturbance=0.0, labour_h_ha=0.5, dry_labour_h_ha=0.5,
     ),
 }  # fmt: skip
+
+# --- crops added by contracts v0.2 ---------------------------------------------------
+# These have no K-State Southwest Kansas enterprise budget of their own. Rather than invent
+# yield/price/cost lines, each borrows the closest budgeted crop and is registered in
+# PROXIED_CROPS so every strategy that uses it carries an explicit caveat (strategies.data_gaps).
+#
+# Triticale: fall-sown small grain like winter wheat, same machinery and operations. There is
+# no NASS Kansas triticale price series either, so wheat's price is used.
+CROPS["triticale"] = replace(CROPS["winter_wheat"])
+
+# Double-cropped years are modelled as their SUMMER crop only — the convention documented in
+# contracts/crops.csv v0.2. A winter wheat / corn year uses the corn budget; the wheat phase's
+# costs, revenue and water are not added, so income and water use for those years are
+# understated. A double-crop budget does not exist in the K-State set.
+CROPS["winwht_corn"] = replace(CROPS["corn"])
+CROPS["triticale_corn"] = replace(CROPS["corn"])
+CROPS["winwht_sorghum"] = replace(CROPS["sorghum"])
+CROPS["winwht_soybeans"] = replace(CROPS["soybeans"])
+
+PROXIED_CROPS: dict[str, str] = {
+    "triticale": "winter_wheat",
+    "winwht_corn": "corn",
+    "triticale_corn": "corn",
+    "winwht_sorghum": "sorghum",
+    "winwht_soybeans": "soybeans",
+}
 
 
 @dataclass(frozen=True)

@@ -174,3 +174,29 @@ Several values are older than 2020 and should be flagged in `SOURCES`: FAO-33 Ky
 [kr25]: https://kansasreflector.com/2025/01/28/ogallala-aquifer-drops-by-more-than-a-foot-in-parts-of-western-kansas/
 [fao66]: https://fao.org/4/i2800e/i2800e.pdf
 [mout]: https://www.fao.org/4/Y3655E/y3655e04.htm
+
+## Addendum: the eight crops added in contracts v0.2
+
+CDL records crops here that the K-State set does not cover. Two groups, handled differently.
+
+**Modelled by documented proxy (5 codes, 50 of 60 fields reach the web).** Triticale and the
+four double-crop rotations have no SW Kansas enterprise budget and, for triticale, no NASS
+Kansas price series. They borrow the closest budgeted crop instead of inventing lines:
+triticale → winter wheat (fall-sown small grain, identical machinery and operations);
+`winwht_corn` and `triticale_corn` → corn; `winwht_sorghum` → sorghum; `winwht_soybeans` →
+soybeans. Registered in `engine/params.py → PROXIED_CROPS`, so every strategy containing one
+carries a `data_gaps` entry and a "verify locally" line naming the proxy. Double-cropped years
+count only the summer crop (the contracts/crops.csv convention), which understates both income
+and water use for those years.
+
+**Not modelled (3 codes, 10 fields excluded).** Potatoes, other hay and "other crops" have no
+K-State SW Kansas budget, and NASS publishes no Kansas potato price — only a US all-potato
+average ($10.80/cwt, 2025, [pots0926]). The only Kansas potato yield reference found is
+MF1115's vegetable-scale figure (200 × 100-lb bags/ac), which is not a pivot-scale budget
+([mf1115]). Costs are the largest line in the model, so a proxy here would fabricate the
+income metric rather than approximate it. `engine/export` therefore skips those fields and
+prints their crop names. Filling them needs a KSRE potato/forage budget that does not exist
+in the public set, or a placeholder cost explicitly approved as such.
+
+[pots0926]: https://release.nass.usda.gov/reports/pots0926.pdf
+[mf1115]: https://bookstore.ksre.ksu.edu/download/farming-a-few-acres-of-vegetables_MF1115
