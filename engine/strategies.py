@@ -338,8 +338,9 @@ def benefits(
     current_metrics: dict | None,
     traits: pd.DataFrame,
     sht: dict,
+    current_rotation: list[str] | None = None,
 ) -> list[str]:
-    """Generate 2-3 concise, quantified agronomic and resource benefits."""
+    """Generate 2-3 concise, strictly favorable agronomic and resource benefits."""
     b: list[str] = []
 
     if is_current:
@@ -355,62 +356,127 @@ def benefits(
         b.append("Familiar baseline performance across 30-year historical weather conditions")
         return b[:3]
 
-    # Water savings benefit
-    if current_metrics is not None:
-        cur_w = current_metrics["water_use_mm"]["p50"]
-        alt_w = metrics["water_use_mm"]["p50"]
-        diff_w = cur_w - alt_w
-        if diff_w >= 20 and cur_w > 0:
-            pct_w = round((diff_w / cur_w) * 100)
-            b.append(
-                f"Cuts median irrigation pumping by {diff_w:.0f} mm/yr ({pct_w}% water savings)"
-            )
-        elif alt_w == 0:
-            b.append("Zero groundwater pumping; 100% conservation of underlying Ogallala reserve")
+    cur_w = current_metrics["water_use_mm"]["p50"] if current_metrics else 0.0
+    alt_w = metrics["water_use_mm"]["p50"]
+    cur_er = current_metrics["erosion_t_ha"]["p50"] if current_metrics else 0.0
+    alt_er = metrics["erosion_t_ha"]["p50"]
+    cur_inc = current_metrics["income_usd_ha"]["p50"] if current_metrics else 0.0
+    alt_inc = metrics["income_usd_ha"]["p50"]
+    cur_lab = current_metrics["labour_index"]["p50"] if current_metrics else 1.0
+    alt_lab = metrics["labour_index"]["p50"]
+    cur_sci = current_metrics["soil_index"]["p50"] if current_metrics else 0.0
+    alt_sci = metrics["soil_index"]["p50"]
 
-    # Soil & pest break benefit
+    # 1. Water savings (only if strictly better)
+    diff_w = cur_w - alt_w
+    if diff_w >= 15.0 and cur_w > 0:
+        pct_w = round((diff_w / cur_w) * 100)
+        b.append(f"Cuts median irrigation pumping by {diff_w:.0f} mm/yr ({pct_w}% water savings)")
+    elif alt_w == 0.0 and cur_w > 0:
+        b.append("Zero groundwater pumping; eliminates irrigation withdrawals from Ogallala")
+
+    # 2. Pest break / crop diversity
     families = {
         str(traits.loc[c, "family"]).strip()
         for c in rotation
         if c in traits.index and str(traits.loc[c, "family"]).strip().lower() not in ("none", "")
     }
-    if sht["pest_break"] and len(families) >= 2:
+    cur_families = set()
+    if current_rotation:
+        cur_families = {
+            str(traits.loc[c, "family"]).strip()
+            for c in current_rotation
+            if c in traits.index
+            and str(traits.loc[c, "family"]).strip().lower() not in ("none", "")
+        }
+    if sht["pest_break"] and len(families) > len(cur_families):
         b.append(
-            f"Breaks monoculture pest and weed cycles across {len(families)} distinct crop families"
+            "Breaks monoculture pest and weed cycles by adding broadleaf/legume to grass rotation"
         )
-    elif "rye_cover" in rotation:
-        b.append(
-            "Continuous living root system protects topsoil from spring High Plains wind erosion"
-        )
-    elif metrics["erosion_t_ha"]["p50"] <= 1.5:
-        p50_er = metrics["erosion_t_ha"]["p50"]
-        b.append(f"Low water erosion rate ({p50_er:.1f} t/ha/yr p50), conserving topsoil")
+    elif sht["pest_break"] and len(families) >= 2:
+        b.append(f"Suppresses pest and weed pressure across {len(families)} crop families")
 
-    # Agronomic / economic / labour benefit
-    if sht["n_fixing_years"] > 0:
+    # 3. Nitrogen fixation (only if more N-fixing years than current)
+    cur_n_fix = 0
+    if current_rotation:
+        cur_n_fix = sum(
+            1 for c in current_rotation if c in traits.index and bool(traits.loc[c, "n_fixing"])
+        )
+    if sht["n_fixing_years"] > cur_n_fix:
         n_fix = sht["n_fixing_years"]
-        b.append(f"Provides biological nitrogen fixation in {n_fix} of {len(rotation)} years")
-    elif sht["forage"]:
-        b.append("Produces high-demand forage/silage for regional cattle feedlots and dairies")
-    elif (
-        current_metrics is not None
-        and metrics["income_usd_ha"]["p50"] > current_metrics["income_usd_ha"]["p50"]
-    ):
-        gain = metrics["income_usd_ha"]["p50"] - current_metrics["income_usd_ha"]["p50"]
-        b.append(f"Higher median return over variable costs (+${gain:.0f}/ha/yr)")
-    elif (
-        current_metrics is not None
-        and metrics["labour_index"]["p50"] < current_metrics["labour_index"]["p50"]
-    ):
-        b.append("Reduces peak seasonal machinery operating hours and management complexity")
-    elif metrics["soil_index"]["p50"] > 0.0:
-        p50_sci = metrics["soil_index"]["p50"]
-        b.append(f"Positive soil conditioning index ({p50_sci:+.2f}), building soil health")
-    else:
-        b.append("Spreads weather and market risk across diversified planting and harvest windows")
+        b.append(
+            f"Biological N fixation in {n_fix} of {len(rotation)} yr cuts synthetic fertilizer"
+        )
+
+    # 4. Wind erosion protection via cover crop
+    if "rye_cover" in rotation and (not current_rotation or "rye_cover" not in current_rotation):
+        b.append("Cereal rye cover shields topsoil from winter and spring High Plains wind erosion")
+
+    # 5. Water erosion reduction (strictly less erosion than current rotation)
+    diff_er = cur_er - alt_er
+    if diff_er >= 0.05 and cur_er > 0:
+        pct_er = round((diff_er / cur_er) * 100)
+        if pct_er >= 10:
+            b.append(
+                f"~{pct_er}% less water erosion than current rotation ({alt_er:.2f} t/ha/yr p50)"
+            )
+
+    # 6. Forage production
+    cur_forage = False
+    if current_rotation:
+        cur_forage = any(
+            c in {"alfalfa", "triticale", "other_hay", "rye_cover"}
+            or (
+                c in traits.index
+                and (
+                    "hay" in str(traits.loc[c, "name"]).lower()
+                    or "silage" in str(traits.loc[c, "name"]).lower()
+                )
+            )
+            for c in current_rotation
+        )
+    if sht["forage"] and not cur_forage:
+        b.append(
+            "Produces high-demand forage or silage for Southwest Kansas cattle feedlots and dairies"
+        )
+    elif sht["forage"] and len(b) < 2:
+        b.append("High-value forage/silage output aligned with local cattle feeding demand")
+
+    # 7. Higher net return (only when strictly higher)
+    diff_inc = alt_inc - cur_inc
+    if diff_inc >= 25.0:
+        b.append(f"Higher median return over variable costs (+${diff_inc:.0f}/ha/yr vs current)")
+
+    # 8. Machinery labour reduction (only when strictly less)
+    diff_lab = cur_lab - alt_lab
+    if diff_lab >= 0.04 and cur_lab > 0:
+        pct_lab = round((diff_lab / cur_lab) * 100)
+        b.append(f"Reduces seasonal machinery and management hours by ~{pct_lab}%")
+
+    # 9. Soil organic matter trend (only when strictly better)
+    diff_sci = alt_sci - cur_sci
+    if diff_sci >= 0.05:
+        b.append(
+            f"Improves Soil Conditioning Index ({alt_sci:+.2f} vs {cur_sci:+.2f} current), "
+            "building organic matter"
+        )
+
+    # 10. Fallbacks if fewer than 2 benefits matched
+    if len(b) < 2:
+        if level == "dryland" and (not current_metrics or cur_w > 0):
+            b.append("Eliminates electricity/fuel pumping costs and well maintenance risks")
+        elif level == "limited":
+            b.append("Preserves water allocation under GMD3 annual metering caps")
+        elif len(rotation) >= 3:
+            b.append(
+                "Spreads weather and price risk across distinct seasonal planting/harvest windows"
+            )
+        else:
+            b.append("Stable multi-year rotation adapted to Southwest Kansas climate variability")
 
     if len(b) < 2:
-        b.append("Spreads production and price risk across multiple seasonal windows")
+        b.append("Spreads production and market risk across diversified seasonal windows")
+
     return b[:3]
 
 
@@ -460,7 +526,16 @@ def field_strategies(
 
         sht = derive_soil_health_traits(rotation, traits)
         why = why_considered(rotation, level, entry is None, props, traits)
-        bens = benefits(rotation, level, entry is None, metrics, cur_metrics, traits, sht)
+        bens = benefits(
+            rotation,
+            level,
+            entry is None,
+            metrics,
+            cur_metrics,
+            traits,
+            sht,
+            current_rotation=current,
+        )
 
         out.append(
             {

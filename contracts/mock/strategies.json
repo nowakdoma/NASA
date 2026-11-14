@@ -181,8 +181,7 @@
     "why_considered": "Incorporates planned fallow on silt loam soil (190 mm AWC) to recharge root-zone soil moisture for following dryland or limited crops.",
     "benefits": [
      "Cuts median irrigation pumping by 236 mm/yr (61% water savings)",
-     "Low water erosion rate (1.5 t/ha/yr p50), conserving topsoil",
-     "Reduces peak seasonal machinery operating hours and management complexity"
+     "Reduces seasonal machinery and management hours by ~48%"
     ],
     "soil_health_traits": {
      "n_fixing_years": 0,
@@ -254,8 +253,9 @@
     ],
     "why_considered": "Introduces nitrogen-fixing soybeans to break continuous grass cereal cycles and reduce synthetic fertilizer inputs.",
     "benefits": [
-     "Breaks monoculture pest and weed cycles across 2 distinct crop families",
-     "Provides biological nitrogen fixation in 1 of 2 years"
+     "Breaks monoculture pest and weed cycles by adding broadleaf/legume to grass rotation",
+     "Biological N fixation in 1 of 2 yr cuts synthetic fertilizer",
+     "Higher median return over variable costs (+$56/ha/yr vs current)"
     ],
     "soil_health_traits": {
      "n_fixing_years": 1,
@@ -331,8 +331,9 @@
     ],
     "why_considered": "Introduces deep-rooted perennial legume to fix atmospheric nitrogen and supply high-demand Southwest Kansas dairy and beef forage markets.",
     "benefits": [
-     "Breaks monoculture pest and weed cycles across 2 distinct crop families",
-     "Provides biological nitrogen fixation in 3 of 5 years"
+     "Breaks monoculture pest and weed cycles by adding broadleaf/legume to grass rotation",
+     "Biological N fixation in 3 of 5 yr cuts synthetic fertilizer",
+     "~50% less water erosion than current rotation (0.43 t/ha/yr p50)"
     ],
     "soil_health_traits": {
      "n_fixing_years": 3,
@@ -480,8 +481,7 @@
     "why_considered": "Incorporates planned fallow on silt loam soil (210 mm AWC) to recharge root-zone soil moisture for following dryland or limited crops.",
     "benefits": [
      "Cuts median irrigation pumping by 180 mm/yr (56% water savings)",
-     "Low water erosion rate (1.1 t/ha/yr p50), conserving topsoil",
-     "Reduces peak seasonal machinery operating hours and management complexity"
+     "Reduces seasonal machinery and management hours by ~40%"
     ],
     "soil_health_traits": {
      "n_fixing_years": 0,
@@ -553,8 +553,9 @@
     ],
     "why_considered": "Introduces nitrogen-fixing soybeans to break continuous grass cereal cycles and reduce synthetic fertilizer inputs.",
     "benefits": [
-     "Breaks monoculture pest and weed cycles across 2 distinct crop families",
-     "Provides biological nitrogen fixation in 1 of 2 years"
+     "Breaks monoculture pest and weed cycles by adding broadleaf/legume to grass rotation",
+     "Biological N fixation in 1 of 2 yr cuts synthetic fertilizer",
+     "Higher median return over variable costs (+$92/ha/yr vs current)"
     ],
     "soil_health_traits": {
      "n_fixing_years": 1,
@@ -630,8 +631,9 @@
     ],
     "why_considered": "Introduces deep-rooted perennial legume to fix atmospheric nitrogen and supply high-demand Southwest Kansas dairy and beef forage markets.",
     "benefits": [
-     "Breaks monoculture pest and weed cycles across 2 distinct crop families",
-     "Provides biological nitrogen fixation in 3 of 5 years"
+     "Breaks monoculture pest and weed cycles by adding broadleaf/legume to grass rotation",
+     "Biological N fixation in 3 of 5 yr cuts synthetic fertilizer",
+     "~48% less water erosion than current rotation (0.32 t/ha/yr p50)"
     ],
     "soil_health_traits": {
      "n_fixing_years": 3,
@@ -779,8 +781,9 @@
     ],
     "why_considered": "Replaces winter bare-soil fallow with cereal rye cover to protect loamy fine sand topsoil from wind erosion and build soil organic matter.",
     "benefits": [
-     "Continuous living root system protects topsoil from spring High Plains wind erosion",
-     "Produces high-demand forage/silage for regional cattle feedlots and dairies"
+     "Cereal rye cover shields topsoil from winter and spring High Plains wind erosion",
+     "~52% less water erosion than current rotation (0.80 t/ha/yr p50)",
+     "Produces high-demand forage or silage for Southwest Kansas cattle feedlots and dairies"
     ],
     "soil_health_traits": {
      "n_fixing_years": 0,
@@ -852,8 +855,9 @@
     ],
     "why_considered": "Introduces nitrogen-fixing soybeans to break continuous grass cereal cycles and reduce synthetic fertilizer inputs.",
     "benefits": [
-     "Breaks monoculture pest and weed cycles across 2 distinct crop families",
-     "Provides biological nitrogen fixation in 1 of 2 years"
+     "Breaks monoculture pest and weed cycles by adding broadleaf/legume to grass rotation",
+     "Biological N fixation in 1 of 2 yr cuts synthetic fertilizer",
+     "~16% less water erosion than current rotation (1.38 t/ha/yr p50)"
     ],
     "soil_health_traits": {
      "n_fixing_years": 1,
@@ -929,8 +933,9 @@
     ],
     "why_considered": "Introduces deep-rooted perennial legume to fix atmospheric nitrogen and supply high-demand Southwest Kansas dairy and beef forage markets.",
     "benefits": [
-     "Breaks monoculture pest and weed cycles across 2 distinct crop families",
-     "Provides biological nitrogen fixation in 3 of 5 years"
+     "Breaks monoculture pest and weed cycles by adding broadleaf/legume to grass rotation",
+     "Biological N fixation in 3 of 5 yr cuts synthetic fertilizer",
+     "~72% less water erosion than current rotation (0.47 t/ha/yr p50)"
     ],
     "soil_health_traits": {
      "n_fixing_years": 3,
@@ -1082,8 +1087,7 @@
     "why_considered": "Incorporates planned fallow on silt loam soil (230 mm AWC) to recharge root-zone soil moisture for following dryland or limited crops.",
     "benefits": [
      "Cuts median irrigation pumping by 347 mm/yr (71% water savings)",
-     "Low water erosion rate (1.1 t/ha/yr p50), conserving topsoil",
-     "Reduces peak seasonal machinery operating hours and management complexity"
+     "Reduces seasonal machinery and management hours by ~61%"
     ],
     "soil_health_traits": {
      "n_fixing_years": 0,
@@ -1156,8 +1160,8 @@
     "why_considered": "Introduces nitrogen-fixing soybeans to break continuous grass cereal cycles and reduce synthetic fertilizer inputs.",
     "benefits": [
      "Cuts median irrigation pumping by 102 mm/yr (21% water savings)",
-     "Breaks monoculture pest and weed cycles across 2 distinct crop families",
-     "Provides biological nitrogen fixation in 1 of 2 years"
+     "Suppresses pest and weed pressure across 2 crop families",
+     "Reduces seasonal machinery and management hours by ~24%"
     ],
     "soil_health_traits": {
      "n_fixing_years": 1,
@@ -1232,8 +1236,8 @@
     "why_considered": "Replaces winter bare-soil fallow with cereal rye cover to protect silt loam topsoil from wind erosion and build soil organic matter.",
     "benefits": [
      "Cuts median irrigation pumping by 114 mm/yr (23% water savings)",
-     "Continuous living root system protects topsoil from spring High Plains wind erosion",
-     "Produces high-demand forage/silage for regional cattle feedlots and dairies"
+     "Cereal rye cover shields topsoil from winter and spring High Plains wind erosion",
+     "Reduces seasonal machinery and management hours by ~19%"
     ],
     "soil_health_traits": {
      "n_fixing_years": 0,
@@ -1381,8 +1385,7 @@
     "why_considered": "Incorporates planned fallow on silt loam soil (205 mm AWC) to recharge root-zone soil moisture for following dryland or limited crops.",
     "benefits": [
      "Cuts median irrigation pumping by 248 mm/yr (64% water savings)",
-     "Low water erosion rate (1.5 t/ha/yr p50), conserving topsoil",
-     "Reduces peak seasonal machinery operating hours and management complexity"
+     "Reduces seasonal machinery and management hours by ~49%"
     ],
     "soil_health_traits": {
      "n_fixing_years": 0,
@@ -1454,8 +1457,8 @@
     "why_considered": "Diversifies the crop sequence on silt loam soil to balance seasonal machinery workload and hedge against weather extremes.",
     "benefits": [
      "Cuts median irrigation pumping by 57 mm/yr (15% water savings)",
-     "Low water erosion rate (0.9 t/ha/yr p50), conserving topsoil",
-     "Reduces peak seasonal machinery operating hours and management complexity"
+     "~23% less water erosion than current rotation (0.95 t/ha/yr p50)",
+     "Reduces seasonal machinery and management hours by ~9%"
     ],
     "soil_health_traits": {
      "n_fixing_years": 0,
@@ -1531,8 +1534,9 @@
     ],
     "why_considered": "Introduces deep-rooted perennial legume to fix atmospheric nitrogen and supply high-demand Southwest Kansas dairy and beef forage markets.",
     "benefits": [
-     "Breaks monoculture pest and weed cycles across 2 distinct crop families",
-     "Provides biological nitrogen fixation in 3 of 5 years"
+     "Suppresses pest and weed pressure across 2 crop families",
+     "Biological N fixation in 3 of 5 yr cuts synthetic fertilizer",
+     "~67% less water erosion than current rotation (0.41 t/ha/yr p50)"
     ],
     "soil_health_traits": {
      "n_fixing_years": 3,
@@ -1681,7 +1685,7 @@
     "why_considered": "Incorporates planned fallow on silt loam soil (180 mm AWC) to recharge root-zone soil moisture for following dryland or limited crops.",
     "benefits": [
      "Cuts median irrigation pumping by 79 mm/yr (34% water savings)",
-     "Reduces peak seasonal machinery operating hours and management complexity"
+     "Reduces seasonal machinery and management hours by ~26%"
     ],
     "soil_health_traits": {
      "n_fixing_years": 0,
@@ -1753,8 +1757,9 @@
     ],
     "why_considered": "Introduces nitrogen-fixing soybeans to break continuous grass cereal cycles and reduce synthetic fertilizer inputs.",
     "benefits": [
-     "Breaks monoculture pest and weed cycles across 2 distinct crop families",
-     "Provides biological nitrogen fixation in 1 of 2 years"
+     "Breaks monoculture pest and weed cycles by adding broadleaf/legume to grass rotation",
+     "Biological N fixation in 1 of 2 yr cuts synthetic fertilizer",
+     "Higher median return over variable costs (+$174/ha/yr vs current)"
     ],
     "soil_health_traits": {
      "n_fixing_years": 1,
@@ -1830,8 +1835,9 @@
     ],
     "why_considered": "Introduces deep-rooted perennial legume to fix atmospheric nitrogen and supply high-demand Southwest Kansas dairy and beef forage markets.",
     "benefits": [
-     "Breaks monoculture pest and weed cycles across 2 distinct crop families",
-     "Provides biological nitrogen fixation in 3 of 5 years"
+     "Breaks monoculture pest and weed cycles by adding broadleaf/legume to grass rotation",
+     "Biological N fixation in 3 of 5 yr cuts synthetic fertilizer",
+     "~53% less water erosion than current rotation (1.18 t/ha/yr p50)"
     ],
     "soil_health_traits": {
      "n_fixing_years": 3,
@@ -1980,7 +1986,7 @@
     "why_considered": "Incorporates planned fallow on silt loam soil (200 mm AWC) to recharge root-zone soil moisture for following dryland or limited crops.",
     "benefits": [
      "Cuts median irrigation pumping by 223 mm/yr (61% water savings)",
-     "Reduces peak seasonal machinery operating hours and management complexity"
+     "Reduces seasonal machinery and management hours by ~46%"
     ],
     "soil_health_traits": {
      "n_fixing_years": 0,
@@ -2052,8 +2058,9 @@
     ],
     "why_considered": "Introduces nitrogen-fixing soybeans to break continuous grass cereal cycles and reduce synthetic fertilizer inputs.",
     "benefits": [
-     "Breaks monoculture pest and weed cycles across 2 distinct crop families",
-     "Provides biological nitrogen fixation in 1 of 2 years"
+     "Breaks monoculture pest and weed cycles by adding broadleaf/legume to grass rotation",
+     "Biological N fixation in 1 of 2 yr cuts synthetic fertilizer",
+     "Higher median return over variable costs (+$67/ha/yr vs current)"
     ],
     "soil_health_traits": {
      "n_fixing_years": 1,
@@ -2129,8 +2136,9 @@
     ],
     "why_considered": "Introduces deep-rooted perennial legume to fix atmospheric nitrogen and supply high-demand Southwest Kansas dairy and beef forage markets.",
     "benefits": [
-     "Breaks monoculture pest and weed cycles across 2 distinct crop families",
-     "Provides biological nitrogen fixation in 3 of 5 years"
+     "Breaks monoculture pest and weed cycles by adding broadleaf/legume to grass rotation",
+     "Biological N fixation in 3 of 5 yr cuts synthetic fertilizer",
+     "~51% less water erosion than current rotation (0.46 t/ha/yr p50)"
     ],
     "soil_health_traits": {
      "n_fixing_years": 3,
@@ -2279,7 +2287,8 @@
     "why_considered": "Incorporates planned fallow on fine sandy loam soil (140 mm AWC) to recharge root-zone soil moisture for following dryland or limited crops.",
     "benefits": [
      "Cuts median irrigation pumping by 116 mm/yr (43% water savings)",
-     "Reduces peak seasonal machinery operating hours and management complexity"
+     "Reduces seasonal machinery and management hours by ~53%",
+     "Improves Soil Conditioning Index (-0.13 vs -0.21 current), building organic matter"
     ],
     "soil_health_traits": {
      "n_fixing_years": 0,
@@ -2351,8 +2360,9 @@
     ],
     "why_considered": "Introduces nitrogen-fixing soybeans to break continuous grass cereal cycles and reduce synthetic fertilizer inputs.",
     "benefits": [
-     "Breaks monoculture pest and weed cycles across 2 distinct crop families",
-     "Provides biological nitrogen fixation in 1 of 2 years"
+     "Suppresses pest and weed pressure across 2 crop families",
+     "Biological N fixation in 1 of 2 yr cuts synthetic fertilizer",
+     "~24% less water erosion than current rotation (2.10 t/ha/yr p50)"
     ],
     "soil_health_traits": {
      "n_fixing_years": 1,
@@ -2428,8 +2438,9 @@
     ],
     "why_considered": "Introduces deep-rooted perennial legume to fix atmospheric nitrogen and supply high-demand Southwest Kansas dairy and beef forage markets.",
     "benefits": [
-     "Breaks monoculture pest and weed cycles across 2 distinct crop families",
-     "Provides biological nitrogen fixation in 3 of 5 years"
+     "Suppresses pest and weed pressure across 2 crop families",
+     "Biological N fixation in 3 of 5 yr cuts synthetic fertilizer",
+     "~73% less water erosion than current rotation (0.74 t/ha/yr p50)"
     ],
     "soil_health_traits": {
      "n_fixing_years": 3,

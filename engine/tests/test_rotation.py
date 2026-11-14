@@ -111,6 +111,36 @@ def test_strategy_why_benefits_soil_traits():
         cur_m,
         traits,
         derive_soil_health_traits(["sorghum", "winter_wheat", "rye_cover"], traits),
+        current_rotation=["corn"],
     )
     assert 2 <= len(bens) <= 3
     assert any("water savings" in b or "irrigation" in b for b in bens)
+
+    # Contradiction check: higher erosion than baseline must never claim lower water erosion
+    alt_higher_erosion = {
+        "water_use_mm": {"p50": 0.0},
+        "erosion_t_ha": {"p50": 0.63},  # higher than cur_m (0.50)
+        "income_usd_ha": {"p50": 120},
+        "labour_index": {"p50": 0.15},
+        "soil_index": {"p50": -0.1},
+    }
+    cur_baseline = {
+        "water_use_mm": {"p50": 380},
+        "erosion_t_ha": {"p50": 0.50},
+        "income_usd_ha": {"p50": 350},
+        "labour_index": {"p50": 0.40},
+        "soil_index": {"p50": 0.10},
+    }
+    bens_dryland = benefits(
+        ["winter_wheat", "sorghum", "fallow"],
+        "dryland",
+        False,
+        alt_higher_erosion,
+        cur_baseline,
+        traits,
+        derive_soil_health_traits(["winter_wheat", "sorghum", "fallow"], traits),
+        current_rotation=["corn"],
+    )
+    assert 2 <= len(bens_dryland) <= 3
+    assert not any("erosion" in b.lower() and "less" in b.lower() for b in bens_dryland)
+    assert not any("low water erosion" in b.lower() for b in bens_dryland)

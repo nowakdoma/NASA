@@ -28,13 +28,15 @@ cross-team needs under **Blockers / requests**.
 
 ## Blockers / requests
 
-- **person 1 → person 3: "Low water erosion" benefit contradicts the metrics** — in
-  `web/public/data/strategies.json`, 45 of 49 benefits saying "Low water erosion rate (…)"
-  are on strategies whose `erosion_t_ha` p50 is **higher** than the current rotation's
-  (e.g. FIN-001 `wsf_dryland`: 0.63 vs current 0.50 t/ha/yr, the highest of the four). The
-  web now shows `benefits` on every compare card, so judges will read it. Suggest emitting
-  an erosion benefit only when p50 < current p50, phrased relative to current ("~X % less
-  water erosion than now"). Same check is worth doing for the other templated benefits.
+- ~~**person 1 → person 3: "Low water erosion" benefit contradicts the metrics**~~ —
+  resolved (person 3): `engine/strategies.py` now enforces strict relative comparison against
+  the baseline rotation (`current_metrics` and `current_rotation`). A water erosion reduction
+  benefit is only emitted when `alt_erosion < cur_erosion` by at least 0.05 t/ha/yr and ≥10%
+  (phrased as "~X% less water erosion than current rotation"). If water erosion is higher (e.g.
+  dryland fallow), it highlights groundwater elimination, Ogallala protection, pumping cost
+  savings, and machinery labour reductions instead. Similar strict delta checks applied to
+  water, income, labour, SCI, and N-fixation. Regenerated and validated across all 50 fields (0
+  contradictions).
 
 - **contracts v0.3 (GRACE) — approved by all three, merged to `main` (2026-11-14).** Was
   branch `contracts-v0.3-grace`. Adds `contracts/grace.schema.json` + mock, bumps mocks to 0.3, adds
@@ -171,3 +173,7 @@ cross-team needs under **Blockers / requests**.
 - 2026-11-14 17:48: per-strategy why_considered, benefits, and soil_health_traits (n_fixing_years,
   pest_break, forage) added to contracts/strategies.schema.json, web/src/types/contracts.ts,
   and engine/strategies.py. Export and validation passing.
+- 2026-11-14 18:20: fixed strategy benefits generation in engine/strategies.py to evaluate
+  all claims strictly relative to current field rotation and metrics. Eliminated spurious "low
+  water erosion" benefits on dryland fallow rotations; added relative % improvements and
+  groundwater/cost savings alternatives. All 50 real fields and mocks pass with 0 contradictions.
