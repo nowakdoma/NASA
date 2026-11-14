@@ -40,13 +40,17 @@ export function readHash(): FlowState {
   };
 }
 
-export function writeHash(s: FlowState & { priorities: Priorities }) {
+/** `push` adds a history entry (step changes, so Back returns to the previous step);
+ *  `replace` updates the link in place (slider and limit changes). */
+export function writeHash(s: FlowState & { priorities: Priorities }, mode: 'push' | 'replace') {
   const q = new URLSearchParams();
   if (s.fieldId) q.set('f', s.fieldId);
   q.set('s', String(s.step));
   q.set('p', PRIORITY_KEYS.map((k) => s.priorities[k]).join(','));
   if (s.waterLimitIn !== null) q.set('w', String(s.waterLimitIn));
-  window.history.replaceState(null, '', `#${q.toString()}`);
+  const url = `#${q.toString()}`;
+  if (mode === 'push') window.history.pushState(null, '', url);
+  else window.history.replaceState(null, '', url);
 }
 
 export type WaterFlag = 'typical' | 'dry' | null;

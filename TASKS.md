@@ -50,7 +50,7 @@ do?" with "nothing". Priority order within each owner = list order. `[ ]` open, 
   "Field 1 (137 ac)", CDL → USDA crop map, p10/p90 → bad/typical/good year, AWC → "holds ~4 in
   of water", index units, GMD3/WIMAS explained); no "%" on an index that can go negative;
   consistent decimals.
-- [ ] **W4 Navigation**: browser/Android Back goes to previous step (`pushState` on step change,
+- [x] **W4 Navigation**: browser/Android Back goes to previous step (`pushState` on step change,
   `lib/flow.ts:49` uses `replaceState`); phone reload/share link opens the saved step tab, not
   the map; no scroll-zoom on the map until tapped; header + stepper + tabs use ~215/844 px on
   phone.

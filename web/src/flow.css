@@ -1417,3 +1417,62 @@
   font-weight: 500;
   color: var(--muted);
 }
+
+/* Map gesture hint: wheel/one-finger pan are off until the map is clicked or tapped (W4). */
+.map-gesture-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 44px;
+  transform: translateX(-50%);
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(28, 42, 57, 0.82);
+  color: #fff;
+  font-size: 0.8rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 3;
+  white-space: nowrap;
+}
+
+.map-gesture-hint.show {
+  opacity: 1;
+}
+
+@media (pointer: coarse) {
+  .map-gesture-hint {
+    opacity: 1;
+  }
+}
+
+/* Phone header (W4): one row — brand + "How we know" icon. Progress lives in the
+   "Step N of 4" tab and the Back/Next footer, so the stepper is hidden here. */
+@media (max-width: 850px) {
+  .app-header {
+    flex-wrap: nowrap;
+    padding: 0.45rem 0.75rem;
+  }
+
+  .app-header .subtitle,
+  .app-header .stepper,
+  .about-nav-btn span {
+    display: none;
+  }
+
+  .about-nav-btn {
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .mobile-tab-nav {
+    padding: 0.25rem 0.5rem;
+  }
+
+  .tab-item {
+    min-height: 44px;
+    padding: 0.25rem;
+  }
+}

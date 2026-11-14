@@ -58,6 +58,10 @@ export function MapView({ fields, year, selectedId, onSelect, highlightCrop }: P
   onSelectRef.current = onSelect;
   const [isMapLoading, setIsMapLoading] = useState(true);
   const [zoom, setZoom] = useState(0);
+  // Wheel zoom (and one-finger pan on touch) stay off until the map is clicked/tapped, so
+  // scrolling the page never gets trapped by the map.
+  const [armed, setArmed] = useState(false);
+  const [hint, setHint] = useState(false);
   const markers = useMemo<Marker[]>(
     () => fields.features.map((f) => ({ position: centroid(f), properties: f.properties })),
     [fields.features],
@@ -133,6 +137,32 @@ export function MapView({ fields, year, selectedId, onSelect, highlightCrop }: P
       setIsMapLoading(false);
     }, 1800);
 
+    const coarse = window.matchMedia('(pointer: coarse)').matches;
+    map.scrollZoom.disable();
+    if (coarse) map.dragPan.disable();
+    let hintTimer = 0;
+    const arm = () => {
+      map.scrollZoom.enable();
+      map.dragPan.enable();
+      setArmed(true);
+      setHint(false);
+    };
+    const disarm = () => {
+      if (coarse) return;
+      map.scrollZoom.disable();
+      setArmed(false);
+    };
+    const onWheel = () => {
+      if (map.scrollZoom.isEnabled()) return;
+      setHint(true);
+      clearTimeout(hintTimer);
+      hintTimer = window.setTimeout(() => setHint(false), 1800);
+    };
+    map.on('click', arm);
+    const el = map.getContainer();
+    el.addEventListener('mouseleave', disarm);
+    el.addEventListener('wheel', onWheel, { passive: true });
+
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
     map.addControl(new maplibregl.ScaleControl({ unit: 'imperial' }), 'bottom-left');
 
@@ -141,6 +171,9 @@ export function MapView({ fields, year, selectedId, onSelect, highlightCrop }: P
 
     return () => {
       clearTimeout(timer);
+      clearTimeout(hintTimer);
+      el.removeEventListener('mouseleave', disarm);
+      el.removeEventListener('wheel', onWheel);
       cancelAnimationFrame(raf);
       overlay.current = null;
       map.remove();
@@ -294,6 +327,13 @@ export function MapView({ fields, year, selectedId, onSelect, highlightCrop }: P
       )}
 
       <div ref={container} className="map" />
+      {!armed && (
+        <div className={`map-gesture-hint${hint ? ' show' : ''}`} aria-hidden="true">
+          {window.matchMedia('(pointer: coarse)').matches
+            ? 'Tap the map to move and zoom it'
+            : 'Click the map, then scroll to zoom'}
+        </div>
+      )}
 
       <div className="county-badge">
         <IconPin className="county-icon" />

@@ -12,6 +12,7 @@ import { FieldStep } from './components/FieldStep';
 import { PrioritiesStep, presetName } from './components/PrioritiesStep';
 import { CompareStep } from './components/CompareStep';
 import { SummaryStep } from './components/SummaryStep';
+import { fieldLabel } from './lib/units';
 import { MM_PER_IN, readHash, writeHash, type Step, type WaterLimitIn } from './lib/flow';
 import './flow.css';
 import { StrategyComparison } from './components/StrategyComparison';
@@ -41,7 +42,10 @@ export default function App() {
   // Screen A until a field is chosen; a shared/reloaded link (#f=…) skips straight to the flow.
   const [started, setStarted] = useState<boolean>(initial.fieldId !== null);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
-  const [mobileTab, setMobileTab] = useState<MobileTab>('map');
+  // A shared or reloaded link opens the step the user was on, not the map.
+  const [mobileTab, setMobileTab] = useState<MobileTab>(initial.fieldId ? 'steps' : 'map');
+  // Last step written to history: a step change pushes an entry so Back walks the steps.
+  const historyStep = useRef<Step | null>(initial.fieldId ? initial.step : null);
   const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -60,8 +64,38 @@ export default function App() {
 
   useEffect(() => {
     if (!started) return;
-    writeHash({ fieldId: selectedId, step, priorities, waterLimitIn });
+    const mode = historyStep.current === step ? 'replace' : 'push';
+    historyStep.current = step;
+    writeHash({ fieldId: selectedId, step, priorities, waterLimitIn }, mode);
   }, [started, selectedId, step, priorities, waterLimitIn]);
+
+  // Browser / Android Back and Forward: restore the flow state from the link.
+  useEffect(() => {
+    const onPop = () => {
+      const h = readHash();
+      if (!h.fieldId) {
+        historyStep.current = null;
+        setStarted(false);
+        return;
+      }
+      historyStep.current = h.step;
+      setSelectedId(h.fieldId);
+      setStep(h.step);
+      if (h.priorities) setPriorities(h.priorities);
+      setWaterLimitIn(h.waterLimitIn);
+      setStarted(true);
+      setMobileTab('steps');
+      panelRef.current?.scrollTo({ top: 0 });
+    };
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []);
+
+  const goHome = () => {
+    historyStep.current = null;
+    window.history.pushState(null, '', window.location.pathname + window.location.search);
+    setStarted(false);
+  };
 
   const goTo = (s: Step) => {
     setStep(s);
@@ -154,7 +188,7 @@ export default function App() {
               <button
                 type="button"
                 className="brand-home"
-                onClick={() => setStarted(false)}
+                onClick={goHome}
                 title="Back to the start screen"
               >
                 FieldShift
@@ -202,7 +236,8 @@ export default function App() {
         >
           <IconClipboard />
           <span>
-            Step {step + 1} of 4 {selectedId ? `· ${selectedId}` : ''}
+            Step {step + 1} of 4
+            {selected ? ` · ${fieldLabel(selected.properties).replace(/ \(.*\)$/, '')}` : ''}
           </span>
         </button>
       </nav>
