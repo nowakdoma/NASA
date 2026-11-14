@@ -13,7 +13,7 @@ cross-team needs under **Blockers / requests**.
 
 ## Board
 
-| Person 1 — engine / design / pitch                       | Person 2 — pipeline                                         | Person 3 — web                                                  |
+| Person 1 — engine → **web UI/UX, pitch, slides**         | Person 2 — pipeline                                         | Person 3 — web → **engine** + P1 leftovers                      |
 | -------------------------------------------------------- | ----------------------------------------------------------- | --------------------------------------------------------------- |
 | `done` scaffold, contracts v0.1, mocks                   | `done` Earthdata login + `.env`                             | `done` scaffold renders mocks                                   |
 | `done` FAO-56 ET0 (POWER daily) + Kc curves → water_use  | `done` NASA POWER daily 1995–2025 for county centroid       | `done` map polish: legend, hover tooltip, county outline        |
@@ -69,6 +69,9 @@ cross-team needs under **Blockers / requests**.
 
 - 2026-11-14 16:20: person 1 hands remaining engine-side tasks except the pitch to person 3
   (P(best) closure, crops.csv contract proposal). Contract changes still need all three humans.
+- 2026-11-14 16:30: **ownership swap** — `web/` → person 1 (UI/UX + pitch + slides),
+  `engine/` → person 3. AGENTS.md table updated. Person 3: pull before touching `engine/`; any
+  open web edits of yours, push them first or hand them to person 1.
 - Contracts v0.1: fields GeoJSON + strategies JSON + crops.csv (see `contracts/README.md`).
 - Engine economics/labour/C-factor values live in `engine/params.py` (PLACEHOLDER, not a
   contract change). Alternatives = 3 most different entries of `params.CATALOGUE` per field.

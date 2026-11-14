@@ -27,9 +27,9 @@ All computation is offline. The web app reads only static JSON/GeoJSON from `web
 | Path          | Owner                          | What lives there                                                                 |
 | ------------- | ------------------------------ | -------------------------------------------------------------------------------- |
 | `contracts/`  | **shared — human approval**    | JSON Schemas, `crops.csv`, realistic mocks. The integration point.               |
-| `engine/`     | person 1 (engine/design/pitch) | FAO-56 water balance, simplified RUSLE, soil-conditioning index, MCDA, export    |
+| `engine/`     | person 3 (from 2026-11-14)     | FAO-56 water balance, simplified RUSLE, soil-conditioning index, MCDA, export    |
 | `pipeline/`   | person 2                       | Download + harmonise NASA POWER, MODIS NDVI, SMAP, SRTM, CDL, SSURGO             |
-| `web/`        | person 3                       | Vite + React + TS, MapLibre GL + deck.gl, Recharts                               |
+| `web/`        | person 1 (UI/UX, pitch, slides) | Vite + React + TS, MapLibre GL + deck.gl, Recharts                              |
 | `notebooks/`  | anyone                         | Exploration only, small cells (`# %%` percent format). Nothing imports from here |
 | `data/`       | pipeline writes                | gitignored raw + interim. Only small processed outputs go to `web/public/data/`  |
 | root files    | person 1                       | `AGENTS.md`, `TASKS.md`, `Makefile`, `pyproject.toml`                            |

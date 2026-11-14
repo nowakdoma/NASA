@@ -90,9 +90,9 @@ pipeline/  ──►  data/interim/*  ──►  engine/  ──►  python -m e
 | Path         | Owner                     | Contents                                                                    |
 | ------------ | ------------------------- | --------------------------------------------------------------------------- |
 | `contracts/` | shared (all 3 approve)    | JSON Schemas, `crops.csv`, realistic mocks. **The integration point**       |
-| `engine/`    | person 1 (engine/pitch)   | FAO-56 water balance, simplified RUSLE, soil-conditioning index, MCDA, export, validation |
+| `engine/`    | person 3                  | FAO-56 water balance, simplified RUSLE, soil-conditioning index, MCDA, export, validation |
 | `pipeline/`  | person 2                  | NASA POWER, MODIS NDVI, SMAP, SRTM, USDA CDL, SSURGO download + harmonisation |
-| `web/`       | person 3                  | Vite + React + TypeScript, MapLibre GL + deck.gl, Recharts                  |
+| `web/`       | person 1 (UI/UX, pitch)   | Vite + React + TypeScript, MapLibre GL + deck.gl, Recharts                  |
 | `notebooks/` | anyone                    | Exploration only (`# %%` percent-format `.py`). Nothing imports from here   |
 | `data/`      | pipeline writes           | Raw + interim data, gitignored                                              |
 
