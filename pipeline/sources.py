@@ -144,11 +144,6 @@ def fetch_power(cfg: Config, *, force: bool = False) -> Path:
     return out
 
 
-def fetch_ndvi(cfg: Config) -> None:
-    """MODIS MOD13Q1 250 m 16-day NDVI (Earthdata login) -> bare-soil periods."""
-    raise NotImplementedError
-
-
 def fetch_smap(cfg: Config) -> None:
     """SMAP L3 enhanced soil moisture SPL3SMP_E (Earthdata) -> water-stress windows."""
     raise NotImplementedError
@@ -193,7 +188,6 @@ def fetch_ssurgo(cfg: Config, *, force: bool = False) -> Path:
 
 SOURCES = {
     "power": fetch_power,
-    "ndvi": fetch_ndvi,
     "smap": fetch_smap,
     "srtm": fetch_srtm,
     "cdl": fetch_cdl,
