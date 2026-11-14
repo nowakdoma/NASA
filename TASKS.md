@@ -61,8 +61,9 @@ do?" with "nothing". Priority order within each owner = list order. `[ ]` open, 
   second "Print Dossier", an empty "Water Deficit" row and overlapping heat pills; print view
   clips date/URL and Labour column on the right; "%" wraps on phone; targets < 44 px (crop-year
   cells 16×24, zoom 29×29, "How we know" 31 px); county label covers zoom buttons on phone.
-- [ ] **W7 Example field**: switch "Try an example" from FIN-001 to a field where an
-  alternative wins (FIN-026: alfalfa–corn 47 % under Soil Stewardship) — re-check after W1.
+- [x] **W7 Example field**: "Try an example" now opens FIN-030 (Field 30, on a real pivot
+  by the Arkansas River). Balanced: alfalfa–corn 5/10 just ahead of sorghum–wheat–cover; with a
+  14 in limit sorghum–wheat–cover 8/10. FIN-026 became a close call after E1–E6.
 - [ ] W8 (later) Ranking samples whole weather years once the engine exports per-year results
   (now each metric × strategy is drawn independently, so a 2012-type year never hits all four
   at once; normalising over only 4 options turns 0.11 vs 0.57 into worst vs best).

@@ -27,6 +27,11 @@ type MobileTab = 'map' | 'steps';
 
 const NEXT_LABEL = ['Next: what matters to you', 'Compare rotations', 'Make adviser summary'];
 
+// "Try an example" field: on a real pivot (checked on USGS imagery), and the water limit
+// visibly changes the result (Balanced: alfalfa–corn 5/10; with 14 in: sorghum–wheat–cover
+// 8/10). Re-check with the ranking if the engine output changes.
+const EXAMPLE_FIELD = 'FIN-030';
+
 export default function App() {
   const initial = useMemo(readHash, []);
   const [data, setData] = useState<AppData | null>(null);
@@ -155,7 +160,8 @@ export default function App() {
 
   if (!started) {
     const exampleId =
-      data.fields.features.find((f) => f.properties.field_id === 'FIN-001')?.properties.field_id ??
+      data.fields.features.find((f) => f.properties.field_id === EXAMPLE_FIELD)?.properties
+        .field_id ??
       data.fields.features[0]?.properties.field_id ??
       '';
     return (
