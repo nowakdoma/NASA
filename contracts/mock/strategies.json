@@ -1,7 +1,7 @@
 {
  "schema_version": "0.4",
  "mock": true,
- "generated_by": "mock generator (hand-tuned heuristics, not engine)",
+ "generated_by": "engine.export 3845189 (mock fields)",
  "generated_at": "2026-11-14",
  "weather_years": [
   1995,
@@ -22,7 +22,7 @@
   },
   "soil_index": {
    "label": "Soil conditioning (SOM trend)",
-   "unit": "index −1…1",
+   "unit": "index \u22121\u20261",
    "better": "higher",
    "priority": "soil"
   },
@@ -34,7 +34,7 @@
   },
   "labour_index": {
    "label": "Labour / management",
-   "unit": "index 0…1",
+   "unit": "index 0\u20261",
    "better": "lower",
    "priority": "labour"
   }
@@ -43,82 +43,98 @@
   "FIN-001": [
    {
     "id": "current",
-    "name": "Current: corn–corn–corn–wheat",
-    "description": "Rotation observed in CDL over recent years.",
-    "is_current": true,
-    "rotation": [
-     "corn",
-     "corn",
-     "corn",
-     "winter_wheat"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 301.0,
-      "p50": 385.0,
-      "p90": 470.0
-     },
-     "erosion_t_ha": {
-      "p10": 0.39,
-      "p50": 0.86,
-      "p90": 1.81
-     },
-     "soil_index": {
-      "p10": -0.0,
-      "p50": 0.09,
-      "p90": 0.16
-     },
-     "income_usd_ha": {
-      "p10": 122.0,
-      "p50": 350.0,
-      "p90": 504.0
-     },
-     "labour_index": {
-      "p10": 0.49,
-      "p50": 0.54,
-      "p90": 0.6
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
-     }
-    ],
-    "data_gaps": [
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence."
-    ],
-    "why_considered": "Observed baseline rotation (Corn–Corn–Corn–Winter wheat) on silt loam soil under full irrigation from USDA CDL history.",
+    "name": "Current: Corn",
+    "description": "Rotation observed in CDL over recent years (irrigated, full).",
+    "why_considered": "Observed baseline crop sequence (Corn) from USDA CDL history on silt loam soil (full irrigation).",
     "benefits": [
      "Established management routine with existing planter, chemical, and harvest equipment",
-     "Direct access to established regional grain elevator and feed mill delivery bids",
-     "Familiar baseline performance across 30-year historical weather conditions"
+     "High stover residue (8+ t/ha) protects topsoil and builds organic matter",
+     "Maximized feed grain yield with local ethanol and cattle feedlot bids"
     ],
     "soil_health_traits": {
      "n_fixing_years": 0,
      "pest_break": false,
      "forage": false
-    }
+    },
+    "is_current": true,
+    "rotation": [
+     "corn"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 265.0,
+      "p50": 389.0,
+      "p90": 486.0
+     },
+     "erosion_t_ha": {
+      "p10": 0.8,
+      "p50": 1.42,
+      "p90": 2.74
+     },
+     "soil_index": {
+      "p10": 0.66,
+      "p50": 0.69,
+      "p90": 0.7
+     },
+     "income_usd_ha": {
+      "p10": 753.0,
+      "p50": 1084.0,
+      "p90": 1311.0
+     },
+     "labour_index": {
+      "p10": 0.37,
+      "p50": 0.45,
+      "p90": 0.51
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Ulysses silt loam, 0 to 1 percent slopes: AWC 190 mm, K 0.43, slope 0.6 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
+    ],
+    "verify_locally": [
+     "Does your water right / well capacity support this rotation in a dry year?",
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence."
+    ]
    },
    {
-    "id": "wsf_limited",
-    "name": "Wheat–sorghum–fallow (limited irrigation)",
-    "description": "Lower-water rotation common in western Kansas.",
+    "id": "wsf_dryland",
+    "name": "Wheat\u2013sorghum\u2013fallow (dryland)",
+    "description": "No irrigation; relies on fallow-stored soil water and rainfall.",
+    "why_considered": "Incorporates planned fallow on silt loam soil (190 mm AWC) to recharge root-zone soil moisture for following dryland or limited crops.",
+    "benefits": [
+     "Cuts median irrigation pumping by 389 mm/yr (100% water savings)",
+     "Reduces seasonal machinery and management hours by ~67%"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": false,
+     "forage": false
+    },
     "is_current": false,
     "rotation": [
      "winter_wheat",
@@ -127,226 +143,252 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 116.0,
-      "p50": 149.0,
-      "p90": 181.0
-     },
-     "erosion_t_ha": {
-      "p10": 0.66,
-      "p50": 1.46,
-      "p90": 3.07
-     },
-     "soil_index": {
-      "p10": -0.16,
-      "p50": -0.07,
+      "p10": 0.0,
+      "p50": 0.0,
       "p90": 0.0
      },
+     "erosion_t_ha": {
+      "p10": 1.21,
+      "p50": 2.04,
+      "p90": 3.27
+     },
+     "soil_index": {
+      "p10": 0.14,
+      "p50": 0.17,
+      "p90": 0.22
+     },
      "income_usd_ha": {
-      "p10": -4.0,
-      "p50": 120.0,
-      "p90": 206.0
+      "p10": 155.0,
+      "p50": 246.0,
+      "p90": 352.0
      },
      "labour_index": {
-      "p10": 0.23,
-      "p50": 0.28,
-      "p90": 0.34
+      "p10": 0.15,
+      "p50": 0.15,
+      "p90": 0.15
      }
     },
     "evidence": [
      {
       "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Ulysses silt loam, 0 to 1 percent slopes: AWC 190 mm, K 0.43, slope 0.6 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Yield response to deficit irrigation is from literature, not this field."
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
     "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
-     "Fallow-year weed control and residue management plan."
-    ],
-    "why_considered": "Incorporates planned fallow on silt loam soil (190 mm AWC) to recharge root-zone soil moisture for following dryland or limited crops.",
+     "How you will keep residue on the fallow to limit wind erosion.",
+     "Residue management: modelled water erosion (2.04 t/ha/yr) exceeds current baseline (1.42 t/ha/yr).",
+     "Economic trade-off: median net return is lower (-$838/ha/yr) than current baseline; evaluate whether water or soil benefits offset income loss."
+    ]
+   },
+   {
+    "id": "corn_wheat_sorghum",
+    "name": "Corn\u2013wheat\u2013sorghum (full irrigation)",
+    "description": "Three crops with different water peaks; spreads workload over the year.",
+    "why_considered": "Diversifies the crop sequence on silt loam soil to balance seasonal machinery workload and hedge against weather extremes.",
     "benefits": [
-     "Cuts median irrigation pumping by 236 mm/yr (61% water savings)",
-     "Reduces seasonal machinery and management hours by ~48%"
+     "Cuts median irrigation pumping by 69 mm/yr (18% water savings)",
+     "Reduces seasonal machinery and management hours by ~13%"
     ],
     "soil_health_traits": {
      "n_fixing_years": 0,
      "pest_break": false,
      "forage": false
-    }
-   },
-   {
-    "id": "corn_soy",
-    "name": "Corn–soybean",
-    "description": "Adds a legume; needs full irrigation.",
+    },
     "is_current": false,
     "rotation": [
      "corn",
-     "soybeans"
+     "winter_wheat",
+     "sorghum"
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 314.0,
-      "p50": 402.0,
-      "p90": 491.0
+      "p10": 212.0,
+      "p50": 320.0,
+      "p90": 383.0
      },
      "erosion_t_ha": {
-      "p10": 0.56,
-      "p50": 1.24,
-      "p90": 2.6
+      "p10": 0.92,
+      "p50": 1.38,
+      "p90": 2.14
      },
      "soil_index": {
-      "p10": -0.09,
-      "p50": 0.0,
-      "p90": 0.07
+      "p10": 0.55,
+      "p50": 0.59,
+      "p90": 0.61
      },
      "income_usd_ha": {
-      "p10": 153.0,
-      "p50": 406.0,
-      "p90": 578.0
+      "p10": 607.0,
+      "p50": 750.0,
+      "p90": 856.0
      },
      "labour_index": {
-      "p10": 0.5,
-      "p50": 0.55,
-      "p90": 0.61
+      "p10": 0.32,
+      "p50": 0.39,
+      "p90": 0.43
      }
     },
     "evidence": [
      {
       "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Ulysses silt loam, 0 to 1 percent slopes: AWC 190 mm, K 0.43, slope 0.6 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Soybean yield under SW Kansas heat not calibrated."
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
     "verify_locally": [
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
-     "Soybean cyst nematode and iron-deficiency chlorosis history."
-    ],
-    "why_considered": "Introduces nitrogen-fixing soybeans to break continuous grass cereal cycles and reduce synthetic fertilizer inputs.",
-    "benefits": [
-     "Breaks monoculture pest and weed cycles by adding broadleaf/legume to grass rotation",
-     "Biological N fixation in 1 of 2 yr cuts synthetic fertilizer",
-     "Higher median return over variable costs (+$56/ha/yr vs current)"
-    ],
-    "soil_health_traits": {
-     "n_fixing_years": 1,
-     "pest_break": true,
-     "forage": false
-    }
+     "Economic trade-off: median net return is lower (-$334/ha/yr) than current baseline; evaluate whether water or soil benefits offset income loss."
+    ]
    },
    {
-    "id": "alfalfa_corn_wheat",
-    "name": "Alfalfa (3 yr)–corn–wheat",
-    "description": "Perennial legume phase for soil building.",
+    "id": "alfalfa_corn",
+    "name": "Alfalfa (3 yr)\u2013corn (2 yr) (full irrigation)",
+    "description": "Perennial forage builds soil; needs hay market and more labour.",
+    "why_considered": "Introduces deep-rooted perennial legume to fix atmospheric nitrogen and supply high-demand Southwest Kansas dairy and beef forage markets.",
+    "benefits": [
+     "Breaks monoculture pest and weed cycles by adding broadleaf/legume to grass rotation",
+     "Biological N fixation in 3 of 5 yr cuts synthetic fertilizer",
+     "~51% less water erosion than current rotation (0.70 t/ha/yr p50)"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 3,
+     "pest_break": true,
+     "forage": true
+    },
     "is_current": false,
     "rotation": [
      "alfalfa",
      "alfalfa",
      "alfalfa",
      "corn",
-     "winter_wheat"
+     "corn"
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 383.0,
-      "p50": 491.0,
-      "p90": 599.0
+      "p10": 348.0,
+      "p50": 436.0,
+      "p90": 500.0
      },
      "erosion_t_ha": {
-      "p10": 0.19,
-      "p50": 0.43,
-      "p90": 0.9
+      "p10": 0.43,
+      "p50": 0.7,
+      "p90": 1.12
      },
      "soil_index": {
-      "p10": 0.18,
-      "p50": 0.27,
-      "p90": 0.34
+      "p10": 0.71,
+      "p50": 0.74,
+      "p90": 0.75
      },
      "income_usd_ha": {
-      "p10": 159.0,
-      "p50": 416.0,
-      "p90": 591.0
+      "p10": 949.0,
+      "p50": 1039.0,
+      "p90": 1131.0
      },
      "labour_index": {
-      "p10": 0.65,
-      "p50": 0.7,
+      "p10": 0.66,
+      "p50": 0.72,
       "p90": 0.76
      }
     },
     "evidence": [
      {
       "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Ulysses silt loam, 0 to 1 percent slopes: AWC 190 mm, K 0.43, slope 0.6 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Alfalfa irrigation demand is the highest of all options; stand life uncertain."
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
     "verify_locally": [
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
-     "Hay buyer within hauling distance.",
-     "Cutting labour and equipment."
-    ],
-    "why_considered": "Introduces deep-rooted perennial legume to fix atmospheric nitrogen and supply high-demand Southwest Kansas dairy and beef forage markets.",
-    "benefits": [
-     "Breaks monoculture pest and weed cycles by adding broadleaf/legume to grass rotation",
-     "Biological N fixation in 3 of 5 yr cuts synthetic fertilizer",
-     "~50% less water erosion than current rotation (0.43 t/ha/yr p50)"
-    ],
-    "soil_health_traits": {
-     "n_fixing_years": 3,
-     "pest_break": true,
-     "forage": true
-    }
+     "Hay buyers, storage and haul distance; stand establishment cost.",
+     "Water allocation check: modelled irrigation need (436 mm/yr) is higher than current baseline (389 mm/yr); check water rights."
+    ]
    }
   ],
   "FIN-002": [
    {
     "id": "current",
-    "name": "Current: corn–wheat",
-    "description": "Rotation observed in CDL over recent years.",
+    "name": "Current: Corn\u2013Winter wheat",
+    "description": "Rotation observed in CDL over recent years (irrigated, full).",
+    "why_considered": "Observed baseline crop sequence (Corn\u2013Winter wheat) from USDA CDL history on silt loam soil (full irrigation).",
+    "benefits": [
+     "Established management routine with existing planter, chemical, and harvest equipment",
+     "Direct access to established regional grain elevator and feed mill bids",
+     "Familiar baseline performance across 30-year historical weather conditions"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": false,
+     "forage": false
+    },
     "is_current": true,
     "rotation": [
      "corn",
@@ -354,677 +396,79 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 251.0,
-      "p50": 322.0,
-      "p90": 393.0
+      "p10": 200.0,
+      "p50": 335.0,
+      "p90": 421.0
      },
      "erosion_t_ha": {
-      "p10": 0.28,
-      "p50": 0.62,
-      "p90": 1.3
-     },
-     "soil_index": {
-      "p10": 0.03,
-      "p50": 0.12,
-      "p90": 0.18
-     },
-     "income_usd_ha": {
-      "p10": 97.0,
-      "p50": 304.0,
-      "p90": 445.0
-     },
-     "labour_index": {
-      "p10": 0.42,
-      "p50": 0.47,
-      "p90": 0.53
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
-     }
-    ],
-    "data_gaps": [
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence."
-    ],
-    "why_considered": "Observed baseline rotation (Corn–Winter wheat) on silt loam soil under full irrigation from USDA CDL history.",
-    "benefits": [
-     "Established management routine with existing planter, chemical, and harvest equipment",
-     "Direct access to established regional grain elevator and feed mill delivery bids",
-     "Familiar baseline performance across 30-year historical weather conditions"
-    ],
-    "soil_health_traits": {
-     "n_fixing_years": 0,
-     "pest_break": false,
-     "forage": false
-    }
-   },
-   {
-    "id": "wsf_limited",
-    "name": "Wheat–sorghum–fallow (limited irrigation)",
-    "description": "Lower-water rotation common in western Kansas.",
-    "is_current": false,
-    "rotation": [
-     "winter_wheat",
-     "sorghum",
-     "fallow"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 111.0,
-      "p50": 142.0,
-      "p90": 173.0
-     },
-     "erosion_t_ha": {
-      "p10": 0.51,
-      "p50": 1.13,
-      "p90": 2.37
-     },
-     "soil_index": {
-      "p10": -0.12,
-      "p50": -0.03,
-      "p90": 0.04
-     },
-     "income_usd_ha": {
-      "p10": 1.0,
-      "p50": 130.0,
-      "p90": 219.0
-     },
-     "labour_index": {
-      "p10": 0.23,
-      "p50": 0.28,
-      "p90": 0.34
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
-     }
-    ],
-    "data_gaps": [
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Yield response to deficit irrigation is from literature, not this field."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence.",
-     "Fallow-year weed control and residue management plan."
-    ],
-    "why_considered": "Incorporates planned fallow on silt loam soil (210 mm AWC) to recharge root-zone soil moisture for following dryland or limited crops.",
-    "benefits": [
-     "Cuts median irrigation pumping by 180 mm/yr (56% water savings)",
-     "Reduces seasonal machinery and management hours by ~40%"
-    ],
-    "soil_health_traits": {
-     "n_fixing_years": 0,
-     "pest_break": false,
-     "forage": false
-    }
-   },
-   {
-    "id": "corn_soy",
-    "name": "Corn–soybean",
-    "description": "Adds a legume; needs full irrigation.",
-    "is_current": false,
-    "rotation": [
-     "corn",
-     "soybeans"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 298.0,
-      "p50": 382.0,
-      "p90": 466.0
-     },
-     "erosion_t_ha": {
-      "p10": 0.42,
-      "p50": 0.94,
-      "p90": 1.98
-     },
-     "soil_index": {
-      "p10": -0.05,
-      "p50": 0.04,
-      "p90": 0.11
-     },
-     "income_usd_ha": {
-      "p10": 148.0,
-      "p50": 396.0,
-      "p90": 565.0
-     },
-     "labour_index": {
-      "p10": 0.5,
-      "p50": 0.55,
-      "p90": 0.61
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
-     }
-    ],
-    "data_gaps": [
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Soybean yield under SW Kansas heat not calibrated."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence.",
-     "Soybean cyst nematode and iron-deficiency chlorosis history."
-    ],
-    "why_considered": "Introduces nitrogen-fixing soybeans to break continuous grass cereal cycles and reduce synthetic fertilizer inputs.",
-    "benefits": [
-     "Breaks monoculture pest and weed cycles by adding broadleaf/legume to grass rotation",
-     "Biological N fixation in 1 of 2 yr cuts synthetic fertilizer",
-     "Higher median return over variable costs (+$92/ha/yr vs current)"
-    ],
-    "soil_health_traits": {
-     "n_fixing_years": 1,
-     "pest_break": true,
-     "forage": false
-    }
-   },
-   {
-    "id": "alfalfa_corn_wheat",
-    "name": "Alfalfa (3 yr)–corn–wheat",
-    "description": "Perennial legume phase for soil building.",
-    "is_current": false,
-    "rotation": [
-     "alfalfa",
-     "alfalfa",
-     "alfalfa",
-     "corn",
-     "winter_wheat"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 378.0,
-      "p50": 485.0,
-      "p90": 592.0
-     },
-     "erosion_t_ha": {
-      "p10": 0.14,
-      "p50": 0.32,
-      "p90": 0.67
-     },
-     "soil_index": {
-      "p10": 0.22,
-      "p50": 0.31,
-      "p90": 0.38
-     },
-     "income_usd_ha": {
-      "p10": 170.0,
-      "p50": 436.0,
-      "p90": 617.0
-     },
-     "labour_index": {
-      "p10": 0.65,
-      "p50": 0.7,
-      "p90": 0.76
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
-     }
-    ],
-    "data_gaps": [
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Alfalfa irrigation demand is the highest of all options; stand life uncertain."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence.",
-     "Hay buyer within hauling distance.",
-     "Cutting labour and equipment."
-    ],
-    "why_considered": "Introduces deep-rooted perennial legume to fix atmospheric nitrogen and supply high-demand Southwest Kansas dairy and beef forage markets.",
-    "benefits": [
-     "Breaks monoculture pest and weed cycles by adding broadleaf/legume to grass rotation",
-     "Biological N fixation in 3 of 5 yr cuts synthetic fertilizer",
-     "~48% less water erosion than current rotation (0.32 t/ha/yr p50)"
-    ],
-    "soil_health_traits": {
-     "n_fixing_years": 3,
-     "pest_break": true,
-     "forage": true
-    }
-   }
-  ],
-  "FIN-003": [
-   {
-    "id": "current",
-    "name": "Current: wheat–sorghum–fallow",
-    "description": "Rotation observed in CDL over recent years.",
-    "is_current": true,
-    "rotation": [
-     "winter_wheat",
-     "sorghum",
-     "fallow"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 124.0,
-      "p50": 159.0,
-      "p90": 194.0
-     },
-     "erosion_t_ha": {
-      "p10": 0.74,
-      "p50": 1.65,
-      "p90": 3.47
-     },
-     "soil_index": {
-      "p10": -0.24,
-      "p50": -0.15,
-      "p90": -0.08
-     },
-     "income_usd_ha": {
-      "p10": -21.0,
-      "p50": 89.0,
-      "p90": 166.0
-     },
-     "labour_index": {
-      "p10": 0.23,
-      "p50": 0.28,
-      "p90": 0.34
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
-     }
-    ],
-    "data_gaps": [
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence."
-    ],
-    "why_considered": "Observed baseline rotation (Winter wheat–Grain sorghum–Fallow / idle cropland) on loamy fine sand soil under full irrigation from USDA CDL history.",
-    "benefits": [
-     "Established management routine with existing planter, chemical, and harvest equipment",
-     "Direct access to established regional grain elevator and feed mill delivery bids",
-     "Familiar baseline performance across 30-year historical weather conditions"
-    ],
-    "soil_health_traits": {
-     "n_fixing_years": 0,
-     "pest_break": false,
-     "forage": false
-    }
-   },
-   {
-    "id": "wsc_cover",
-    "name": "Wheat–sorghum + rye cover (no fallow)",
-    "description": "Replaces the fallow year with a cereal-rye cover crop.",
-    "is_current": false,
-    "rotation": [
-     "winter_wheat",
-     "sorghum",
-     "rye_cover"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 204.0,
-      "p50": 262.0,
-      "p90": 320.0
-     },
-     "erosion_t_ha": {
-      "p10": 0.36,
-      "p50": 0.8,
+      "p10": 0.62,
+      "p50": 0.91,
       "p90": 1.67
      },
      "soil_index": {
-      "p10": 0.0,
-      "p50": 0.09,
-      "p90": 0.16
+      "p10": 0.54,
+      "p50": 0.59,
+      "p90": 0.62
      },
      "income_usd_ha": {
-      "p10": 18.0,
-      "p50": 159.0,
-      "p90": 257.0
+      "p10": 539.0,
+      "p50": 740.0,
+      "p90": 881.0
      },
      "labour_index": {
-      "p10": 0.36,
-      "p50": 0.41,
+      "p10": 0.33,
+      "p50": 0.42,
       "p90": 0.47
      }
     },
     "evidence": [
      {
       "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Richfield silt loam, 0 to 1 percent slopes: AWC 210 mm, K 0.37, slope 0.5 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Cover-crop water use in dry springs is uncertain."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence.",
-     "Termination timing vs. stored soil water before sorghum."
-    ],
-    "why_considered": "Replaces winter bare-soil fallow with cereal rye cover to protect loamy fine sand topsoil from wind erosion and build soil organic matter.",
-    "benefits": [
-     "Cereal rye cover shields topsoil from winter and spring High Plains wind erosion",
-     "~52% less water erosion than current rotation (0.80 t/ha/yr p50)",
-     "Produces high-demand forage or silage for Southwest Kansas cattle feedlots and dairies"
-    ],
-    "soil_health_traits": {
-     "n_fixing_years": 0,
-     "pest_break": false,
-     "forage": true
-    }
-   },
-   {
-    "id": "corn_soy",
-    "name": "Corn–soybean",
-    "description": "Adds a legume; needs full irrigation.",
-    "is_current": false,
-    "rotation": [
-     "corn",
-     "soybeans"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 340.0,
-      "p50": 436.0,
-      "p90": 533.0
-     },
-     "erosion_t_ha": {
-      "p10": 0.62,
-      "p50": 1.38,
-      "p90": 2.89
-     },
-     "soil_index": {
-      "p10": -0.17,
-      "p50": -0.08,
-      "p90": -0.01
-     },
-     "income_usd_ha": {
-      "p10": 127.0,
-      "p50": 358.0,
-      "p90": 515.0
-     },
-     "labour_index": {
-      "p10": 0.5,
-      "p50": 0.55,
-      "p90": 0.61
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
-     }
-    ],
-    "data_gaps": [
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Soybean yield under SW Kansas heat not calibrated."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence.",
-     "Soybean cyst nematode and iron-deficiency chlorosis history."
-    ],
-    "why_considered": "Introduces nitrogen-fixing soybeans to break continuous grass cereal cycles and reduce synthetic fertilizer inputs.",
-    "benefits": [
-     "Breaks monoculture pest and weed cycles by adding broadleaf/legume to grass rotation",
-     "Biological N fixation in 1 of 2 yr cuts synthetic fertilizer",
-     "~16% less water erosion than current rotation (1.38 t/ha/yr p50)"
-    ],
-    "soil_health_traits": {
-     "n_fixing_years": 1,
-     "pest_break": true,
-     "forage": false
-    }
-   },
-   {
-    "id": "alfalfa_corn_wheat",
-    "name": "Alfalfa (3 yr)–corn–wheat",
-    "description": "Perennial legume phase for soil building.",
-    "is_current": false,
-    "rotation": [
-     "alfalfa",
-     "alfalfa",
-     "alfalfa",
-     "corn",
-     "winter_wheat"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 428.0,
-      "p50": 549.0,
-      "p90": 669.0
-     },
-     "erosion_t_ha": {
-      "p10": 0.21,
-      "p50": 0.47,
-      "p90": 0.99
-     },
-     "soil_index": {
-      "p10": 0.1,
-      "p50": 0.19,
-      "p90": 0.26
-     },
-     "income_usd_ha": {
-      "p10": 148.0,
-      "p50": 396.0,
-      "p90": 565.0
-     },
-     "labour_index": {
-      "p10": 0.65,
-      "p50": 0.7,
-      "p90": 0.76
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
-     }
-    ],
-    "data_gaps": [
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Alfalfa irrigation demand is the highest of all options; stand life uncertain."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence.",
-     "Hay buyer within hauling distance.",
-     "Cutting labour and equipment."
-    ],
-    "why_considered": "Introduces deep-rooted perennial legume to fix atmospheric nitrogen and supply high-demand Southwest Kansas dairy and beef forage markets.",
-    "benefits": [
-     "Breaks monoculture pest and weed cycles by adding broadleaf/legume to grass rotation",
-     "Biological N fixation in 3 of 5 yr cuts synthetic fertilizer",
-     "~72% less water erosion than current rotation (0.47 t/ha/yr p50)"
-    ],
-    "soil_health_traits": {
-     "n_fixing_years": 3,
-     "pest_break": true,
-     "forage": true
-    }
-   }
-  ],
-  "FIN-004": [
-   {
-    "id": "current",
-    "name": "Current: alfalfa–alfalfa–alfalfa–alfalfa–corn–wheat",
-    "description": "Rotation observed in CDL over recent years.",
-    "is_current": true,
-    "rotation": [
-     "alfalfa",
-     "alfalfa",
-     "alfalfa",
-     "alfalfa",
-     "corn",
-     "winter_wheat"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 381.0,
-      "p50": 488.0,
-      "p90": 596.0
-     },
-     "erosion_t_ha": {
-      "p10": 0.12,
-      "p50": 0.27,
-      "p90": 0.57
-     },
-     "soil_index": {
-      "p10": 0.26,
-      "p50": 0.35,
-      "p90": 0.42
-     },
-     "income_usd_ha": {
-      "p10": 185.0,
-      "p50": 464.0,
-      "p90": 654.0
-     },
-     "labour_index": {
-      "p10": 0.67,
-      "p50": 0.72,
-      "p90": 0.78
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
-     }
-    ],
-    "data_gaps": [
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered."
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
     "verify_locally": [
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence."
-    ],
-    "why_considered": "Observed baseline rotation (Alfalfa–Alfalfa–Alfalfa–Alfalfa–Corn–Winter wheat) on silt loam soil under full irrigation from USDA CDL history.",
-    "benefits": [
-     "Established management routine with existing planter, chemical, and harvest equipment",
-     "Maintains multi-crop family rotation breaking single-crop disease cycles",
-     "Familiar baseline performance across 30-year historical weather conditions"
-    ],
-    "soil_health_traits": {
-     "n_fixing_years": 4,
-     "pest_break": true,
-     "forage": true
-    }
+    ]
    },
    {
-    "id": "wsf_limited",
-    "name": "Wheat–sorghum–fallow (limited irrigation)",
-    "description": "Lower-water rotation common in western Kansas.",
+    "id": "wsf_dryland",
+    "name": "Wheat\u2013sorghum\u2013fallow (dryland)",
+    "description": "No irrigation; relies on fallow-stored soil water and rainfall.",
+    "why_considered": "Incorporates planned fallow on silt loam soil (210 mm AWC) to recharge root-zone soil moisture for following dryland or limited crops.",
+    "benefits": [
+     "Cuts median irrigation pumping by 335 mm/yr (100% water savings)",
+     "Reduces seasonal machinery and management hours by ~64%"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": false,
+     "forage": false
+    },
     "is_current": false,
     "rotation": [
      "winter_wheat",
@@ -1033,72 +477,426 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 110.0,
-      "p50": 141.0,
-      "p90": 172.0
+      "p10": 0.0,
+      "p50": 0.0,
+      "p90": 0.0
      },
      "erosion_t_ha": {
-      "p10": 0.49,
-      "p50": 1.09,
-      "p90": 2.29
+      "p10": 0.9,
+      "p50": 1.52,
+      "p90": 2.44
      },
      "soil_index": {
-      "p10": -0.1,
-      "p50": -0.01,
-      "p90": 0.06
+      "p10": 0.16,
+      "p50": 0.19,
+      "p90": 0.24
      },
      "income_usd_ha": {
-      "p10": 8.0,
-      "p50": 142.0,
-      "p90": 234.0
+      "p10": 181.0,
+      "p50": 266.0,
+      "p90": 377.0
      },
      "labour_index": {
-      "p10": 0.23,
-      "p50": 0.28,
-      "p90": 0.34
+      "p10": 0.15,
+      "p50": 0.15,
+      "p90": 0.15
      }
     },
     "evidence": [
      {
       "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Richfield silt loam, 0 to 1 percent slopes: AWC 210 mm, K 0.37, slope 0.5 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Yield response to deficit irrigation is from literature, not this field."
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
+    ],
+    "verify_locally": [
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "How you will keep residue on the fallow to limit wind erosion.",
+     "Residue management: modelled water erosion (1.52 t/ha/yr) exceeds current baseline (0.91 t/ha/yr).",
+     "Economic trade-off: median net return is lower (-$474/ha/yr) than current baseline; evaluate whether water or soil benefits offset income loss."
+    ]
+   },
+   {
+    "id": "alfalfa_corn",
+    "name": "Alfalfa (3 yr)\u2013corn (2 yr) (full irrigation)",
+    "description": "Perennial forage builds soil; needs hay market and more labour.",
+    "why_considered": "Introduces deep-rooted perennial legume to fix atmospheric nitrogen and supply high-demand Southwest Kansas dairy and beef forage markets.",
+    "benefits": [
+     "Breaks monoculture pest and weed cycles by adding broadleaf/legume to grass rotation",
+     "Biological N fixation in 3 of 5 yr cuts synthetic fertilizer",
+     "~43% less water erosion than current rotation (0.52 t/ha/yr p50)"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 3,
+     "pest_break": true,
+     "forage": true
+    },
+    "is_current": false,
+    "rotation": [
+     "alfalfa",
+     "alfalfa",
+     "alfalfa",
+     "corn",
+     "corn"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 345.0,
+      "p50": 434.0,
+      "p90": 496.0
+     },
+     "erosion_t_ha": {
+      "p10": 0.32,
+      "p50": 0.52,
+      "p90": 0.83
+     },
+     "soil_index": {
+      "p10": 0.72,
+      "p50": 0.74,
+      "p90": 0.76
+     },
+     "income_usd_ha": {
+      "p10": 962.0,
+      "p50": 1047.0,
+      "p90": 1139.0
+     },
+     "labour_index": {
+      "p10": 0.66,
+      "p50": 0.72,
+      "p90": 0.76
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Richfield silt loam, 0 to 1 percent slopes: AWC 210 mm, K 0.37, slope 0.5 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
     "verify_locally": [
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
-     "Fallow-year weed control and residue management plan."
-    ],
-    "why_considered": "Incorporates planned fallow on silt loam soil (230 mm AWC) to recharge root-zone soil moisture for following dryland or limited crops.",
+     "Hay buyers, storage and haul distance; stand establishment cost.",
+     "Water allocation check: modelled irrigation need (434 mm/yr) is higher than current baseline (335 mm/yr); check water rights."
+    ]
+   },
+   {
+    "id": "sorghum_wheat_cover",
+    "name": "Sorghum\u2013wheat\u2013cover crop (limited irrigation)",
+    "description": "Cover crop replaces fallow to protect soil; uses some stored water.",
+    "why_considered": "Replaces winter bare-soil fallow with cereal rye cover to protect silt loam topsoil from wind erosion and build soil organic matter.",
     "benefits": [
-     "Cuts median irrigation pumping by 347 mm/yr (71% water savings)",
-     "Reduces seasonal machinery and management hours by ~61%"
+     "Cuts median irrigation pumping by 235 mm/yr (70% water savings)",
+     "Living winter cover adds root biomass, builds organic matter, and limits weeds",
+     "Reduces seasonal machinery and management hours by ~52%"
     ],
     "soil_health_traits": {
      "n_fixing_years": 0,
      "pest_break": false,
      "forage": false
-    }
+    },
+    "is_current": false,
+    "rotation": [
+     "sorghum",
+     "winter_wheat",
+     "rye_cover"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 93.0,
+      "p50": 100.0,
+      "p90": 100.0
+     },
+     "erosion_t_ha": {
+      "p10": 0.78,
+      "p50": 1.19,
+      "p90": 1.82
+     },
+     "soil_index": {
+      "p10": 0.38,
+      "p50": 0.43,
+      "p90": 0.5
+     },
+     "income_usd_ha": {
+      "p10": 161.0,
+      "p50": 293.0,
+      "p90": 438.0
+     },
+     "labour_index": {
+      "p10": 0.19,
+      "p50": 0.2,
+      "p90": 0.2
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Richfield silt loam, 0 to 1 percent slopes: AWC 210 mm, K 0.37, slope 0.5 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass.",
+     "Limited irrigation capped at 150 mm/yr (6 in) on cropped seasons (~100 mm/yr rotation average including cover/fallow); wet years may use less.",
+     "Cover crop modelled as a winter rye season; termination timing and its effect on the next crop's water are simplified."
+    ],
+    "verify_locally": [
+     "Does your water right / well capacity support this rotation in a dry year?",
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "Cover crop seed cost and termination timing for crop insurance compliance.",
+     "Residue management: modelled water erosion (1.19 t/ha/yr) exceeds current baseline (0.91 t/ha/yr).",
+     "Economic trade-off: median net return is lower (-$447/ha/yr) than current baseline; evaluate whether water or soil benefits offset income loss."
+    ]
+   }
+  ],
+  "FIN-003": [
+   {
+    "id": "current",
+    "name": "Current: Winter wheat\u2013Grain sorghum\u2013Fallow / idle cropland",
+    "description": "Rotation observed in CDL over recent years (irrigated, full).",
+    "why_considered": "Observed baseline crop sequence (Winter wheat\u2013Grain sorghum\u2013Fallow / idle cropland) from USDA CDL history on loamy fine sand soil (full irrigation).",
+    "benefits": [
+     "Established management routine with existing planter, chemical, and harvest equipment",
+     "High drought and heat tolerance with lower water and N demands than corn",
+     "Readily accepted by local cattle feedyards and ethanol plants"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": false,
+     "forage": false
+    },
+    "is_current": true,
+    "rotation": [
+     "winter_wheat",
+     "sorghum",
+     "fallow"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 155.0,
+      "p50": 203.0,
+      "p90": 238.0
+     },
+     "erosion_t_ha": {
+      "p10": 1.48,
+      "p50": 2.51,
+      "p90": 4.01
+     },
+     "soil_index": {
+      "p10": 0.28,
+      "p50": 0.3,
+      "p90": 0.32
+     },
+     "income_usd_ha": {
+      "p10": 278.0,
+      "p50": 310.0,
+      "p90": 358.0
+     },
+     "labour_index": {
+      "p10": 0.25,
+      "p50": 0.28,
+      "p90": 0.3
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Las Animas-Lincoln complex: AWC 110 mm, K 0.24, slope 1.4 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
+    ],
+    "verify_locally": [
+     "Does your water right / well capacity support this rotation in a dry year?",
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "How you will keep residue on the fallow to limit wind erosion."
+    ]
+   },
+   {
+    "id": "alfalfa_corn",
+    "name": "Alfalfa (3 yr)\u2013corn (2 yr) (full irrigation)",
+    "description": "Perennial forage builds soil; needs hay market and more labour.",
+    "why_considered": "Introduces deep-rooted perennial legume to fix atmospheric nitrogen and supply high-demand Southwest Kansas dairy and beef forage markets.",
+    "benefits": [
+     "Breaks monoculture pest and weed cycles by adding broadleaf/legume to grass rotation",
+     "Biological N fixation in 3 of 5 yr cuts synthetic fertilizer",
+     "~66% less water erosion than current rotation (0.85 t/ha/yr p50)"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 3,
+     "pest_break": true,
+     "forage": true
+    },
+    "is_current": false,
+    "rotation": [
+     "alfalfa",
+     "alfalfa",
+     "alfalfa",
+     "corn",
+     "corn"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 388.0,
+      "p50": 463.0,
+      "p90": 513.0
+     },
+     "erosion_t_ha": {
+      "p10": 0.53,
+      "p50": 0.85,
+      "p90": 1.37
+     },
+     "soil_index": {
+      "p10": 0.7,
+      "p50": 0.72,
+      "p90": 0.74
+     },
+     "income_usd_ha": {
+      "p10": 911.0,
+      "p50": 976.0,
+      "p90": 1095.0
+     },
+     "labour_index": {
+      "p10": 0.69,
+      "p50": 0.74,
+      "p90": 0.77
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Las Animas-Lincoln complex: AWC 110 mm, K 0.24, slope 1.4 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
+    ],
+    "verify_locally": [
+     "Does your water right / well capacity support this rotation in a dry year?",
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "Hay buyers, storage and haul distance; stand establishment cost.",
+     "Water allocation check: modelled irrigation need (463 mm/yr) is higher than current baseline (203 mm/yr); check water rights."
+    ]
    },
    {
     "id": "corn_soy",
-    "name": "Corn–soybean",
-    "description": "Adds a legume; needs full irrigation.",
+    "name": "Corn\u2013soybean (full irrigation)",
+    "description": "Adds a nitrogen-fixing legume; breaks corn pest cycles.",
+    "why_considered": "Introduces nitrogen-fixing soybeans to break continuous grass cereal cycles and reduce synthetic fertilizer inputs.",
+    "benefits": [
+     "Breaks monoculture pest and weed cycles by adding broadleaf/legume to grass rotation",
+     "Biological N fixation in 1 of 2 yr cuts synthetic fertilizer",
+     "Higher median return over variable costs (+$766/ha/yr vs current)"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 1,
+     "pest_break": true,
+     "forage": false
+    },
     "is_current": false,
     "rotation": [
      "corn",
@@ -1106,223 +904,254 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 301.0,
-      "p50": 386.0,
-      "p90": 471.0
+      "p10": 343.0,
+      "p50": 391.0,
+      "p90": 491.0
      },
      "erosion_t_ha": {
-      "p10": 0.41,
-      "p50": 0.92,
-      "p90": 1.93
+      "p10": 1.26,
+      "p50": 2.57,
+      "p90": 4.26
      },
      "soil_index": {
-      "p10": -0.03,
-      "p50": 0.06,
-      "p90": 0.13
+      "p10": 0.4,
+      "p50": 0.47,
+      "p90": 0.49
      },
      "income_usd_ha": {
-      "p10": 162.0,
-      "p50": 422.0,
-      "p90": 598.0
+      "p10": 892.0,
+      "p50": 1076.0,
+      "p90": 1222.0
      },
      "labour_index": {
-      "p10": 0.5,
-      "p50": 0.55,
-      "p90": 0.61
+      "p10": 0.39,
+      "p50": 0.42,
+      "p90": 0.48
      }
     },
     "evidence": [
      {
       "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Las Animas-Lincoln complex: AWC 110 mm, K 0.24, slope 1.4 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Soybean yield under SW Kansas heat not calibrated."
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
     "verify_locally": [
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
-     "Soybean cyst nematode and iron-deficiency chlorosis history."
-    ],
-    "why_considered": "Introduces nitrogen-fixing soybeans to break continuous grass cereal cycles and reduce synthetic fertilizer inputs.",
-    "benefits": [
-     "Cuts median irrigation pumping by 102 mm/yr (21% water savings)",
-     "Suppresses pest and weed pressure across 2 crop families",
-     "Reduces seasonal machinery and management hours by ~24%"
-    ],
-    "soil_health_traits": {
-     "n_fixing_years": 1,
-     "pest_break": true,
-     "forage": false
-    }
+     "Soybean yield on your soil (iron-deficiency chlorosis on high-pH soils).",
+     "Water allocation check: modelled irrigation need (391 mm/yr) is higher than current baseline (203 mm/yr); check water rights."
+    ]
    },
    {
-    "id": "corn_sorg_cover",
-    "name": "Corn–sorghum + rye cover",
-    "description": "Exits alfalfa; covers protect soil in winter.",
+    "id": "sorghum_wheat_cover",
+    "name": "Sorghum\u2013wheat\u2013cover crop (limited irrigation)",
+    "description": "Cover crop replaces fallow to protect soil; uses some stored water.",
+    "why_considered": "Replaces winter bare-soil fallow with cereal rye cover to protect loamy fine sand topsoil from wind erosion and build soil organic matter.",
+    "benefits": [
+     "Cuts median irrigation pumping by 103 mm/yr (51% water savings)",
+     "Cereal rye cover shields topsoil from winter/spring High Plains wind erosion",
+     "~22% less water erosion than current rotation (1.95 t/ha/yr p50)"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": false,
+     "forage": false
+    },
     "is_current": false,
     "rotation": [
-     "corn",
-     "rye_cover",
      "sorghum",
+     "winter_wheat",
      "rye_cover"
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 292.0,
-      "p50": 374.0,
-      "p90": 456.0
+      "p10": 95.0,
+      "p50": 100.0,
+      "p90": 100.0
      },
      "erosion_t_ha": {
-      "p10": 0.19,
-      "p50": 0.41,
-      "p90": 0.87
+      "p10": 1.27,
+      "p50": 1.95,
+      "p90": 3.0
      },
      "soil_index": {
-      "p10": 0.25,
-      "p50": 0.34,
-      "p90": 0.41
+      "p10": 0.34,
+      "p50": 0.39,
+      "p90": 0.46
      },
      "income_usd_ha": {
-      "p10": 98.0,
-      "p50": 306.0,
-      "p90": 448.0
+      "p10": 94.0,
+      "p50": 226.0,
+      "p90": 393.0
      },
      "labour_index": {
-      "p10": 0.53,
-      "p50": 0.58,
+      "p10": 0.19,
+      "p50": 0.2,
+      "p90": 0.2
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Las Animas-Lincoln complex: AWC 110 mm, K 0.24, slope 1.4 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass.",
+     "Limited irrigation capped at 150 mm/yr (6 in) on cropped seasons (~100 mm/yr rotation average including cover/fallow); wet years may use less.",
+     "Cover crop modelled as a winter rye season; termination timing and its effect on the next crop's water are simplified."
+    ],
+    "verify_locally": [
+     "Does your water right / well capacity support this rotation in a dry year?",
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "Cover crop seed cost and termination timing for crop insurance compliance.",
+     "Economic trade-off: median net return is lower (-$84/ha/yr) than current baseline; evaluate whether water or soil benefits offset income loss."
+    ]
+   }
+  ],
+  "FIN-004": [
+   {
+    "id": "current",
+    "name": "Current: Winter wheat\u2013Alfalfa\u2013Alfalfa\u2013Corn\u2013Corn",
+    "description": "Rotation observed in CDL over recent years (irrigated, full).",
+    "why_considered": "Observed baseline crop sequence (Winter wheat\u2013Alfalfa\u2013Alfalfa\u2013Corn\u2013Corn) from USDA CDL history on silt loam soil (full irrigation).",
+    "benefits": [
+     "Established management routine with existing planter, chemical, and harvest equipment",
+     "Perennial root system maximizes soil building and biological N fixation",
+     "Direct premium marketing to Southwest Kansas dairy operations"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 2,
+     "pest_break": true,
+     "forage": true
+    },
+    "is_current": true,
+    "rotation": [
+     "winter_wheat",
+     "alfalfa",
+     "alfalfa",
+     "corn",
+     "corn"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 303.0,
+      "p50": 387.0,
+      "p90": 438.0
+     },
+     "erosion_t_ha": {
+      "p10": 0.45,
+      "p50": 0.68,
+      "p90": 0.98
+     },
+     "soil_index": {
+      "p10": 0.66,
+      "p50": 0.68,
+      "p90": 0.7
+     },
+     "income_usd_ha": {
+      "p10": 847.0,
+      "p50": 928.0,
+      "p90": 1016.0
+     },
+     "labour_index": {
+      "p10": 0.55,
+      "p50": 0.61,
       "p90": 0.64
      }
     },
     "evidence": [
      {
       "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Bridgeport silt loam, occasionally flooded: AWC 230 mm, K 0.43, slope 0.4 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Soil benefit of ending the alfalfa stand is not quantified."
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
     "verify_locally": [
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
-     "Hay market access lost if alfalfa is dropped."
-    ],
-    "why_considered": "Replaces winter bare-soil fallow with cereal rye cover to protect silt loam topsoil from wind erosion and build soil organic matter.",
+     "Hay buyers, storage and haul distance; stand establishment cost."
+    ]
+   },
+   {
+    "id": "wsf_dryland",
+    "name": "Wheat\u2013sorghum\u2013fallow (dryland)",
+    "description": "No irrigation; relies on fallow-stored soil water and rainfall.",
+    "why_considered": "Incorporates planned fallow on silt loam soil (230 mm AWC) to recharge root-zone soil moisture for following dryland or limited crops.",
     "benefits": [
-     "Cuts median irrigation pumping by 114 mm/yr (23% water savings)",
-     "Cereal rye cover shields topsoil from winter and spring High Plains wind erosion",
-     "Reduces seasonal machinery and management hours by ~19%"
+     "Cuts median irrigation pumping by 387 mm/yr (100% water savings)",
+     "Reduces seasonal machinery and management hours by ~75%"
     ],
     "soil_health_traits": {
      "n_fixing_years": 0,
      "pest_break": false,
-     "forage": true
-    }
-   }
-  ],
-  "FIN-005": [
-   {
-    "id": "current",
-    "name": "Current: corn–soybeans",
-    "description": "Rotation observed in CDL over recent years.",
-    "is_current": true,
-    "rotation": [
-     "corn",
-     "soybeans"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 304.0,
-      "p50": 390.0,
-      "p90": 475.0
-     },
-     "erosion_t_ha": {
-      "p10": 0.55,
-      "p50": 1.23,
-      "p90": 2.57
-     },
-     "soil_index": {
-      "p10": -0.06,
-      "p50": 0.03,
-      "p90": 0.1
-     },
-     "income_usd_ha": {
-      "p10": 151.0,
-      "p50": 401.0,
-      "p90": 572.0
-     },
-     "labour_index": {
-      "p10": 0.5,
-      "p50": 0.55,
-      "p90": 0.61
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
-     }
-    ],
-    "data_gaps": [
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence."
-    ],
-    "why_considered": "Observed baseline rotation (Corn–Soybeans) on silt loam soil under full irrigation from USDA CDL history.",
-    "benefits": [
-     "Established management routine with existing planter, chemical, and harvest equipment",
-     "Maintains multi-crop family rotation breaking single-crop disease cycles",
-     "Familiar baseline performance across 30-year historical weather conditions"
-    ],
-    "soil_health_traits": {
-     "n_fixing_years": 1,
-     "pest_break": true,
      "forage": false
-    }
-   },
-   {
-    "id": "wsf_limited",
-    "name": "Wheat–sorghum–fallow (limited irrigation)",
-    "description": "Lower-water rotation common in western Kansas.",
+    },
     "is_current": false,
     "rotation": [
      "winter_wheat",
@@ -1331,1122 +1160,1587 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 111.0,
-      "p50": 142.0,
-      "p90": 174.0
+      "p10": 0.0,
+      "p50": 0.0,
+      "p90": 0.0
      },
      "erosion_t_ha": {
-      "p10": 0.67,
-      "p50": 1.49,
-      "p90": 3.14
+      "p10": 0.89,
+      "p50": 1.51,
+      "p90": 2.42
      },
      "soil_index": {
-      "p10": -0.13,
-      "p50": -0.04,
-      "p90": 0.03
+      "p10": 0.17,
+      "p50": 0.21,
+      "p90": 0.25
      },
      "income_usd_ha": {
-      "p10": 0.0,
-      "p50": 128.0,
-      "p90": 216.0
+      "p10": 206.0,
+      "p50": 291.0,
+      "p90": 401.0
      },
      "labour_index": {
-      "p10": 0.23,
-      "p50": 0.28,
-      "p90": 0.34
+      "p10": 0.15,
+      "p50": 0.15,
+      "p90": 0.15
      }
     },
     "evidence": [
      {
       "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Bridgeport silt loam, occasionally flooded: AWC 230 mm, K 0.43, slope 0.4 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Yield response to deficit irrigation is from literature, not this field."
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
+    ],
+    "verify_locally": [
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "How you will keep residue on the fallow to limit wind erosion.",
+     "Erosion risk: modelled water erosion (1.51 t/ha/yr) is 2.2x your baseline (0.68 t/ha/yr); verify residue management and tillage.",
+     "Economic trade-off: median net return is lower (-$637/ha/yr) than current baseline; evaluate whether water or soil benefits offset income loss."
+    ]
+   },
+   {
+    "id": "corn_soy",
+    "name": "Corn\u2013soybean (full irrigation)",
+    "description": "Adds a nitrogen-fixing legume; breaks corn pest cycles.",
+    "why_considered": "Introduces nitrogen-fixing soybeans to break continuous grass cereal cycles and reduce synthetic fertilizer inputs.",
+    "benefits": [
+     "Suppresses pest and weed pressure across 2 crop families",
+     "Higher median return over variable costs (+$233/ha/yr vs current)",
+     "Reduces seasonal machinery and management hours by ~31%"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 1,
+     "pest_break": true,
+     "forage": false
+    },
+    "is_current": false,
+    "rotation": [
+     "corn",
+     "soybeans"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 302.0,
+      "p50": 386.0,
+      "p90": 486.0
+     },
+     "erosion_t_ha": {
+      "p10": 0.76,
+      "p50": 1.55,
+      "p90": 2.57
+     },
+     "soil_index": {
+      "p10": 0.45,
+      "p50": 0.51,
+      "p90": 0.53
+     },
+     "income_usd_ha": {
+      "p10": 973.0,
+      "p50": 1161.0,
+      "p90": 1283.0
+     },
+     "labour_index": {
+      "p10": 0.36,
+      "p50": 0.42,
+      "p90": 0.48
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Bridgeport silt loam, occasionally flooded: AWC 230 mm, K 0.43, slope 0.4 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
     "verify_locally": [
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
-     "Fallow-year weed control and residue management plan."
-    ],
-    "why_considered": "Incorporates planned fallow on silt loam soil (205 mm AWC) to recharge root-zone soil moisture for following dryland or limited crops.",
+     "Soybean yield on your soil (iron-deficiency chlorosis on high-pH soils).",
+     "Erosion risk: modelled water erosion (1.55 t/ha/yr) is 2.3x your baseline (0.68 t/ha/yr); verify residue management and tillage."
+    ]
+   },
+   {
+    "id": "sorghum_wheat_cover",
+    "name": "Sorghum\u2013wheat\u2013cover crop (limited irrigation)",
+    "description": "Cover crop replaces fallow to protect soil; uses some stored water.",
+    "why_considered": "Replaces winter bare-soil fallow with cereal rye cover to protect silt loam topsoil from wind erosion and build soil organic matter.",
     "benefits": [
-     "Cuts median irrigation pumping by 248 mm/yr (64% water savings)",
-     "Reduces seasonal machinery and management hours by ~49%"
+     "Cuts median irrigation pumping by 287 mm/yr (74% water savings)",
+     "Living winter cover adds root biomass, builds organic matter, and limits weeds",
+     "Reduces seasonal machinery and management hours by ~67%"
     ],
     "soil_health_traits": {
      "n_fixing_years": 0,
      "pest_break": false,
      "forage": false
-    }
+    },
+    "is_current": false,
+    "rotation": [
+     "sorghum",
+     "winter_wheat",
+     "rye_cover"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 93.0,
+      "p50": 100.0,
+      "p90": 100.0
+     },
+     "erosion_t_ha": {
+      "p10": 0.77,
+      "p50": 1.18,
+      "p90": 1.8
+     },
+     "soil_index": {
+      "p10": 0.39,
+      "p50": 0.43,
+      "p90": 0.5
+     },
+     "income_usd_ha": {
+      "p10": 174.0,
+      "p50": 302.0,
+      "p90": 445.0
+     },
+     "labour_index": {
+      "p10": 0.19,
+      "p50": 0.2,
+      "p90": 0.2
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Bridgeport silt loam, occasionally flooded: AWC 230 mm, K 0.43, slope 0.4 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass.",
+     "Limited irrigation capped at 150 mm/yr (6 in) on cropped seasons (~100 mm/yr rotation average including cover/fallow); wet years may use less.",
+     "Cover crop modelled as a winter rye season; termination timing and its effect on the next crop's water are simplified."
+    ],
+    "verify_locally": [
+     "Does your water right / well capacity support this rotation in a dry year?",
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "Cover crop seed cost and termination timing for crop insurance compliance.",
+     "Residue management: modelled water erosion (1.18 t/ha/yr) exceeds current baseline (0.68 t/ha/yr).",
+     "Economic trade-off: median net return is lower (-$626/ha/yr) than current baseline; evaluate whether water or soil benefits offset income loss."
+    ]
+   }
+  ],
+  "FIN-005": [
+   {
+    "id": "current",
+    "name": "Current: Corn\u2013Soybeans",
+    "description": "Rotation observed in CDL over recent years (irrigated, full).",
+    "why_considered": "Observed baseline crop sequence (Corn\u2013Soybeans) from USDA CDL history on silt loam soil (full irrigation).",
+    "benefits": [
+     "Established management routine with existing planter, chemical, and harvest equipment",
+     "Diverse crop families break monoculture disease, weed, and insect cycles",
+     "Spreads field operations across distinct planting and harvesting windows"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 1,
+     "pest_break": true,
+     "forage": false
+    },
+    "is_current": true,
+    "rotation": [
+     "corn",
+     "soybeans"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 313.0,
+      "p50": 386.0,
+      "p90": 483.0
+     },
+     "erosion_t_ha": {
+      "p10": 1.0,
+      "p50": 2.05,
+      "p90": 3.4
+     },
+     "soil_index": {
+      "p10": 0.44,
+      "p50": 0.5,
+      "p90": 0.51
+     },
+     "income_usd_ha": {
+      "p10": 952.0,
+      "p50": 1146.0,
+      "p90": 1276.0
+     },
+     "labour_index": {
+      "p10": 0.37,
+      "p50": 0.42,
+      "p90": 0.48
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Richfield silt loam, 0 to 1 percent slopes: AWC 205 mm, K 0.37, slope 0.7 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
+    ],
+    "verify_locally": [
+     "Does your water right / well capacity support this rotation in a dry year?",
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "Soybean yield on your soil (iron-deficiency chlorosis on high-pH soils)."
+    ]
    },
    {
-    "id": "corn_sorg",
-    "name": "Corn–sorghum",
-    "description": "Swaps soybeans for drought-tolerant sorghum.",
+    "id": "wsf_dryland",
+    "name": "Wheat\u2013sorghum\u2013fallow (dryland)",
+    "description": "No irrigation; relies on fallow-stored soil water and rainfall.",
+    "why_considered": "Incorporates planned fallow on silt loam soil (205 mm AWC) to recharge root-zone soil moisture for following dryland or limited crops.",
+    "benefits": [
+     "Cuts median irrigation pumping by 386 mm/yr (100% water savings)",
+     "Reduces seasonal machinery and management hours by ~64%"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": false,
+     "forage": false
+    },
+    "is_current": false,
+    "rotation": [
+     "winter_wheat",
+     "sorghum",
+     "fallow"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 0.0,
+      "p50": 0.0,
+      "p90": 0.0
+     },
+     "erosion_t_ha": {
+      "p10": 1.18,
+      "p50": 2.0,
+      "p90": 3.2
+     },
+     "soil_index": {
+      "p10": 0.15,
+      "p50": 0.18,
+      "p90": 0.23
+     },
+     "income_usd_ha": {
+      "p10": 174.0,
+      "p50": 260.0,
+      "p90": 370.0
+     },
+     "labour_index": {
+      "p10": 0.15,
+      "p50": 0.15,
+      "p90": 0.15
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Richfield silt loam, 0 to 1 percent slopes: AWC 205 mm, K 0.37, slope 0.7 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
+    ],
+    "verify_locally": [
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "How you will keep residue on the fallow to limit wind erosion.",
+     "Economic trade-off: median net return is lower (-$886/ha/yr) than current baseline; evaluate whether water or soil benefits offset income loss."
+    ]
+   },
+   {
+    "id": "corn_wheat_sorghum",
+    "name": "Corn\u2013wheat\u2013sorghum (full irrigation)",
+    "description": "Three crops with different water peaks; spreads workload over the year.",
+    "why_considered": "Diversifies the crop sequence on silt loam soil to balance seasonal machinery workload and hedge against weather extremes.",
+    "benefits": [
+     "Cuts median irrigation pumping by 66 mm/yr (17% water savings)",
+     "~34% less water erosion than current rotation (1.35 t/ha/yr p50)",
+     "Improves Soil Conditioning Index (+0.59 vs +0.50 current), building organic matter"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": false,
+     "forage": false
+    },
     "is_current": false,
     "rotation": [
      "corn",
+     "winter_wheat",
      "sorghum"
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 259.0,
-      "p50": 333.0,
-      "p90": 406.0
+      "p10": 209.0,
+      "p50": 320.0,
+      "p90": 382.0
      },
      "erosion_t_ha": {
-      "p10": 0.43,
-      "p50": 0.95,
-      "p90": 2.0
+      "p10": 0.9,
+      "p50": 1.35,
+      "p90": 2.09
      },
      "soil_index": {
-      "p10": 0.06,
-      "p50": 0.15,
-      "p90": 0.22
+      "p10": 0.56,
+      "p50": 0.59,
+      "p90": 0.61
      },
      "income_usd_ha": {
-      "p10": 115.0,
-      "p50": 337.0,
-      "p90": 488.0
+      "p10": 619.0,
+      "p50": 757.0,
+      "p90": 856.0
      },
      "labour_index": {
-      "p10": 0.45,
-      "p50": 0.5,
-      "p90": 0.56
+      "p10": 0.31,
+      "p50": 0.39,
+      "p90": 0.43
      }
     },
     "evidence": [
      {
       "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Richfield silt loam, 0 to 1 percent slopes: AWC 205 mm, K 0.37, slope 0.7 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered."
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
     "verify_locally": [
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
-     "Sorghum harvest timing vs. wheat planting."
-    ],
-    "why_considered": "Diversifies the crop sequence on silt loam soil to balance seasonal machinery workload and hedge against weather extremes.",
-    "benefits": [
-     "Cuts median irrigation pumping by 57 mm/yr (15% water savings)",
-     "~23% less water erosion than current rotation (0.95 t/ha/yr p50)",
-     "Reduces seasonal machinery and management hours by ~9%"
-    ],
-    "soil_health_traits": {
-     "n_fixing_years": 0,
-     "pest_break": false,
-     "forage": false
-    }
+     "Economic trade-off: median net return is lower (-$389/ha/yr) than current baseline; evaluate whether water or soil benefits offset income loss."
+    ]
    },
    {
-    "id": "alfalfa_corn_wheat",
-    "name": "Alfalfa (3 yr)–corn–wheat",
-    "description": "Perennial legume phase for soil building.",
+    "id": "alfalfa_corn",
+    "name": "Alfalfa (3 yr)\u2013corn (2 yr) (full irrigation)",
+    "description": "Perennial forage builds soil; needs hay market and more labour.",
+    "why_considered": "Introduces deep-rooted perennial legume to fix atmospheric nitrogen and supply high-demand Southwest Kansas dairy and beef forage markets.",
+    "benefits": [
+     "Suppresses pest and weed pressure across 2 crop families",
+     "Biological N fixation in 3 of 5 yr cuts synthetic fertilizer",
+     "~67% less water erosion than current rotation (0.68 t/ha/yr p50)"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 3,
+     "pest_break": true,
+     "forage": true
+    },
     "is_current": false,
     "rotation": [
      "alfalfa",
      "alfalfa",
      "alfalfa",
      "corn",
-     "winter_wheat"
+     "corn"
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 386.0,
-      "p50": 495.0,
-      "p90": 604.0
+      "p10": 347.0,
+      "p50": 435.0,
+      "p90": 498.0
      },
      "erosion_t_ha": {
-      "p10": 0.19,
-      "p50": 0.41,
-      "p90": 0.86
+      "p10": 0.42,
+      "p50": 0.68,
+      "p90": 1.09
      },
      "soil_index": {
-      "p10": 0.21,
-      "p50": 0.3,
-      "p90": 0.37
+      "p10": 0.71,
+      "p50": 0.74,
+      "p90": 0.75
      },
      "income_usd_ha": {
-      "p10": 163.0,
-      "p50": 423.0,
-      "p90": 600.0
+      "p10": 959.0,
+      "p50": 1046.0,
+      "p90": 1135.0
      },
      "labour_index": {
-      "p10": 0.65,
-      "p50": 0.7,
+      "p10": 0.66,
+      "p50": 0.72,
       "p90": 0.76
      }
     },
     "evidence": [
      {
       "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Richfield silt loam, 0 to 1 percent slopes: AWC 205 mm, K 0.37, slope 0.7 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Alfalfa irrigation demand is the highest of all options; stand life uncertain."
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
     "verify_locally": [
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
-     "Hay buyer within hauling distance.",
-     "Cutting labour and equipment."
-    ],
-    "why_considered": "Introduces deep-rooted perennial legume to fix atmospheric nitrogen and supply high-demand Southwest Kansas dairy and beef forage markets.",
-    "benefits": [
-     "Suppresses pest and weed pressure across 2 crop families",
-     "Biological N fixation in 3 of 5 yr cuts synthetic fertilizer",
-     "~67% less water erosion than current rotation (0.41 t/ha/yr p50)"
-    ],
-    "soil_health_traits": {
-     "n_fixing_years": 3,
-     "pest_break": true,
-     "forage": true
-    }
+     "Hay buyers, storage and haul distance; stand establishment cost.",
+     "Water allocation check: modelled irrigation need (435 mm/yr) is higher than current baseline (386 mm/yr); check water rights.",
+     "Economic trade-off: median net return is lower (-$100/ha/yr) than current baseline; evaluate whether water or soil benefits offset income loss."
+    ]
    }
   ],
   "FIN-006": [
    {
     "id": "current",
-    "name": "Current: sorghum–sorghum–wheat",
-    "description": "Rotation observed in CDL over recent years.",
+    "name": "Current: Grain sorghum\u2013Winter wheat\u2013Grain sorghum",
+    "description": "Rotation observed in CDL over recent years (irrigated, full).",
+    "why_considered": "Observed baseline crop sequence (Grain sorghum\u2013Winter wheat\u2013Grain sorghum) from USDA CDL history on silt loam soil (full irrigation).",
+    "benefits": [
+     "Established management routine with existing planter, chemical, and harvest equipment",
+     "High drought and heat tolerance with lower water and N demands than corn",
+     "Readily accepted by local cattle feedyards and ethanol plants"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": false,
+     "forage": false
+    },
     "is_current": true,
     "rotation": [
      "sorghum",
+     "winter_wheat",
+     "sorghum"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 178.0,
+      "p50": 292.0,
+      "p90": 364.0
+     },
+     "erosion_t_ha": {
+      "p10": 3.31,
+      "p50": 4.77,
+      "p90": 7.71
+     },
+     "soil_index": {
+      "p10": 0.41,
+      "p50": 0.46,
+      "p90": 0.5
+     },
+     "income_usd_ha": {
+      "p10": 569.0,
+      "p50": 637.0,
+      "p90": 710.0
+     },
+     "labour_index": {
+      "p10": 0.28,
+      "p50": 0.35,
+      "p90": 0.4
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Ulysses silt loam, 1 to 3 percent slopes: AWC 180 mm, K 0.43, slope 2.1 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
+    ],
+    "verify_locally": [
+     "Does your water right / well capacity support this rotation in a dry year?",
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence."
+    ]
+   },
+   {
+    "id": "corn_soy",
+    "name": "Corn\u2013soybean (full irrigation)",
+    "description": "Adds a nitrogen-fixing legume; breaks corn pest cycles.",
+    "why_considered": "Introduces nitrogen-fixing soybeans to break continuous grass cereal cycles and reduce synthetic fertilizer inputs.",
+    "benefits": [
+     "Breaks monoculture pest and weed cycles by adding broadleaf/legume to grass rotation",
+     "Biological N fixation in 1 of 2 yr cuts synthetic fertilizer",
+     "Higher median return over variable costs (+$495/ha/yr vs current)"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 1,
+     "pest_break": true,
+     "forage": false
+    },
+    "is_current": false,
+    "rotation": [
+     "corn",
+     "soybeans"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 324.0,
+      "p50": 386.0,
+      "p90": 486.0
+     },
+     "erosion_t_ha": {
+      "p10": 3.5,
+      "p50": 7.14,
+      "p90": 11.84
+     },
+     "soil_index": {
+      "p10": 0.34,
+      "p50": 0.38,
+      "p90": 0.44
+     },
+     "income_usd_ha": {
+      "p10": 927.0,
+      "p50": 1132.0,
+      "p90": 1265.0
+     },
+     "labour_index": {
+      "p10": 0.38,
+      "p50": 0.42,
+      "p90": 0.48
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Ulysses silt loam, 1 to 3 percent slopes: AWC 180 mm, K 0.43, slope 2.1 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
+    ],
+    "verify_locally": [
+     "Does your water right / well capacity support this rotation in a dry year?",
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "Soybean yield on your soil (iron-deficiency chlorosis on high-pH soils).",
+     "Residue management: modelled water erosion (7.14 t/ha/yr) exceeds current baseline (4.77 t/ha/yr).",
+     "Water allocation check: modelled irrigation need (386 mm/yr) is higher than current baseline (292 mm/yr); check water rights."
+    ]
+   },
+   {
+    "id": "wsf_dryland",
+    "name": "Wheat\u2013sorghum\u2013fallow (dryland)",
+    "description": "No irrigation; relies on fallow-stored soil water and rainfall.",
+    "why_considered": "Incorporates planned fallow on silt loam soil (180 mm AWC) to recharge root-zone soil moisture for following dryland or limited crops.",
+    "benefits": [
+     "Cuts median irrigation pumping by 292 mm/yr (100% water savings)",
+     "Reduces seasonal machinery and management hours by ~57%"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": false,
+     "forage": false
+    },
+    "is_current": false,
+    "rotation": [
+     "winter_wheat",
      "sorghum",
+     "fallow"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 0.0,
+      "p50": 0.0,
+      "p90": 0.0
+     },
+     "erosion_t_ha": {
+      "p10": 4.12,
+      "p50": 6.96,
+      "p90": 11.16
+     },
+     "soil_index": {
+      "p10": 0.02,
+      "p50": 0.08,
+      "p90": 0.14
+     },
+     "income_usd_ha": {
+      "p10": 142.0,
+      "p50": 232.0,
+      "p90": 337.0
+     },
+     "labour_index": {
+      "p10": 0.15,
+      "p50": 0.15,
+      "p90": 0.15
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Ulysses silt loam, 1 to 3 percent slopes: AWC 180 mm, K 0.43, slope 2.1 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
+    ],
+    "verify_locally": [
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "How you will keep residue on the fallow to limit wind erosion.",
+     "Residue management: modelled water erosion (6.96 t/ha/yr) exceeds current baseline (4.77 t/ha/yr).",
+     "Economic trade-off: median net return is lower (-$405/ha/yr) than current baseline; evaluate whether water or soil benefits offset income loss."
+    ]
+   },
+   {
+    "id": "alfalfa_corn",
+    "name": "Alfalfa (3 yr)\u2013corn (2 yr) (full irrigation)",
+    "description": "Perennial forage builds soil; needs hay market and more labour.",
+    "why_considered": "Introduces deep-rooted perennial legume to fix atmospheric nitrogen and supply high-demand Southwest Kansas dairy and beef forage markets.",
+    "benefits": [
+     "Breaks monoculture pest and weed cycles by adding broadleaf/legume to grass rotation",
+     "Biological N fixation in 3 of 5 yr cuts synthetic fertilizer",
+     "~50% less water erosion than current rotation (2.37 t/ha/yr p50)"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 3,
+     "pest_break": true,
+     "forage": true
+    },
+    "is_current": false,
+    "rotation": [
+     "alfalfa",
+     "alfalfa",
+     "alfalfa",
+     "corn",
+     "corn"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 353.0,
+      "p50": 442.0,
+      "p90": 505.0
+     },
+     "erosion_t_ha": {
+      "p10": 1.47,
+      "p50": 2.37,
+      "p90": 3.81
+     },
+     "soil_index": {
+      "p10": 0.68,
+      "p50": 0.7,
+      "p90": 0.72
+     },
+     "income_usd_ha": {
+      "p10": 939.0,
+      "p50": 1035.0,
+      "p90": 1127.0
+     },
+     "labour_index": {
+      "p10": 0.67,
+      "p50": 0.72,
+      "p90": 0.77
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Ulysses silt loam, 1 to 3 percent slopes: AWC 180 mm, K 0.43, slope 2.1 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
+    ],
+    "verify_locally": [
+     "Does your water right / well capacity support this rotation in a dry year?",
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "Hay buyers, storage and haul distance; stand establishment cost.",
+     "Water allocation check: modelled irrigation need (442 mm/yr) is higher than current baseline (292 mm/yr); check water rights."
+    ]
+   }
+  ],
+  "FIN-007": [
+   {
+    "id": "current",
+    "name": "Current: Corn\u2013Fallow / idle cropland\u2013Corn\u2013Corn\u2013Winter wheat",
+    "description": "Rotation observed in CDL over recent years (irrigated, full).",
+    "why_considered": "Observed baseline crop sequence (Corn\u2013Fallow / idle cropland\u2013Corn\u2013Corn\u2013Winter wheat) from USDA CDL history on silt loam soil (full irrigation).",
+    "benefits": [
+     "Established management routine with existing planter, chemical, and harvest equipment",
+     "Direct access to established regional grain elevator and feed mill bids",
+     "Familiar baseline performance across 30-year historical weather conditions"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": false,
+     "forage": false
+    },
+    "is_current": true,
+    "rotation": [
+     "corn",
+     "fallow",
+     "corn",
+     "corn",
      "winter_wheat"
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 180.0,
-      "p50": 230.0,
-      "p90": 281.0
+      "p10": 227.0,
+      "p50": 281.0,
+      "p90": 346.0
      },
      "erosion_t_ha": {
-      "p10": 1.13,
-      "p50": 2.52,
-      "p90": 5.28
+      "p10": 1.52,
+      "p50": 2.03,
+      "p90": 2.98
      },
      "soil_index": {
-      "p10": 0.01,
+      "p10": 0.51,
+      "p50": 0.53,
+      "p90": 0.55
+     },
+     "income_usd_ha": {
+      "p10": 592.0,
+      "p50": 691.0,
+      "p90": 778.0
+     },
+     "labour_index": {
+      "p10": 0.32,
+      "p50": 0.36,
+      "p90": 0.4
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Keith silt loam, 0 to 1 percent slopes: AWC 200 mm, K 0.37, slope 0.8 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
+    ],
+    "verify_locally": [
+     "Does your water right / well capacity support this rotation in a dry year?",
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "How you will keep residue on the fallow to limit wind erosion."
+    ]
+   },
+   {
+    "id": "wsf_dryland",
+    "name": "Wheat\u2013sorghum\u2013fallow (dryland)",
+    "description": "No irrigation; relies on fallow-stored soil water and rainfall.",
+    "why_considered": "Incorporates planned fallow on silt loam soil (200 mm AWC) to recharge root-zone soil moisture for following dryland or limited crops.",
+    "benefits": [
+     "Cuts median irrigation pumping by 281 mm/yr (100% water savings)",
+     "Reduces seasonal machinery and management hours by ~58%"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": false,
+     "forage": false
+    },
+    "is_current": false,
+    "rotation": [
+     "winter_wheat",
+     "sorghum",
+     "fallow"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 0.0,
+      "p50": 0.0,
+      "p90": 0.0
+     },
+     "erosion_t_ha": {
+      "p10": 1.33,
+      "p50": 2.24,
+      "p90": 3.6
+     },
+     "soil_index": {
+      "p10": 0.14,
+      "p50": 0.18,
+      "p90": 0.23
+     },
+     "income_usd_ha": {
+      "p10": 168.0,
+      "p50": 255.0,
+      "p90": 364.0
+     },
+     "labour_index": {
+      "p10": 0.15,
+      "p50": 0.15,
+      "p90": 0.15
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Keith silt loam, 0 to 1 percent slopes: AWC 200 mm, K 0.37, slope 0.8 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
+    ],
+    "verify_locally": [
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "How you will keep residue on the fallow to limit wind erosion.",
+     "Residue management: modelled water erosion (2.24 t/ha/yr) exceeds current baseline (2.03 t/ha/yr).",
+     "Economic trade-off: median net return is lower (-$436/ha/yr) than current baseline; evaluate whether water or soil benefits offset income loss."
+    ]
+   },
+   {
+    "id": "alfalfa_corn",
+    "name": "Alfalfa (3 yr)\u2013corn (2 yr) (full irrigation)",
+    "description": "Perennial forage builds soil; needs hay market and more labour.",
+    "why_considered": "Introduces deep-rooted perennial legume to fix atmospheric nitrogen and supply high-demand Southwest Kansas dairy and beef forage markets.",
+    "benefits": [
+     "Breaks monoculture pest and weed cycles by adding broadleaf/legume to grass rotation",
+     "Biological N fixation in 3 of 5 yr cuts synthetic fertilizer",
+     "~62% less water erosion than current rotation (0.77 t/ha/yr p50)"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 3,
+     "pest_break": true,
+     "forage": true
+    },
+    "is_current": false,
+    "rotation": [
+     "alfalfa",
+     "alfalfa",
+     "alfalfa",
+     "corn",
+     "corn"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 348.0,
+      "p50": 436.0,
+      "p90": 499.0
+     },
+     "erosion_t_ha": {
+      "p10": 0.48,
+      "p50": 0.77,
+      "p90": 1.23
+     },
+     "soil_index": {
+      "p10": 0.71,
+      "p50": 0.74,
+      "p90": 0.75
+     },
+     "income_usd_ha": {
+      "p10": 951.0,
+      "p50": 1045.0,
+      "p90": 1135.0
+     },
+     "labour_index": {
+      "p10": 0.66,
+      "p50": 0.72,
+      "p90": 0.76
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Keith silt loam, 0 to 1 percent slopes: AWC 200 mm, K 0.37, slope 0.8 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
+    ],
+    "verify_locally": [
+     "Does your water right / well capacity support this rotation in a dry year?",
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "Hay buyers, storage and haul distance; stand establishment cost.",
+     "Water allocation check: modelled irrigation need (436 mm/yr) is higher than current baseline (281 mm/yr); check water rights."
+    ]
+   },
+   {
+    "id": "sorghum_wheat_cover",
+    "name": "Sorghum\u2013wheat\u2013cover crop (limited irrigation)",
+    "description": "Cover crop replaces fallow to protect soil; uses some stored water.",
+    "why_considered": "Replaces winter bare-soil fallow with cereal rye cover to protect silt loam topsoil from wind erosion and build soil organic matter.",
+    "benefits": [
+     "Cuts median irrigation pumping by 181 mm/yr (64% water savings)",
+     "Cereal rye cover shields topsoil from winter/spring High Plains wind erosion",
+     "~14% less water erosion than current rotation (1.75 t/ha/yr p50)"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": false,
+     "forage": false
+    },
+    "is_current": false,
+    "rotation": [
+     "sorghum",
+     "winter_wheat",
+     "rye_cover"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 93.0,
+      "p50": 100.0,
+      "p90": 100.0
+     },
+     "erosion_t_ha": {
+      "p10": 1.14,
+      "p50": 1.75,
+      "p90": 2.69
+     },
+     "soil_index": {
+      "p10": 0.37,
+      "p50": 0.42,
+      "p90": 0.49
+     },
+     "income_usd_ha": {
+      "p10": 154.0,
+      "p50": 287.0,
+      "p90": 434.0
+     },
+     "labour_index": {
+      "p10": 0.19,
+      "p50": 0.2,
+      "p90": 0.2
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Keith silt loam, 0 to 1 percent slopes: AWC 200 mm, K 0.37, slope 0.8 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass.",
+     "Limited irrigation capped at 150 mm/yr (6 in) on cropped seasons (~100 mm/yr rotation average including cover/fallow); wet years may use less.",
+     "Cover crop modelled as a winter rye season; termination timing and its effect on the next crop's water are simplified."
+    ],
+    "verify_locally": [
+     "Does your water right / well capacity support this rotation in a dry year?",
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "Cover crop seed cost and termination timing for crop insurance compliance.",
+     "Economic trade-off: median net return is lower (-$404/ha/yr) than current baseline; evaluate whether water or soil benefits offset income loss."
+    ]
+   }
+  ],
+  "FIN-008": [
+   {
+    "id": "current",
+    "name": "Current: Cotton\u2013Cotton\u2013Grain sorghum",
+    "description": "Rotation observed in CDL over recent years (irrigated, full).",
+    "why_considered": "Observed baseline crop sequence (Cotton\u2013Cotton\u2013Grain sorghum) from USDA CDL history on fine sandy loam soil (full irrigation).",
+    "benefits": [
+     "Established management routine with existing planter, chemical, and harvest equipment",
+     "High drought and heat tolerance with lower water and N demands than corn",
+     "Readily accepted by local cattle feedyards and ethanol plants"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": true,
+     "forage": false
+    },
+    "is_current": true,
+    "rotation": [
+     "cotton",
+     "cotton",
+     "sorghum"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 301.0,
+      "p50": 394.0,
+      "p90": 482.0
+     },
+     "erosion_t_ha": {
+      "p10": 3.55,
+      "p50": 5.45,
+      "p90": 9.39
+     },
+     "soil_index": {
+      "p10": 0.1,
+      "p50": 0.16,
+      "p90": 0.19
+     },
+     "income_usd_ha": {
+      "p10": 942.0,
+      "p50": 1037.0,
+      "p90": 1115.0
+     },
+     "labour_index": {
+      "p10": 0.42,
+      "p50": 0.48,
+      "p90": 0.54
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Manter fine sandy loam, 1 to 3 percent slopes: AWC 140 mm, K 0.24, slope 2.4 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
+    ],
+    "verify_locally": [
+     "Does your water right / well capacity support this rotation in a dry year?",
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence."
+    ]
+   },
+   {
+    "id": "wsf_dryland",
+    "name": "Wheat\u2013sorghum\u2013fallow (dryland)",
+    "description": "No irrigation; relies on fallow-stored soil water and rainfall.",
+    "why_considered": "Incorporates planned fallow on fine sandy loam soil (140 mm AWC) to recharge root-zone soil moisture for following dryland or limited crops.",
+    "benefits": [
+     "Cuts median irrigation pumping by 394 mm/yr (100% water savings)",
+     "~17% less water erosion than current rotation (4.52 t/ha/yr p50)",
+     "Reduces seasonal machinery and management hours by ~69%"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": false,
+     "forage": false
+    },
+    "is_current": false,
+    "rotation": [
+     "winter_wheat",
+     "sorghum",
+     "fallow"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 0.0,
+      "p50": 0.0,
+      "p90": 0.0
+     },
+     "erosion_t_ha": {
+      "p10": 2.67,
+      "p50": 4.52,
+      "p90": 7.24
+     },
+     "soil_index": {
+      "p10": 0.07,
       "p50": 0.1,
       "p90": 0.17
      },
      "income_usd_ha": {
-      "p10": 55.0,
-      "p50": 227.0,
-      "p90": 346.0
+      "p10": 104.0,
+      "p50": 190.0,
+      "p90": 282.0
+     },
+     "labour_index": {
+      "p10": 0.15,
+      "p50": 0.15,
+      "p90": 0.15
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Manter fine sandy loam, 1 to 3 percent slopes: AWC 140 mm, K 0.24, slope 2.4 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
+    ],
+    "verify_locally": [
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "How you will keep residue on the fallow to limit wind erosion.",
+     "Economic trade-off: median net return is lower (-$847/ha/yr) than current baseline; evaluate whether water or soil benefits offset income loss."
+    ]
+   },
+   {
+    "id": "alfalfa_corn",
+    "name": "Alfalfa (3 yr)\u2013corn (2 yr) (full irrigation)",
+    "description": "Perennial forage builds soil; needs hay market and more labour.",
+    "why_considered": "Introduces deep-rooted perennial legume to fix atmospheric nitrogen and supply high-demand Southwest Kansas dairy and beef forage markets.",
+    "benefits": [
+     "Suppresses pest and weed pressure across 2 crop families",
+     "Biological N fixation in 3 of 5 yr cuts synthetic fertilizer",
+     "~72% less water erosion than current rotation (1.54 t/ha/yr p50)"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 3,
+     "pest_break": true,
+     "forage": true
+    },
+    "is_current": false,
+    "rotation": [
+     "alfalfa",
+     "alfalfa",
+     "alfalfa",
+     "corn",
+     "corn"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 372.0,
+      "p50": 455.0,
+      "p90": 511.0
+     },
+     "erosion_t_ha": {
+      "p10": 0.96,
+      "p50": 1.54,
+      "p90": 2.48
+     },
+     "soil_index": {
+      "p10": 0.69,
+      "p50": 0.71,
+      "p90": 0.73
+     },
+     "income_usd_ha": {
+      "p10": 926.0,
+      "p50": 1008.0,
+      "p90": 1106.0
+     },
+     "labour_index": {
+      "p10": 0.68,
+      "p50": 0.73,
+      "p90": 0.77
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Manter fine sandy loam, 1 to 3 percent slopes: AWC 140 mm, K 0.24, slope 2.4 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
+    ],
+    "verify_locally": [
+     "Does your water right / well capacity support this rotation in a dry year?",
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "Hay buyers, storage and haul distance; stand establishment cost.",
+     "Water allocation check: modelled irrigation need (455 mm/yr) is higher than current baseline (394 mm/yr); check water rights."
+    ]
+   },
+   {
+    "id": "corn_wheat_sorghum",
+    "name": "Corn\u2013wheat\u2013sorghum (full irrigation)",
+    "description": "Three crops with different water peaks; spreads workload over the year.",
+    "why_considered": "Diversifies the crop sequence on fine sandy loam soil to balance seasonal machinery workload and hedge against weather extremes.",
+    "benefits": [
+     "Cuts median irrigation pumping by 65 mm/yr (16% water savings)",
+     "~44% less water erosion than current rotation (3.05 t/ha/yr p50)",
+     "Reduces seasonal machinery and management hours by ~19%"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": false,
+     "forage": false
+    },
+    "is_current": false,
+    "rotation": [
+     "corn",
+     "winter_wheat",
+     "sorghum"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 230.0,
+      "p50": 329.0,
+      "p90": 398.0
+     },
+     "erosion_t_ha": {
+      "p10": 2.04,
+      "p50": 3.05,
+      "p90": 4.74
+     },
+     "soil_index": {
+      "p10": 0.51,
+      "p50": 0.55,
+      "p90": 0.58
+     },
+     "income_usd_ha": {
+      "p10": 582.0,
+      "p50": 727.0,
+      "p90": 841.0
      },
      "labour_index": {
       "p10": 0.33,
-      "p50": 0.38,
+      "p50": 0.39,
       "p90": 0.44
      }
     },
     "evidence": [
      {
       "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN \u2192 FAO-56 ET0; PRECTOTCORR \u2192 soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
      },
      {
       "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
+      "note": "Manter fine sandy loam, 1 to 3 percent slopes: AWC 140 mm, K 0.24, slope 2.4 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
      }
     ],
     "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence."
-    ],
-    "why_considered": "Observed baseline rotation (Grain sorghum–Grain sorghum–Winter wheat) on silt loam soil under full irrigation from USDA CDL history.",
-    "benefits": [
-     "Established management routine with existing planter, chemical, and harvest equipment",
-     "Direct access to established regional grain elevator and feed mill delivery bids",
-     "Familiar baseline performance across 30-year historical weather conditions"
-    ],
-    "soil_health_traits": {
-     "n_fixing_years": 0,
-     "pest_break": false,
-     "forage": false
-    }
-   },
-   {
-    "id": "wsf_limited",
-    "name": "Wheat–sorghum–fallow (limited irrigation)",
-    "description": "Lower-water rotation common in western Kansas.",
-    "is_current": false,
-    "rotation": [
-     "winter_wheat",
-     "sorghum",
-     "fallow"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 118.0,
-      "p50": 151.0,
-      "p90": 184.0
-     },
-     "erosion_t_ha": {
-      "p10": 1.78,
-      "p50": 3.96,
-      "p90": 8.31
-     },
-     "soil_index": {
-      "p10": -0.18,
-      "p50": -0.09,
-      "p90": -0.02
-     },
-     "income_usd_ha": {
-      "p10": -4.0,
-      "p50": 119.0,
-      "p90": 205.0
-     },
-     "labour_index": {
-      "p10": 0.23,
-      "p50": 0.28,
-      "p90": 0.34
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
-     }
-    ],
-    "data_gaps": [
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Yield response to deficit irrigation is from literature, not this field."
+     "Single soil bucket with slope-dependent storm runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified NRCS Soil Conditioning Index proxy including root and crown biomass."
     ],
     "verify_locally": [
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
-     "Fallow-year weed control and residue management plan."
-    ],
-    "why_considered": "Incorporates planned fallow on silt loam soil (180 mm AWC) to recharge root-zone soil moisture for following dryland or limited crops.",
-    "benefits": [
-     "Cuts median irrigation pumping by 79 mm/yr (34% water savings)",
-     "Reduces seasonal machinery and management hours by ~26%"
-    ],
-    "soil_health_traits": {
-     "n_fixing_years": 0,
-     "pest_break": false,
-     "forage": false
-    }
-   },
-   {
-    "id": "corn_soy",
-    "name": "Corn–soybean",
-    "description": "Adds a legume; needs full irrigation.",
-    "is_current": false,
-    "rotation": [
-     "corn",
-     "soybeans"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 306.0,
-      "p50": 392.0,
-      "p90": 478.0
-     },
-     "erosion_t_ha": {
-      "p10": 1.52,
-      "p50": 3.38,
-      "p90": 7.09
-     },
-     "soil_index": {
-      "p10": -0.11,
-      "p50": -0.02,
-      "p90": 0.05
-     },
-     "income_usd_ha": {
-      "p10": 151.0,
-      "p50": 401.0,
-      "p90": 571.0
-     },
-     "labour_index": {
-      "p10": 0.5,
-      "p50": 0.55,
-      "p90": 0.61
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
-     }
-    ],
-    "data_gaps": [
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Soybean yield under SW Kansas heat not calibrated."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence.",
-     "Soybean cyst nematode and iron-deficiency chlorosis history."
-    ],
-    "why_considered": "Introduces nitrogen-fixing soybeans to break continuous grass cereal cycles and reduce synthetic fertilizer inputs.",
-    "benefits": [
-     "Breaks monoculture pest and weed cycles by adding broadleaf/legume to grass rotation",
-     "Biological N fixation in 1 of 2 yr cuts synthetic fertilizer",
-     "Higher median return over variable costs (+$174/ha/yr vs current)"
-    ],
-    "soil_health_traits": {
-     "n_fixing_years": 1,
-     "pest_break": true,
-     "forage": false
-    }
-   },
-   {
-    "id": "alfalfa_corn_wheat",
-    "name": "Alfalfa (3 yr)–corn–wheat",
-    "description": "Perennial legume phase for soil building.",
-    "is_current": false,
-    "rotation": [
-     "alfalfa",
-     "alfalfa",
-     "alfalfa",
-     "corn",
-     "winter_wheat"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 382.0,
-      "p50": 490.0,
-      "p90": 597.0
-     },
-     "erosion_t_ha": {
-      "p10": 0.53,
-      "p50": 1.18,
-      "p90": 2.47
-     },
-     "soil_index": {
-      "p10": 0.16,
-      "p50": 0.25,
-      "p90": 0.32
-     },
-     "income_usd_ha": {
-      "p10": 156.0,
-      "p50": 411.0,
-      "p90": 585.0
-     },
-     "labour_index": {
-      "p10": 0.65,
-      "p50": 0.7,
-      "p90": 0.76
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
-     }
-    ],
-    "data_gaps": [
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Alfalfa irrigation demand is the highest of all options; stand life uncertain."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence.",
-     "Hay buyer within hauling distance.",
-     "Cutting labour and equipment."
-    ],
-    "why_considered": "Introduces deep-rooted perennial legume to fix atmospheric nitrogen and supply high-demand Southwest Kansas dairy and beef forage markets.",
-    "benefits": [
-     "Breaks monoculture pest and weed cycles by adding broadleaf/legume to grass rotation",
-     "Biological N fixation in 3 of 5 yr cuts synthetic fertilizer",
-     "~53% less water erosion than current rotation (1.18 t/ha/yr p50)"
-    ],
-    "soil_health_traits": {
-     "n_fixing_years": 3,
-     "pest_break": true,
-     "forage": true
-    }
-   }
-  ],
-  "FIN-007": [
-   {
-    "id": "current",
-    "name": "Current: corn–corn–wheat",
-    "description": "Rotation observed in CDL over recent years.",
-    "is_current": true,
-    "rotation": [
-     "corn",
-     "corn",
-     "winter_wheat"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 285.0,
-      "p50": 365.0,
-      "p90": 446.0
-     },
-     "erosion_t_ha": {
-      "p10": 0.42,
-      "p50": 0.94,
-      "p90": 1.97
-     },
-     "soil_index": {
-      "p10": 0.01,
-      "p50": 0.1,
-      "p90": 0.17
-     },
-     "income_usd_ha": {
-      "p10": 114.0,
-      "p50": 334.0,
-      "p90": 484.0
-     },
-     "labour_index": {
-      "p10": 0.47,
-      "p50": 0.52,
-      "p90": 0.58
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
-     }
-    ],
-    "data_gaps": [
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence."
-    ],
-    "why_considered": "Observed baseline rotation (Corn–Corn–Winter wheat) on silt loam soil under full irrigation from USDA CDL history.",
-    "benefits": [
-     "Established management routine with existing planter, chemical, and harvest equipment",
-     "Direct access to established regional grain elevator and feed mill delivery bids",
-     "Familiar baseline performance across 30-year historical weather conditions"
-    ],
-    "soil_health_traits": {
-     "n_fixing_years": 0,
-     "pest_break": false,
-     "forage": false
-    }
-   },
-   {
-    "id": "wsf_limited",
-    "name": "Wheat–sorghum–fallow (limited irrigation)",
-    "description": "Lower-water rotation common in western Kansas.",
-    "is_current": false,
-    "rotation": [
-     "winter_wheat",
-     "sorghum",
-     "fallow"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 111.0,
-      "p50": 142.0,
-      "p90": 173.0
-     },
-     "erosion_t_ha": {
-      "p10": 0.72,
-      "p50": 1.6,
-      "p90": 3.36
-     },
-     "soil_index": {
-      "p10": -0.14,
-      "p50": -0.05,
-      "p90": 0.02
-     },
-     "income_usd_ha": {
-      "p10": 2.0,
-      "p50": 130.0,
-      "p90": 220.0
-     },
-     "labour_index": {
-      "p10": 0.23,
-      "p50": 0.28,
-      "p90": 0.34
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
-     }
-    ],
-    "data_gaps": [
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Yield response to deficit irrigation is from literature, not this field."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence.",
-     "Fallow-year weed control and residue management plan."
-    ],
-    "why_considered": "Incorporates planned fallow on silt loam soil (200 mm AWC) to recharge root-zone soil moisture for following dryland or limited crops.",
-    "benefits": [
-     "Cuts median irrigation pumping by 223 mm/yr (61% water savings)",
-     "Reduces seasonal machinery and management hours by ~46%"
-    ],
-    "soil_health_traits": {
-     "n_fixing_years": 0,
-     "pest_break": false,
-     "forage": false
-    }
-   },
-   {
-    "id": "corn_soy",
-    "name": "Corn–soybean",
-    "description": "Adds a legume; needs full irrigation.",
-    "is_current": false,
-    "rotation": [
-     "corn",
-     "soybeans"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 298.0,
-      "p50": 382.0,
-      "p90": 466.0
-     },
-     "erosion_t_ha": {
-      "p10": 0.59,
-      "p50": 1.31,
-      "p90": 2.76
-     },
-     "soil_index": {
-      "p10": -0.07,
-      "p50": 0.02,
-      "p90": 0.09
-     },
-     "income_usd_ha": {
-      "p10": 150.0,
-      "p50": 401.0,
-      "p90": 571.0
-     },
-     "labour_index": {
-      "p10": 0.5,
-      "p50": 0.55,
-      "p90": 0.61
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
-     }
-    ],
-    "data_gaps": [
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Soybean yield under SW Kansas heat not calibrated."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence.",
-     "Soybean cyst nematode and iron-deficiency chlorosis history."
-    ],
-    "why_considered": "Introduces nitrogen-fixing soybeans to break continuous grass cereal cycles and reduce synthetic fertilizer inputs.",
-    "benefits": [
-     "Breaks monoculture pest and weed cycles by adding broadleaf/legume to grass rotation",
-     "Biological N fixation in 1 of 2 yr cuts synthetic fertilizer",
-     "Higher median return over variable costs (+$67/ha/yr vs current)"
-    ],
-    "soil_health_traits": {
-     "n_fixing_years": 1,
-     "pest_break": true,
-     "forage": false
-    }
-   },
-   {
-    "id": "alfalfa_corn_wheat",
-    "name": "Alfalfa (3 yr)–corn–wheat",
-    "description": "Perennial legume phase for soil building.",
-    "is_current": false,
-    "rotation": [
-     "alfalfa",
-     "alfalfa",
-     "alfalfa",
-     "corn",
-     "winter_wheat"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 375.0,
-      "p50": 481.0,
-      "p90": 587.0
-     },
-     "erosion_t_ha": {
-      "p10": 0.21,
-      "p50": 0.46,
-      "p90": 0.97
-     },
-     "soil_index": {
-      "p10": 0.2,
-      "p50": 0.29,
-      "p90": 0.36
-     },
-     "income_usd_ha": {
-      "p10": 164.0,
-      "p50": 426.0,
-      "p90": 604.0
-     },
-     "labour_index": {
-      "p10": 0.65,
-      "p50": 0.7,
-      "p90": 0.76
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
-     }
-    ],
-    "data_gaps": [
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Alfalfa irrigation demand is the highest of all options; stand life uncertain."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence.",
-     "Hay buyer within hauling distance.",
-     "Cutting labour and equipment."
-    ],
-    "why_considered": "Introduces deep-rooted perennial legume to fix atmospheric nitrogen and supply high-demand Southwest Kansas dairy and beef forage markets.",
-    "benefits": [
-     "Breaks monoculture pest and weed cycles by adding broadleaf/legume to grass rotation",
-     "Biological N fixation in 3 of 5 yr cuts synthetic fertilizer",
-     "~51% less water erosion than current rotation (0.46 t/ha/yr p50)"
-    ],
-    "soil_health_traits": {
-     "n_fixing_years": 3,
-     "pest_break": true,
-     "forage": true
-    }
-   }
-  ],
-  "FIN-008": [
-   {
-    "id": "current",
-    "name": "Current: cotton–cotton–sorghum",
-    "description": "Rotation observed in CDL over recent years.",
-    "is_current": true,
-    "rotation": [
-     "cotton",
-     "cotton",
-     "sorghum"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 209.0,
-      "p50": 268.0,
-      "p90": 327.0
-     },
-     "erosion_t_ha": {
-      "p10": 1.24,
-      "p50": 2.75,
-      "p90": 5.77
-     },
-     "soil_index": {
-      "p10": -0.3,
-      "p50": -0.21,
-      "p90": -0.14
-     },
-     "income_usd_ha": {
-      "p10": 77.0,
-      "p50": 266.0,
-      "p90": 396.0
-     },
-     "labour_index": {
-      "p10": 0.55,
-      "p50": 0.6,
-      "p90": 0.66
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
-     }
-    ],
-    "data_gaps": [
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence."
-    ],
-    "why_considered": "Observed baseline rotation (Cotton–Cotton–Grain sorghum) on fine sandy loam soil under full irrigation from USDA CDL history.",
-    "benefits": [
-     "Established management routine with existing planter, chemical, and harvest equipment",
-     "Maintains multi-crop family rotation breaking single-crop disease cycles",
-     "Familiar baseline performance across 30-year historical weather conditions"
-    ],
-    "soil_health_traits": {
-     "n_fixing_years": 0,
-     "pest_break": true,
-     "forage": false
-    }
-   },
-   {
-    "id": "wsf_limited",
-    "name": "Wheat–sorghum–fallow (limited irrigation)",
-    "description": "Lower-water rotation common in western Kansas.",
-    "is_current": false,
-    "rotation": [
-     "winter_wheat",
-     "sorghum",
-     "fallow"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 118.0,
-      "p50": 152.0,
-      "p90": 185.0
-     },
-     "erosion_t_ha": {
-      "p10": 1.14,
-      "p50": 2.52,
-      "p90": 5.3
-     },
-     "soil_index": {
-      "p10": -0.22,
-      "p50": -0.13,
-      "p90": -0.06
-     },
-     "income_usd_ha": {
-      "p10": -13.0,
-      "p50": 104.0,
-      "p90": 185.0
-     },
-     "labour_index": {
-      "p10": 0.23,
-      "p50": 0.28,
-      "p90": 0.34
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
-     }
-    ],
-    "data_gaps": [
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Yield response to deficit irrigation is from literature, not this field."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence.",
-     "Fallow-year weed control and residue management plan."
-    ],
-    "why_considered": "Incorporates planned fallow on fine sandy loam soil (140 mm AWC) to recharge root-zone soil moisture for following dryland or limited crops.",
-    "benefits": [
-     "Cuts median irrigation pumping by 116 mm/yr (43% water savings)",
-     "Reduces seasonal machinery and management hours by ~53%",
-     "Improves Soil Conditioning Index (-0.13 vs -0.21 current), building organic matter"
-    ],
-    "soil_health_traits": {
-     "n_fixing_years": 0,
-     "pest_break": false,
-     "forage": false
-    }
-   },
-   {
-    "id": "corn_soy",
-    "name": "Corn–soybean",
-    "description": "Adds a legume; needs full irrigation.",
-    "is_current": false,
-    "rotation": [
-     "corn",
-     "soybeans"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 325.0,
-      "p50": 417.0,
-      "p90": 509.0
-     },
-     "erosion_t_ha": {
-      "p10": 0.95,
-      "p50": 2.1,
-      "p90": 4.41
-     },
-     "soil_index": {
-      "p10": -0.15,
-      "p50": -0.06,
-      "p90": 0.01
-     },
-     "income_usd_ha": {
-      "p10": 136.0,
-      "p50": 374.0,
-      "p90": 536.0
-     },
-     "labour_index": {
-      "p10": 0.5,
-      "p50": 0.55,
-      "p90": 0.61
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
-     }
-    ],
-    "data_gaps": [
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Soybean yield under SW Kansas heat not calibrated."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence.",
-     "Soybean cyst nematode and iron-deficiency chlorosis history."
-    ],
-    "why_considered": "Introduces nitrogen-fixing soybeans to break continuous grass cereal cycles and reduce synthetic fertilizer inputs.",
-    "benefits": [
-     "Suppresses pest and weed pressure across 2 crop families",
-     "Biological N fixation in 1 of 2 yr cuts synthetic fertilizer",
-     "~24% less water erosion than current rotation (2.10 t/ha/yr p50)"
-    ],
-    "soil_health_traits": {
-     "n_fixing_years": 1,
-     "pest_break": true,
-     "forage": false
-    }
-   },
-   {
-    "id": "alfalfa_corn_wheat",
-    "name": "Alfalfa (3 yr)–corn–wheat",
-    "description": "Perennial legume phase for soil building.",
-    "is_current": false,
-    "rotation": [
-     "alfalfa",
-     "alfalfa",
-     "alfalfa",
-     "corn",
-     "winter_wheat"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 411.0,
-      "p50": 527.0,
-      "p90": 642.0
-     },
-     "erosion_t_ha": {
-      "p10": 0.33,
-      "p50": 0.74,
-      "p90": 1.56
-     },
-     "soil_index": {
-      "p10": 0.12,
-      "p50": 0.21,
-      "p90": 0.28
-     },
-     "income_usd_ha": {
-      "p10": 152.0,
-      "p50": 403.0,
-      "p90": 574.0
-     },
-     "labour_index": {
-      "p10": 0.65,
-      "p50": 0.7,
-      "p90": 0.76
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "MOCK. T2M, T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → effective rain and RUSLE R."
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "MOCK. Field crop history used to define the current rotation."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "MOCK. Texture, OM, K factor and AWC of the dominant map unit."
-     }
-    ],
-    "data_gaps": [
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Actual pumping records and water-right limits (Kansas WIMAS) not used.",
-     "Ogallala aquifer saturated thickness / well capacity not considered.",
-     "Alfalfa irrigation demand is the highest of all options; stand life uncertain."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence.",
-     "Hay buyer within hauling distance.",
-     "Cutting labour and equipment."
-    ],
-    "why_considered": "Introduces deep-rooted perennial legume to fix atmospheric nitrogen and supply high-demand Southwest Kansas dairy and beef forage markets.",
-    "benefits": [
-     "Suppresses pest and weed pressure across 2 crop families",
-     "Biological N fixation in 3 of 5 yr cuts synthetic fertilizer",
-     "~73% less water erosion than current rotation (0.74 t/ha/yr p50)"
-    ],
-    "soil_health_traits": {
-     "n_fixing_years": 3,
-     "pest_break": true,
-     "forage": true
-    }
+     "Economic trade-off: median net return is lower (-$310/ha/yr) than current baseline; evaluate whether water or soil benefits offset income loss."
+    ]
    }
   ]
  }

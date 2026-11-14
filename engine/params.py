@@ -87,6 +87,8 @@ class CropParams:
     disturbance: float  # 0..1 soil disturbance (tillage passes, STIR-like) for SCI FO term
     labour_h_ha: float  # field operations (irrigation labour added from water applied)
     dry_labour_h_ha: float
+    root_biomass_t_ha: float = 1.0  # [S/D] root & crown biomass returned to soil for SCI OM term
+    irrig_trigger: float = 0.40  # fraction of TAW depletion triggering pivot irrigation
     cycles: int = 1  # repeat the crops.csv Kc stages (alfalfa: one cycle per cutting)
 
 
@@ -97,61 +99,74 @@ CROPS: dict[str, CropParams] = {
         120, False, ky=1.25, ym_t_ha=14.1, price_usd_t=192.0,
         var_cost_usd_ha=1268.0, dry_var_cost_usd_ha=694.0, other_revenue_usd_ha=0.0,
         c_factor=0.20, disturbance=0.35, labour_h_ha=1.16, dry_labour_h_ha=0.91,
+        root_biomass_t_ha=1.5, irrig_trigger=0.40,
     ),
     "sorghum": CropParams(
         145, False, ky=0.90, ym_t_ha=10.0, price_usd_t=180.0,
         var_cost_usd_ha=863.0, dry_var_cost_usd_ha=558.0, other_revenue_usd_ha=0.0,
         c_factor=0.22, disturbance=0.35, labour_h_ha=0.84, dry_labour_h_ha=0.91,
+        root_biomass_t_ha=1.2, irrig_trigger=0.40,
     ),
     # price from the limited-irrigation W KS budget ($6.98/bu) — flagged, far above NASS 2025p;
-    # dryland cost from the 2026 W-F budget (no 2027 SW dryland wheat budget)
+    # dryland cost from the 2026 W-F budget (no 2027 SW dryland wheat budget).
+    # Deficit irrigation trigger 0.55 reflects deep root zone and drought tolerance (FAO-56 p=0.55).
     "winter_wheat": CropParams(
         275, True, ky=1.00, ym_t_ha=4.7, price_usd_t=257.0,
         var_cost_usd_ha=635.0, dry_var_cost_usd_ha=485.0, other_revenue_usd_ha=0.0,
         c_factor=0.15, disturbance=0.40, labour_h_ha=1.21, dry_labour_h_ha=1.21,
+        root_biomass_t_ha=1.2, irrig_trigger=0.55,
     ),
     "soybeans": CropParams(
         135, False, ky=0.85, ym_t_ha=4.4, price_usd_t=442.0,
         var_cost_usd_ha=531.0, dry_var_cost_usd_ha=415.0, other_revenue_usd_ha=0.0,
         c_factor=0.35, disturbance=0.40, labour_h_ha=0.82, dry_labour_h_ha=0.74,
+        root_biomass_t_ha=0.8, irrig_trigger=0.40,
     ),
     # cost 1134 [D] + 69 [R] stand establishment over a 3-yr stand; labour 0.59 [D] + 3.0 [R]
     # management of 4 cuttings; dryland: no usable upland budget -> irrigated costs minus
     # harvest share [R]. crops.csv cycles are 75 d, so 3 cycles fit the Apr-Oct season.
+    # Perennial legume root/crown biomass 4.5 t/ha/yr builds substantial soil organic matter.
     "alfalfa": CropParams(
         85, False, ky=1.10, ym_t_ha=11.2, price_usd_t=217.0,
         var_cost_usd_ha=1203.0, dry_var_cost_usd_ha=680.0, other_revenue_usd_ha=0.0,
-        c_factor=0.02, disturbance=0.05, labour_h_ha=3.6, dry_labour_h_ha=2.0, cycles=3,
+        c_factor=0.02, disturbance=0.05, labour_h_ha=3.6, dry_labour_h_ha=2.0,
+        root_biomass_t_ha=4.5, irrig_trigger=0.40, cycles=3,
     ),
     # other revenue: cottonseed $243/ac [S]
     "cotton": CropParams(
         135, False, ky=0.85, ym_t_ha=1.68, price_usd_t=1698.0,
         var_cost_usd_ha=1988.0, dry_var_cost_usd_ha=1428.0, other_revenue_usd_ha=600.0,
         c_factor=0.40, disturbance=0.55, labour_h_ha=1.63, dry_labour_h_ha=1.75,
+        root_biomass_t_ha=0.8, irrig_trigger=0.40,
     ),
     "sunflower": CropParams(
         150, False, ky=0.95, ym_t_ha=2.69, price_usd_t=430.0,
         var_cost_usd_ha=769.0, dry_var_cost_usd_ha=560.0, other_revenue_usd_ha=0.0,
         c_factor=0.30, disturbance=0.40, labour_h_ha=1.24, dry_labour_h_ha=0.72,
+        root_biomass_t_ha=1.0, irrig_trigger=0.40,
     ),
     # [D/R] seed + custom drilling + glyphosate termination (128-146 USD/ha). C [R]: halfway
     # between living cover (0.10) and fallow (0.45): the Kc season ends in Jan, residue after.
+    # Dense fibrous root mass contributes 2.5 t/ha root biomass for SOM building.
     "rye_cover": CropParams(
         285, True, ky=0.0, ym_t_ha=0.0, price_usd_t=0.0,
         var_cost_usd_ha=137.0, dry_var_cost_usd_ha=137.0, other_revenue_usd_ha=0.0,
         c_factor=0.28, disturbance=0.20, labour_h_ha=0.3, dry_labour_h_ha=0.3,
+        root_biomass_t_ha=2.5, irrig_trigger=0.40,
     ),
     # [D/R] SW herbicide $46/ac + 3-4 spray passes (170-198 USD/ha)
     "fallow": CropParams(
         1, False, ky=0.0, ym_t_ha=0.0, price_usd_t=0.0,
         var_cost_usd_ha=185.0, dry_var_cost_usd_ha=185.0, other_revenue_usd_ha=0.0,
         c_factor=0.45, disturbance=0.30, labour_h_ha=0.6, dry_labour_h_ha=0.6,
+        root_biomass_t_ha=0.0, irrig_trigger=0.40,
     ),
     # [R] no budget researched
     "grass_pasture": CropParams(
         90, False, ky=0.0, ym_t_ha=0.0, price_usd_t=0.0,
         var_cost_usd_ha=60.0, dry_var_cost_usd_ha=60.0, other_revenue_usd_ha=150.0,
         c_factor=0.01, disturbance=0.0, labour_h_ha=0.5, dry_labour_h_ha=0.5,
+        root_biomass_t_ha=3.5, irrig_trigger=0.40,
     ),
 }  # fmt: skip
 

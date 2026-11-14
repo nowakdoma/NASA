@@ -144,3 +144,50 @@ def test_strategy_why_benefits_soil_traits():
     assert 2 <= len(bens_dryland) <= 3
     assert not any("erosion" in b.lower() and "less" in b.lower() for b in bens_dryland)
     assert not any("low water erosion" in b.lower() for b in bens_dryland)
+
+
+def test_rye_cover_traits_and_tradeoffs():
+    from engine.strategies import verify_locally
+
+    traits = load_crop_traits()
+    # E4: rye_cover must NOT be marked as forage
+    sht_rye = derive_soil_health_traits(["sorghum", "winter_wheat", "rye_cover"], traits)
+    assert sht_rye["forage"] is False
+
+    cur_m = {
+        "water_use_mm": {"p50": 350.0},
+        "erosion_t_ha": {"p50": 0.25},
+        "income_usd_ha": {"p50": 800.0},
+        "labour_index": {"p50": 0.40},
+        "soil_index": {"p50": 0.50},
+    }
+    # Case 1: alternative erosion is higher than baseline -> cannot claim wind erosion shielding
+    alt_m_higher_er = {
+        "water_use_mm": {"p50": 100.0},
+        "erosion_t_ha": {"p50": 0.45},
+        "income_usd_ha": {"p50": 200.0},
+        "labour_index": {"p50": 0.20},
+        "soil_index": {"p50": 0.40},
+    }
+    bens = benefits(
+        ["sorghum", "winter_wheat", "rye_cover"],
+        "limited",
+        False,
+        alt_m_higher_er,
+        cur_m,
+        traits,
+        sht_rye,
+        current_rotation=["corn"],
+    )
+    assert not any("wind erosion" in b.lower() for b in bens)
+    assert any("root biomass" in b.lower() for b in bens)
+
+    # E5: verify_locally trade-offs
+    checks = verify_locally(
+        ["sorghum", "winter_wheat", "rye_cover"],
+        "limited",
+        metrics=alt_m_higher_er,
+        current_metrics=cur_m,
+    )
+    assert any("modelled water erosion" in c.lower() for c in checks)
+    assert any("median net return is lower" in c.lower() for c in checks)

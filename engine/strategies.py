@@ -78,11 +78,27 @@ def evaluate(
     cap = params.IRRIGATION_LEVELS[irrigation]
     k_si = k_factor_si(soil["kffact"])
     ls = ls_factor(soil["slope_pct"])
+    slope_pct = float(soil.get("slope_pct", 0.0))
     residue = np.array([float(traits.loc[c, "residue_t_ha"]) for c in rotation])
+    root_biomass = np.array([params.CROPS[c].root_biomass_t_ha for c in rotation])
+    total_biomass = residue + root_biomass
     disturbance = float(np.mean([cp.disturbance for cp in cps]))
-    dry = irrigation == "dryland"
-    labour_h = sum(cp.dry_labour_h_ha if dry else cp.labour_h_ha for cp in cps)
-    var_cost = sum(cp.dry_var_cost_usd_ha if dry else cp.var_cost_usd_ha for cp in cps)
+
+    if irrigation == "dryland":
+        labour_h = sum(cp.dry_labour_h_ha for cp in cps)
+        var_cost = sum(cp.dry_var_cost_usd_ha for cp in cps)
+    elif irrigation == "limited":
+        # Intermediate variable cost and field operations based on K-State limited budgets
+        labour_h = sum(
+            cp.dry_labour_h_ha + 0.50 * (cp.labour_h_ha - cp.dry_labour_h_ha) for cp in cps
+        )
+        var_cost = sum(
+            cp.dry_var_cost_usd_ha + 0.50 * (cp.var_cost_usd_ha - cp.dry_var_cost_usd_ha)
+            for cp in cps
+        )
+    else:
+        labour_h = sum(cp.labour_h_ha for cp in cps)
+        var_cost = sum(cp.var_cost_usd_ha for cp in cps)
 
     out = {m: [] for m in METRICS}
     n_w = len(wy.years)
@@ -94,6 +110,7 @@ def evaluate(
             np.concatenate([wy.precip[y] for y in ys]),
             soil["awc_mm"],
             cap,
+            slope_pct=slope_pct,
         )
         ratio = res.yield_ratio(ky)
         irr_total = res.irrigation_mm.sum()
@@ -103,9 +120,9 @@ def evaluate(
         costs = var_cost + irr_total * params.PUMPING_COST_USD_HA_MM
         erosion = np.mean([rusle_annual(wy.r_factor[y], k_si, ls, cover_factor(c))
                            for y, c in zip(ys, rotation, strict=True)])  # fmt: skip
-        # residue scales with how well the crop grew (yield ratio; 1 for non-yield crops)
+        # biomass returned to soil (above-ground residue + root/crown) scales with yield ratio
         sci = soil_conditioning_index(
-            organic_matter_term(float(np.mean(residue * ratio))),
+            organic_matter_term(float(np.mean(total_biomass * ratio))),
             field_operations_term(disturbance),
             erosion_term(erosion, params.SOIL_LOSS_TOLERANCE_T_HA),
         )
@@ -193,14 +210,21 @@ def data_gaps(
         "(natural gas, 300 ft) are not known for this field.",
         "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can "
         "dominate on bare soil.",
-        "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+        "Single soil bucket with slope-dependent storm runoff; water use is irrigation "
+        "need, not metered pumping.",
         "Ogallala aquifer saturated thickness / well capacity and water-right limits "
         "(Kansas WIMAS) not considered.",
-        "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index.",
+        "Soil index is a simplified NRCS Soil Conditioning Index proxy including root "
+        "and crown biomass.",
     ]
     if irrigation == "limited":
-        gaps.append(f"Limited irrigation assumed capped at "
-                    f"{params.IRRIGATION_LEVELS['limited']:.0f} mm/yr.")  # fmt: skip
+        cropped_count = sum(1 for c in rotation if c not in params.NO_IRRIGATION_CROPS)
+        rot_cap = params.IRRIGATION_LEVELS["limited"] * cropped_count / len(rotation)
+        gaps.append(
+            f"Limited irrigation capped at {params.IRRIGATION_LEVELS['limited']:.0f} mm/yr "
+            f"(6 in) on cropped seasons (~{rot_cap:.0f} mm/yr rotation average including "
+            f"cover/fallow); wet years may use less."
+        )
     proxied = [c for c in dict.fromkeys(rotation) if c in params.PROXIED_CROPS]
     if proxied:
         detail = "; ".join(f"{c} on the {params.PROXIED_CROPS[c]} budget" for c in proxied)
@@ -215,14 +239,21 @@ def data_gaps(
     return gaps
 
 
-def verify_locally(rotation: list[str], irrigation: str) -> list[str]:
+def verify_locally(
+    rotation: list[str],
+    irrigation: str,
+    metrics: dict | None = None,
+    current_metrics: dict | None = None,
+) -> list[str]:
     checks = [
         "Local elevator or contract prices and basis.",
         "Herbicide carryover restrictions between the crops in this sequence.",
     ]
     if irrigation != "dryland":
-        checks.insert(0, "Does your water right / well capacity support this rotation in a "
-                         "dry year?")  # fmt: skip
+        checks.insert(
+            0,
+            "Does your water right / well capacity support this rotation in a dry year?",
+        )
     if "fallow" in rotation:
         checks.append("How you will keep residue on the fallow to limit wind erosion.")
     if "alfalfa" in rotation:
@@ -234,9 +265,44 @@ def verify_locally(rotation: list[str], irrigation: str) -> list[str]:
         checks.append(
             f"Actual price and yield for {', '.join(proxied)}: the model uses the "
             f"{params.PROXIED_CROPS[proxied[0]]} budget as a proxy."
-        )  # fmt: skip
+        )
     if "rye_cover" in rotation:
-        checks.append("Cover crop seed cost and termination rules for crop insurance.")
+        checks.append("Cover crop seed cost and termination timing for crop insurance compliance.")
+
+    # Specific agronomic and resource trade-offs vs baseline
+    if metrics is not None and current_metrics is not None:
+        alt_er = metrics["erosion_t_ha"]["p50"]
+        cur_er = current_metrics["erosion_t_ha"]["p50"]
+        if alt_er > cur_er + 0.10:
+            if cur_er > 0 and alt_er >= 2.0 * cur_er:
+                ratio = alt_er / max(cur_er, 0.05)
+                checks.append(
+                    f"Erosion risk: modelled water erosion ({alt_er:.2f} t/ha/yr) is {ratio:.1f}x "
+                    f"your baseline ({cur_er:.2f} t/ha/yr); verify residue management and tillage."
+                )
+            else:
+                checks.append(
+                    f"Residue management: modelled water erosion ({alt_er:.2f} t/ha/yr) "
+                    f"exceeds current baseline ({cur_er:.2f} t/ha/yr)."
+                )
+
+        alt_w = metrics["water_use_mm"]["p50"]
+        cur_w = current_metrics["water_use_mm"]["p50"]
+        if alt_w > cur_w + 25.0 and cur_w > 0:
+            checks.append(
+                f"Water allocation check: modelled irrigation need ({alt_w:.0f} mm/yr) is "
+                f"higher than current baseline ({cur_w:.0f} mm/yr); check water rights."
+            )
+
+        alt_inc = metrics["income_usd_ha"]["p50"]
+        cur_inc = current_metrics["income_usd_ha"]["p50"]
+        if alt_inc < cur_inc - 50.0:
+            diff = cur_inc - alt_inc
+            checks.append(
+                f"Economic trade-off: median net return is lower (-${diff:.0f}/ha/yr) than "
+                "current baseline; evaluate whether water or soil benefits offset income loss."
+            )
+
     return checks
 
 
@@ -251,8 +317,9 @@ def derive_soil_health_traits(rotation: list[str], traits: pd.DataFrame) -> dict
         if c in traits.index and str(traits.loc[c, "family"]).strip().lower() not in ("none", "")
     }
     pest_break = len(families) >= 2
+    # Cereal rye cover crop is glyphosate-terminated green cover, not harvested forage
     forage = any(
-        c in {"alfalfa", "triticale", "other_hay", "rye_cover"}
+        c in {"alfalfa", "triticale", "other_hay"}
         or (
             c in traits.index
             and (
@@ -284,8 +351,8 @@ def why_considered(
     if is_current:
         crop_names = _crop_names(rotation, traits)
         return (
-            f"Observed baseline rotation ({crop_names}) on {texture} soil "
-            f"under {level} irrigation from USDA CDL history."
+            f"Observed baseline crop sequence ({crop_names}) from USDA CDL history on "
+            f"{texture} soil ({level} irrigation)."
         )
 
     rot_set = set(rotation)
@@ -315,9 +382,12 @@ def why_considered(
             "and reduce synthetic fertilizer inputs."
         )
     if level == "limited":
+        cropped_count = sum(1 for c in rotation if c not in params.NO_IRRIGATION_CROPS)
+        rot_cap = params.IRRIGATION_LEVELS["limited"] * cropped_count / len(rotation)
+        lim_val = params.IRRIGATION_LEVELS["limited"]
         return (
-            f"Caps annual irrigation at {params.IRRIGATION_LEVELS['limited']:.0f} mm/yr to "
-            f"extend well longevity and meet GMD3 water conservation targets."
+            f"Caps seasonal irrigation on cropped years at {lim_val:.0f} mm "
+            f"(~{rot_cap:.0f} mm/yr rotation average) to extend well longevity and meet GMD3 caps."
         )
     if level == "dryland":
         return (
@@ -347,13 +417,25 @@ def benefits(
         b.append(
             "Established management routine with existing planter, chemical, and harvest equipment"
         )
-        if sht["pest_break"]:
-            b.append("Maintains multi-crop family rotation breaking single-crop disease cycles")
+        rot_crops = set(rotation)
+        if "corn" in rot_crops and len(rot_crops) == 1:
+            b.append("High stover residue (8+ t/ha) protects topsoil and builds organic matter")
+            b.append("Maximized feed grain yield with local ethanol and cattle feedlot bids")
+        elif "winter_wheat" in rot_crops and len(rot_crops) == 1:
+            b.append("Lower seasonal water need than summer row crops, preserving well capacity")
+            b.append("Established custom harvesting infrastructure and local wheat elevator bids")
+        elif "alfalfa" in rot_crops:
+            b.append("Perennial root system maximizes soil building and biological N fixation")
+            b.append("Direct premium marketing to Southwest Kansas dairy operations")
+        elif "sorghum" in rot_crops and "corn" not in rot_crops:
+            b.append("High drought and heat tolerance with lower water and N demands than corn")
+            b.append("Readily accepted by local cattle feedyards and ethanol plants")
+        elif sht["pest_break"]:
+            b.append("Diverse crop families break monoculture disease, weed, and insect cycles")
+            b.append("Spreads field operations across distinct planting and harvesting windows")
         else:
-            b.append(
-                "Direct access to established regional grain elevator and feed mill delivery bids"
-            )
-        b.append("Familiar baseline performance across 30-year historical weather conditions")
+            b.append("Direct access to established regional grain elevator and feed mill bids")
+            b.append("Familiar baseline performance across 30-year historical weather conditions")
         return b[:3]
 
     cur_w = current_metrics["water_use_mm"]["p50"] if current_metrics else 0.0
@@ -408,9 +490,14 @@ def benefits(
             f"Biological N fixation in {n_fix} of {len(rotation)} yr cuts synthetic fertilizer"
         )
 
-    # 4. Wind erosion protection via cover crop
+    # 4. Wind erosion protection via cover crop (only if erosion is not worse than current)
     if "rye_cover" in rotation and (not current_rotation or "rye_cover" not in current_rotation):
-        b.append("Cereal rye cover shields topsoil from winter and spring High Plains wind erosion")
+        if alt_er <= cur_er + 0.05:
+            b.append("Cereal rye cover shields topsoil from winter/spring High Plains wind erosion")
+        else:
+            b.append(
+                "Living winter cover adds root biomass, builds organic matter, and limits weeds"
+            )
 
     # 5. Water erosion reduction (strictly less erosion than current rotation)
     diff_er = cur_er - alt_er
@@ -425,7 +512,7 @@ def benefits(
     cur_forage = False
     if current_rotation:
         cur_forage = any(
-            c in {"alfalfa", "triticale", "other_hay", "rye_cover"}
+            c in {"alfalfa", "triticale", "other_hay"}
             or (
                 c in traits.index
                 and (
@@ -550,7 +637,9 @@ def field_strategies(
                 "metrics": metrics,
                 "evidence": evidence(weather_synthetic, weather_years, props["soil"]),
                 "data_gaps": data_gaps(rotation, level, weather_synthetic, wy.filled_cells, soil),
-                "verify_locally": verify_locally(rotation, level),
+                "verify_locally": verify_locally(
+                    rotation, level, metrics=metrics, current_metrics=cur_metrics
+                ),
             }
         )
     return out

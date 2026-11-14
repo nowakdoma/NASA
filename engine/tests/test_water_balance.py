@@ -145,3 +145,26 @@ def test_weather_length_mismatch_raises():
     et0, rain = _flat(1)
     with pytest.raises(ValueError, match="weather length"):
         simulate(tl, et0[:300], rain[:300], 150.0, None)
+
+
+def test_wheat_winter_dormancy():
+    # Fall-sown winter wheat must have Kc capped at 0.40 and irrigable=False during winter dormancy
+    tl = rotation_timeline(["winter_wheat"], TRAITS)
+    # January DOY 15 (index 14) is winter dormancy
+    assert tl.kc[14] <= 0.40
+    assert not tl.irrigable[14]
+    # Spring DOY 120 (May) active growth
+    assert tl.kc[119] > 0.40
+    assert tl.irrigable[119]
+
+
+def test_slope_runoff_reduces_infiltration():
+    tl = rotation_timeline(["corn"], TRAITS)
+    # 20 mm storm on day 150
+    et0 = np.full(365, 4.0)
+    rain = np.zeros(365)
+    rain[149] = 20.0
+    res_flat = simulate(tl, et0, rain, 150.0, None, slope_pct=0.0)
+    res_sloped = simulate(tl, et0, rain, 150.0, None, slope_pct=5.0)
+    # On sloped field, runoff occurs during intense rain, so more irrigation or lower ETa
+    assert res_flat.deep_perc_mm.sum() >= res_sloped.deep_perc_mm.sum()

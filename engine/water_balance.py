@@ -116,6 +116,7 @@ class Timeline:
     kc: np.ndarray  # crop coefficient, 0 when no crop
     slot: np.ndarray  # rotation position 0..L-1 of the crop on this day, -1 when bare
     irrigable: np.ndarray  # bool: crop that a farmer would irrigate is in the field
+    trigger_frac: np.ndarray  # fraction of TAW depletion triggering pivot irrigation
 
 
 def rotation_timeline(rotation: list[str] | tuple[str, ...], traits: pd.DataFrame) -> Timeline:
@@ -125,6 +126,8 @@ def rotation_timeline(rotation: list[str] | tuple[str, ...], traits: pd.DataFram
     n = 365 * n_years
     kc = np.zeros(n)
     slot = np.full(n, -1)
+    trigger_frac = np.full(n, params.IRRIGATION_TRIGGER)
+    doys = np.tile(np.arange(1, 366), n_years)
     for k, crop in enumerate(rotation):
         cp = params.CROPS[crop]
         season = kc_stages(crop, traits, cp.cycles)
@@ -135,9 +138,21 @@ def rotation_timeline(rotation: list[str] | tuple[str, ...], traits: pd.DataFram
         take = season[: idx.size] >= kc[idx]  # overlapping seasons: higher Kc wins
         kc[idx[take]] = season[: idx.size][take]
         slot[idx[take]] = k
+        trigger_frac[idx[take]] = cp.irrig_trigger
+
     crops = np.array(rotation)
     irrigable = (slot >= 0) & ~np.isin(crops[np.maximum(slot, 0)], list(params.NO_IRRIGATION_CROPS))
-    return Timeline(kc=kc, slot=slot, irrigable=irrigable)
+
+    # Winter dormancy for fall-sown crops (Dec 1 to Feb 28/Mar 1, DOY >= 330 or DOY <= 60):
+    # Western Kansas center pivots are winterized/drained; vegetative growth is dormant (Kc ~0.40).
+    for k, crop in enumerate(rotation):
+        if params.CROPS[crop].fall_sown:
+            crop_mask = slot == k
+            dormant_mask = crop_mask & ((doys >= 330) | (doys <= 60))
+            kc[dormant_mask] = np.minimum(kc[dormant_mask], 0.40)
+            irrigable[dormant_mask] = False
+
+    return Timeline(kc=kc, slot=slot, irrigable=irrigable, trigger_frac=trigger_frac)
 
 
 @dataclass
@@ -160,14 +175,16 @@ def simulate(
     precip: np.ndarray,
     awc_mm: float,
     irrigation_cap_mm: float | None,
+    slope_pct: float = 0.0,
     spin_up: bool = True,
 ) -> WaterResult:
     """Daily root-zone bucket (FAO-56 ch. 8) over one rotation cycle.
 
     ``et0``/``precip`` are aligned with the timeline (365 * L days). Each day: rain first
     (excess drains), then irrigation up to the pivot capacity if depletion still exceeds
-    IRRIGATION_TRIGGER * TAW (capped at ``irrigation_cap_mm`` per calendar year; None =
+    trigger * TAW (capped at ``irrigation_cap_mm`` per calendar year; None =
     unlimited, 0 = dryland), then ET. TAW is floored at params.MIN_AWC_MM.
+    Intense storms (> 10 mm) experience slope-dependent runoff.
 
     The rotation is cyclic, so with ``spin_up`` the cycle is run once to reach its own
     end-of-cycle soil water, and only the second pass is recorded. This lets a fall-sown
@@ -176,8 +193,8 @@ def simulate(
     taw = max(float(awc_mm), params.MIN_AWC_MM)
     dr = 0.5 * taw
     if spin_up:
-        dr = _run(timeline, et0, precip, taw, irrigation_cap_mm, dr)[1]
-    return _run(timeline, et0, precip, taw, irrigation_cap_mm, dr)[0]
+        dr = _run(timeline, et0, precip, taw, irrigation_cap_mm, slope_pct, dr)[1]
+    return _run(timeline, et0, precip, taw, irrigation_cap_mm, slope_pct, dr)[0]
 
 
 def _run(
@@ -186,6 +203,7 @@ def _run(
     precip: np.ndarray,
     taw: float,
     irrigation_cap_mm: float | None,
+    slope_pct: float,
     dr: float,
 ) -> tuple[WaterResult, float]:
     """One pass over the cycle from depletion ``dr``. Returns (result, final depletion)."""
@@ -194,8 +212,10 @@ def _run(
         raise ValueError(f"weather length {len(et0)}/{len(precip)} != timeline {n_days} days")
     n_years = n_days // 365
     raw = params.P_DEPLETION * taw
-    trigger = params.IRRIGATION_TRIGGER * taw
     cap = np.inf if irrigation_cap_mm is None else float(irrigation_cap_mm)
+
+    slope_eff = max(0.0, min(float(slope_pct), 15.0))
+    runoff_factor = 0.015 * slope_eff
 
     irr = np.zeros(n_years)
     dp = np.zeros(n_years)
@@ -203,14 +223,18 @@ def _run(
     eta_s = np.zeros(n_years)
     stress = np.zeros(n_years)
     kc_l, slot_l, irr_l = timeline.kc.tolist(), timeline.slot.tolist(), timeline.irrigable.tolist()
+    trig_l = timeline.trigger_frac.tolist()
     et0_l, p_l = et0.tolist(), precip.tolist()
     for d in range(n_days):
         y = d // 365
         s = slot_l[d]
-        dr -= p_l[d]
+        p_day = p_l[d]
+        p_infil = p_day * (1.0 - runoff_factor) if (p_day > 10.0 and runoff_factor > 0) else p_day
+        dr -= p_infil
         if dr < 0:
             dp[y] -= dr
             dr = 0.0
+        trigger = trig_l[d] * taw
         if irr_l[d] and dr > trigger and irr[y] < cap:
             amt = min(dr, params.PIVOT_CAPACITY_MM_DAY, cap - irr[y])
             irr[y] += amt

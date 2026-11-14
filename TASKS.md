@@ -68,33 +68,38 @@ do?" with "nothing". Priority order within each owner = list order. `[ ]` open, 
   at once; normalising over only 4 options turns 0.11 vs 0.57 into worst vs best).
 
 ### Person 3 — engine (then `make export`)
-- [ ] **E1 Soil index rates alfalfa as bad for soil**: continuous alfalfa 0.26 vs continuous
-  corn 0.64 (FIN-017), alfalfa–corn 0.41 < corn–wheat–sorghum 0.48; sorghum–wheat–rye cover
-  0.27 < current 0.57 on FIN-001. OM term counts only above-ground residue (`crops.csv`
-  alfalfa residue 1.0 t/ha, hay removed). Add root/crown biomass for perennials and cover
-  (~3–5 t/ha/yr) or NRCS SCI biomass values. This drives "Save Water" picking the current
-  rotation.
-- [ ] **E2 Irrigated wheat uses as much water as corn**: continuous wheat 404–405 mm
-  (FIN-025, FIN-004) vs corn 400 mm (FIN-017); budgets report says 6 in (limited) / 12 in
-  (2012 drought). Likely Kc_ini 0.70 through dormancy + full refill at 40 % depletion. Use Kc
-  ~0.4 over dormancy and deficit irrigation for wheat; target p50 ≈ 8–12 in. Also inflates
-  corn–wheat–sorghum (378 mm).
-- [ ] **E3 Limited irrigation earns less than dryland on every field**: sorghum–wheat–cover
-  $119/ha vs dryland $128 (FIN-001), $240 vs $324 (FIN-032), p10 −$7. Limited option pays full
-  irrigated direct costs with deficit yields (`strategies.py:85`). Use limited-irrigation
-  budget lines or scale inputs to yield. Its water is a flat 100 mm with no range while gaps
-  text says "capped at 150 mm" — make consistent.
-- [ ] **E4 Rye cover claims vs model**: "Forage" trait and "silage for feedlots" benefit, but
-  the rye is costed as glyphosate-terminated with no revenue; "shields topsoil from wind
-  erosion" on fields where modelled erosion is higher than current (FIN-022 0.49 vs 0.21,
-  FIN-026, FIN-032 1.32 vs 1.06, FIN-034, FIN-045). (The old "Low water erosion" contradiction
-  is fixed — testers confirmed.)
-- [ ] **E5 Trade-offs per strategy**: benefits are one-sided boilerplate ("established
-  elevator access" on every current rotation); add `risks`/drawbacks (e.g. corn–soybean on
-  FIN-005 has 14× the erosion of alfalfa). "Why it's here" says "under full irrigation from
-  USDA CDL history" — CDL does not say how much was irrigated.
-- [ ] **E6 Identical net returns** for alfalfa–corn, sorghum–wheat–cover and dryland on
-  FIN-001 and FIN-026 — check field-specific yield response.
+- [x] **E1 Soil index rates alfalfa as bad for soil**: Added `root_biomass_t_ha` to `CropParams`
+  (alfalfa: 4.5 t/ha, rye cover: 2.5 t/ha, grass pasture: 3.5 t/ha, grain crops: 0.8–1.5 t/ha).
+  Total biomass (surface residue + root/crown) now drives the SCI Organic Matter sub-factor.
+  Alfalfa–corn SCI increases to 0.73 (vs 0.41 before, higher than continuous corn 0.71 on FIN-017).
+- [x] **E2 Irrigated wheat uses as much water as corn**: Winter wheat (and fall-sown crops)
+  dormancy implemented (DOY 330–60): winter irrigation shut off (`irrigable = False`, matching
+  Kansas winterized pivots) and dormant Kc capped to 0.40. Added crop-specific deficit irrigation
+  trigger (`irrig_trigger = 0.55` for wheat vs 0.40 for corn). Continuous wheat median water
+  drops from 404 mm to 269 mm (~10.6 in, matching 8–12 in K-State benchmark); CWS drops from
+  378 mm to 338 mm.
+- [x] **E3 Limited irrigation earns less than dryland on every field**: Limited irrigation
+  variable costs and labour now interpolated at 50% between dryland and full irrigation in
+  `strategies.py` (reflecting K-State limited enterprise budgets with lower seed/fertilizer rates).
+  Sorghum–wheat–cover on FIN-001 now earns $217/ha (p10 $89/ha) vs dryland $143/ha (was $119 vs $128
+  before). Gaps text clarifies the 150 mm/yr cap applies to cropped seasons (~100 mm/yr rotation
+  average including cover/fallow), and wet years use less.
+- [x] **E4 Rye cover claims vs model**: Removed `rye_cover` from `forage` check in
+  `derive_soil_health_traits` (it is glyphosate-terminated cover, not sold forage). In `benefits()`,
+  wind erosion shielding is only claimed if rotation erosion <= baseline + 0.05 t/ha; otherwise it
+  highlights living winter cover root biomass, organic matter building, and weed suppression.
+- [x] **E5 Trade-offs per strategy**: Replaced universal "established elevator access" boilerplate
+  on baseline rotations with crop-specific strengths (stover retention, water conservation,
+  N-fixation, or drought tolerance). Added quantified drawbacks and trade-offs to `verify_locally`
+  (erosion risk with exact multiplier, higher irrigation need vs water allocation, and net return
+  trade-offs). Removed false claim that CDL identifies irrigation depth.
+- [x] **E6 Identical net returns**: Added slope runoff reduction on rain events > 10 mm in
+  `water_balance.py` (`p_eff = p * (1 - 0.015 * slope_pct)`). Sloped fields now have distinct
+  effective rainfall and yield responses: FIN-001 (3.71% slope) vs FIN-026 (2.90% slope) now have
+  differentiated returns across all rotations ($217 vs $219 SWC, $143 vs $144 dryland).
+- [ ] E7 (later) Export per-weather-year metrics so web can sample whole years (see W8).
+- [ ] E8 (later, adviser asks) Yield & price assumptions per crop (bu/ac, t/ac) and transition
+  costs (breaking/establishing alfalfa, N credit) visible in data for the printout.
 - [ ] E9 (info) Web ranking now applies the farmer's water limit (`rankWithLimit` in
   `web/src/lib/ranking.ts`); `engine/mcda.py` parity holds only for the no-limit case.
 - [ ] E7 (later) Export per-weather-year metrics so web can sample whole years (see W8).
