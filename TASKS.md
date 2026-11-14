@@ -75,7 +75,7 @@ cross-team needs under **Blockers / requests**.
   (`winwht_corn` 225, `triticale_corn` 228, `winwht_sorghum` 236, `winwht_soybeans` 26),
   with a documented double-crop convention (summer crop only, winter phase not modelled,
   `placeholder=true`). The pipeline now emits **all 60 fields** with complete histories.
-- **pipeline → person 1 (done, please review):** `engine/params.py` now covers 5 of the 8 new
+- **pipeline → person 3 (engine owner after the swap; done, please review):** `engine/params.py` now covers 5 of the 8 new
   crops via documented budget proxies (`PROXIED_CROPS`): triticale → winter wheat, and the
   four double-crop rotations → their summer crop. Each proxy is surfaced in `data_gaps` and
   in `verify_locally`, so the UI says which budget it used. **50 of 60 fields now reach the
@@ -135,6 +135,18 @@ cross-team needs under **Blockers / requests**.
   Verified after the ownership swap and the v0.3 edits (2026-11-14): `assemble` and
   `groundwater` still run, `fields.geojson` (60 fields) and `grace_water_storage.json`
   (259 months) both validate at 0.3 with `mock: false`.
+- **pipeline → person 1 / person 3: frost data is produced but NOTHING consumes it.** Checked
+  2026-11-14: `data/interim/frost_windows.json` + `.csv` exist (spring/fall frost dates and
+  p10/p50/p90, 1995-2025), and `grep -rn frost web/src contracts engine` returns **zero hits**.
+  Decision needed, in either direction:
+  - **Contract route:** add `"frost"` to the `type` enum in `contracts/fields.schema.json`
+    `stress_window` (currently `["water", "heat"]`) and emit windows per field-year — that is
+    a **v0.4** contract change needing all three, after which the passport timeline can show
+    frost rows alongside heat and bare periods.
+  - **Standalone route:** leave the contract alone and give it its own card (like GRACE), so
+    the start screen or "How we know" can cite the frost-free window without a schema bump.
+  Until one is chosen the file is dead weight — say which and I will do it.
+
 - ~~**person 1 → person 3: per-strategy "why / benefits / risks"**~~ — resolved (person 3):
   `contracts/strategies.schema.json` and `web/src/types/contracts.ts` gained `why_considered`
   (field-specific rationale tied to soil/history/water), `benefits` (2–3 quantified strings),
@@ -155,7 +167,7 @@ cross-team needs under **Blockers / requests**.
   the code now paces, honours `Retry-After` for, and resumes around via the per-composite
   cache — a fresh `make data` may need a second `pipeline ndvi` pass to finish, by design.
 
-- **pipeline → person 3 (web):** two observations from opening the dev server with real data.
+- **pipeline → person 1 (web owner after the swap):** two observations from opening the dev server with real data.
   The 26 fields load correctly (legend tallies match: alfalfa 13, corn 7, wheat 2, fallow 2,
   sorghum 1, grass 1) and no mock banner shows, but at county zoom the fields read as small
   dots rather than visible circles — expected for an 800 m pivot in a 764 px viewport, so
