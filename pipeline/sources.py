@@ -16,6 +16,7 @@ import rasterio
 from pipeline.config import INTERIM, RAW, Config
 from pipeline.fields import cdl_tif
 from pipeline.net import download
+from pipeline.soil import fetch_ssurgo as soil_fetch_ssurgo
 from pipeline.terrain import fetch_srtm as terrain_fetch_srtm
 
 # POWER daily point API: one row per day, DOY-indexed, no date column.
@@ -185,9 +186,9 @@ def fetch_cdl(cfg: Config, *, force: bool = False) -> list[Path]:
     return out
 
 
-def fetch_ssurgo(cfg: Config) -> None:
+def fetch_ssurgo(cfg: Config, *, force: bool = False) -> Path:
     """SSURGO map units + component/horizon tables for the county."""
-    raise NotImplementedError
+    return soil_fetch_ssurgo(cfg, force=force)
 
 
 SOURCES = {

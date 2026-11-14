@@ -17,6 +17,7 @@ import pandas as pd
 
 from pipeline.config import INTERIM, Config
 from pipeline.fields import derive_fields
+from pipeline.soil import derive_soil
 from pipeline.terrain import derive_terrain
 
 # Thresholds for heat stress on the Finney County crops in contracts/crops.csv.
@@ -138,4 +139,9 @@ def derive_heat_stress(cfg: Config) -> Path:
     return out
 
 
-DERIVATIONS = {"heat": derive_heat_stress, "fields": derive_fields, "terrain": derive_terrain}
+DERIVATIONS = {
+    "heat": derive_heat_stress,
+    "fields": derive_fields,
+    "terrain": derive_terrain,
+    "soil": derive_soil,
+}
