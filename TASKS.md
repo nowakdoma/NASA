@@ -107,16 +107,11 @@ cross-team needs under **Blockers / requests**.
      heat-stress windows (`type: "frost"`) is ideal.
   3. Optional: **GPM IMERG** monthly precip for the county vs POWER — one sentence for the
      "satellite vs model data" box (brief asks to explain this).
-- **person 1 → person 3: per-strategy "why / benefits / risks"** — the brief requires, per
-  strategy: why suggested, evidence, benefits, information gaps, risks needing local review.
-  `strategies.json` already has `description`, `evidence`, `data_gaps`, `verify_locally`.
-  Missing: (a) `why_considered` — one sentence tied to this field (e.g. "bare 3–6 months most
-  winters on fine sand → cover replaces fallow"); (b) `benefits` — 2–3 short strings;
-  (c) soil-health traits per strategy for the brief's priorities: `n_fixing_years`,
-  `pest_break` (true if ≥ 2 crop families), `forage` (bool). (a)–(c) need a contracts bump
-  (3 humans). Fallback if no time: person 1 writes the copy statically in `web/`, labelled
-  draft. Water-allocation constraint ("inches I can pump") will be done client-side in web
-  from `water_use_mm` p50/p90 — no engine change needed.
+- ~~**person 1 → person 3: per-strategy "why / benefits / risks"**~~ — resolved (person 3):
+  `contracts/strategies.schema.json` and `web/src/types/contracts.ts` gained `why_considered`
+  (field-specific rationale tied to soil/history/water), `benefits` (2–3 quantified strings),
+  and `soil_health_traits` (`n_fixing_years`, `pest_break`, `forage`). Implemented and tested
+  in `engine/strategies.py`; all fields in `engine.export` populate them dynamically.
 - ~~**person 1 → person 2: `pipeline ndvi` pages leave the county**~~ — resolved in
   `6d41c21` (bare periods 2007–2025 in `fields.geojson`). Kept for reference: (`pipeline/ndvi.py`
   `search_items`). Page 1 is a POST with `bbox` + `collections` and returns the right tiles
@@ -154,3 +149,6 @@ cross-team needs under **Blockers / requests**.
   with rank_strategies and test parity. Contract proposal for crops.csv v0.2 (triticale, oats,
   other hay, double crops) documented in reports/CONTRACT_PROPOSAL_CROPS_V0.2.md. Pitch deck
   (7 slides) & 3-minute live demo script written in reports/PITCH_AND_DEMO_SCRIPT.md.
+- 2026-11-14 17:48: per-strategy why_considered, benefits, and soil_health_traits (n_fixing_years,
+  pest_break, forage) added to contracts/strategies.schema.json, web/src/types/contracts.ts,
+  and engine/strategies.py. Export and validation passing.

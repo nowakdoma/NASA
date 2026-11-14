@@ -34,6 +34,12 @@ def test_export_strategies_structure(exported):
         assert len({x["id"] for x in strategies}) == 4
         for x in strategies:
             assert x["data_gaps"]
+            assert x["why_considered"] and isinstance(x["why_considered"], str)
+            assert 2 <= len(x["benefits"]) <= 3
+            sht = x["soil_health_traits"]
+            assert isinstance(sht["n_fixing_years"], int) and sht["n_fixing_years"] >= 0
+            assert isinstance(sht["pest_break"], bool)
+            assert isinstance(sht["forage"], bool)
             for q in x["metrics"].values():
                 assert q["p10"] <= q["p50"] <= q["p90"]
 

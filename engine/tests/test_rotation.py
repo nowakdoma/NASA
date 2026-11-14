@@ -1,7 +1,9 @@
 import pytest
 
 from engine import params
+from engine.crops import load_crop_traits
 from engine.rotation import detect_rotation, select_alternatives
+from engine.strategies import benefits, derive_soil_health_traits, why_considered
 
 
 def _history(seq, first=2008, last=2025):
@@ -56,3 +58,59 @@ def test_select_alternatives_dryland_field():
 def test_detect_rotation_empty_history_raises():
     with pytest.raises(ValueError, match="empty crop_history"):
         detect_rotation({})
+
+
+def test_strategy_why_benefits_soil_traits():
+    traits = load_crop_traits()
+
+    # Monoculture corn
+    traits_corn = derive_soil_health_traits(["corn"], traits)
+    assert traits_corn["n_fixing_years"] == 0
+    assert traits_corn["pest_break"] is False
+    assert traits_corn["forage"] is False
+
+    # Alfalfa (forage, n-fixing, 2 families with corn)
+    traits_alfalfa = derive_soil_health_traits(["alfalfa", "alfalfa", "corn"], traits)
+    assert traits_alfalfa["n_fixing_years"] == 2
+    assert traits_alfalfa["pest_break"] is True
+    assert traits_alfalfa["forage"] is True
+
+    # Why considered
+    props = {
+        "soil": {"texture": "silt loam", "awc_mm": 180, "kffact": 0.37, "slope_pct": 0.5},
+        "crop_history": {"2024": "corn", "2025": "corn"},
+    }
+    why_cur = why_considered(["corn"], "full", True, props, traits)
+    assert "baseline" in why_cur and "silt loam" in why_cur
+
+    why_alt = why_considered(
+        ["sorghum", "winter_wheat", "rye_cover"], "limited", False, props, traits
+    )
+    assert "cereal rye" in why_alt or "erosion" in why_alt
+
+    # Benefits
+    alt_m = {
+        "water_use_mm": {"p50": 180},
+        "erosion_t_ha": {"p50": 1.2},
+        "income_usd_ha": {"p50": 320},
+        "labour_index": {"p50": 0.3},
+        "soil_index": {"p50": 0.4},
+    }
+    cur_m = {
+        "water_use_mm": {"p50": 420},
+        "erosion_t_ha": {"p50": 2.5},
+        "income_usd_ha": {"p50": 350},
+        "labour_index": {"p50": 0.5},
+        "soil_index": {"p50": 0.1},
+    }
+    bens = benefits(
+        ["sorghum", "winter_wheat", "rye_cover"],
+        "limited",
+        False,
+        alt_m,
+        cur_m,
+        traits,
+        derive_soil_health_traits(["sorghum", "winter_wheat", "rye_cover"], traits),
+    )
+    assert 2 <= len(bens) <= 3
+    assert any("water savings" in b or "irrigation" in b for b in bens)

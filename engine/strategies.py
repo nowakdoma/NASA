@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import copy
 from dataclasses import dataclass
+from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -239,6 +240,180 @@ def verify_locally(rotation: list[str], irrigation: str) -> list[str]:
     return checks
 
 
+def derive_soil_health_traits(rotation: list[str], traits: pd.DataFrame) -> dict[str, Any]:
+    """Calculate soil health and rotational break traits."""
+    n_fixing_years = sum(
+        1 for c in rotation if c in traits.index and bool(traits.loc[c, "n_fixing"])
+    )
+    families = {
+        str(traits.loc[c, "family"]).strip()
+        for c in rotation
+        if c in traits.index and str(traits.loc[c, "family"]).strip().lower() not in ("none", "")
+    }
+    pest_break = len(families) >= 2
+    forage = any(
+        c in {"alfalfa", "triticale", "other_hay", "rye_cover"}
+        or (
+            c in traits.index
+            and (
+                "hay" in str(traits.loc[c, "name"]).lower()
+                or "silage" in str(traits.loc[c, "name"]).lower()
+            )
+        )
+        for c in rotation
+    )
+    return {
+        "n_fixing_years": n_fixing_years,
+        "pest_break": pest_break,
+        "forage": forage,
+    }
+
+
+def why_considered(
+    rotation: list[str],
+    level: str,
+    is_current: bool,
+    props: dict,
+    traits: pd.DataFrame,
+) -> str:
+    """Generate a field-specific rationale sentence tied to soil, history, and water."""
+    soil = props["soil"]
+    texture = soil.get("texture", "loam")
+    awc = soil.get("awc_mm", 150)
+
+    if is_current:
+        crop_names = _crop_names(rotation, traits)
+        return (
+            f"Observed baseline rotation ({crop_names}) on {texture} soil "
+            f"under {level} irrigation from USDA CDL history."
+        )
+
+    rot_set = set(rotation)
+    if "rye_cover" in rot_set:
+        return (
+            f"Replaces winter bare-soil fallow with cereal rye cover to protect {texture} "
+            f"topsoil from wind erosion and build soil organic matter."
+        )
+    if "fallow" in rot_set:
+        return (
+            f"Incorporates planned fallow on {texture} soil ({awc:.0f} mm AWC) to recharge "
+            f"root-zone soil moisture for following dryland or limited crops."
+        )
+    if "sorghum" in rot_set and "corn" not in rot_set:
+        return (
+            f"Transitions from water-intensive corn to drought-tolerant grain sorghum to "
+            f"curtail Ogallala pumping withdrawals on {texture} soil."
+        )
+    if "alfalfa" in rot_set:
+        return (
+            "Introduces deep-rooted perennial legume to fix atmospheric nitrogen and "
+            "supply high-demand Southwest Kansas dairy and beef forage markets."
+        )
+    if "soybeans" in rot_set:
+        return (
+            "Introduces nitrogen-fixing soybeans to break continuous grass cereal cycles "
+            "and reduce synthetic fertilizer inputs."
+        )
+    if level == "limited":
+        return (
+            f"Caps annual irrigation at {params.IRRIGATION_LEVELS['limited']:.0f} mm/yr to "
+            f"extend well longevity and meet GMD3 water conservation targets."
+        )
+    if level == "dryland":
+        return (
+            f"Eliminates groundwater pumping entirely on {texture} acreage to avoid declining "
+            f"well capacity and rising pumping fuel costs."
+        )
+    return (
+        f"Diversifies the crop sequence on {texture} soil to balance seasonal machinery "
+        f"workload and hedge against weather extremes."
+    )
+
+
+def benefits(
+    rotation: list[str],
+    level: str,
+    is_current: bool,
+    metrics: dict,
+    current_metrics: dict | None,
+    traits: pd.DataFrame,
+    sht: dict,
+) -> list[str]:
+    """Generate 2-3 concise, quantified agronomic and resource benefits."""
+    b: list[str] = []
+
+    if is_current:
+        b.append(
+            "Established management routine with existing planter, chemical, and harvest equipment"
+        )
+        if sht["pest_break"]:
+            b.append("Maintains multi-crop family rotation breaking single-crop disease cycles")
+        else:
+            b.append(
+                "Direct access to established regional grain elevator and feed mill delivery bids"
+            )
+        b.append("Familiar baseline performance across 30-year historical weather conditions")
+        return b[:3]
+
+    # Water savings benefit
+    if current_metrics is not None:
+        cur_w = current_metrics["water_use_mm"]["p50"]
+        alt_w = metrics["water_use_mm"]["p50"]
+        diff_w = cur_w - alt_w
+        if diff_w >= 20 and cur_w > 0:
+            pct_w = round((diff_w / cur_w) * 100)
+            b.append(
+                f"Cuts median irrigation pumping by {diff_w:.0f} mm/yr ({pct_w}% water savings)"
+            )
+        elif alt_w == 0:
+            b.append("Zero groundwater pumping; 100% conservation of underlying Ogallala reserve")
+
+    # Soil & pest break benefit
+    families = {
+        str(traits.loc[c, "family"]).strip()
+        for c in rotation
+        if c in traits.index and str(traits.loc[c, "family"]).strip().lower() not in ("none", "")
+    }
+    if sht["pest_break"] and len(families) >= 2:
+        b.append(
+            f"Breaks monoculture pest and weed cycles across {len(families)} distinct crop families"
+        )
+    elif "rye_cover" in rotation:
+        b.append(
+            "Continuous living root system protects topsoil from spring High Plains wind erosion"
+        )
+    elif metrics["erosion_t_ha"]["p50"] <= 1.5:
+        p50_er = metrics["erosion_t_ha"]["p50"]
+        b.append(f"Low water erosion rate ({p50_er:.1f} t/ha/yr p50), conserving topsoil")
+
+    # Agronomic / economic / labour benefit
+    if sht["n_fixing_years"] > 0:
+        n_fix = sht["n_fixing_years"]
+        b.append(f"Provides biological nitrogen fixation in {n_fix} of {len(rotation)} years")
+    elif sht["forage"]:
+        b.append("Produces high-demand forage/silage for regional cattle feedlots and dairies")
+    elif (
+        current_metrics is not None
+        and metrics["income_usd_ha"]["p50"] > current_metrics["income_usd_ha"]["p50"]
+    ):
+        gain = metrics["income_usd_ha"]["p50"] - current_metrics["income_usd_ha"]["p50"]
+        b.append(f"Higher median return over variable costs (+${gain:.0f}/ha/yr)")
+    elif (
+        current_metrics is not None
+        and metrics["labour_index"]["p50"] < current_metrics["labour_index"]["p50"]
+    ):
+        b.append("Reduces peak seasonal machinery operating hours and management complexity")
+    elif metrics["soil_index"]["p50"] > 0.0:
+        p50_sci = metrics["soil_index"]["p50"]
+        b.append(f"Positive soil conditioning index ({p50_sci:+.2f}), building soil health")
+    else:
+        b.append("Spreads weather and market risk across diversified planting and harvest windows")
+
+    if len(b) < 2:
+        b.append("Spreads production and price risk across multiple seasonal windows")
+    return b[:3]
+
+
 def field_strategies(
     props: dict,
     wy: WeatherYears,
@@ -260,6 +435,7 @@ def field_strategies(
     ]  # fmt: skip
     out = []
     used_ids = set()
+    cur_metrics = None
     for sid, entry, rotation, level in options:
         while sid in used_ids:
             sid += "_b"
@@ -279,11 +455,21 @@ def field_strategies(
             if cache is not None:
                 cache[key] = metrics
         metrics = copy.deepcopy(cache[key]) if cache is not None else metrics
+        if entry is None:
+            cur_metrics = metrics
+
+        sht = derive_soil_health_traits(rotation, traits)
+        why = why_considered(rotation, level, entry is None, props, traits)
+        bens = benefits(rotation, level, entry is None, metrics, cur_metrics, traits, sht)
+
         out.append(
             {
                 "id": sid,
                 "name": name,
                 "description": desc,
+                "why_considered": why,
+                "benefits": bens,
+                "soil_health_traits": sht,
                 "is_current": entry is None,
                 "rotation": rotation,
                 "metrics": metrics,

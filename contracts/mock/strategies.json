@@ -102,7 +102,18 @@
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence."
-    ]
+    ],
+    "why_considered": "Observed baseline rotation (Corn–Corn–Corn–Winter wheat) on silt loam soil under full irrigation from USDA CDL history.",
+    "benefits": [
+     "Established management routine with existing planter, chemical, and harvest equipment",
+     "Direct access to established regional grain elevator and feed mill delivery bids",
+     "Familiar baseline performance across 30-year historical weather conditions"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": false,
+     "forage": false
+    }
    },
    {
     "id": "wsf_limited",
@@ -166,7 +177,18 @@
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
      "Fallow-year weed control and residue management plan."
-    ]
+    ],
+    "why_considered": "Incorporates planned fallow on silt loam soil (190 mm AWC) to recharge root-zone soil moisture for following dryland or limited crops.",
+    "benefits": [
+     "Cuts median irrigation pumping by 236 mm/yr (61% water savings)",
+     "Low water erosion rate (1.5 t/ha/yr p50), conserving topsoil",
+     "Reduces peak seasonal machinery operating hours and management complexity"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": false,
+     "forage": false
+    }
    },
    {
     "id": "corn_soy",
@@ -229,7 +251,17 @@
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
      "Soybean cyst nematode and iron-deficiency chlorosis history."
-    ]
+    ],
+    "why_considered": "Introduces nitrogen-fixing soybeans to break continuous grass cereal cycles and reduce synthetic fertilizer inputs.",
+    "benefits": [
+     "Breaks monoculture pest and weed cycles across 2 distinct crop families",
+     "Provides biological nitrogen fixation in 1 of 2 years"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 1,
+     "pest_break": true,
+     "forage": false
+    }
    },
    {
     "id": "alfalfa_corn_wheat",
@@ -296,7 +328,17 @@
      "Herbicide carryover restrictions between the crops in this sequence.",
      "Hay buyer within hauling distance.",
      "Cutting labour and equipment."
-    ]
+    ],
+    "why_considered": "Introduces deep-rooted perennial legume to fix atmospheric nitrogen and supply high-demand Southwest Kansas dairy and beef forage markets.",
+    "benefits": [
+     "Breaks monoculture pest and weed cycles across 2 distinct crop families",
+     "Provides biological nitrogen fixation in 3 of 5 years"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 3,
+     "pest_break": true,
+     "forage": true
+    }
    }
   ],
   "FIN-002": [
@@ -359,7 +401,18 @@
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence."
-    ]
+    ],
+    "why_considered": "Observed baseline rotation (Corn–Winter wheat) on silt loam soil under full irrigation from USDA CDL history.",
+    "benefits": [
+     "Established management routine with existing planter, chemical, and harvest equipment",
+     "Direct access to established regional grain elevator and feed mill delivery bids",
+     "Familiar baseline performance across 30-year historical weather conditions"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": false,
+     "forage": false
+    }
    },
    {
     "id": "wsf_limited",
@@ -423,7 +476,18 @@
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
      "Fallow-year weed control and residue management plan."
-    ]
+    ],
+    "why_considered": "Incorporates planned fallow on silt loam soil (210 mm AWC) to recharge root-zone soil moisture for following dryland or limited crops.",
+    "benefits": [
+     "Cuts median irrigation pumping by 180 mm/yr (56% water savings)",
+     "Low water erosion rate (1.1 t/ha/yr p50), conserving topsoil",
+     "Reduces peak seasonal machinery operating hours and management complexity"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": false,
+     "forage": false
+    }
    },
    {
     "id": "corn_soy",
@@ -486,7 +550,17 @@
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
      "Soybean cyst nematode and iron-deficiency chlorosis history."
-    ]
+    ],
+    "why_considered": "Introduces nitrogen-fixing soybeans to break continuous grass cereal cycles and reduce synthetic fertilizer inputs.",
+    "benefits": [
+     "Breaks monoculture pest and weed cycles across 2 distinct crop families",
+     "Provides biological nitrogen fixation in 1 of 2 years"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 1,
+     "pest_break": true,
+     "forage": false
+    }
    },
    {
     "id": "alfalfa_corn_wheat",
@@ -553,7 +627,17 @@
      "Herbicide carryover restrictions between the crops in this sequence.",
      "Hay buyer within hauling distance.",
      "Cutting labour and equipment."
-    ]
+    ],
+    "why_considered": "Introduces deep-rooted perennial legume to fix atmospheric nitrogen and supply high-demand Southwest Kansas dairy and beef forage markets.",
+    "benefits": [
+     "Breaks monoculture pest and weed cycles across 2 distinct crop families",
+     "Provides biological nitrogen fixation in 3 of 5 years"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 3,
+     "pest_break": true,
+     "forage": true
+    }
    }
   ],
   "FIN-003": [
@@ -617,7 +701,18 @@
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence."
-    ]
+    ],
+    "why_considered": "Observed baseline rotation (Winter wheat–Grain sorghum–Fallow / idle cropland) on loamy fine sand soil under full irrigation from USDA CDL history.",
+    "benefits": [
+     "Established management routine with existing planter, chemical, and harvest equipment",
+     "Direct access to established regional grain elevator and feed mill delivery bids",
+     "Familiar baseline performance across 30-year historical weather conditions"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": false,
+     "forage": false
+    }
    },
    {
     "id": "wsc_cover",
@@ -681,7 +776,17 @@
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
      "Termination timing vs. stored soil water before sorghum."
-    ]
+    ],
+    "why_considered": "Replaces winter bare-soil fallow with cereal rye cover to protect loamy fine sand topsoil from wind erosion and build soil organic matter.",
+    "benefits": [
+     "Continuous living root system protects topsoil from spring High Plains wind erosion",
+     "Produces high-demand forage/silage for regional cattle feedlots and dairies"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": false,
+     "forage": true
+    }
    },
    {
     "id": "corn_soy",
@@ -744,7 +849,17 @@
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
      "Soybean cyst nematode and iron-deficiency chlorosis history."
-    ]
+    ],
+    "why_considered": "Introduces nitrogen-fixing soybeans to break continuous grass cereal cycles and reduce synthetic fertilizer inputs.",
+    "benefits": [
+     "Breaks monoculture pest and weed cycles across 2 distinct crop families",
+     "Provides biological nitrogen fixation in 1 of 2 years"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 1,
+     "pest_break": true,
+     "forage": false
+    }
    },
    {
     "id": "alfalfa_corn_wheat",
@@ -811,7 +926,17 @@
      "Herbicide carryover restrictions between the crops in this sequence.",
      "Hay buyer within hauling distance.",
      "Cutting labour and equipment."
-    ]
+    ],
+    "why_considered": "Introduces deep-rooted perennial legume to fix atmospheric nitrogen and supply high-demand Southwest Kansas dairy and beef forage markets.",
+    "benefits": [
+     "Breaks monoculture pest and weed cycles across 2 distinct crop families",
+     "Provides biological nitrogen fixation in 3 of 5 years"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 3,
+     "pest_break": true,
+     "forage": true
+    }
    }
   ],
   "FIN-004": [
@@ -878,7 +1003,18 @@
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence."
-    ]
+    ],
+    "why_considered": "Observed baseline rotation (Alfalfa–Alfalfa–Alfalfa–Alfalfa–Corn–Winter wheat) on silt loam soil under full irrigation from USDA CDL history.",
+    "benefits": [
+     "Established management routine with existing planter, chemical, and harvest equipment",
+     "Maintains multi-crop family rotation breaking single-crop disease cycles",
+     "Familiar baseline performance across 30-year historical weather conditions"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 4,
+     "pest_break": true,
+     "forage": true
+    }
    },
    {
     "id": "wsf_limited",
@@ -942,7 +1078,18 @@
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
      "Fallow-year weed control and residue management plan."
-    ]
+    ],
+    "why_considered": "Incorporates planned fallow on silt loam soil (230 mm AWC) to recharge root-zone soil moisture for following dryland or limited crops.",
+    "benefits": [
+     "Cuts median irrigation pumping by 347 mm/yr (71% water savings)",
+     "Low water erosion rate (1.1 t/ha/yr p50), conserving topsoil",
+     "Reduces peak seasonal machinery operating hours and management complexity"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": false,
+     "forage": false
+    }
    },
    {
     "id": "corn_soy",
@@ -1005,7 +1152,18 @@
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
      "Soybean cyst nematode and iron-deficiency chlorosis history."
-    ]
+    ],
+    "why_considered": "Introduces nitrogen-fixing soybeans to break continuous grass cereal cycles and reduce synthetic fertilizer inputs.",
+    "benefits": [
+     "Cuts median irrigation pumping by 102 mm/yr (21% water savings)",
+     "Breaks monoculture pest and weed cycles across 2 distinct crop families",
+     "Provides biological nitrogen fixation in 1 of 2 years"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 1,
+     "pest_break": true,
+     "forage": false
+    }
    },
    {
     "id": "corn_sorg_cover",
@@ -1070,7 +1228,18 @@
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
      "Hay market access lost if alfalfa is dropped."
-    ]
+    ],
+    "why_considered": "Replaces winter bare-soil fallow with cereal rye cover to protect silt loam topsoil from wind erosion and build soil organic matter.",
+    "benefits": [
+     "Cuts median irrigation pumping by 114 mm/yr (23% water savings)",
+     "Continuous living root system protects topsoil from spring High Plains wind erosion",
+     "Produces high-demand forage/silage for regional cattle feedlots and dairies"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": false,
+     "forage": true
+    }
    }
   ],
   "FIN-005": [
@@ -1133,7 +1302,18 @@
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence."
-    ]
+    ],
+    "why_considered": "Observed baseline rotation (Corn–Soybeans) on silt loam soil under full irrigation from USDA CDL history.",
+    "benefits": [
+     "Established management routine with existing planter, chemical, and harvest equipment",
+     "Maintains multi-crop family rotation breaking single-crop disease cycles",
+     "Familiar baseline performance across 30-year historical weather conditions"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 1,
+     "pest_break": true,
+     "forage": false
+    }
    },
    {
     "id": "wsf_limited",
@@ -1197,7 +1377,18 @@
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
      "Fallow-year weed control and residue management plan."
-    ]
+    ],
+    "why_considered": "Incorporates planned fallow on silt loam soil (205 mm AWC) to recharge root-zone soil moisture for following dryland or limited crops.",
+    "benefits": [
+     "Cuts median irrigation pumping by 248 mm/yr (64% water savings)",
+     "Low water erosion rate (1.5 t/ha/yr p50), conserving topsoil",
+     "Reduces peak seasonal machinery operating hours and management complexity"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": false,
+     "forage": false
+    }
    },
    {
     "id": "corn_sorg",
@@ -1259,7 +1450,18 @@
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
      "Sorghum harvest timing vs. wheat planting."
-    ]
+    ],
+    "why_considered": "Diversifies the crop sequence on silt loam soil to balance seasonal machinery workload and hedge against weather extremes.",
+    "benefits": [
+     "Cuts median irrigation pumping by 57 mm/yr (15% water savings)",
+     "Low water erosion rate (0.9 t/ha/yr p50), conserving topsoil",
+     "Reduces peak seasonal machinery operating hours and management complexity"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": false,
+     "forage": false
+    }
    },
    {
     "id": "alfalfa_corn_wheat",
@@ -1326,7 +1528,17 @@
      "Herbicide carryover restrictions between the crops in this sequence.",
      "Hay buyer within hauling distance.",
      "Cutting labour and equipment."
-    ]
+    ],
+    "why_considered": "Introduces deep-rooted perennial legume to fix atmospheric nitrogen and supply high-demand Southwest Kansas dairy and beef forage markets.",
+    "benefits": [
+     "Breaks monoculture pest and weed cycles across 2 distinct crop families",
+     "Provides biological nitrogen fixation in 3 of 5 years"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 3,
+     "pest_break": true,
+     "forage": true
+    }
    }
   ],
   "FIN-006": [
@@ -1390,7 +1602,18 @@
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence."
-    ]
+    ],
+    "why_considered": "Observed baseline rotation (Grain sorghum–Grain sorghum–Winter wheat) on silt loam soil under full irrigation from USDA CDL history.",
+    "benefits": [
+     "Established management routine with existing planter, chemical, and harvest equipment",
+     "Direct access to established regional grain elevator and feed mill delivery bids",
+     "Familiar baseline performance across 30-year historical weather conditions"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": false,
+     "forage": false
+    }
    },
    {
     "id": "wsf_limited",
@@ -1454,7 +1677,17 @@
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
      "Fallow-year weed control and residue management plan."
-    ]
+    ],
+    "why_considered": "Incorporates planned fallow on silt loam soil (180 mm AWC) to recharge root-zone soil moisture for following dryland or limited crops.",
+    "benefits": [
+     "Cuts median irrigation pumping by 79 mm/yr (34% water savings)",
+     "Reduces peak seasonal machinery operating hours and management complexity"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": false,
+     "forage": false
+    }
    },
    {
     "id": "corn_soy",
@@ -1517,7 +1750,17 @@
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
      "Soybean cyst nematode and iron-deficiency chlorosis history."
-    ]
+    ],
+    "why_considered": "Introduces nitrogen-fixing soybeans to break continuous grass cereal cycles and reduce synthetic fertilizer inputs.",
+    "benefits": [
+     "Breaks monoculture pest and weed cycles across 2 distinct crop families",
+     "Provides biological nitrogen fixation in 1 of 2 years"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 1,
+     "pest_break": true,
+     "forage": false
+    }
    },
    {
     "id": "alfalfa_corn_wheat",
@@ -1584,7 +1827,17 @@
      "Herbicide carryover restrictions between the crops in this sequence.",
      "Hay buyer within hauling distance.",
      "Cutting labour and equipment."
-    ]
+    ],
+    "why_considered": "Introduces deep-rooted perennial legume to fix atmospheric nitrogen and supply high-demand Southwest Kansas dairy and beef forage markets.",
+    "benefits": [
+     "Breaks monoculture pest and weed cycles across 2 distinct crop families",
+     "Provides biological nitrogen fixation in 3 of 5 years"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 3,
+     "pest_break": true,
+     "forage": true
+    }
    }
   ],
   "FIN-007": [
@@ -1648,7 +1901,18 @@
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence."
-    ]
+    ],
+    "why_considered": "Observed baseline rotation (Corn–Corn–Winter wheat) on silt loam soil under full irrigation from USDA CDL history.",
+    "benefits": [
+     "Established management routine with existing planter, chemical, and harvest equipment",
+     "Direct access to established regional grain elevator and feed mill delivery bids",
+     "Familiar baseline performance across 30-year historical weather conditions"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": false,
+     "forage": false
+    }
    },
    {
     "id": "wsf_limited",
@@ -1712,7 +1976,17 @@
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
      "Fallow-year weed control and residue management plan."
-    ]
+    ],
+    "why_considered": "Incorporates planned fallow on silt loam soil (200 mm AWC) to recharge root-zone soil moisture for following dryland or limited crops.",
+    "benefits": [
+     "Cuts median irrigation pumping by 223 mm/yr (61% water savings)",
+     "Reduces peak seasonal machinery operating hours and management complexity"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": false,
+     "forage": false
+    }
    },
    {
     "id": "corn_soy",
@@ -1775,7 +2049,17 @@
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
      "Soybean cyst nematode and iron-deficiency chlorosis history."
-    ]
+    ],
+    "why_considered": "Introduces nitrogen-fixing soybeans to break continuous grass cereal cycles and reduce synthetic fertilizer inputs.",
+    "benefits": [
+     "Breaks monoculture pest and weed cycles across 2 distinct crop families",
+     "Provides biological nitrogen fixation in 1 of 2 years"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 1,
+     "pest_break": true,
+     "forage": false
+    }
    },
    {
     "id": "alfalfa_corn_wheat",
@@ -1842,7 +2126,17 @@
      "Herbicide carryover restrictions between the crops in this sequence.",
      "Hay buyer within hauling distance.",
      "Cutting labour and equipment."
-    ]
+    ],
+    "why_considered": "Introduces deep-rooted perennial legume to fix atmospheric nitrogen and supply high-demand Southwest Kansas dairy and beef forage markets.",
+    "benefits": [
+     "Breaks monoculture pest and weed cycles across 2 distinct crop families",
+     "Provides biological nitrogen fixation in 3 of 5 years"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 3,
+     "pest_break": true,
+     "forage": true
+    }
    }
   ],
   "FIN-008": [
@@ -1906,7 +2200,18 @@
      "Does your water right / well capacity support this rotation in a dry year?",
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence."
-    ]
+    ],
+    "why_considered": "Observed baseline rotation (Cotton–Cotton–Grain sorghum) on fine sandy loam soil under full irrigation from USDA CDL history.",
+    "benefits": [
+     "Established management routine with existing planter, chemical, and harvest equipment",
+     "Maintains multi-crop family rotation breaking single-crop disease cycles",
+     "Familiar baseline performance across 30-year historical weather conditions"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": true,
+     "forage": false
+    }
    },
    {
     "id": "wsf_limited",
@@ -1970,7 +2275,17 @@
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
      "Fallow-year weed control and residue management plan."
-    ]
+    ],
+    "why_considered": "Incorporates planned fallow on fine sandy loam soil (140 mm AWC) to recharge root-zone soil moisture for following dryland or limited crops.",
+    "benefits": [
+     "Cuts median irrigation pumping by 116 mm/yr (43% water savings)",
+     "Reduces peak seasonal machinery operating hours and management complexity"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 0,
+     "pest_break": false,
+     "forage": false
+    }
    },
    {
     "id": "corn_soy",
@@ -2033,7 +2348,17 @@
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
      "Soybean cyst nematode and iron-deficiency chlorosis history."
-    ]
+    ],
+    "why_considered": "Introduces nitrogen-fixing soybeans to break continuous grass cereal cycles and reduce synthetic fertilizer inputs.",
+    "benefits": [
+     "Breaks monoculture pest and weed cycles across 2 distinct crop families",
+     "Provides biological nitrogen fixation in 1 of 2 years"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 1,
+     "pest_break": true,
+     "forage": false
+    }
    },
    {
     "id": "alfalfa_corn_wheat",
@@ -2100,7 +2425,17 @@
      "Herbicide carryover restrictions between the crops in this sequence.",
      "Hay buyer within hauling distance.",
      "Cutting labour and equipment."
-    ]
+    ],
+    "why_considered": "Introduces deep-rooted perennial legume to fix atmospheric nitrogen and supply high-demand Southwest Kansas dairy and beef forage markets.",
+    "benefits": [
+     "Breaks monoculture pest and weed cycles across 2 distinct crop families",
+     "Provides biological nitrogen fixation in 3 of 5 years"
+    ],
+    "soil_health_traits": {
+     "n_fixing_years": 3,
+     "pest_break": true,
+     "forage": true
+    }
    }
   ]
  }

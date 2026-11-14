@@ -82,10 +82,19 @@ export interface MetricMeta {
   description?: string;
 }
 
+export interface SoilHealthTraits {
+  n_fixing_years: number;
+  pest_break: boolean;
+  forage: boolean;
+}
+
 export interface Strategy {
   id: string;
   name: string;
   description?: string;
+  why_considered?: string;
+  benefits?: string[];
+  soil_health_traits?: SoilHealthTraits;
   is_current: boolean;
   rotation: CropCode[];
   metrics: Record<MetricKey, Interval>;

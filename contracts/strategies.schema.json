@@ -86,6 +86,26 @@
         "id": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
         "name": { "type": "string" },
         "description": { "type": "string" },
+        "why_considered": {
+          "type": "string",
+          "description": "Field-specific context explaining why this rotation was evaluated"
+        },
+        "benefits": {
+          "type": "array",
+          "description": "Key agronomic, economic, or resource benefits of this rotation",
+          "items": { "type": "string" }
+        },
+        "soil_health_traits": {
+          "type": "object",
+          "description": "Agronomic and soil health traits (N-fixing years, pest break, forage)",
+          "required": ["n_fixing_years", "pest_break", "forage"],
+          "additionalProperties": false,
+          "properties": {
+            "n_fixing_years": { "type": "integer", "minimum": 0 },
+            "pest_break": { "type": "boolean" },
+            "forage": { "type": "boolean" }
+          }
+        },
         "is_current": { "type": "boolean" },
         "rotation": {
           "description": "Crop sequence, one entry per season; crop codes from contracts/crops.csv.",
