@@ -26,18 +26,15 @@ cross-team needs under **Blockers / requests**.
 
 ## Blockers / requests
 
-- **pipeline:** Earthdata credentials verified **working** — NSIDC SMAP listings
-  (`daacdata.apps.nsidc.org/pub/SMAP/SPL3SMP_E/`) return 200 with them. Note EDL rejects
-  HTTP Basic on `/api/users/self` by design, so a 401 there does not mean bad credentials.
-- **pipeline:** LP DAAC cloud (`data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/`,
-  where MOD13Q1 and SRTMGL1 now live) returns **401 for username/password** — protected
-  data there needs an EDL bearer token + S3 credentials. Legacy `e4ftl01.cr.usgs.gov`
-  paths are decommissioned (only `ASTT` remains). Workarounds verified: MOD13Q1 NDVI is
-  readable anonymously from the Planetary Computer mirror via `/api/sas/v1/sign` (206),
-  and SRTM GL1 needs no login at all from the public `elevation-tiles-prod` skadi bucket.
-- **pipeline:** open question for person 1 — if the pitch should credit LP DAAC directly
-  (rather than a mirror), someone with the account must generate an EDL token and we add
-  `boto3` for S3 access.
+- **pipeline:** Earthdata access fully verified. `EARTHDATA_TOKEN` unlocks the LP DAAC
+  cloud protected buckets — MOD13Q1 granule range request returns 206 (HTTP Basic returns
+  401 there). `EARTHDATA_USERNAME`/`PASSWORD` still covers NSIDC SMAP. EDL rejects Basic on
+  `/api/users/self` by design, so a 401 there means nothing.
+- **pipeline:** legacy `e4ftl01.cr.usgs.gov` pool is decommissioned (only `ASTT` remains) —
+  ignore any tutorial that points at it. SRTM also has a no-login fallback from the public
+  `elevation-tiles-prod` skadi bucket if LP DAAC is ever unavailable.
+- **pipeline → person 1:** `.env.example` should document `EARTHDATA_TOKEN`, but it is a
+  root file I do not own — please add, or tell me to.
 
 ## Decisions log
 

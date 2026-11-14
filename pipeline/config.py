@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import base64
 import os
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -46,3 +47,28 @@ def earthdata_credentials() -> tuple[str, str]:
     if not user or not pwd:
         raise RuntimeError("EARTHDATA_USERNAME / EARTHDATA_PASSWORD not set (see .env.example)")
     return user, pwd
+
+
+def earthdata_token() -> str | None:
+    """Personal Access Token from ``EARTHDATA_TOKEN``, or None.
+
+    Prefer this over username/password: EDL tokens authenticate against Earthdata
+    Cloud protected buckets (LP DAAC MOD13Q1, SRTMGL1), where HTTP Basic returns 401.
+    Tokens also survive 2FA on the account.
+    """
+    load_env()
+    token = (os.environ.get("EARTHDATA_TOKEN") or "").strip()
+    return token or None
+
+
+def earthdata_auth_header() -> dict[str, str]:
+    """``Authorization`` header for Earthdata requests: Bearer, else Basic.
+
+    Bearer (token) covers every DAAC we use. Basic works for NSIDC SMAP and GES DISC
+    but is rejected by the LP DAAC cloud buckets, so it is only the fallback.
+    """
+    token = earthdata_token()
+    if token:
+        return {"Authorization": f"Bearer {token}"}
+    user, pwd = earthdata_credentials()
+    return {"Authorization": "Basic " + base64.b64encode(f"{user}:{pwd}".encode()).decode()}
