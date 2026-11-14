@@ -93,7 +93,7 @@ function IntervalPlot({
                     {fmt(Math.abs(r.deltaP50))}{' '}
                     {meta.unit.startsWith('score')
                       ? 'vs now'
-                      : `${meta.unit} (${r.deltaPct! > 0 ? '+' : ''}${r.deltaPct} %)`}
+                      : `${meta.unit} (${r.deltaPct! > 0 ? '+' : r.deltaPct! < 0 ? '−' : ''}${Math.abs(r.deltaPct!)} %)`}
                   </span>
                 )}
               </div>

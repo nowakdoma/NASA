@@ -101,9 +101,9 @@ export function PrintReport({
             <tr>
               <th>Soil (USDA SSURGO)</th>
               <td>
-                {p.soil.map_unit ?? p.soil.texture} · {p.soil.om_pct} % organic matter · holds{' '}
+                {p.soil.map_unit ?? p.soil.texture} · {p.soil.om_pct} % organic matter · holds{' '}
                 {(p.soil.awc_mm / 25.4).toFixed(1)} in ({p.soil.awc_mm} mm) · slope{' '}
-                {p.soil.slope_pct.toFixed(1)} % (NASA SRTM)
+                {p.soil.slope_pct.toFixed(1)} % (NASA SRTM)
               </td>
             </tr>
             <tr>
@@ -140,14 +140,14 @@ export function PrintReport({
           </thead>
           <tbody>
             <tr>
-              <th>Crop (USDA map)</th>
+              <th>Crop (USDA)</th>
               {years.map((y) => (
                 <td key={y}>{cropShort(p.crop_history[y])}</td>
               ))}
             </tr>
             {bare && (
               <tr>
-                <th>Months without green cover</th>
+                <th>No green cover (months)</th>
                 {years.map((y) => (
                   <td key={y}>
                     {((bare.daysByYear.get(Number(y)) ?? 0) / DAYS_PER_MONTH).toFixed(1)}

@@ -57,7 +57,7 @@ do?" with "nothing". Priority order within each owner = list order. `[ ]` open, 
 - [x] **W5 Finding your field**: satellite/labelled basemap toggle, zoom to selected field,
   hint above the map (dots cover it), "50 sample pivots — if yours isn't here pick one with
   similar soil".
-- [ ] **W6 Clean leftovers**: "Season-by-season detail" still has a second field dropdown, a
+- [x] **W6 Clean leftovers**: "Season-by-season detail" still has a second field dropdown, a
   second "Print Dossier", an empty "Water Deficit" row and overlapping heat pills; print view
   clips date/URL and Labour column on the right; "%" wraps on phone; targets < 44 px (crop-year
   cells 16×24, zoom 29×29, "How we know" 31 px); county label covers zoom buttons on phone.

@@ -1,15 +1,14 @@
 import { useMemo } from 'react';
 import type { FieldFeature, BarePeriod, StressWindow } from '../types/contracts';
 import { cropCss, cropLabel } from '../lib/colors';
-import { IconInfo, IconPrinter } from './Icons';
+import { IconInfo } from './Icons';
+import { fieldLabel } from '../lib/units';
 
 interface Props {
   field: FieldFeature;
   year: number;
   onSelectYear?: (year: number) => void;
   onOpenAbout?: () => void;
-  allFields?: FieldFeature[];
-  onSelectField?: (fieldId: string) => void;
 }
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -31,14 +30,7 @@ function calculateDays(startStr: string, endStr: string): number {
   return Math.max(1, Math.round((end - start) / (1000 * 60 * 60 * 24)));
 }
 
-export function FieldPanel({
-  field,
-  year,
-  onSelectYear,
-  onOpenAbout,
-  allFields,
-  onSelectField,
-}: Props) {
+export function FieldPanel({ field, year, onSelectYear, onOpenAbout }: Props) {
   const p = field.properties;
   const years = Object.keys(p.crop_history).sort();
   const currentCrop = p.crop_history[String(year)];
@@ -78,39 +70,10 @@ export function FieldPanel({
         <div className="passport-title-wrap">
           <div className="passport-badge-row">
             <span className="passport-badge">Field Passport</span>
-            {allFields && allFields.length > 1 && (
-              <select
-                value={p.field_id}
-                onChange={(e) => onSelectField?.(e.target.value)}
-                className="field-quick-select"
-                aria-label="Select active field"
-                title="Switch between Finney County fields"
-              >
-                {allFields.map((f) => (
-                  <option key={f.properties.field_id} value={f.properties.field_id}>
-                    {f.properties.field_id} · {f.properties.name ?? 'Field'} ({f.properties.area_ha}{' '}
-                    ha)
-                  </option>
-                ))}
-              </select>
-            )}
           </div>
           <h2 id="passport-title" className="passport-id">
-            {p.field_id} {p.name && <small className="passport-name">· {p.name}</small>}
+            {fieldLabel(p)} {p.name && <small className="passport-name">· {p.name}</small>}
           </h2>
-        </div>
-
-        <div className="passport-header-actions">
-          <button
-            type="button"
-            className="print-btn no-print"
-            onClick={() => window.print()}
-            title="Generate printable 1-page Field Report (PDF)"
-            aria-label="Print field report"
-          >
-            <IconPrinter />
-            <span>Print Dossier</span>
-          </button>
         </div>
       </div>
 
@@ -180,7 +143,7 @@ export function FieldPanel({
           </div>
           <div className="kv-item" title="Soil Organic Matter percentage in upper horizon">
             <dt>Organic Matter</dt>
-            <dd>{p.soil.om_pct} %</dd>
+            <dd>{p.soil.om_pct} %</dd>
           </div>
           <div className="kv-item" title="RUSLE Kf erodibility factor of fine-earth fraction">
             <dt>Erodibility (Kf)</dt>
@@ -192,7 +155,7 @@ export function FieldPanel({
           </div>
           <div className="kv-item" title="Average slope percentage derived from SRTM">
             <dt>Avg Slope</dt>
-            <dd>{p.soil.slope_pct} %</dd>
+            <dd>{p.soil.slope_pct} %</dd>
           </div>
           {p.soil.map_unit && (
             <div className="kv-item" title="SSURGO Map Unit Identifier">
@@ -234,8 +197,11 @@ export function FieldPanel({
           <div className="calendar-tracks">
             {/* Bare soil track */}
             <div className="track-row">
-              <span className="track-label" title="MODIS 250m NDVI bare soil detection">
-                Bare Soil
+              <span
+                className="track-label"
+                title="NASA MODIS 250 m greenness (NDVI < 0.3); includes dormant alfalfa and stalks"
+              >
+                No green cover
               </span>
               <div className="track-lane">
                 {barePeriods.map((b: BarePeriod, i: number) => {
@@ -248,48 +214,50 @@ export function FieldPanel({
                       key={`bare-${i}`}
                       className="timeline-bar bare-soil-bar"
                       style={{ left: `${left}%`, width: `${width}%` }}
-                      title={`Bare Soil: ${b.start} → ${b.end} (${days}d)\n${b.source}${b.note ? ` · ${b.note}` : ''}`}
+                      title={`No green cover: ${b.start} → ${b.end} (${days}d)\n${b.source}${b.note ? ` · ${b.note}` : ''}`}
                     >
-                      <span className="bar-text">{days}d</span>
+                      {width >= 8 && <span className="bar-text">{days} d</span>}
                     </div>
                   );
                 })}
               </div>
             </div>
 
-            {/* Water stress track */}
-            <div className="track-row">
-              <span className="track-label" title="SMAP soil moisture root-zone deficit">
-                Water Deficit
-              </span>
-              <div className="track-lane">
-                {waterStress.map((s: StressWindow, i: number) => {
-                  const left = getPctOfYear(s.start, year);
-                  const right = getPctOfYear(s.end, year);
-                  const width = Math.max(right - left, 2);
-                  const days = calculateDays(s.start, s.end);
-                  return (
-                    <div
-                      key={`water-${i}`}
-                      className="timeline-bar water-stress-bar"
-                      style={{
-                        left: `${left}%`,
-                        width: `${width}%`,
-                        opacity: 0.65 + s.severity * 0.35,
-                      }}
-                      title={`Water Stress: ${s.start} → ${s.end} (${days}d)\nSeverity: ${(s.severity * 100).toFixed(0)}%\nSource: ${s.source}`}
-                    >
-                      <span className="bar-text">Sev {(s.severity * 100).toFixed(0)}%</span>
-                    </div>
-                  );
-                })}
+            {/* Water stress track — only when the data has water-stress windows */}
+            {waterStress.length > 0 && (
+              <div className="track-row">
+                <span className="track-label" title="Soil water balance below crop need">
+                  Water stress
+                </span>
+                <div className="track-lane">
+                  {waterStress.map((s: StressWindow, i: number) => {
+                    const left = getPctOfYear(s.start, year);
+                    const right = getPctOfYear(s.end, year);
+                    const width = Math.max(right - left, 2);
+                    const days = calculateDays(s.start, s.end);
+                    return (
+                      <div
+                        key={`water-${i}`}
+                        className="timeline-bar water-stress-bar"
+                        style={{
+                          left: `${left}%`,
+                          width: `${width}%`,
+                          opacity: 0.65 + s.severity * 0.35,
+                        }}
+                        title={`Water Stress: ${s.start} → ${s.end} (${days}d)\nSeverity: ${(s.severity * 100).toFixed(0)}%\nSource: ${s.source}`}
+                      >
+                        {width >= 12 && <span className="bar-text">{days} d</span>}
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Heat stress track */}
             <div className="track-row">
-              <span className="track-label" title="NASA POWER air temperature > 35°C">
-                Heat Stress
+              <span className="track-label" title="NASA POWER: 2+ days at or above 35 °C (95 °F)">
+                Heat stress
               </span>
               <div className="track-lane">
                 {heatStress.map((s: StressWindow, i: number) => {
@@ -308,7 +276,7 @@ export function FieldPanel({
                       }}
                       title={`Heat Stress (Tmax > 35°C): ${s.start} → ${s.end} (${days}d)\nSeverity: ${(s.severity * 100).toFixed(0)}%\nSource: ${s.source}`}
                     >
-                      <span className="bar-text">Sev {(s.severity * 100).toFixed(0)}%</span>
+                      {width >= 12 && <span className="bar-text">{days} d</span>}
                     </div>
                   );
                 })}
@@ -320,7 +288,7 @@ export function FieldPanel({
         {/* Compact Event Pills */}
         {barePeriods.length + stressWindows.length === 0 ? (
           <p className="no-events-notice">
-            No bare-soil or severe stress anomalies detected for {year}.
+            No periods without green cover and no heat or water stress found for {year}.
           </p>
         ) : (
           <div className="events-compact-grid">
@@ -330,7 +298,7 @@ export function FieldPanel({
                 className="compact-event-card bare"
                 title={`${b.source} · ${b.note ?? ''}`}
               >
-                <span className="tag-pill bare">Bare Soil</span>
+                <span className="tag-pill bare">No green cover</span>
                 <span className="event-date-text">
                   {b.start.slice(5)} → {b.end.slice(5)}
                 </span>
@@ -344,12 +312,12 @@ export function FieldPanel({
                 title={`${s.source} · Severity ${(s.severity * 100).toFixed(0)}%`}
               >
                 <span className={`tag-pill ${s.type}`}>
-                  {s.type === 'water' ? 'Water' : 'Heat'}
+                  {s.type === 'water' ? 'Water' : s.type === 'frost' ? 'Frost-free season' : 'Heat'}
                 </span>
                 <span className="event-date-text">
                   {s.start.slice(5)} → {s.end.slice(5)}
                 </span>
-                <span className="event-duration-badge">{(s.severity * 100).toFixed(0)}% sev</span>
+                <span className="event-duration-badge">{calculateDays(s.start, s.end)} d</span>
               </div>
             ))}
           </div>

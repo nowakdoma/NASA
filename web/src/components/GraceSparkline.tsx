@@ -61,7 +61,7 @@ export function GraceSparkline({ grace }: { grace: GraceFile }) {
         <span className="grace-sub">
           since {first}
           {grace.mock ? '' : ', measured monthly from orbit'} (the trend line explains{' '}
-          {Math.round(grace.trend.r2 * 100)} % of the ups and downs)
+          {Math.round(grace.trend.r2 * 100)} % of the ups and downs)
         </span>
         {grace.mock && (
           <span className="grace-mock" role="note">

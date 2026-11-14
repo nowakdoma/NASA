@@ -217,7 +217,7 @@ export function AboutModal({ isOpen, onClose, grace, ranked, fieldId, weatherYea
                 1-in-10 low year to a 1-in-10 high year; the tick is a typical year. Then we vary
                 your priorities slightly, 2,000 times.{' '}
                 {lead
-                  ? `"On top in ${Math.round(lead.pBest * 10)} of 10 runs" means ${lead.strategy.name} came first in ${Math.round(lead.pBest * 100)} % of those runs.`
+                  ? `"On top in ${Math.round(lead.pBest * 10)} of 10 runs" means ${lead.strategy.name} came first in ${Math.round(lead.pBest * 100)} % of those runs.`
                   : '"On top in 6 of 10 runs" means the rotation came first in about 60 % of those runs.'}{' '}
                 If you set a water limit, a rotation cannot come first in a run where it would need
                 more water than you can pump. It shows how sure we can be, not a verdict.

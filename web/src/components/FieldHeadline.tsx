@@ -21,7 +21,7 @@ export function FieldHeadline({ field }: { field: FieldFeature }) {
       <p className="field-headline-sub">
         {h.compare} Seen from orbit by NASA MODIS every 16 days. This also counts dormant alfalfa
         and standing stalks, so the soil may not be fully bare. Uncovered {p.soil.texture} on a{' '}
-        {p.soil.slope_pct.toFixed(1)} % slope is when this soil erodes most easily.
+        {p.soil.slope_pct.toFixed(1)} % slope is when this soil erodes most easily.
       </p>
     </div>
   );

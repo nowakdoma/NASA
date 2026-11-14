@@ -539,7 +539,7 @@
 }
 
 .crop-cell {
-  height: 24px;
+  height: 32px;
   padding: 0;
   border: 0;
   border-radius: 3px;
@@ -1073,16 +1073,23 @@
     font-size: 10.5pt;
   }
 
-  .print-history th,
-  .print-history td {
-    padding: 2pt 3pt;
-    font-size: 7.5pt;
-    text-align: center;
+  .print-history {
+    width: 100%;
+    table-layout: fixed;
   }
 
+  .print-history th,
+  .print-history td {
+    padding: 2pt 1pt;
+    font-size: 6.5pt;
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+
+  .print-history th:first-child,
   .print-history tbody th {
+    width: 58pt;
     text-align: left;
-    white-space: nowrap;
   }
 
   .print-strategy {
@@ -1531,4 +1538,83 @@
   .map-tools .seg button {
     min-height: 44px;
   }
+}
+
+/* W6: print header may shrink instead of pushing the date/link off the page. */
+@media print {
+  .print-header {
+    gap: 12pt;
+  }
+
+  .print-header > div:first-child {
+    min-width: 0;
+  }
+
+  .print-meta-box {
+    flex: 0 1 190pt;
+    min-width: 0;
+  }
+
+  .print-url {
+    max-width: 190pt;
+  }
+}
+
+/* W6: touch targets ≥ 44 px on phones/tablets. */
+@media (pointer: coarse) {
+  .maplibregl-ctrl-group button {
+    width: 44px;
+    height: 44px;
+  }
+
+  .about-nav-btn {
+    min-height: 44px;
+  }
+
+  .crop-cell {
+    min-height: 44px;
+  }
+}
+
+.about-nav-btn {
+  min-height: 40px;
+}
+
+.maplibregl-ctrl-group button {
+  width: 36px;
+  height: 36px;
+}
+
+/* W6: the county badge must not cover the zoom buttons on narrow maps. */
+.county-badge {
+  max-width: calc(100% - 80px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 850px) {
+  .county-badge .county-sub,
+  .county-badge .county-fips {
+    display: none;
+  }
+}
+
+/* W6: link-style and tab buttons get a usable hit area. */
+.flow-scroll .text-link-btn,
+.flow-footer .text-link-btn,
+.reset-btn {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.tab-btn {
+  min-height: 36px;
+}
+
+/* Frost-free season (contracts v0.4): context, not a stress — neutral cool tone. */
+.tag-pill.frost {
+  background: #e6eef3;
+  color: #2b5b74;
 }

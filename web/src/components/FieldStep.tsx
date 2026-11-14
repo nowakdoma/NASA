@@ -42,7 +42,7 @@ export function FieldStep({ field, year, onSelectYear }: Props) {
   const facts = [
     {
       label: 'Soil',
-      value: `${p.soil.texture}, ${p.soil.om_pct} % organic matter`,
+      value: `${p.soil.texture}, ${p.soil.om_pct} % organic matter`,
       src: 'USDA SSURGO',
     },
     {
@@ -50,7 +50,7 @@ export function FieldStep({ field, year, onSelectYear }: Props) {
       value: `${(p.soil.awc_mm / 25.4).toFixed(1)} in (${p.soil.awc_mm} mm) in the root zone`,
       src: 'USDA SSURGO',
     },
-    { label: 'Slope', value: `${p.soil.slope_pct.toFixed(1)} %`, src: 'NASA SRTM 30 m' },
+    { label: 'Slope', value: `${p.soil.slope_pct.toFixed(1)} %`, src: 'NASA SRTM 30 m' },
     {
       label: `Heat-stress days ${lastYear}`,
       value: `${Math.round(heatDays)} days`,

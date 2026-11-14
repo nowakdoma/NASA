@@ -289,8 +289,6 @@ export default function App() {
                         year={year}
                         onSelectYear={setYear}
                         onOpenAbout={() => setIsAboutOpen(true)}
-                        allFields={data.fields.features}
-                        onSelectField={handleSelectField}
                       />
                     </details>
                   </>

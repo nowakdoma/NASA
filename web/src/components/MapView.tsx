@@ -443,7 +443,8 @@ export function MapView({ fields, year, selectedId, onSelect, highlightCrop }: P
         <strong>
           {fields.county.name}, {fields.county.state}
         </strong>{' '}
-        (FIPS {fields.county.fips})<span className="county-sub"> · County Boundary</span>
+        <span className="county-fips">(FIPS {fields.county.fips})</span>
+        <span className="county-sub"> · County Boundary</span>
       </div>
     </div>
   );
