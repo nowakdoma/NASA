@@ -15,7 +15,8 @@ INTERIM = DATA / "interim"
 
 @dataclass(frozen=True)
 class Region:
-    name: str = "Finney County, KS"
+    name: str = "Finney County, KS"  # human label, includes the state
+    county_name: str = "Finney County"  # bare name for the contract's county.name
     fips: str = "20055"
     bbox: tuple[float, float, float, float] = (-101.103, 37.737, -100.652, 38.264)
     centroid: tuple[float, float] = (-100.874, 38.000)  # lon, lat

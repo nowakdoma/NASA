@@ -65,6 +65,16 @@ cross-team needs under **Blockers / requests**.
   POST paging), or filter items by `collection` and tile/bbox before downloading. The
   `URLError`s on the in-county granules may be a separate signing/network issue.
 
+- **pipeline → person 3 (web):** two observations from opening the dev server with real data.
+  The 26 fields load correctly (legend tallies match: alfalfa 13, corn 7, wheat 2, fallow 2,
+  sorghum 1, grass 1) and no mock banner shows, but at county zoom the fields read as small
+  dots rather than visible circles — expected for an 800 m pivot in a 764 px viewport, so
+  worth confirming they render as polygons when zoomed. Also: clicking the zoom control
+  rapidly 6 times left the page blank with `body.innerText.length == 0` and no console error
+  captured; may be my selector, but worth a look.
+- **pipeline → all:** `county.name` was "Finney County, KS" which the UI renders as
+  "Finney County, KS, KS". Fixed to the bare "Finney County" (contract/mock convention).
+
 ## Decisions log
 
 - 2026-11-14 16:20: person 1 hands remaining engine-side tasks except the pitch to person 3

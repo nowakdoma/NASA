@@ -396,7 +396,7 @@ def derive_fields(cfg: Config) -> Path:
         "type": "FeatureCollection",
         "crs": "EPSG:4326",
         "county": {
-            "name": cfg.region.name,
+            "name": cfg.region.county_name,
             "state": "KS",
             "fips": cfg.region.fips,
             "bbox": list(cfg.region.bbox),

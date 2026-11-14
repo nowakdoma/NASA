@@ -2,7 +2,7 @@
  "type": "FeatureCollection",
  "schema_version": "0.1",
  "county": {
-  "name": "Finney County, KS",
+  "name": "Finney County",
   "state": "KS",
   "fips": "20055",
   "bbox": [
