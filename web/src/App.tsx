@@ -1,44 +1,66 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { loadData, type AppData } from './data/load';
 import { MapView } from './components/MapView';
 import { YearSlider } from './components/YearSlider';
 import { CropLegend } from './components/CropLegend';
 import { FieldPanel } from './components/FieldPanel';
-import { PrioritySliders, DEFAULT_PRIORITIES } from './components/PrioritySliders';
+import { DEFAULT_PRIORITIES } from './components/PrioritySliders';
+import { Stepper } from './components/Stepper';
+import { FieldStep } from './components/FieldStep';
+import { PrioritiesStep, presetName } from './components/PrioritiesStep';
+import { CompareStep } from './components/CompareStep';
+import { SummaryStep } from './components/SummaryStep';
+import { readHash, writeHash, type Step, type WaterLimitIn } from './lib/flow';
+import './flow.css';
 import { StrategyComparison } from './components/StrategyComparison';
 import { AboutModal } from './components/AboutModal';
 import { PrintReport } from './components/PrintReport';
 import { rankStrategies, type Priorities } from './lib/ranking';
-import {
-  IconClipboard,
-  IconMap,
-  IconPrinter,
-  IconSatellite,
-  IconScales,
-  IconSprout,
-} from './components/Icons';
+import { IconClipboard, IconMap, IconSatellite, IconSprout } from './components/Icons';
 
-type MobileTab = 'map' | 'passport' | 'strategies';
+type MobileTab = 'map' | 'steps';
+
+const NEXT_LABEL = ['Next: what matters to you', 'Compare rotations', 'Make adviser summary'];
 
 export default function App() {
+  const initial = useMemo(readHash, []);
   const [data, setData] = useState<AppData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [year, setYear] = useState<number>(2025);
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [selectedId, setSelectedId] = useState<string | null>(initial.fieldId);
   const [highlightCrop, setHighlightCrop] = useState<string | null>(null);
-  const [priorities, setPriorities] = useState<Priorities>(DEFAULT_PRIORITIES);
+  const [priorities, setPriorities] = useState<Priorities>(
+    initial.priorities ?? DEFAULT_PRIORITIES,
+  );
+  const [waterLimitIn, setWaterLimitIn] = useState<WaterLimitIn>(initial.waterLimitIn);
+  const [step, setStep] = useState<Step>(initial.step);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [mobileTab, setMobileTab] = useState<MobileTab>('map');
+  const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     loadData()
       .then((d) => {
         setData(d);
         setYear(d.fields.years[1]);
-        setSelectedId(d.fields.features[0]?.properties.field_id ?? null);
+        setSelectedId((id) =>
+          id && d.fields.features.some((f) => f.properties.field_id === id)
+            ? id
+            : (d.fields.features[0]?.properties.field_id ?? null),
+        );
       })
       .catch((e: unknown) => setError(String(e)));
   }, []);
+
+  useEffect(() => {
+    writeHash({ fieldId: selectedId, step, priorities, waterLimitIn });
+  }, [selectedId, step, priorities, waterLimitIn]);
+
+  const goTo = (s: Step) => {
+    setStep(s);
+    panelRef.current?.scrollTo({ top: 0 });
+    panelRef.current?.focus({ preventScroll: true });
+  };
 
   const selected = useMemo(
     () => data?.fields.features.find((f) => f.properties.field_id === selectedId) ?? null,
@@ -51,10 +73,12 @@ export default function App() {
     return rankStrategies(strategies, data.strategies.metric_meta, priorities);
   }, [data, selectedId, priorities]);
 
+  const presetLabel = (presetName(priorities) ?? 'your custom').toLowerCase();
+
   const handleSelectField = (fieldId: string) => {
     setSelectedId(fieldId);
     if (window.innerWidth < 850 && mobileTab === 'map') {
-      setMobileTab('passport');
+      setMobileTab('steps');
     }
   };
 
@@ -83,7 +107,6 @@ export default function App() {
 
   return (
     <div className="app">
-      {/* Top Header */}
       <header className="app-header no-print">
         <div className="header-brand">
           <div className="logo-badge" aria-hidden="true">
@@ -92,43 +115,31 @@ export default function App() {
           <div>
             <h1>FieldShift</h1>
             <span className="subtitle">
-              {data.fields.county.name}, {data.fields.county.state} · Adaptive Crop Rotation
-              Decision Support
+              {data.fields.county.name}, {data.fields.county.state} · more regions planned
             </span>
           </div>
         </div>
 
+        <Stepper step={step} onStep={goTo} />
+
         <div className="header-actions">
           {isMock && (
-            <span className="badge-mock" title="Rendering verified contracts v0.1 format">
+            <span className="badge-mock" title="Rendering mock contract data">
               MOCK DATA (v{data.fields.schema_version})
             </span>
           )}
-
-          <button
-            type="button"
-            className="print-nav-btn primary-action"
-            onClick={() => window.print()}
-            title="Generate printable 1-page Field Dossier (PDF)"
-            aria-label="Print field dossier"
-          >
-            <IconPrinter />
-            <span>Print Dossier</span>
-          </button>
-
           <button
             type="button"
             className="about-nav-btn"
             onClick={() => setIsAboutOpen(true)}
-            aria-label="About data, NASA sources, and uncertainty methodology"
+            aria-label="How we know: NASA data sources and uncertainty"
           >
             <IconSatellite />
-            <span>Data & Uncertainty</span>
+            <span>How we know</span>
           </button>
         </div>
       </header>
 
-      {/* Mobile / Tablet Tab Navigation Bar */}
       <nav className="mobile-tab-nav no-print" aria-label="View sections">
         <button
           type="button"
@@ -136,29 +147,21 @@ export default function App() {
           onClick={() => setMobileTab('map')}
         >
           <IconMap />
-          <span>Field Map</span>
+          <span>Field map</span>
         </button>
         <button
           type="button"
-          className={`tab-item${mobileTab === 'passport' ? ' active' : ''}`}
-          onClick={() => setMobileTab('passport')}
+          className={`tab-item${mobileTab === 'steps' ? ' active' : ''}`}
+          onClick={() => setMobileTab('steps')}
         >
           <IconClipboard />
-          <span>Passport {selectedId ? `(${selectedId})` : ''}</span>
-        </button>
-        <button
-          type="button"
-          className={`tab-item${mobileTab === 'strategies' ? ' active' : ''}`}
-          onClick={() => setMobileTab('strategies')}
-        >
-          <IconScales />
-          <span>Priorities & Strategies</span>
+          <span>
+            Step {step + 1} of 4 {selectedId ? `· ${selectedId}` : ''}
+          </span>
         </button>
       </nav>
 
-      {/* Main Content Workspace */}
       <main className="app-main no-print">
-        {/* Left Column: Interactive Map & Map Controls */}
         <section
           className={`map-col${mobileTab !== 'map' ? ' mobile-hidden' : ''}`}
           aria-label="Interactive map view"
@@ -186,55 +189,113 @@ export default function App() {
           </div>
         </section>
 
-        {/* Right Column: Field Passport, Priorities, and Strategy Comparisons */}
         <aside
-          className={`side-col${mobileTab === 'map' ? ' mobile-hidden' : ''}`}
-          aria-label="Field evaluation and rotation analysis"
+          className={`side-col flow-col${mobileTab === 'map' ? ' mobile-hidden' : ''}`}
+          aria-label="Guided field analysis"
         >
           {selected ? (
             <>
-              <div className={mobileTab === 'strategies' ? 'mobile-hidden-section' : ''}>
-                <FieldPanel
-                  field={selected}
-                  year={year}
-                  onSelectYear={setYear}
-                  onOpenAbout={() => setIsAboutOpen(true)}
-                  allFields={data.fields.features}
-                  onSelectField={handleSelectField}
-                />
+              <div className="flow-scroll" ref={panelRef} tabIndex={-1}>
+                {step === 0 && (
+                  <>
+                    <FieldStep field={selected} year={year} onSelectYear={setYear} />
+                    <details className="flow-details">
+                      <summary>Season-by-season detail for {year}</summary>
+                      <FieldPanel
+                        field={selected}
+                        year={year}
+                        onSelectYear={setYear}
+                        onOpenAbout={() => setIsAboutOpen(true)}
+                        allFields={data.fields.features}
+                        onSelectField={handleSelectField}
+                      />
+                    </details>
+                  </>
+                )}
+                {step === 1 && (
+                  <PrioritiesStep
+                    priorities={priorities}
+                    onPriorities={setPriorities}
+                    waterLimitIn={waterLimitIn}
+                    onWaterLimit={setWaterLimitIn}
+                  />
+                )}
+                {step === 2 && (
+                  <>
+                    <CompareStep
+                      ranked={ranked}
+                      meta={data.strategies.metric_meta}
+                      weatherYears={data.strategies.weather_years}
+                      presetLabel={presetLabel}
+                      waterLimitIn={waterLimitIn}
+                      onOpenAbout={() => setIsAboutOpen(true)}
+                    />
+                    <details className="flow-details flow-details-wide">
+                      <summary>Detailed charts for all five measures</summary>
+                      <StrategyComparison
+                        ranked={ranked}
+                        meta={data.strategies.metric_meta}
+                        weatherYears={data.strategies.weather_years}
+                        onOpenAbout={() => setIsAboutOpen(true)}
+                      />
+                    </details>
+                  </>
+                )}
+                {step === 3 && (
+                  <SummaryStep
+                    field={selected}
+                    ranked={ranked}
+                    presetLabel={presetLabel}
+                    waterLimitIn={waterLimitIn}
+                  />
+                )}
+                <footer className="side-footer">
+                  <a
+                    href="https://www.flaticon.com/free-icons/yield"
+                    title="yield icons"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Yield icons created by Eucalyp - Flaticon
+                  </a>
+                </footer>
               </div>
 
-              <div className={mobileTab === 'passport' ? 'mobile-hidden-section' : ''}>
-                <PrioritySliders value={priorities} onChange={setPriorities} />
-                <StrategyComparison
-                  ranked={ranked}
-                  meta={data.strategies.metric_meta}
-                  weatherYears={data.strategies.weather_years}
-                  onOpenAbout={() => setIsAboutOpen(true)}
-                />
+              <div className="flow-footer">
+                <button
+                  type="button"
+                  className="text-link-btn"
+                  onClick={() => setIsAboutOpen(true)}
+                >
+                  How we know this
+                </button>
+                <div className="flow-footer-actions">
+                  {step > 0 && (
+                    <button
+                      type="button"
+                      className="btn-secondary"
+                      onClick={() => goTo((step - 1) as Step)}
+                    >
+                      Back
+                    </button>
+                  )}
+                  {step < 3 && (
+                    <button
+                      type="button"
+                      className="btn-cta"
+                      onClick={() => goTo((step + 1) as Step)}
+                    >
+                      {NEXT_LABEL[step]}
+                    </button>
+                  )}
+                </div>
               </div>
             </>
           ) : (
             <div className="empty-state">
-              <p className="hint">
-                Select a field on the map to inspect its passport and rotation options.
-              </p>
+              <p className="hint">Click a field on the map to start.</p>
             </div>
           )}
-
-          {/* Subtle footer attribution */}
-          <footer className="side-footer">
-            <span>
-              <a
-                href="https://www.flaticon.com/free-icons/yield"
-                title="yield icons"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Yield icons created by Eucalyp - Flaticon
-              </a>
-            </span>
-          </footer>
         </aside>
       </main>
 

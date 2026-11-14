@@ -18,7 +18,7 @@ export const DEFAULT_PRIORITIES: Priorities = {
   labour: 3,
 };
 
-const PRESETS: { name: string; desc: string; priorities: Priorities }[] = [
+export const PRESETS: { name: string; desc: string; priorities: Priorities }[] = [
   {
     name: 'Balanced',
     desc: 'Equal weight across all 5 dimensions',
@@ -44,11 +44,13 @@ const PRESETS: { name: string; desc: string; priorities: Priorities }[] = [
 interface Props {
   value: Priorities;
   onChange: (p: Priorities) => void;
+  /** Hide the preset row when the presets are already shown elsewhere (guided flow). */
+  showPresets?: boolean;
 }
 
 const SCALE_DESCRIPTIONS = ['Off', 'Low', 'Moderate', 'High', 'Very High', 'Critical'];
 
-export function PrioritySliders({ value, onChange }: Props) {
+export function PrioritySliders({ value, onChange, showPresets = true }: Props) {
   // Check which preset matches current values (if any)
   const isDefault = PRIORITY_KEYS.every((k) => value[k] === 3);
 
@@ -73,22 +75,24 @@ export function PrioritySliders({ value, onChange }: Props) {
       </div>
 
       {/* Preset quick buttons — Hick's Law sensible defaults */}
-      <div className="preset-buttons-row" role="group" aria-label="Priority presets">
-        {PRESETS.map((preset) => {
-          const isActive = PRIORITY_KEYS.every((k) => value[k] === preset.priorities[k]);
-          return (
-            <button
-              key={preset.name}
-              type="button"
-              className={`preset-chip${isActive ? ' active-preset' : ''}`}
-              onClick={() => onChange(preset.priorities)}
-              title={preset.desc}
-            >
-              {preset.name}
-            </button>
-          );
-        })}
-      </div>
+      {showPresets && (
+        <div className="preset-buttons-row" role="group" aria-label="Priority presets">
+          {PRESETS.map((preset) => {
+            const isActive = PRIORITY_KEYS.every((k) => value[k] === preset.priorities[k]);
+            return (
+              <button
+                key={preset.name}
+                type="button"
+                className={`preset-chip${isActive ? ' active-preset' : ''}`}
+                onClick={() => onChange(preset.priorities)}
+                title={preset.desc}
+              >
+                {preset.name}
+              </button>
+            );
+          })}
+        </div>
+      )}
 
       <div className="sliders-list">
         {PRIORITY_KEYS.map((k) => {

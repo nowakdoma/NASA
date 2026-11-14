@@ -113,8 +113,8 @@ export function MapView({ fields, year, selectedId, onSelect, highlightCrop }: P
         pickable: false,
         stroked: true,
         filled: true,
-        getFillColor: [80, 120, 80, 6],
-        getLineColor: [45, 80, 55, 175],
+        getFillColor: [247, 245, 239, 0],
+        getLineColor: [28, 42, 57, 150],
         getLineWidth: 2,
         lineWidthUnits: 'pixels',
       }),
@@ -135,8 +135,8 @@ export function MapView({ fields, year, selectedId, onSelect, highlightCrop }: P
           return [...rgb, alpha];
         },
         getLineColor: (f) =>
-          f.properties.field_id === selectedId ? [26, 43, 33, 255] : [65, 80, 70, 185],
-        getLineWidth: (f) => (f.properties.field_id === selectedId ? 3.5 : 1.5),
+          f.properties.field_id === selectedId ? [28, 42, 57, 255] : [28, 42, 57, 110],
+        getLineWidth: (f) => (f.properties.field_id === selectedId ? 4 : 1),
         lineWidthUnits: 'pixels',
         updateTriggers: {
           getFillColor: [key, highlightCrop],

@@ -1,13 +1,13 @@
-// Earthy, high-contrast agricultural cartographic palette (USGS / USDA inspired).
+// Topographic ink crop palette (design canvas, Look 3).
 export const CROP_COLORS: Record<string, [number, number, number]> = {
-  corn: [229, 169, 39], // Rich warm maize gold
-  sorghum: [194, 65, 12], // Warm grain terracotta / amber
-  winter_wheat: [168, 117, 43], // Deep bronze wheat / harvest gold
-  soybeans: [46, 125, 50], // Deep healthy agricultural green
-  alfalfa: [142, 92, 163], // Muted clover / heather purple
+  corn: [226, 179, 60], // Topo maize #E2B33C
+  sorghum: [164, 71, 42], // Topo terracotta #A4472A
+  winter_wheat: [216, 204, 160], // Topo straw #D8CCA0
+  soybeans: [122, 140, 64], // Olive
+  alfalfa: [79, 125, 58], // Topo alfalfa green #4F7D3A
   cotton: [212, 107, 78], // Dusty warm coral / desert rose
   sunflower: [237, 138, 25], // Sunny ochre
-  rye_cover: [21, 94, 53], // Forest pine conservation cover
+  rye_cover: [43, 122, 155], // Topo accent blue (cover)
   fallow: [168, 160, 149], // Warm sandstone / fallow silt
   grass_pasture: [122, 158, 126], // Prairie sage / pasture green
 };
