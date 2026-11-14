@@ -36,8 +36,8 @@ cross-team needs under **Blockers / requests**.
   an erosion benefit only when p50 < current p50, phrased relative to current ("~X % less
   water erosion than now"). Same check is worth doing for the other templated benefits.
 
-- **person 1 → all three: approve contracts v0.3 (GRACE)** — branch `contracts-v0.3-grace`
-  (not merged). Adds `contracts/grace.schema.json` + mock, bumps mocks to 0.3, adds
+- **contracts v0.3 (GRACE) — approved by all three, merged to `main` (2026-11-14).** Was
+  branch `contracts-v0.3-grace`. Adds `contracts/grace.schema.json` + mock, bumps mocks to 0.3, adds
   `GraceFile` to `web/src/types/contracts.ts`. The web start screen already shows the GRACE
   card whenever `web/public/data/grace_water_storage.json` exists, and hides it otherwise.
   After approval:
