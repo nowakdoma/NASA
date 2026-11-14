@@ -28,6 +28,17 @@ cross-team needs under **Blockers / requests**.
 
 ## Blockers / requests
 
+- **person 1 → all three: approve contracts v0.3 (GRACE)** — branch `contracts-v0.3-grace`
+  (not merged). Adds `contracts/grace.schema.json` + mock, bumps mocks to 0.3, adds
+  `GraceFile` to `web/src/types/contracts.ts`. The web start screen already shows the GRACE
+  card whenever `web/public/data/grace_water_storage.json` exists, and hides it otherwise.
+  After approval:
+  - **person 2:** `pipeline grace` writes `"schema_version": "0.3"` at the top level.
+  - **person 3:** `engine.export` copies `data/interim/grace_water_storage.json` to
+    `web/public/data/`; `engine.validate` checks it against `grace.schema.json` in
+    `make check`; `SCHEMA_VERSION = "0.3"`.
+  - `Makefile` `PIPELINE_STEPS` now includes `grace groundwater frost` (done, person 1).
+
 - **pipeline:** Earthdata access fully verified. `EARTHDATA_TOKEN` unlocks the LP DAAC
   cloud protected buckets — MOD13Q1 granule range request returns 206 (HTTP Basic returns
   401 there). `EARTHDATA_USERNAME`/`PASSWORD` still covers NSIDC SMAP. EDL rejects Basic on

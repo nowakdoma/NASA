@@ -23,7 +23,7 @@ setup: ## install python + web deps, pre-commit hook
 
 # Derivations after the downloads, in dependency order (each reads the previous outputs):
 # heat <- weather; fields <- CDL; terrain/soil/ndvi <- fields_raw; assemble -> fields.geojson
-PIPELINE_STEPS := heat fields terrain soil ndvi assemble
+PIPELINE_STEPS := heat fields terrain soil ndvi grace groundwater frost assemble
 
 data: ## download sources, then derive data/interim/fields.geojson
 	$(UV) run python -m pipeline all
