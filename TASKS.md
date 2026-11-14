@@ -16,13 +16,13 @@ cross-team needs under **Blockers / requests**.
 | Person 1 — engine / design / pitch                       | Person 2 — pipeline                                         | Person 3 — web                                                  |
 | -------------------------------------------------------- | ----------------------------------------------------------- | --------------------------------------------------------------- |
 | `done` scaffold, contracts v0.1, mocks                   | `todo` Earthdata login + `.env`                             | `done` scaffold renders mocks                                   |
-| `done` FAO-56 ET0 (POWER daily) + Kc curves → water_use  | `done` NASA POWER daily 1995–2025 for county centroid       | `todo` map polish: legend, hover tooltip, county outline        |
-| `done` simplified RUSLE (R from POWER precip, K, LS, C)  | `done` CDL 2008–2025 clip to Finney + field polygons        | `todo` passport: timeline of bare/stress windows                |
-| `done` soil-conditioning index (residue, OM, tillage)    | `todo` SSURGO soil props per field (texture, OM, K, AWC)    | `todo` strategy comparison: interval chart per metric           |
-| `done` income model (price source per crop, placeholder) | `done` SRTM slope per field                                 | `todo` P(best) + "verify locally" box copy                      |
-| `todo` MCDA + Dirichlet weights, P(best) in export       | `todo` MODIS NDVI → bare-soil periods per field-year        | `todo` mobile layout / accessibility pass                       |
-| `done` `engine.export` → contracts format                | `todo` SMAP soil moisture → water-stress windows            | `todo` "about the data" / uncertainty page                      |
-| `todo` pitch deck + demo script                          | `done` heat-stress windows (POWER Tmax > threshold)         | `todo` deploy static build                                      |
+| `done` FAO-56 ET0 (POWER daily) + Kc curves → water_use  | `done` NASA POWER daily 1995–2025 for county centroid       | `done` map polish: legend, hover tooltip, county outline        |
+| `done` simplified RUSLE (R from POWER precip, K, LS, C)  | `done` CDL 2008–2025 clip to Finney + field polygons        | `done` passport: timeline of bare/stress windows                |
+| `done` soil-conditioning index (residue, OM, tillage)    | `todo` SSURGO soil props per field (texture, OM, K, AWC)    | `done` strategy comparison: interval chart per metric           |
+| `done` income model (price source per crop, placeholder) | `done` SRTM slope per field                                 | `done` P(best) + "verify locally" box copy                      |
+| `todo` MCDA + Dirichlet weights, P(best) in export       | `todo` MODIS NDVI → bare-soil periods per field-year        | `done` mobile layout / accessibility pass                       |
+| `done` `engine.export` → contracts format                | `todo` SMAP soil moisture → water-stress windows            | `done` "about the data" / uncertainty page                      |
+| `todo` pitch deck + demo script                          | `done` heat-stress windows (POWER Tmax > threshold)         | `done` deploy static build                                      |
 
 ## Blockers / requests
 

@@ -18,7 +18,17 @@ export const cropColor = (crop: string | undefined): [number, number, number] =>
 
 export const cropCss = (crop: string | undefined): string => `rgb(${cropColor(crop).join(',')})`;
 
-export const cropLabel = (crop: string): string =>
-  ({ winter_wheat: 'winter wheat', rye_cover: 'rye cover', grass_pasture: 'grass/pasture' })[
-    crop
-  ] ?? crop;
+const CROP_LABELS: Record<string, string> = {
+  corn: 'Corn',
+  sorghum: 'Grain sorghum',
+  winter_wheat: 'Winter wheat',
+  soybeans: 'Soybeans',
+  alfalfa: 'Alfalfa',
+  cotton: 'Cotton',
+  sunflower: 'Sunflower',
+  rye_cover: 'Cereal rye (cover)',
+  fallow: 'Fallow / idle',
+  grass_pasture: 'Grass / pasture',
+};
+
+export const cropLabel = (crop: string): string => CROP_LABELS[crop] ?? crop.replace(/_/g, ' ');
