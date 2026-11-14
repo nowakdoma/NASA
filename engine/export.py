@@ -6,7 +6,7 @@
 Inputs:
 - fields: ``data/interim/fields.geojson`` (contracts/fields.schema.json, written by pipeline/),
   falling back to ``contracts/mock/fields.geojson``;
-- weather: ``data/interim/power_daily.csv`` (see engine.weather), falling back to SYNTHETIC.
+- weather: ``data/interim/weather_daily.csv`` (pipeline power; see engine.weather), else SYNTHETIC.
 Anything built on a fallback is written with ``"mock": true``.
 """
 

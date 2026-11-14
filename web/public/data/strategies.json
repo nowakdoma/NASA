@@ -1,7 +1,7 @@
 {
  "schema_version": "0.1",
  "mock": true,
- "generated_by": "engine.export 9a40c12 (SYNTHETIC weather) (mock fields)",
+ "generated_by": "engine.export d651201 (mock fields)",
  "generated_at": "2026-11-14",
  "weather_years": [
   1995,
@@ -51,35 +51,36 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 314.0,
-      "p50": 493.0,
-      "p90": 589.0
+      "p10": 282.0,
+      "p50": 422.0,
+      "p90": 570.0
      },
      "erosion_t_ha": {
-      "p10": 0.74,
-      "p50": 1.44,
-      "p90": 2.39
+      "p10": 0.8,
+      "p50": 1.42,
+      "p90": 2.74
      },
      "soil_index": {
       "p10": 0.64,
       "p50": 0.67,
-      "p90": 0.69
+      "p90": 0.7
      },
      "income_usd_ha": {
-      "p10": 473.0,
-      "p50": 666.0,
-      "p90": 874.0
+      "p10": 407.0,
+      "p50": 722.0,
+      "p90": 894.0
      },
      "labour_index": {
-      "p10": 0.6,
-      "p50": 0.66,
-      "p90": 0.7
+      "p10": 0.59,
+      "p50": 0.64,
+      "p90": 0.69
      }
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -95,7 +96,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
@@ -125,19 +125,19 @@
       "p90": 0.0
      },
      "erosion_t_ha": {
-      "p10": 1.58,
-      "p50": 2.14,
-      "p90": 2.8
+      "p10": 1.21,
+      "p50": 2.04,
+      "p90": 3.27
      },
      "soil_index": {
       "p10": 0.09,
-      "p50": 0.12,
-      "p90": 0.15
+      "p50": 0.11,
+      "p90": 0.16
      },
      "income_usd_ha": {
-      "p10": 45.0,
-      "p50": 110.0,
-      "p90": 214.0
+      "p10": 52.0,
+      "p50": 112.0,
+      "p90": 196.0
      },
      "labour_index": {
       "p10": 0.19,
@@ -147,8 +147,9 @@
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -164,7 +165,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
@@ -189,35 +189,36 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 303.0,
-      "p50": 373.0,
-      "p90": 420.0
+      "p10": 269.0,
+      "p50": 382.0,
+      "p90": 465.0
      },
      "erosion_t_ha": {
-      "p10": 1.18,
-      "p50": 1.57,
-      "p90": 1.89
+      "p10": 0.92,
+      "p50": 1.38,
+      "p90": 2.14
      },
      "soil_index": {
-      "p10": 0.48,
+      "p10": 0.47,
       "p50": 0.49,
       "p90": 0.5
      },
      "income_usd_ha": {
-      "p10": 348.0,
-      "p50": 442.0,
-      "p90": 516.0
+      "p10": 295.0,
+      "p50": 429.0,
+      "p90": 564.0
      },
      "labour_index": {
-      "p10": 0.43,
+      "p10": 0.42,
       "p50": 0.46,
-      "p90": 0.47
+      "p90": 0.49
      }
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -233,7 +234,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
@@ -260,14 +260,14 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 388.0,
-      "p50": 489.0,
-      "p90": 535.0
+      "p10": 364.0,
+      "p50": 457.0,
+      "p90": 516.0
      },
      "erosion_t_ha": {
-      "p10": 0.49,
-      "p50": 0.71,
-      "p90": 0.99
+      "p10": 0.43,
+      "p50": 0.7,
+      "p90": 1.12
      },
      "soil_index": {
       "p10": 0.41,
@@ -275,20 +275,21 @@
       "p90": 0.43
      },
      "income_usd_ha": {
-      "p10": 499.0,
-      "p50": 567.0,
-      "p90": 662.0
+      "p10": 486.0,
+      "p50": 587.0,
+      "p90": 700.0
      },
      "labour_index": {
-      "p10": 0.83,
-      "p50": 0.86,
-      "p90": 0.88
+      "p10": 0.82,
+      "p50": 0.85,
+      "p90": 0.87
      }
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -304,7 +305,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
@@ -331,35 +331,36 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 314.0,
-      "p50": 400.0,
-      "p90": 493.0
+      "p10": 285.0,
+      "p50": 426.0,
+      "p90": 544.0
      },
      "erosion_t_ha": {
-      "p10": 0.67,
-      "p50": 1.05,
-      "p90": 1.39
+      "p10": 0.62,
+      "p50": 0.91,
+      "p90": 1.67
      },
      "soil_index": {
-      "p10": 0.48,
+      "p10": 0.47,
       "p50": 0.5,
       "p90": 0.51
      },
      "income_usd_ha": {
-      "p10": 319.0,
-      "p50": 449.0,
-      "p90": 546.0
+      "p10": 245.0,
+      "p50": 429.0,
+      "p90": 581.0
      },
      "labour_index": {
-      "p10": 0.46,
-      "p50": 0.49,
-      "p90": 0.52
+      "p10": 0.45,
+      "p50": 0.5,
+      "p90": 0.54
      }
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -375,7 +376,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
@@ -405,19 +405,19 @@
       "p90": 0.0
      },
      "erosion_t_ha": {
-      "p10": 1.18,
-      "p50": 1.6,
-      "p90": 2.09
+      "p10": 0.9,
+      "p50": 1.52,
+      "p90": 2.44
      },
      "soil_index": {
       "p10": 0.11,
       "p50": 0.13,
-      "p90": 0.17
+      "p90": 0.18
      },
      "income_usd_ha": {
-      "p10": 60.0,
-      "p50": 124.0,
-      "p90": 227.0
+      "p10": 67.0,
+      "p50": 128.0,
+      "p90": 211.0
      },
      "labour_index": {
       "p10": 0.19,
@@ -427,8 +427,9 @@
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -444,7 +445,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
@@ -471,35 +471,36 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 383.0,
-      "p50": 484.0,
-      "p90": 534.0
+      "p10": 360.0,
+      "p50": 454.0,
+      "p90": 513.0
      },
      "erosion_t_ha": {
-      "p10": 0.36,
-      "p50": 0.53,
-      "p90": 0.74
+      "p10": 0.32,
+      "p50": 0.52,
+      "p90": 0.83
      },
      "soil_index": {
-      "p10": 0.42,
+      "p10": 0.41,
       "p50": 0.43,
       "p90": 0.43
      },
      "income_usd_ha": {
-      "p10": 504.0,
-      "p50": 575.0,
-      "p90": 669.0
+      "p10": 493.0,
+      "p50": 592.0,
+      "p90": 706.0
      },
      "labour_index": {
-      "p10": 0.83,
-      "p50": 0.86,
-      "p90": 0.88
+      "p10": 0.82,
+      "p50": 0.85,
+      "p90": 0.87
      }
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -515,7 +516,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
@@ -546,19 +546,19 @@
       "p90": 100.0
      },
      "erosion_t_ha": {
-      "p10": 0.7,
-      "p50": 0.92,
-      "p90": 1.16
+      "p10": 0.58,
+      "p50": 0.83,
+      "p90": 1.42
      },
      "soil_index": {
-      "p10": 0.23,
+      "p10": 0.24,
       "p50": 0.28,
-      "p90": 0.32
+      "p90": 0.34
      },
      "income_usd_ha": {
-      "p10": 4.0,
-      "p50": 134.0,
-      "p90": 222.0
+      "p10": 18.0,
+      "p50": 122.0,
+      "p90": 259.0
      },
      "labour_index": {
       "p10": 0.24,
@@ -568,8 +568,9 @@
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -585,7 +586,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
@@ -615,35 +615,36 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 181.0,
-      "p50": 235.0,
-      "p90": 275.0
+      "p10": 203.0,
+      "p50": 262.0,
+      "p90": 294.0
      },
      "erosion_t_ha": {
-      "p10": 1.94,
-      "p50": 2.62,
-      "p90": 3.43
+      "p10": 1.48,
+      "p50": 2.51,
+      "p90": 4.01
      },
      "soil_index": {
-      "p10": 0.22,
+      "p10": 0.21,
       "p50": 0.24,
-      "p90": 0.25
+      "p90": 0.26
      },
      "income_usd_ha": {
-      "p10": 144.0,
-      "p50": 186.0,
-      "p90": 237.0
+      "p10": 124.0,
+      "p50": 152.0,
+      "p90": 215.0
      },
      "labour_index": {
-      "p10": 0.25,
-      "p50": 0.27,
+      "p10": 0.26,
+      "p50": 0.28,
       "p90": 0.29
      }
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -659,7 +660,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
@@ -671,75 +671,6 @@
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
      "How you will keep residue on the fallow to limit wind erosion."
-    ]
-   },
-   {
-    "id": "corn_soy",
-    "name": "Corn–soybean (full irrigation)",
-    "description": "Adds a nitrogen-fixing legume; breaks corn pest cycles.",
-    "is_current": false,
-    "rotation": [
-     "corn",
-     "soybeans"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 381.0,
-      "p50": 502.0,
-      "p90": 544.0
-     },
-     "erosion_t_ha": {
-      "p10": 1.73,
-      "p50": 2.46,
-      "p90": 3.79
-     },
-     "soil_index": {
-      "p10": 0.36,
-      "p50": 0.38,
-      "p90": 0.4
-     },
-     "income_usd_ha": {
-      "p10": 360.0,
-      "p50": 467.0,
-      "p90": 624.0
-     },
-     "labour_index": {
-      "p10": 0.52,
-      "p50": 0.56,
-      "p90": 0.58
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "Current rotation = repeating cycle in the most recent CDL years."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "Las Animas-Lincoln complex: AWC 110 mm, K 0.24, slope 1.4 %."
-     },
-     {
-      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
-      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
-     }
-    ],
-    "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
-     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
-     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
-     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence.",
-     "Soybean yield on your soil (iron-deficiency chlorosis on high-pH soils)."
     ]
    },
    {
@@ -756,14 +687,14 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 421.0,
-      "p50": 515.0,
-      "p90": 548.0
+      "p10": 399.0,
+      "p50": 481.0,
+      "p90": 538.0
      },
      "erosion_t_ha": {
-      "p10": 0.6,
-      "p50": 0.87,
-      "p90": 1.21
+      "p10": 0.53,
+      "p50": 0.85,
+      "p90": 1.37
      },
      "soil_index": {
       "p10": 0.4,
@@ -771,20 +702,21 @@
       "p90": 0.42
      },
      "income_usd_ha": {
-      "p10": 460.0,
-      "p50": 523.0,
-      "p90": 627.0
+      "p10": 443.0,
+      "p50": 546.0,
+      "p90": 658.0
      },
      "labour_index": {
-      "p10": 0.84,
-      "p50": 0.87,
+      "p10": 0.83,
+      "p50": 0.86,
       "p90": 0.88
      }
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -800,7 +732,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
@@ -812,6 +743,75 @@
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
      "Hay buyers, storage and haul distance; stand establishment cost."
+    ]
+   },
+   {
+    "id": "corn_soy",
+    "name": "Corn–soybean (full irrigation)",
+    "description": "Adds a nitrogen-fixing legume; breaks corn pest cycles.",
+    "is_current": false,
+    "rotation": [
+     "corn",
+     "soybeans"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 352.0,
+      "p50": 419.0,
+      "p90": 541.0
+     },
+     "erosion_t_ha": {
+      "p10": 1.26,
+      "p50": 2.57,
+      "p90": 4.26
+     },
+     "soil_index": {
+      "p10": 0.35,
+      "p50": 0.37,
+      "p90": 0.41
+     },
+     "income_usd_ha": {
+      "p10": 352.0,
+      "p50": 545.0,
+      "p90": 658.0
+     },
+     "labour_index": {
+      "p10": 0.51,
+      "p50": 0.54,
+      "p90": 0.58
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Las Animas-Lincoln complex: AWC 110 mm, K 0.24, slope 1.4 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
+    ],
+    "verify_locally": [
+     "Does your water right / well capacity support this rotation in a dry year?",
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "Soybean yield on your soil (iron-deficiency chlorosis on high-pH soils)."
     ]
    },
    {
@@ -831,19 +831,19 @@
       "p90": 100.0
      },
      "erosion_t_ha": {
-      "p10": 1.15,
-      "p50": 1.51,
-      "p90": 1.9
+      "p10": 0.95,
+      "p50": 1.37,
+      "p90": 2.33
      },
      "soil_index": {
-      "p10": 0.22,
-      "p50": 0.26,
-      "p90": 0.29
+      "p10": 0.21,
+      "p50": 0.25,
+      "p90": 0.3
      },
      "income_usd_ha": {
-      "p10": -21.0,
-      "p50": 85.0,
-      "p90": 169.0
+      "p10": -34.0,
+      "p50": 68.0,
+      "p90": 209.0
      },
      "labour_index": {
       "p10": 0.24,
@@ -853,8 +853,9 @@
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -870,7 +871,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
@@ -902,24 +902,24 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 360.0,
-      "p50": 443.0,
-      "p90": 488.0
+      "p10": 348.0,
+      "p50": 434.0,
+      "p90": 499.0
      },
      "erosion_t_ha": {
-      "p10": 0.53,
-      "p50": 0.64,
-      "p90": 0.9
+      "p10": 0.45,
+      "p50": 0.68,
+      "p90": 0.98
      },
      "soil_index": {
       "p10": 0.43,
       "p50": 0.44,
-      "p90": 0.44
+      "p90": 0.45
      },
      "income_usd_ha": {
-      "p10": 474.0,
-      "p50": 507.0,
-      "p90": 602.0
+      "p10": 444.0,
+      "p50": 524.0,
+      "p90": 628.0
      },
      "labour_index": {
       "p10": 0.69,
@@ -929,8 +929,9 @@
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -946,7 +947,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
@@ -977,19 +977,19 @@
       "p90": 0.0
      },
      "erosion_t_ha": {
-      "p10": 1.17,
-      "p50": 1.58,
-      "p90": 2.07
+      "p10": 0.89,
+      "p50": 1.51,
+      "p90": 2.42
      },
      "soil_index": {
       "p10": 0.11,
       "p50": 0.14,
-      "p90": 0.17
+      "p90": 0.18
      },
      "income_usd_ha": {
-      "p10": 74.0,
-      "p50": 138.0,
-      "p90": 239.0
+      "p10": 79.0,
+      "p50": 142.0,
+      "p90": 226.0
      },
      "labour_index": {
       "p10": 0.19,
@@ -999,8 +999,9 @@
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -1016,7 +1017,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
@@ -1040,35 +1040,36 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 336.0,
-      "p50": 480.0,
-      "p90": 550.0
+      "p10": 301.0,
+      "p50": 410.0,
+      "p90": 541.0
      },
      "erosion_t_ha": {
-      "p10": 1.04,
-      "p50": 1.48,
-      "p90": 2.28
+      "p10": 0.76,
+      "p50": 1.55,
+      "p90": 2.57
      },
      "soil_index": {
-      "p10": 0.4,
+      "p10": 0.38,
       "p50": 0.41,
-      "p90": 0.42
+      "p90": 0.43
      },
      "income_usd_ha": {
-      "p10": 451.0,
-      "p50": 537.0,
-      "p90": 686.0
+      "p10": 430.0,
+      "p50": 606.0,
+      "p90": 711.0
      },
      "labour_index": {
-      "p10": 0.51,
-      "p50": 0.56,
+      "p10": 0.5,
+      "p50": 0.53,
       "p90": 0.58
      }
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -1084,7 +1085,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
@@ -1115,19 +1115,19 @@
       "p90": 100.0
      },
      "erosion_t_ha": {
-      "p10": 0.69,
-      "p50": 0.91,
-      "p90": 1.14
+      "p10": 0.57,
+      "p50": 0.83,
+      "p90": 1.4
      },
      "soil_index": {
       "p10": 0.24,
-      "p50": 0.29,
-      "p90": 0.33
+      "p50": 0.28,
+      "p90": 0.34
      },
      "income_usd_ha": {
-      "p10": 8.0,
-      "p50": 139.0,
-      "p90": 231.0
+      "p10": 28.0,
+      "p50": 133.0,
+      "p90": 266.0
      },
      "labour_index": {
       "p10": 0.24,
@@ -1137,8 +1137,9 @@
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -1154,7 +1155,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
@@ -1183,35 +1183,36 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 346.0,
-      "p50": 483.0,
-      "p90": 550.0
+      "p10": 310.0,
+      "p50": 413.0,
+      "p90": 538.0
      },
      "erosion_t_ha": {
-      "p10": 1.38,
-      "p50": 1.96,
-      "p90": 3.02
+      "p10": 1.0,
+      "p50": 2.05,
+      "p90": 3.4
      },
      "soil_index": {
-      "p10": 0.38,
+      "p10": 0.37,
       "p50": 0.4,
-      "p90": 0.41
+      "p90": 0.42
      },
      "income_usd_ha": {
-      "p10": 433.0,
-      "p50": 524.0,
-      "p90": 673.0
+      "p10": 418.0,
+      "p50": 597.0,
+      "p90": 702.0
      },
      "labour_index": {
-      "p10": 0.51,
-      "p50": 0.56,
+      "p10": 0.5,
+      "p50": 0.53,
       "p90": 0.58
      }
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -1227,7 +1228,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
@@ -1258,19 +1258,19 @@
       "p90": 0.0
      },
      "erosion_t_ha": {
-      "p10": 1.55,
-      "p50": 2.09,
-      "p90": 2.73
+      "p10": 1.18,
+      "p50": 2.0,
+      "p90": 3.2
      },
      "soil_index": {
-      "p10": 0.09,
+      "p10": 0.1,
       "p50": 0.12,
-      "p90": 0.15
+      "p90": 0.17
      },
      "income_usd_ha": {
-      "p10": 56.0,
-      "p50": 121.0,
-      "p90": 223.0
+      "p10": 63.0,
+      "p50": 124.0,
+      "p90": 208.0
      },
      "labour_index": {
       "p10": 0.19,
@@ -1280,8 +1280,9 @@
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -1297,7 +1298,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
@@ -1322,35 +1322,36 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 301.0,
-      "p50": 371.0,
-      "p90": 420.0
+      "p10": 265.0,
+      "p50": 382.0,
+      "p90": 463.0
      },
      "erosion_t_ha": {
-      "p10": 1.15,
-      "p50": 1.54,
-      "p90": 1.85
+      "p10": 0.9,
+      "p50": 1.35,
+      "p90": 2.09
      },
      "soil_index": {
-      "p10": 0.48,
+      "p10": 0.47,
       "p50": 0.49,
       "p90": 0.5
      },
      "income_usd_ha": {
-      "p10": 351.0,
-      "p50": 446.0,
-      "p90": 519.0
+      "p10": 304.0,
+      "p50": 436.0,
+      "p90": 566.0
      },
      "labour_index": {
-      "p10": 0.43,
+      "p10": 0.42,
       "p50": 0.46,
-      "p90": 0.47
+      "p90": 0.49
      }
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -1366,7 +1367,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
@@ -1393,35 +1393,36 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 384.0,
-      "p50": 485.0,
-      "p90": 534.0
+      "p10": 360.0,
+      "p50": 456.0,
+      "p90": 515.0
      },
      "erosion_t_ha": {
-      "p10": 0.48,
-      "p50": 0.69,
-      "p90": 0.97
+      "p10": 0.42,
+      "p50": 0.68,
+      "p90": 1.09
      },
      "soil_index": {
-      "p10": 0.42,
+      "p10": 0.41,
       "p50": 0.42,
       "p90": 0.43
      },
      "income_usd_ha": {
-      "p10": 502.0,
-      "p50": 572.0,
-      "p90": 668.0
+      "p10": 490.0,
+      "p50": 591.0,
+      "p90": 706.0
      },
      "labour_index": {
-      "p10": 0.83,
-      "p50": 0.86,
-      "p90": 0.88
+      "p10": 0.82,
+      "p50": 0.85,
+      "p90": 0.87
      }
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -1437,7 +1438,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
@@ -1465,35 +1465,36 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 267.0,
-      "p50": 339.0,
-      "p90": 386.0
+      "p10": 226.0,
+      "p50": 343.0,
+      "p90": 429.0
      },
      "erosion_t_ha": {
-      "p10": 4.11,
-      "p50": 5.48,
-      "p90": 6.79
+      "p10": 3.31,
+      "p50": 4.77,
+      "p90": 7.71
      },
      "soil_index": {
-      "p10": 0.34,
-      "p50": 0.36,
-      "p90": 0.38
+      "p10": 0.32,
+      "p50": 0.37,
+      "p90": 0.4
      },
      "income_usd_ha": {
-      "p10": 307.0,
-      "p50": 361.0,
-      "p90": 424.0
+      "p10": 267.0,
+      "p50": 351.0,
+      "p90": 465.0
      },
      "labour_index": {
-      "p10": 0.35,
+      "p10": 0.34,
       "p50": 0.38,
-      "p90": 0.39
+      "p90": 0.41
      }
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -1509,7 +1510,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
@@ -1533,35 +1533,36 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 352.0,
-      "p50": 486.0,
-      "p90": 554.0
+      "p10": 320.0,
+      "p50": 416.0,
+      "p90": 538.0
      },
      "erosion_t_ha": {
-      "p10": 4.8,
-      "p50": 6.84,
-      "p90": 10.54
+      "p10": 3.5,
+      "p50": 7.14,
+      "p90": 11.84
      },
      "soil_index": {
       "p10": 0.24,
       "p50": 0.3,
-      "p90": 0.34
+      "p90": 0.36
      },
      "income_usd_ha": {
-      "p10": 418.0,
-      "p50": 514.0,
-      "p90": 655.0
+      "p10": 402.0,
+      "p50": 591.0,
+      "p90": 691.0
      },
      "labour_index": {
-      "p10": 0.51,
-      "p50": 0.56,
+      "p10": 0.5,
+      "p50": 0.53,
       "p90": 0.58
      }
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -1577,7 +1578,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
@@ -1608,19 +1608,19 @@
       "p90": 0.0
      },
      "erosion_t_ha": {
-      "p10": 5.39,
-      "p50": 7.29,
-      "p90": 9.53
+      "p10": 4.12,
+      "p50": 6.96,
+      "p90": 11.16
      },
      "soil_index": {
-      "p10": -0.03,
+      "p10": -0.04,
       "p50": 0.02,
-      "p90": 0.05
+      "p90": 0.06
      },
      "income_usd_ha": {
-      "p10": 37.0,
-      "p50": 100.0,
-      "p90": 207.0
+      "p10": 43.0,
+      "p50": 103.0,
+      "p90": 187.0
      },
      "labour_index": {
       "p10": 0.19,
@@ -1630,8 +1630,9 @@
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -1647,7 +1648,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
@@ -1674,35 +1674,36 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 390.0,
-      "p50": 492.0,
-      "p90": 534.0
+      "p10": 365.0,
+      "p50": 463.0,
+      "p90": 520.0
      },
      "erosion_t_ha": {
-      "p10": 1.67,
-      "p50": 2.41,
-      "p90": 3.38
+      "p10": 1.47,
+      "p50": 2.37,
+      "p90": 3.81
      },
      "soil_index": {
-      "p10": 0.38,
+      "p10": 0.37,
       "p50": 0.39,
       "p90": 0.4
      },
      "income_usd_ha": {
-      "p10": 495.0,
-      "p50": 559.0,
-      "p90": 661.0
+      "p10": 482.0,
+      "p50": 585.0,
+      "p90": 697.0
      },
      "labour_index": {
-      "p10": 0.83,
-      "p50": 0.86,
-      "p90": 0.88
+      "p10": 0.82,
+      "p50": 0.85,
+      "p90": 0.87
      }
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -1718,7 +1719,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
@@ -1748,35 +1748,36 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 282.0,
-      "p50": 337.0,
-      "p90": 385.0
+      "p10": 268.0,
+      "p50": 328.0,
+      "p90": 411.0
      },
      "erosion_t_ha": {
-      "p10": 1.66,
-      "p50": 2.12,
-      "p90": 2.61
+      "p10": 1.52,
+      "p50": 2.03,
+      "p90": 2.98
      },
      "soil_index": {
-      "p10": 0.43,
+      "p10": 0.44,
       "p50": 0.45,
       "p90": 0.46
      },
      "income_usd_ha": {
-      "p10": 368.0,
-      "p50": 443.0,
-      "p90": 517.0
+      "p10": 347.0,
+      "p50": 442.0,
+      "p90": 522.0
      },
      "labour_index": {
       "p10": 0.45,
       "p50": 0.47,
-      "p90": 0.49
+      "p90": 0.5
      }
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -1792,7 +1793,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
@@ -1823,19 +1823,19 @@
       "p90": 0.0
      },
      "erosion_t_ha": {
-      "p10": 1.74,
-      "p50": 2.35,
-      "p90": 3.07
+      "p10": 1.33,
+      "p50": 2.24,
+      "p90": 3.6
      },
      "soil_index": {
       "p10": 0.09,
-      "p50": 0.12,
-      "p90": 0.15
+      "p50": 0.11,
+      "p90": 0.16
      },
      "income_usd_ha": {
-      "p10": 52.0,
-      "p50": 117.0,
-      "p90": 220.0
+      "p10": 60.0,
+      "p50": 120.0,
+      "p90": 204.0
      },
      "labour_index": {
       "p10": 0.19,
@@ -1845,8 +1845,9 @@
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -1862,7 +1863,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
@@ -1889,14 +1889,14 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 385.0,
-      "p50": 488.0,
-      "p90": 534.0
+      "p10": 361.0,
+      "p50": 456.0,
+      "p90": 516.0
      },
      "erosion_t_ha": {
-      "p10": 0.54,
-      "p50": 0.78,
-      "p90": 1.09
+      "p10": 0.48,
+      "p50": 0.77,
+      "p90": 1.23
      },
      "soil_index": {
       "p10": 0.41,
@@ -1904,20 +1904,21 @@
       "p90": 0.43
      },
      "income_usd_ha": {
-      "p10": 501.0,
-      "p50": 567.0,
-      "p90": 666.0
+      "p10": 491.0,
+      "p50": 590.0,
+      "p90": 702.0
      },
      "labour_index": {
-      "p10": 0.83,
-      "p50": 0.86,
-      "p90": 0.88
+      "p10": 0.82,
+      "p50": 0.85,
+      "p90": 0.87
      }
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -1933,7 +1934,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
@@ -1964,19 +1964,19 @@
       "p90": 100.0
      },
      "erosion_t_ha": {
-      "p10": 1.03,
-      "p50": 1.35,
-      "p90": 1.7
+      "p10": 0.85,
+      "p50": 1.23,
+      "p90": 2.09
      },
      "soil_index": {
       "p10": 0.23,
-      "p50": 0.28,
-      "p90": 0.31
+      "p50": 0.27,
+      "p90": 0.33
      },
      "income_usd_ha": {
-      "p10": 2.0,
-      "p50": 130.0,
-      "p90": 217.0
+      "p10": 13.0,
+      "p50": 117.0,
+      "p90": 254.0
      },
      "labour_index": {
       "p10": 0.24,
@@ -1986,8 +1986,9 @@
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -2003,7 +2004,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
@@ -2033,35 +2033,36 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 367.0,
-      "p50": 448.0,
-      "p90": 510.0
+      "p10": 307.0,
+      "p50": 412.0,
+      "p90": 508.0
      },
      "erosion_t_ha": {
-      "p10": 4.66,
-      "p50": 6.03,
-      "p90": 7.5
+      "p10": 3.55,
+      "p50": 5.45,
+      "p90": 9.39
      },
      "soil_index": {
-      "p10": 0.04,
-      "p50": 0.07,
-      "p90": 0.1
+      "p10": 0.01,
+      "p50": 0.08,
+      "p90": 0.11
      },
      "income_usd_ha": {
-      "p10": 480.0,
-      "p50": 549.0,
-      "p90": 638.0
+      "p10": 466.0,
+      "p50": 575.0,
+      "p90": 672.0
      },
      "labour_index": {
-      "p10": 0.55,
-      "p50": 0.58,
+      "p10": 0.53,
+      "p50": 0.57,
       "p90": 0.6
      }
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -2077,7 +2078,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
@@ -2107,19 +2107,19 @@
       "p90": 0.0
      },
      "erosion_t_ha": {
-      "p10": 3.5,
-      "p50": 4.73,
-      "p90": 6.19
+      "p10": 2.67,
+      "p50": 4.52,
+      "p90": 7.24
      },
      "soil_index": {
-      "p10": 0.01,
+      "p10": 0.0,
       "p50": 0.05,
-      "p90": 0.09
+      "p90": 0.1
      },
      "income_usd_ha": {
-      "p10": 8.0,
-      "p50": 59.0,
-      "p90": 178.0
+      "p10": 7.0,
+      "p50": 68.0,
+      "p90": 152.0
      },
      "labour_index": {
       "p10": 0.19,
@@ -2129,8 +2129,9 @@
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -2146,7 +2147,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
@@ -2170,35 +2170,36 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 368.0,
-      "p50": 493.0,
-      "p90": 550.0
+      "p10": 336.0,
+      "p50": 419.0,
+      "p90": 534.0
      },
      "erosion_t_ha": {
-      "p10": 3.12,
-      "p50": 4.44,
-      "p90": 6.85
+      "p10": 2.27,
+      "p50": 4.64,
+      "p90": 7.69
      },
      "soil_index": {
       "p10": 0.31,
-      "p50": 0.35,
-      "p90": 0.37
+      "p50": 0.33,
+      "p90": 0.38
      },
      "income_usd_ha": {
-      "p10": 390.0,
-      "p50": 489.0,
-      "p90": 641.0
+      "p10": 372.0,
+      "p50": 566.0,
+      "p90": 672.0
      },
      "labour_index": {
-      "p10": 0.52,
-      "p50": 0.56,
-      "p90": 0.58
+      "p10": 0.51,
+      "p50": 0.54,
+      "p90": 0.57
      }
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -2214,7 +2215,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
@@ -2240,35 +2240,36 @@
     ],
     "metrics": {
      "water_use_mm": {
-      "p10": 318.0,
-      "p50": 390.0,
-      "p90": 429.0
+      "p10": 284.0,
+      "p50": 388.0,
+      "p90": 471.0
      },
      "erosion_t_ha": {
-      "p10": 2.6,
-      "p50": 3.48,
-      "p90": 4.18
+      "p10": 2.04,
+      "p50": 3.05,
+      "p90": 4.74
      },
      "soil_index": {
-      "p10": 0.43,
+      "p10": 0.42,
       "p50": 0.45,
       "p90": 0.47
      },
      "income_usd_ha": {
-      "p10": 333.0,
-      "p50": 428.0,
-      "p90": 494.0
+      "p10": 282.0,
+      "p50": 405.0,
+      "p90": 538.0
      },
      "labour_index": {
-      "p10": 0.44,
+      "p10": 0.43,
       "p50": 0.46,
-      "p90": 0.48
+      "p90": 0.49
      }
     },
     "evidence": [
      {
-      "dataset": "SYNTHETIC weather (placeholder for NASA POWER)",
-      "note": "Stochastic generator 1995-2025; real NASA POWER daily not yet available."
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
      },
      {
       "dataset": "USDA NASS Cropland Data Layer 2008-2025",
@@ -2284,7 +2285,6 @@
      }
     ],
     "data_gaps": [
-     "Weather is SYNTHETIC until NASA POWER data is loaded: intervals are illustrative only.",
      "Prices, yields and costs are fixed PLACEHOLDER ballpark values (engine/params.py); price risk is not in the intervals.",
      "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
      "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",

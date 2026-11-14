@@ -1,10 +1,11 @@
 """Daily weather input for the engine.
 
-Real input (written by pipeline/, person 2): ``data/interim/power_daily.csv``
-    one row per day for the region centroid, 1995-01-01 .. 2025-12-31, no gaps, no -999:
-    DATE (YYYY-MM-DD), T2M_MAX [°C], T2M_MIN [°C], RH2M [%], WS2M [m/s at 2 m],
-    ALLSKY_SFC_SW_DWN [MJ/m²/day], PRECTOTCORR [mm/day]
-    (NASA POWER daily, community "AG"; parameter names kept as-is.)
+Real input (written by ``python -m pipeline power``, person 2): ``data/interim/weather_daily.csv``
+    NASA POWER daily for the region centroid, 1995..2025, community "AG". Columns used:
+    date, t2m_max_c, t2m_min_c [°C], rh2m_pct [%], ws2m_ms [m/s at 2 m],
+    sw_down_mj_m2_d [MJ/m²/day], precip_mm_d [mm/day]. POWER's -999 days are empty cells.
+    Short gaps (<= MAX_GAP_DAYS) are interpolated here; longer gaps are an error.
+    Internally the engine uses the POWER parameter names (T2M_MAX, ..., PRECTOTCORR).
 
 Fallback: :func:`synthetic_weather` — a seeded stochastic generator with a rough Garden City,
 KS climatology. It exists ONLY so the engine can run before real data arrives. Output built
@@ -20,22 +21,40 @@ import pandas as pd
 
 from engine import REPO_ROOT
 
-POWER_DAILY = REPO_ROOT / "data" / "interim" / "power_daily.csv"
-COLUMNS = ["T2M_MAX", "T2M_MIN", "RH2M", "WS2M", "ALLSKY_SFC_SW_DWN", "PRECTOTCORR"]
+WEATHER_DAILY = REPO_ROOT / "data" / "interim" / "weather_daily.csv"
+# pipeline interim column -> internal POWER parameter name
+PIPELINE_COLUMNS = {
+    "t2m_max_c": "T2M_MAX",
+    "t2m_min_c": "T2M_MIN",
+    "rh2m_pct": "RH2M",
+    "ws2m_ms": "WS2M",
+    "sw_down_mj_m2_d": "ALLSKY_SFC_SW_DWN",
+    "precip_mm_d": "PRECTOTCORR",
+}
+COLUMNS = list(PIPELINE_COLUMNS.values())
+MAX_GAP_DAYS = 3
 
 
-def load_power_daily(path: Path = POWER_DAILY) -> pd.DataFrame:
-    """Read the pipeline CSV, check columns/gaps, return a DataFrame indexed by date."""
-    df = pd.read_csv(path, parse_dates=["DATE"]).set_index("DATE").sort_index()
-    missing = [c for c in COLUMNS if c not in df.columns]
+def load_weather_daily(path: Path = WEATHER_DAILY) -> pd.DataFrame:
+    """Read the pipeline CSV, fill short gaps, return POWER-named columns indexed by date.
+
+    ``df.attrs["filled_cells"]`` counts interpolated values (reported as a data gap).
+    Raises ``ValueError`` on missing columns or gaps longer than MAX_GAP_DAYS.
+    """
+    df = pd.read_csv(path, parse_dates=["date"]).set_index("date").sort_index()
+    missing = [c for c in PIPELINE_COLUMNS if c not in df.columns]
     if missing:
         raise ValueError(f"{path}: missing columns {missing}")
-    df = df[COLUMNS].astype(float)
-    if df.isna().any().any() or (df <= -999).any().any():
-        raise ValueError(f"{path}: contains NaN or -999 fill values")
-    full = pd.date_range(df.index[0], df.index[-1], freq="D")
-    if len(full) != len(df):
-        raise ValueError(f"{path}: {len(full) - len(df)} missing days")
+    df = df[list(PIPELINE_COLUMNS)].rename(columns=PIPELINE_COLUMNS).astype(float)
+    df = df[~df.index.duplicated()]
+    df = df.reindex(pd.date_range(df.index[0], df.index[-1], freq="D", name="DATE"))
+    df = df.mask(df <= -999)
+    gaps = int(df.isna().sum().sum())
+    df = df.interpolate(limit=MAX_GAP_DAYS, limit_area="inside")
+    if df.isna().any().any():
+        bad = df.isna().sum()
+        raise ValueError(f"{path}: gaps longer than {MAX_GAP_DAYS} days: {bad[bad > 0].to_dict()}")
+    df.attrs["filled_cells"] = gaps
     return df
 
 
@@ -77,10 +96,10 @@ def synthetic_weather(first: int, last: int, seed: int = 42) -> pd.DataFrame:
     )
 
 
-def get_weather(first: int, last: int, path: Path = POWER_DAILY) -> tuple[pd.DataFrame, bool]:
+def get_weather(first: int, last: int, path: Path = WEATHER_DAILY) -> tuple[pd.DataFrame, bool]:
     """Return (weather for [first, last], is_synthetic)."""
     if path.exists():
-        df = load_power_daily(path)
+        df = load_weather_daily(path)
         df = df.loc[f"{first}-01-01" : f"{last}-12-31"]
         years = set(df.index.year)
         if years != set(range(first, last + 1)):

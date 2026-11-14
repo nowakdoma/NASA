@@ -35,12 +35,10 @@ cross-team needs under **Blockers / requests**.
   `elevation-tiles-prod` skadi bucket if LP DAAC is ever unavailable.
 - **pipeline → person 1:** `.env.example` should document `EARTHDATA_TOKEN`, but it is a
   root file I do not own — please add, or tell me to.
-- **person 1 → person 2: engine input formats** (engine runs on fallbacks until these exist;
+- **person 1 → person 2: engine inputs** (engine runs on fallbacks until these exist;
   output is then flagged `"mock": true`):
-  - `data/interim/power_daily.csv`: NASA POWER daily for the county centroid, 1995-01-01 to
-    2025-12-31, one row per day, no gaps, no `-999`. Columns: `DATE` (YYYY-MM-DD), `T2M_MAX`,
-    `T2M_MIN` (°C), `RH2M` (%), `WS2M` (m/s at 2 m), `ALLSKY_SFC_SW_DWN` (MJ/m²/day),
-    `PRECTOTCORR` (mm/day). Checked by `engine.weather.load_power_daily`.
+  - weather: engine reads `data/interim/weather_daily.csv` as written by `pipeline power`
+    (no change needed). Gaps up to 3 days are interpolated; longer gaps fail the export.
   - `data/interim/fields.geojson`: real fields in `contracts/fields.schema.json` format.
     `make export` reads it, adds `strategies.json`, writes both to `web/public/data/` and
     validates them.

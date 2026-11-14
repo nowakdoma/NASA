@@ -3,13 +3,13 @@ import json
 import pytest
 
 from engine.export import FILES, export
-from engine.weather import COLUMNS, POWER_DAILY, load_power_daily
+from engine.weather import MAX_GAP_DAYS, PIPELINE_COLUMNS, WEATHER_DAILY, load_weather_daily
 
 
 @pytest.fixture(scope="module")
 def exported(tmp_path_factory):
-    if POWER_DAILY.exists():
-        pytest.skip("real power_daily.csv present; mock assumptions do not hold")
+    if WEATHER_DAILY.exists():
+        pytest.skip("real weather_daily.csv present; mock assumptions do not hold")
     out = tmp_path_factory.mktemp("export")
     errors = export(out_dir=out)
     return out, errors
@@ -37,36 +37,49 @@ def test_export_strategies_structure(exported):
                 assert q["p10"] <= q["p50"] <= q["p90"]
 
 
-def _write_csv(path, rows, columns):
-    lines = ["DATE," + ",".join(columns)]
+PIPE_COLS = list(PIPELINE_COLUMNS)
+
+
+def _write_csv(path, rows, columns=PIPE_COLS):
+    """Pipeline format: lowercase columns with units, missing values as empty cells."""
+    lines = ["date," + ",".join(columns)]
     for d, vals in rows:
-        lines.append(d + "," + ",".join(str(v) for v in vals))
+        lines.append(d + "," + ",".join("" if v is None else str(v) for v in vals))
     path.write_text("\n".join(lines) + "\n")
 
 
-def test_load_power_daily_ok(tmp_path):
+def test_load_weather_daily_ok(tmp_path):
     p = tmp_path / "ok.csv"
-    _write_csv(p, [("2020-01-01", [1] * 6), ("2020-01-02", [2] * 6)], COLUMNS)
-    df = load_power_daily(p)
-    assert list(df.columns) == COLUMNS and len(df) == 2
+    _write_csv(p, [("2020-01-01", [1] * 6), ("2020-01-02", [2] * 6)])
+    df = load_weather_daily(p)
+    assert list(df.columns) == list(PIPELINE_COLUMNS.values()) and len(df) == 2
+    assert df.attrs["filled_cells"] == 0
 
 
-def test_load_power_daily_missing_column(tmp_path):
+def test_load_weather_daily_missing_column(tmp_path):
     p = tmp_path / "bad.csv"
-    _write_csv(p, [("2020-01-01", [1] * 5)], COLUMNS[:-1])
+    _write_csv(p, [("2020-01-01", [1] * 5)], PIPE_COLS[:-1])
     with pytest.raises(ValueError, match="missing columns"):
-        load_power_daily(p)
+        load_weather_daily(p)
 
 
-def test_load_power_daily_fill_value(tmp_path):
-    p = tmp_path / "fill.csv"
-    _write_csv(p, [("2020-01-01", [1] * 6), ("2020-01-02", [-999, 1, 1, 1, 1, 1])], COLUMNS)
-    with pytest.raises(ValueError, match="-999"):
-        load_power_daily(p)
+def test_load_weather_daily_fills_short_gaps(tmp_path):
+    p = tmp_path / "short.csv"
+    rows = [
+        ("2020-01-01", [1] * 6),
+        ("2020-01-02", [None, 1, 1, 1, 1, -999]),  # empty cell + POWER fill value
+        ("2020-01-04", [3] * 6),  # 2020-01-03 missing entirely
+    ]
+    _write_csv(p, rows)
+    df = load_weather_daily(p)
+    assert len(df) == 4 and not df.isna().any().any()
+    assert df.loc["2020-01-03", "T2M_MAX"] == pytest.approx(7 / 3)  # 1 -> _ -> _ -> 3
+    assert df.attrs["filled_cells"] == 8  # 2 cells on 01-02 + 6 on 01-03
 
 
-def test_load_power_daily_gap(tmp_path):
+def test_load_weather_daily_long_gap(tmp_path):
     p = tmp_path / "gap.csv"
-    _write_csv(p, [("2020-01-01", [1] * 6), ("2020-01-04", [1] * 6)], COLUMNS)
-    with pytest.raises(ValueError, match="missing days"):
-        load_power_daily(p)
+    end = f"2020-01-{MAX_GAP_DAYS + 3:02d}"
+    _write_csv(p, [("2020-01-01", [1] * 6), (end, [1] * 6)])
+    with pytest.raises(ValueError, match="gaps longer"):
+        load_weather_daily(p)
