@@ -26,6 +26,94 @@ cross-team needs under **Blockers / requests**.
 | `done` pitch deck (7 slides) + 3-min live demo script    |                                                             | `done` (from P1) P(best): closed live in web, engine/mcda.py synced |
 |                                                          |                                                             | `done` (from P1) crops.csv v0.2 proposal in reports/CONTRACT_PROPOSAL_CROPS_V0.2.md |
 
+## Test round 1 — judges, farmer, adviser (2026-11-14 ~19:00)
+
+Three scripted testers drove the live app in Edge: a judge panel (scores Impact 4 · Creativity 4 ·
+**Validity 2.5** · Relevance 3.5 · Presentation 4), "Dale" (Garden City irrigator, desktop + phone)
+and "Maria" (K-State crop adviser, checked numbers against `strategies.json` / `engine/params.py`).
+Shared top finding: **on the example field the current rotation wins under every preset, even
+"Save Water" with a 14 in or dryland limit** — the demo answers "what could a different rotation
+do?" with "nothing". Priority order within each owner = list order. `[ ]` open, `[x]` done.
+
+### Person 1 — web
+- [ ] **W1 Water limit counts in the ranking** (`lib/ranking.ts`): a sample where a rotation
+  exceeds the limit cannot be "best"; headline adds why the winner wins ("mainly on soil score
+  and labour; alfalfa–corn needs ~17 in, over your 8 in"). Small tolerance (±5 %) before
+  flagging (459 mm vs 457 mm limit was flagged).
+- [ ] **W2 US units** on cards, compare and print: in/yr, $/ac, t/ac; "≈ $X for this N-ac field";
+  label net return "before land rent & pivot/well costs". Metric in print footnote.
+- [ ] **W3 Plain wording**: "came out on top in about 5 of every 10 runs" (not "49 % of
+  samples"); "months without green cover" (NDVI < 0.3 includes dormant alfalfa and standing
+  stalks) instead of "bare soil … most erodible state"; drop "every number comes from open
+  data" (cover factors, pivot capacity, SCI thresholds, labour are judgement values); GRACE
+  card must not say "every month measured" while showing the mock; jargon list (FIN-001 →
+  "Field 1 (137 ac)", CDL → USDA crop map, p10/p90 → bad/typical/good year, AWC → "holds ~4 in
+  of water", index units, GMD3/WIMAS explained); no "%" on an index that can go negative;
+  consistent decimals.
+- [ ] **W4 Navigation**: browser/Android Back goes to previous step (`pushState` on step change,
+  `lib/flow.ts:49` uses `replaceState`); phone reload/share link opens the saved step tab, not
+  the map; no scroll-zoom on the map until tapped; header + stepper + tabs use ~215/844 px on
+  phone.
+- [ ] **W5 Finding your field**: satellite/labelled basemap toggle, zoom to selected field,
+  hint above the map (dots cover it), "50 sample pivots — if yours isn't here pick one with
+  similar soil".
+- [ ] **W6 Clean leftovers**: "Season-by-season detail" still has a second field dropdown, a
+  second "Print Dossier", an empty "Water Deficit" row and overlapping heat pills; print view
+  clips date/URL and Labour column on the right; "%" wraps on phone; targets < 44 px (crop-year
+  cells 16×24, zoom 29×29, "How we know" 31 px); county label covers zoom buttons on phone.
+- [ ] **W7 Example field**: switch "Try an example" from FIN-001 to a field where an
+  alternative wins (FIN-026: alfalfa–corn 47 % under Soil Stewardship) — re-check after W1.
+- [ ] W8 (later) Ranking samples whole weather years once the engine exports per-year results
+  (now each metric × strategy is drawn independently, so a 2012-type year never hits all four
+  at once; normalising over only 4 options turns 0.11 vs 0.57 into worst vs best).
+
+### Person 3 — engine (then `make export`)
+- [ ] **E1 Soil index rates alfalfa as bad for soil**: continuous alfalfa 0.26 vs continuous
+  corn 0.64 (FIN-017), alfalfa–corn 0.41 < corn–wheat–sorghum 0.48; sorghum–wheat–rye cover
+  0.27 < current 0.57 on FIN-001. OM term counts only above-ground residue (`crops.csv`
+  alfalfa residue 1.0 t/ha, hay removed). Add root/crown biomass for perennials and cover
+  (~3–5 t/ha/yr) or NRCS SCI biomass values. This drives "Save Water" picking the current
+  rotation.
+- [ ] **E2 Irrigated wheat uses as much water as corn**: continuous wheat 404–405 mm
+  (FIN-025, FIN-004) vs corn 400 mm (FIN-017); budgets report says 6 in (limited) / 12 in
+  (2012 drought). Likely Kc_ini 0.70 through dormancy + full refill at 40 % depletion. Use Kc
+  ~0.4 over dormancy and deficit irrigation for wheat; target p50 ≈ 8–12 in. Also inflates
+  corn–wheat–sorghum (378 mm).
+- [ ] **E3 Limited irrigation earns less than dryland on every field**: sorghum–wheat–cover
+  $119/ha vs dryland $128 (FIN-001), $240 vs $324 (FIN-032), p10 −$7. Limited option pays full
+  irrigated direct costs with deficit yields (`strategies.py:85`). Use limited-irrigation
+  budget lines or scale inputs to yield. Its water is a flat 100 mm with no range while gaps
+  text says "capped at 150 mm" — make consistent.
+- [ ] **E4 Rye cover claims vs model**: "Forage" trait and "silage for feedlots" benefit, but
+  the rye is costed as glyphosate-terminated with no revenue; "shields topsoil from wind
+  erosion" on fields where modelled erosion is higher than current (FIN-022 0.49 vs 0.21,
+  FIN-026, FIN-032 1.32 vs 1.06, FIN-034, FIN-045). (The old "Low water erosion" contradiction
+  is fixed — testers confirmed.)
+- [ ] **E5 Trade-offs per strategy**: benefits are one-sided boilerplate ("established
+  elevator access" on every current rotation); add `risks`/drawbacks (e.g. corn–soybean on
+  FIN-005 has 14× the erosion of alfalfa). "Why it's here" says "under full irrigation from
+  USDA CDL history" — CDL does not say how much was irrigated.
+- [ ] **E6 Identical net returns** for alfalfa–corn, sorghum–wheat–cover and dryland on
+  FIN-001 and FIN-026 — check field-specific yield response.
+- [ ] E7 (later) Export per-weather-year metrics so web can sample whole years (see W8).
+- [ ] E8 (later, adviser asks) Yield & price assumptions per crop (bu/ac, t/ac) and transition
+  costs (breaking/establishing alfalfa, N credit) visible in data for the printout.
+
+### Person 2 — pipeline
+- [ ] **P1 GRACE `schema_version: "0.3"`** — still blocking the real 259-month series (see
+  Blockers). Then `make data` → `make export`.
+- [ ] **P2 Heat-stress days are identical (31) for every field** (one POWER cell) and 35 of 50
+  fields are exactly 55.4 ha (idealised circles): mark both as county-level / approximate in
+  the data (`note` or a `data_gaps` entry) so the UI can say so.
+- [ ] P3 (later) Frost windows into contracts (needs approval of all three) so the UI can show
+  frost risk — the brief lists it.
+- [ ] P4 (later) "Bare" definition: NDVI < 0.3 counts dormant alfalfa and standing stalks as
+  bare; consider a residue/dormancy note per period.
+
+### Not doing before the freeze (decided)
+- ECOSTRESS / Landsat / SMAP / GPM integration (mention in "How we know" only).
+- Forage and N-fixing as weightable priorities (shown as traits instead).
+
 ## Blockers / requests
 
 - ~~**person 1 → person 3: "Low water erosion" benefit contradicts the metrics**~~ —
