@@ -54,6 +54,15 @@ cross-team needs under **Blockers / requests**.
   geometry + crop history + purity flags) already exists in the pipeline's own interim
   format if that helps you prototype — but do not treat it as contract-shaped.
 
+- **person 1 → person 2: `pipeline ndvi` pages leave the county** (`pipeline/ndvi.py`
+  `search_items`). Page 1 is a POST with `bbox` + `collections` and returns the right tiles
+  (100 × `h10v05`). The `rel=next` link is then fetched with a GET and no body, so later pages
+  are unfiltered: global tiles (`h23v02`, `h35v09`, …) and even Aqua `MYD13Q1` items. Seen in
+  a full `make data` run on 2026-11-14 (256 granules skipped, all `URLError`, most of them
+  outside Kansas). Fix ideas: follow the next link with the method/body it specifies (STAC
+  POST paging), or filter items by `collection` and tile/bbox before downloading. The
+  `URLError`s on the in-county granules may be a separate signing/network issue.
+
 ## Decisions log
 
 - Contracts v0.1: fields GeoJSON + strategies JSON + crops.csv (see `contracts/README.md`).
