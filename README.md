@@ -74,7 +74,7 @@ MODIS, SMAP and SRTM downloads need a free
 [NASA Earthdata](https://urs.earthdata.nasa.gov) account. NASA POWER needs no login.
 
 ```bash
-cp .env.example .env   # then fill in EARTHDATA_USERNAME / EARTHDATA_PASSWORD
+cp .env.example .env   # then fill in EARTHDATA_TOKEN (+ USERNAME/PASSWORD for SMAP)
 ```
 
 `.env` is gitignored. Never commit, print or log credentials.

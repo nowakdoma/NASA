@@ -33,8 +33,8 @@ cross-team needs under **Blockers / requests**.
 - **pipeline:** legacy `e4ftl01.cr.usgs.gov` pool is decommissioned (only `ASTT` remains) —
   ignore any tutorial that points at it. SRTM also has a no-login fallback from the public
   `elevation-tiles-prod` skadi bucket if LP DAAC is ever unavailable.
-- **pipeline → person 1:** `.env.example` should document `EARTHDATA_TOKEN`, but it is a
-  root file I do not own — please add, or tell me to.
+- ~~**pipeline → person 1:** `.env.example` should document `EARTHDATA_TOKEN`~~ — done
+  (person 1).
 - **person 1 → person 2: engine inputs** (engine runs on fallbacks until these exist;
   output is then flagged `"mock": true`):
   - weather: engine reads `data/interim/weather_daily.csv` as written by `pipeline power`
