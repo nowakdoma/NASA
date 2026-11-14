@@ -154,3 +154,117 @@ def test_heat_windows_are_labelled_county_level():
     assert "COUNTY-LEVEL" in note
     assert "50 km" in note
     assert "identical" in note
+
+
+def _frost_payload(rows, p50=199, p10=177):
+    return {
+        "summary": {"frost_free_days": {"p50": p50, "p10": p10, "p90": 226}},
+        "per_year": rows,
+    }
+
+
+def _write_frost(tmp_path, payload):
+    import json as _json
+
+    path = tmp_path / "frost_windows.json"
+    path.write_text(_json.dumps(payload))
+    return path
+
+
+def test_frost_severity_scales_between_p50_and_p10(tmp_path):
+    """(p50 - days) / (p50 - p10): median season = 0, p10 season = 1, longer = 0."""
+    rows = [
+        {
+            "year": 2020,
+            "last_spring_frost": "2020-04-15",
+            "first_fall_frost": "2020-10-31",
+            "frost_free_days": 199,
+        },
+        {
+            "year": 2021,
+            "last_spring_frost": "2021-04-20",
+            "first_fall_frost": "2021-10-14",
+            "frost_free_days": 188,
+        },
+        {
+            "year": 2022,
+            "last_spring_frost": "2022-04-25",
+            "first_fall_frost": "2022-10-10",
+            "frost_free_days": 177,
+        },
+        {
+            "year": 2023,
+            "last_spring_frost": "2023-04-01",
+            "first_fall_frost": "2023-11-15",
+            "frost_free_days": 228,
+        },
+    ]
+    windows, _ = assemble.load_frost(
+        assemble.Config(), _write_frost(tmp_path, _frost_payload(rows))
+    )
+    by_year = {w["year"]: w["severity"] for w in windows}
+    assert by_year[2020] == pytest.approx(0.0)
+    assert by_year[2021] == pytest.approx(0.5)
+    assert by_year[2022] == pytest.approx(1.0)
+    assert by_year[2023] == pytest.approx(0.0)  # a longer season is not "stress"
+
+
+def test_frost_window_spans_the_season_and_names_both_dates(tmp_path):
+    rows = [
+        {
+            "year": 2022,
+            "last_spring_frost": "2022-04-25",
+            "first_fall_frost": "2022-10-10",
+            "frost_free_days": 177,
+        }
+    ]
+    windows, _ = assemble.load_frost(
+        assemble.Config(), _write_frost(tmp_path, _frost_payload(rows))
+    )
+    w = windows[0]
+    assert w["type"] == "frost"
+    assert w["start"] == "2022-04-25" and w["end"] == "2022-10-10"
+    assert "2022-04-25" in w["note"] and "2022-10-10" in w["note"]
+    assert "COUNTY-LEVEL" in w["note"]
+
+
+def test_frost_years_outside_crop_years_are_dropped(tmp_path):
+    rows = [
+        {
+            "year": 1999,
+            "last_spring_frost": "1999-04-20",
+            "first_fall_frost": "1999-10-10",
+            "frost_free_days": 180,
+        },
+        {
+            "year": 2010,
+            "last_spring_frost": "2010-04-20",
+            "first_fall_frost": "2010-10-10",
+            "frost_free_days": 180,
+        },
+    ]
+    windows, _ = assemble.load_frost(
+        assemble.Config(), _write_frost(tmp_path, _frost_payload(rows))
+    )
+    assert [w["year"] for w in windows] == [2010]
+
+
+def test_years_without_both_frost_dates_are_skipped(tmp_path):
+    rows = [
+        {
+            "year": 2011,
+            "last_spring_frost": "",
+            "first_fall_frost": "2011-10-10",
+            "frost_free_days": None,
+        },
+        {
+            "year": 2012,
+            "last_spring_frost": "2012-04-10",
+            "first_fall_frost": "2012-10-20",
+            "frost_free_days": 193,
+        },
+    ]
+    windows, _ = assemble.load_frost(
+        assemble.Config(), _write_frost(tmp_path, _frost_payload(rows))
+    )
+    assert [w["year"] for w in windows] == [2012]

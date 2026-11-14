@@ -21,7 +21,7 @@ from pathlib import Path
 
 from pipeline.config import INTERIM, Config
 
-SCHEMA_VERSION = "0.3"
+SCHEMA_VERSION = "0.4"
 
 
 def load_soil(path: Path) -> dict[str, dict]:
@@ -73,6 +73,49 @@ def load_heat_windows(path: Path, years: set[int]) -> list[dict]:
     return windows
 
 
+def load_frost(cfg: Config, path: Path) -> tuple[list[dict], dict]:
+    """Per-year frost dates -> frost-free season windows (contracts v0.4, type 'frost').
+
+    One window per field-year spanning last spring frost to first fall frost. Severity is how
+    much shorter the season was than the 1995-2025 median, scaled by the p10 gap, so 0 = a
+    median-or-longer season and 1 = as short as the driest tenth. A single band is more useful
+    on a timeline than 36 single-day markers, and both dates ride along in the note.
+    """
+    payload = json.loads(path.read_text())
+    summary = payload.get("summary", {})
+    season = summary.get("frost_free_days", {})
+    p50 = season.get("p50")
+    p10 = season.get("p10")
+    years = set(range(cfg.crop_years[0], cfg.crop_years[1] + 1))
+    windows = []
+    for row in payload.get("per_year", []):
+        year = int(row["year"])
+        if year not in years or not row.get("last_spring_frost") or not row.get("first_fall_frost"):
+            continue
+        days = row.get("frost_free_days")
+        severity = 0.0
+        if days is not None and p50 is not None and p10 is not None and p50 > p10:
+            severity = max(0.0, min(1.0, (p50 - float(days)) / (p50 - p10)))
+        windows.append(
+            {
+                "year": year,
+                "start": row["last_spring_frost"],
+                "end": row["first_fall_frost"],
+                "type": "frost",
+                "severity": round(severity, 3),
+                "source": "NASA POWER daily T2M_MIN (MERRA-2), county grid cell",
+                "note": (
+                    f"Frost-free season {days} d (climatology p50 {p50} d, p10 {p10} d). "
+                    "Last spring frost "
+                    f"{row['last_spring_frost']}, first fall frost {row['first_fall_frost']}. "
+                    "COUNTY-LEVEL: one POWER grid cell; a ~50 km cell smooths cold nights, so "
+                    "the season reads long and this severity is understated."
+                ),
+            }
+        )
+    return windows, summary
+
+
 def heat_index_by_year(windows: list[dict]) -> dict[str, float]:
     """Worst heat severity per year — the only stress signal we can defend today."""
     out: dict[str, float] = {}
@@ -106,6 +149,8 @@ def assemble(cfg: Config) -> tuple[Path, dict]:
     years = list(range(cfg.crop_years[0], cfg.crop_years[1] + 1))
     year_keys = {str(y) for y in years}
     heat = load_heat_windows(INTERIM / "heat_stress_windows.csv", set(years))
+    frost_path = INTERIM / "frost_windows.json"
+    frost, _frost_summary = load_frost(cfg, frost_path) if frost_path.exists() else ([], {})
     stress_index = heat_index_by_year(heat)
 
     features, dropped = [], []
@@ -141,7 +186,7 @@ def assemble(cfg: Config) -> tuple[Path, dict]:
                         "bare_periods": sorted(
                             bare.get(fid, []), key=lambda b: (b["year"], b["start"])
                         ),
-                        "stress_windows": heat,
+                        "stress_windows": heat + frost,
                     },
                     "stress_index_by_year": {
                         y: stress_index.get(y, 0.0) for y in sorted(year_keys)

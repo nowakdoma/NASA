@@ -33,7 +33,7 @@ INTERIM_FIELDS = REPO_ROOT / "data" / "interim" / "fields.geojson"
 INTERIM_GRACE = REPO_ROOT / "data" / "interim" / GRACE_FILE
 MOCK_GRACE = CONTRACTS / "mock" / GRACE_FILE
 WEATHER_YEARS = (1995, 2025)
-SCHEMA_VERSION = "0.3"
+SCHEMA_VERSION = "0.4"
 
 
 def export_mock(out_dir: Path = WEB_DATA) -> None:

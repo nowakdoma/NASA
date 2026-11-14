@@ -1,5 +1,5 @@
 {
- "schema_version": "0.3",
+ "schema_version": "0.4",
  "mock": true,
  "generated_by": "mock generator (hand-tuned heuristics, not engine)",
  "generated_at": "2026-11-14",

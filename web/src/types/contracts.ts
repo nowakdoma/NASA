@@ -24,7 +24,7 @@ export interface DateRange {
 export type BarePeriod = DateRange;
 
 export interface StressWindow extends DateRange {
-  type: 'water' | 'heat';
+  type: 'water' | 'heat' | 'frost';
   severity: number; // 0..1
 }
 

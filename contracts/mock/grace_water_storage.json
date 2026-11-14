@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.3",
+  "schema_version": "0.4",
   "mock": true,
   "source": "MOCK — yearly subsample of NASA/JPL GRACE & GRACE-FO mascon, TELLUS_GRAC-GRFO_MASCON_CRI_GRID_RL06.3_V4 (JPL RL06.3Mv04)",
   "units": "cm equivalent water thickness anomaly",

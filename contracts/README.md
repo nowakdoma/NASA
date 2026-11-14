@@ -1,7 +1,7 @@
 # contracts/ — the integration point
 
 Everything that crosses a team boundary is defined here. **Changes need explicit approval
-from all three humans** (see `AGENTS.md`). Current version: **0.3** (proposal, pending approval).
+from all three humans** (see `AGENTS.md`). Current version: **0.4** (frost added; approved by all three, 2026-11-14).
 
 | File                            | Producer                         | Consumer           |
 | ------------------------------- | -------------------------------- | ------------------ |
@@ -43,6 +43,22 @@ l_ini_d, l_dev_d, l_mid_d, l_late_d, residue_t_ha, price_source, placeholder, so
 
 Kc and stage lengths (days) follow FAO-56 Tables 11–12; `placeholder=true` rows still need
 local calibration (K-State extension / KS NASS).
+
+### v0.4 — frost risk
+
+`stress_window.type` gained `"frost"`. A frost window spans the **frost-free season** for that
+field-year: `start` = last spring air frost, `end` = first fall air frost, so the window is the
+period the crop could grow unprotected. `severity` rises as the season is shorter than the
+1995-2025 median:
+
+    severity = clip((p50_days - season_days) / (p50_days - p10_days), 0, 1)
+
+so 0 means a season at or above the median and 1 means a season as short as the driest tenth.
+Both frost dates are echoed in the window `note`. Rationale for one window per year rather
+than one per event: it is the agronomically meaningful envelope, it keeps the payload small
+(18 records per field, not 36), and the timeline can show it as a band.
+Source: NASA POWER daily `T2M_MIN`, one grid cell for the county — a MERRA-2 cell smooths
+cold nights, so the season reads long and severity is systematically understated.
 
 ### v0.2 — CDL classes that were missing
 

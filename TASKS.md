@@ -113,8 +113,13 @@ do?" with "nothing". Priority order within each owner = list order. `[ ]` open, 
   `fields_raw.geojson -> known_limits`; **person 3 (engine)**: to surface it in the UI it
   needs a `data_gaps` line in `strategies.json`, e.g. "Field shape is an idealised circle at
   the detected radius; area is approximate to a few percent."
-- [ ] P3 (later) Frost windows into contracts (needs approval of all three) so the UI can show
-  frost risk — the brief lists it.
+- [x] P3 Frost windows into contracts — **contracts v0.4** (approved by all three, 2026-11-14).
+  `stress_window.type` now allows `"frost"`; every field carries 18 frost windows (one per
+  crop year, 2008-2025) spanning last spring frost -> first fall frost, with severity =
+  how much shorter the season was than the 1995-2025 median (0 = median or longer, 1 = p10).
+  `web/public/data` regenerated at 0.4, `engine.validate` and `check:data` clean.
+  **person 1 (web):** the passport timeline can now render `type: "frost"` as a band — the
+  two frost dates and the climatology are already in each window's `note`.
 - [x] P4 "Bare" definition — every bare period's `note` now carries the caveat: NDVI sees
   green canopy, not ground cover, so dormant alfalfa, standing stalks and residue-covered
   soil all read as "bare" even when the surface is protected from wind erosion.
@@ -232,18 +237,10 @@ do?" with "nothing". Priority order within each owner = list order. `[ ]` open, 
   Verified after the ownership swap and the v0.3 edits (2026-11-14): `assemble` and
   `groundwater` still run, `fields.geojson` (60 fields) and `grace_water_storage.json`
   (259 months) both validate at 0.3 with `mock: false`.
-- **pipeline → person 1 / person 3: frost data is produced but NOTHING consumes it.** Checked
-  2026-11-14: `data/interim/frost_windows.json` + `.csv` exist (spring/fall frost dates and
-  p10/p50/p90, 1995-2025), and `grep -rn frost web/src contracts engine` returns **zero hits**.
-  Decision needed, in either direction:
-  - **Contract route:** add `"frost"` to the `type` enum in `contracts/fields.schema.json`
-    `stress_window` (currently `["water", "heat"]`) and emit windows per field-year — that is
-    a **v0.4** contract change needing all three, after which the passport timeline can show
-    frost rows alongside heat and bare periods.
-  - **Standalone route:** leave the contract alone and give it its own card (like GRACE), so
-    the start screen or "How we know" can cite the frost-free window without a schema bump.
-  Until one is chosen the file is dead weight — say which and I will do it.
-
+- ~~**pipeline → person 1 / person 3: frost data is produced but NOTHING consumes it.**~~
+  **Resolved at contracts v0.4** — frost is now part of `fields.geojson` as
+  `type: "frost"` windows, so nothing is stranded. Remaining work is on the web side: render
+  it on the passport timeline.
 - ~~**person 1 → person 3: per-strategy "why / benefits / risks"**~~ — resolved (person 3):
   `contracts/strategies.schema.json` and `web/src/types/contracts.ts` gained `why_considered`
   (field-specific rationale tied to soil/history/water), `benefits` (2–3 quantified strings),

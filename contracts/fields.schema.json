@@ -86,12 +86,12 @@
         "end": true,
         "source": true,
         "note": true,
-        "type": { "enum": ["water", "heat"] },
+        "type": { "enum": ["water", "heat", "frost"] },
         "severity": {
           "type": "number",
           "minimum": 0,
           "maximum": 1,
-          "description": "0 = none, 1 = extreme"
+          "description": "0 = none, 1 = extreme. For type 'frost' the window spans the frost-free season (last spring frost to first fall frost) and severity rises as it is shorter than the 1995-2025 median."
         }
       }
     },
