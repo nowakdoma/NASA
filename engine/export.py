@@ -68,9 +68,12 @@ def build(fields_path: Path, weather_path: Path | None = None) -> tuple[dict, di
     mock = synthetic or bool(fields.get("mock", False))
 
     per_field = {}
+    cache: dict = {}  # identical (rotation, irrigation, soil) -> metrics
     for feat in fields["features"]:
         props = feat["properties"]
-        per_field[props["field_id"]] = field_strategies(props, wy, traits, synthetic, WEATHER_YEARS)
+        per_field[props["field_id"]] = field_strategies(
+            props, wy, traits, synthetic, WEATHER_YEARS, cache
+        )
         print(f"  {props['field_id']}: {[s['id'] for s in per_field[props['field_id']]]}")
 
     meta_src = json.loads((CONTRACTS / "mock" / "strategies.json").read_text(encoding="utf-8"))
@@ -95,8 +98,12 @@ def export(out_dir: Path = WEB_DATA, fields_path: Path | None = None) -> list[st
     print(f"fields: {src.relative_to(REPO_ROOT) if src.is_relative_to(REPO_ROOT) else src}")
     fields, strategies = build(src)
     out_dir.mkdir(parents=True, exist_ok=True)
-    (out_dir / FILES[0]).write_text(json.dumps(fields, ensure_ascii=False, indent=1) + "\n")
-    (out_dir / FILES[1]).write_text(json.dumps(strategies, ensure_ascii=False, indent=1) + "\n")
+    (out_dir / FILES[0]).write_text(
+        json.dumps(fields, ensure_ascii=False, indent=1) + "\n", encoding="utf-8"
+    )
+    (out_dir / FILES[1]).write_text(
+        json.dumps(strategies, ensure_ascii=False, indent=1) + "\n", encoding="utf-8"
+    )
     errors = validate_all(out_dir / FILES[0], out_dir / FILES[1])
     status = "INVALID" if errors else "valid"
     print(f"exported {FILES} -> {out_dir} ({status}, mock={strategies['mock']})")

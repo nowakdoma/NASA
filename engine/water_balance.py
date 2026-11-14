@@ -109,19 +109,6 @@ def kc_stages(crop_code: str, traits: pd.DataFrame, cycles: int = 1) -> np.ndarr
     return np.tile(one, cycles)
 
 
-def kc_curve(crop_code: str, planting_doy: int, traits: pd.DataFrame, cycles: int = 1):
-    """Daily single crop coefficient over one 365-day year, wrapping past 31 Dec.
-
-    Returns an array of length 365 with 0 outside the season (caller handles bare-soil
-    evaporation). Stage lengths and Kc values come from contracts/crops.csv.
-    """
-    season = kc_stages(crop_code, traits, cycles)[:365]
-    out = np.zeros(365)
-    idx = (planting_doy - 1 + np.arange(len(season))) % 365
-    out[idx] = season
-    return out
-
-
 @dataclass
 class Timeline:
     """Daily crop calendar of a cyclic rotation of length L years (365 * L days)."""
@@ -173,16 +160,39 @@ def simulate(
     precip: np.ndarray,
     awc_mm: float,
     irrigation_cap_mm: float | None,
-    initial_depletion: float = 0.5,
+    spin_up: bool = True,
 ) -> WaterResult:
     """Daily root-zone bucket (FAO-56 ch. 8) over one rotation cycle.
 
-    ``et0``/``precip`` are aligned with the timeline (365 * L days). Irrigation refills
-    up to the pivot capacity when depletion exceeds IRRIGATION_TRIGGER * TAW, limited to
-    ``irrigation_cap_mm`` per calendar year (None = unlimited, 0 = dryland).
+    ``et0``/``precip`` are aligned with the timeline (365 * L days). Each day: rain first
+    (excess drains), then irrigation up to the pivot capacity if depletion still exceeds
+    IRRIGATION_TRIGGER * TAW (capped at ``irrigation_cap_mm`` per calendar year; None =
+    unlimited, 0 = dryland), then ET. TAW is floored at params.MIN_AWC_MM.
+
+    The rotation is cyclic, so with ``spin_up`` the cycle is run once to reach its own
+    end-of-cycle soil water, and only the second pass is recorded. This lets a fall-sown
+    crop at the start of the cycle (wheat after fallow) inherit the water stored at the end.
     """
-    n_years = len(timeline.kc) // 365
-    taw = float(awc_mm)
+    taw = max(float(awc_mm), params.MIN_AWC_MM)
+    dr = 0.5 * taw
+    if spin_up:
+        dr = _run(timeline, et0, precip, taw, irrigation_cap_mm, dr)[1]
+    return _run(timeline, et0, precip, taw, irrigation_cap_mm, dr)[0]
+
+
+def _run(
+    timeline: Timeline,
+    et0: np.ndarray,
+    precip: np.ndarray,
+    taw: float,
+    irrigation_cap_mm: float | None,
+    dr: float,
+) -> tuple[WaterResult, float]:
+    """One pass over the cycle from depletion ``dr``. Returns (result, final depletion)."""
+    n_days = len(timeline.kc)
+    if len(et0) != n_days or len(precip) != n_days:
+        raise ValueError(f"weather length {len(et0)}/{len(precip)} != timeline {n_days} days")
+    n_years = n_days // 365
     raw = params.P_DEPLETION * taw
     trigger = params.IRRIGATION_TRIGGER * taw
     cap = np.inf if irrigation_cap_mm is None else float(irrigation_cap_mm)
@@ -192,12 +202,15 @@ def simulate(
     etc_s = np.zeros(n_years)
     eta_s = np.zeros(n_years)
     stress = np.zeros(n_years)
-    dr = initial_depletion * taw
     kc_l, slot_l, irr_l = timeline.kc.tolist(), timeline.slot.tolist(), timeline.irrigable.tolist()
     et0_l, p_l = et0.tolist(), precip.tolist()
-    for d in range(len(kc_l)):
+    for d in range(n_days):
         y = d // 365
         s = slot_l[d]
+        dr -= p_l[d]
+        if dr < 0:
+            dp[y] -= dr
+            dr = 0.0
         if irr_l[d] and dr > trigger and irr[y] < cap:
             amt = min(dr, params.PIVOT_CAPACITY_MM_DAY, cap - irr[y])
             irr[y] += amt
@@ -212,9 +225,5 @@ def simulate(
                 stress[s] += 1
         else:
             eta = params.KC_BARE * et0_l[d] * (1 - dr / taw) ** 2
-        dr = dr - p_l[d] + eta
-        if dr < 0:
-            dp[y] -= dr
-            dr = 0.0
-        dr = min(dr, taw)
-    return WaterResult(irr, dp, etc_s, eta_s, stress)
+        dr = min(dr + eta, taw)
+    return WaterResult(irr, dp, etc_s, eta_s, stress), dr

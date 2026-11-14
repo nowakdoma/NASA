@@ -8,6 +8,7 @@ the n samples are the interval exported to strategies.json.
 
 from __future__ import annotations
 
+import copy
 from dataclasses import dataclass
 
 import numpy as np
@@ -43,6 +44,7 @@ class WeatherYears:
     et0: dict[int, np.ndarray]
     precip: dict[int, np.ndarray]
     r_factor: dict[int, float]
+    filled_cells: int = 0  # interpolated weather values (reported as a data gap)
 
     @classmethod
     def from_daily(cls, weather: pd.DataFrame) -> WeatherYears:
@@ -55,6 +57,7 @@ class WeatherYears:
             et0={y: et0[yr == y] for y in years},
             precip={y: w["PRECTOTCORR"].to_numpy()[yr == y] for y in years},
             r_factor=r_factor_by_year(w["PRECTOTCORR"]),
+            filled_cells=int(weather.attrs.get("filled_cells", 0)),
         )
 
 
@@ -162,8 +165,20 @@ def evidence(weather_synthetic: bool, weather_years: tuple[int, int], soil: dict
     ]
 
 
-def data_gaps(rotation: list[str], irrigation: str, weather_synthetic: bool) -> list[str]:
+def data_gaps(
+    rotation: list[str],
+    irrigation: str,
+    weather_synthetic: bool,
+    filled_cells: int = 0,
+    soil: dict | None = None,
+) -> list[str]:
     gaps = []
+    if filled_cells:
+        gaps.append(f"{filled_cells} missing NASA POWER daily values were linearly "
+                    "interpolated.")  # fmt: skip
+    if soil is not None and soil.get("awc_mm", 0) < params.MIN_AWC_MM:
+        gaps.append(f"SSURGO available water capacity missing or below "
+                    f"{params.MIN_AWC_MM:.0f} mm; {params.MIN_AWC_MM:.0f} mm assumed.")  # fmt: skip
     if weather_synthetic:
         gaps.append("Weather is SYNTHETIC until NASA POWER data is loaded: intervals are "
                     "illustrative only.")  # fmt: skip
@@ -216,8 +231,11 @@ def field_strategies(
     traits: pd.DataFrame,
     weather_synthetic: bool,
     weather_years: tuple[int, int],
+    cache: dict | None = None,
 ) -> list[dict]:
-    """The 4 strategies (current + 3 alternatives) for one field in contracts format."""
+    """The 4 strategies (current + 3 alternatives) for one field in contracts format.
+
+    ``cache`` (shared across fields) memoises metrics by (rotation, level, soil inputs)."""
     irrigated = bool(props.get("irrigated", True))
     current = detect_rotation(props["crop_history"])
     cur_level = "full" if irrigated else "dryland"
@@ -240,7 +258,13 @@ def field_strategies(
             name = entry.name if level == entry.irrigation else (
                 f"{_crop_names(rotation, traits)} (dryland)")  # fmt: skip
             desc = entry.description
-        metrics = summarise(evaluate(rotation, level, props["soil"], wy, traits))
+        soil = props["soil"]
+        key = (tuple(rotation), level, soil["awc_mm"], soil["kffact"], soil["slope_pct"])
+        if cache is None or key not in cache:
+            metrics = summarise(evaluate(rotation, level, soil, wy, traits))
+            if cache is not None:
+                cache[key] = metrics
+        metrics = copy.deepcopy(cache[key]) if cache is not None else metrics
         out.append(
             {
                 "id": sid,
@@ -250,7 +274,7 @@ def field_strategies(
                 "rotation": rotation,
                 "metrics": metrics,
                 "evidence": evidence(weather_synthetic, weather_years, props["soil"]),
-                "data_gaps": data_gaps(rotation, level, weather_synthetic),
+                "data_gaps": data_gaps(rotation, level, weather_synthetic, wy.filled_cells, soil),
                 "verify_locally": verify_locally(rotation, level),
             }
         )

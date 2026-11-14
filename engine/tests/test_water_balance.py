@@ -1,4 +1,5 @@
 import numpy as np
+import pytest
 
 from engine import params
 from engine.crops import load_crop_traits
@@ -6,7 +7,6 @@ from engine.strategies import WeatherYears
 from engine.water_balance import (
     et0_fao56_pm,
     extraterrestrial_radiation,
-    kc_curve,
     rotation_timeline,
     simulate,
 )
@@ -42,27 +42,26 @@ def test_extraterrestrial_radiation_example8():
     assert abs(ra[0] - 32.2) < 0.2
 
 
-def test_kc_curve_corn():
+def test_single_crop_timeline_corn():
     t = TRAITS.loc["corn"]
-    kc = kc_curve("corn", params.CROPS["corn"].plant_doy, TRAITS)
+    kc = rotation_timeline(["corn"], TRAITS).kc
     assert kc.shape == (365,)
-    lo = min(t.kc_ini, t.kc_end)
     active = kc[kc > 0]
     assert active.size > 0
-    assert active.min() >= lo - 1e-9 and active.max() <= t.kc_mid + 1e-9
+    assert active.min() >= min(t.kc_ini, t.kc_end) - 1e-9 and active.max() <= t.kc_mid + 1e-9
     assert np.all(kc[:119] == 0)  # before planting (doy 120)
     assert kc[-1] == 0
 
 
-def test_kc_curve_winter_wheat_wraps():
-    kc = kc_curve("winter_wheat", params.CROPS["winter_wheat"].plant_doy, TRAITS)
-    assert kc.shape == (365,)
+def test_single_crop_timeline_winter_wheat_wraps():
+    kc = rotation_timeline(["winter_wheat"], TRAITS).kc
     assert kc[0] > 0 and kc[-1] > 0
     assert np.any(kc == 0)
 
 
-def test_kc_curve_fallow_is_zero():
-    assert np.all(kc_curve("fallow", 1, TRAITS) == 0)
+def test_fallow_timeline_is_bare():
+    tl = rotation_timeline(["fallow"], TRAITS)
+    assert np.all(tl.kc == 0) and np.all(tl.slot == -1)
 
 
 def test_rotation_timeline_shapes_and_fallow():
@@ -107,3 +106,42 @@ def test_simulate_irrigation_caps_and_yield_ratio():
         assert np.all(res.deep_perc_mm >= 0)
     # full irrigation should not be more stressed than dryland
     assert full.stress_days.sum() <= dry.stress_days.sum()
+
+
+def _flat(n_years, et0=5.0, rain=0.0):
+    n = 365 * n_years
+    return np.full(n, et0), np.full(n, rain)
+
+
+def test_rain_before_irrigation():
+    # Daily rain larger than daily ET keeps the bucket full: no irrigation is needed.
+    tl = rotation_timeline(["corn"], TRAITS)
+    et0, rain = _flat(1, et0=5.0, rain=8.0)
+    res = simulate(tl, et0, rain, 150.0, None)
+    assert res.irrigation_mm.sum() == 0
+
+
+def test_spin_up_carries_fallow_water_into_wheat():
+    # Wet fallow year at the end of the cycle; dry otherwise. With spin-up the wheat at the
+    # start of the cycle inherits the stored water and is less stressed.
+    rot = ["winter_wheat", "sorghum", "fallow"]
+    tl = rotation_timeline(rot, TRAITS)
+    et0, rain = _flat(3, et0=4.0, rain=0.0)
+    rain[730:] = 3.0  # fallow year
+    with_spin = simulate(tl, et0, rain, 200.0, 0.0, spin_up=True)
+    without = simulate(tl, et0, rain, 200.0, 0.0, spin_up=False)
+    assert with_spin.eta_mm[0] > without.eta_mm[0]
+
+
+def test_zero_awc_does_not_crash():
+    tl = rotation_timeline(["corn"], TRAITS)
+    et0, rain = _flat(1)
+    res = simulate(tl, et0, rain, 0.0, None)
+    assert np.isfinite(res.eta_mm).all()
+
+
+def test_weather_length_mismatch_raises():
+    tl = rotation_timeline(["corn"], TRAITS)
+    et0, rain = _flat(1)
+    with pytest.raises(ValueError, match="weather length"):
+        simulate(tl, et0[:300], rain[:300], 150.0, None)

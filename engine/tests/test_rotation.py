@@ -1,3 +1,5 @@
+import pytest
+
 from engine import params
 from engine.rotation import detect_rotation, select_alternatives
 
@@ -49,3 +51,8 @@ def test_select_alternatives_dryland_field():
     assert all(lvl == "dryland" for _, lvl in alts)
     keys = [(e.rotation, lvl) for e, lvl in alts]
     assert len(set(keys)) == 3
+
+
+def test_detect_rotation_empty_history_raises():
+    with pytest.raises(ValueError, match="empty crop_history"):
+        detect_rotation({})

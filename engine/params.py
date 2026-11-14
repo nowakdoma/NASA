@@ -49,6 +49,7 @@ ELEVATION_M = 880.0
 P_DEPLETION = 0.5  # FAO-56 p: stress starts when depletion > p * TAW
 IRRIGATION_TRIGGER = 0.4  # irrigate when depletion > trigger * TAW (pivot can't catch up later)
 PIVOT_CAPACITY_MM_DAY = 5.4  # [R] ~500 gpm on 125 ac (p10 3.3, p90 8.7); no Finney data
+MIN_AWC_MM = 20.0  # [R] floor for missing/zero SSURGO AWC (reported as a data gap)
 KC_BARE = 0.30  # bare/residue soil evaporation coefficient when wet (PLACEHOLDER)
 NO_IRRIGATION_CROPS = frozenset({"fallow", "rye_cover", "grass_pasture"})
 
@@ -133,11 +134,12 @@ CROPS: dict[str, CropParams] = {
         var_cost_usd_ha=769.0, dry_var_cost_usd_ha=560.0, other_revenue_usd_ha=0.0,
         c_factor=0.30, disturbance=0.40, labour_h_ha=1.24, dry_labour_h_ha=0.72,
     ),
-    # [D/R] seed + custom drilling + glyphosate termination (128-146 USD/ha)
+    # [D/R] seed + custom drilling + glyphosate termination (128-146 USD/ha). C [R]: halfway
+    # between living cover (0.10) and fallow (0.45): the Kc season ends in Jan, residue after.
     "rye_cover": CropParams(
         285, True, ky=0.0, ym_t_ha=0.0, price_usd_t=0.0,
         var_cost_usd_ha=137.0, dry_var_cost_usd_ha=137.0, other_revenue_usd_ha=0.0,
-        c_factor=0.10, disturbance=0.20, labour_h_ha=0.3, dry_labour_h_ha=0.3,
+        c_factor=0.28, disturbance=0.20, labour_h_ha=0.3, dry_labour_h_ha=0.3,
     ),
     # [D/R] SW herbicide $46/ac + 3-4 spray passes (170-198 USD/ha)
     "fallow": CropParams(

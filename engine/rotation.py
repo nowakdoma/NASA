@@ -18,6 +18,8 @@ def detect_rotation(crop_history: dict[str, str], recent: int = RECENT_YEARS) ->
     MAX_MISMATCH of the years. The cycle is returned in the order of the most recent years.
     Falls back to the last 4 observed years when nothing repeats.
     """
+    if not crop_history:
+        raise ValueError("empty crop_history: cannot detect a rotation")
     years = sorted(crop_history, key=int)[-recent:]
     seq = [crop_history[y] for y in years]
     n = len(seq)

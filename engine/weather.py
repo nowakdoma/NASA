@@ -101,9 +101,14 @@ def get_weather(first: int, last: int, path: Path = WEATHER_DAILY) -> tuple[pd.D
     if path.exists():
         df = load_weather_daily(path)
         df = df.loc[f"{first}-01-01" : f"{last}-12-31"]
-        years = set(df.index.year)
-        if years != set(range(first, last + 1)):
-            raise ValueError(f"{path}: years {sorted(years)} do not cover {first}-{last}")
+        counts = df.groupby(df.index.year).size()
+        short = {int(y): int(n) for y, n in counts.items() if n < 365}
+        missing = sorted(set(range(first, last + 1)) - set(counts.index))
+        if missing or short:
+            raise ValueError(
+                f"{path}: incomplete weather for {first}-{last}: missing years {missing}, "
+                f"short years (days) {short}"
+            )
         return df, False
     return synthetic_weather(first, last), True
 

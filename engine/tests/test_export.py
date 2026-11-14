@@ -1,5 +1,6 @@
 import json
 
+import pandas as pd
 import pytest
 
 from engine.export import FILES, export
@@ -83,3 +84,13 @@ def test_load_weather_daily_long_gap(tmp_path):
     _write_csv(p, [("2020-01-01", [1] * 6), (end, [1] * 6)])
     with pytest.raises(ValueError, match="gaps longer"):
         load_weather_daily(p)
+
+
+def test_get_weather_rejects_partial_year(tmp_path):
+    from engine.weather import get_weather
+
+    p = tmp_path / "partial.csv"
+    days = [d.strftime("%Y-%m-%d") for d in pd.date_range("2020-01-01", "2021-11-30")]
+    _write_csv(p, [(d, [1] * 6) for d in days])
+    with pytest.raises(ValueError, match="short years"):
+        get_weather(2020, 2021, path=p)
