@@ -1,7 +1,7 @@
 {
  "schema_version": "0.1",
  "mock": false,
- "generated_by": "engine.export eed795f",
+ "generated_by": "engine.export 6d41c21",
  "generated_at": "2026-11-14",
  "weather_years": [
   1995,
@@ -4227,6 +4227,77 @@
     ]
    },
    {
+    "id": "corn_soy",
+    "name": "Corn–soybean (full irrigation)",
+    "description": "Adds a nitrogen-fixing legume; breaks corn pest cycles.",
+    "is_current": false,
+    "rotation": [
+     "corn",
+     "soybeans"
+    ],
+    "metrics": {
+     "water_use_mm": {
+      "p10": 346.0,
+      "p50": 389.0,
+      "p90": 489.0
+     },
+     "erosion_t_ha": {
+      "p10": 1.28,
+      "p50": 2.61,
+      "p90": 4.33
+     },
+     "soil_index": {
+      "p10": 0.31,
+      "p50": 0.36,
+      "p90": 0.38
+     },
+     "income_usd_ha": {
+      "p10": 882.0,
+      "p50": 1074.0,
+      "p90": 1220.0
+     },
+     "labour_index": {
+      "p10": 0.39,
+      "p50": 0.42,
+      "p90": 0.48
+     }
+    },
+    "evidence": [
+     {
+      "dataset": "NASA POWER daily 1995-2025",
+      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
+      "url": "https://power.larc.nasa.gov/"
+     },
+     {
+      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
+      "note": "Current rotation = repeating cycle in the most recent CDL years."
+     },
+     {
+      "dataset": "USDA NRCS SSURGO",
+      "note": "Valent-Vona loamy fine sands, 3 to 15 percent slopes: AWC 106.0 mm, K 0.17, slope 1.96 %."
+     },
+     {
+      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
+      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
+     }
+    ],
+    "data_gaps": [
+     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
+     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
+     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
+     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
+     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
+     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
+     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
+    ],
+    "verify_locally": [
+     "Does your water right / well capacity support this rotation in a dry year?",
+     "Local elevator or contract prices and basis.",
+     "Herbicide carryover restrictions between the crops in this sequence.",
+     "Soybean yield on your soil (iron-deficiency chlorosis on high-pH soils)."
+    ]
+   },
+   {
     "id": "alfalfa_corn",
     "name": "Alfalfa (3 yr)–corn (2 yr) (full irrigation)",
     "description": "Perennial forage builds soil; needs hay market and more labour.",
@@ -4298,77 +4369,6 @@
      "Local elevator or contract prices and basis.",
      "Herbicide carryover restrictions between the crops in this sequence.",
      "Hay buyers, storage and haul distance; stand establishment cost."
-    ]
-   },
-   {
-    "id": "corn_soy",
-    "name": "Corn–soybean (full irrigation)",
-    "description": "Adds a nitrogen-fixing legume; breaks corn pest cycles.",
-    "is_current": false,
-    "rotation": [
-     "corn",
-     "soybeans"
-    ],
-    "metrics": {
-     "water_use_mm": {
-      "p10": 346.0,
-      "p50": 389.0,
-      "p90": 489.0
-     },
-     "erosion_t_ha": {
-      "p10": 1.28,
-      "p50": 2.61,
-      "p90": 4.33
-     },
-     "soil_index": {
-      "p10": 0.31,
-      "p50": 0.36,
-      "p90": 0.38
-     },
-     "income_usd_ha": {
-      "p10": 882.0,
-      "p50": 1074.0,
-      "p90": 1220.0
-     },
-     "labour_index": {
-      "p10": 0.39,
-      "p50": 0.42,
-      "p90": 0.48
-     }
-    },
-    "evidence": [
-     {
-      "dataset": "NASA POWER daily 1995-2025",
-      "note": "T2M_MAX/MIN, RH2M, WS2M, ALLSKY_SFC_SW_DWN → FAO-56 ET0; PRECTOTCORR → soil water balance and RUSLE R.",
-      "url": "https://power.larc.nasa.gov/"
-     },
-     {
-      "dataset": "USDA NASS Cropland Data Layer 2008-2025",
-      "note": "Current rotation = repeating cycle in the most recent CDL years."
-     },
-     {
-      "dataset": "USDA NRCS SSURGO",
-      "note": "Valent-Vona loamy fine sands, 3 to 15 percent slopes: AWC 106.0 mm, K 0.17, slope 1.96 %."
-     },
-     {
-      "dataset": "FAO-56 / FAO-33 / RUSLE (AH-703)",
-      "note": "Crop coefficients (contracts/crops.csv), yield response Ky, LS and C factors."
-     }
-    ],
-    "data_gaps": [
-     "Prices, yields and costs are fixed K-State 2027 planning budgets (SW Kansas); their prices are 20-60 % above USDA NASS 2025 Kansas prices and price risk is not in the intervals.",
-     "Income is return over direct (variable) costs: land rent and pivot/well capital (~$470/ac/yr irrigated, ~$100-140 dryland, K-State 2027) are not subtracted.",
-     "Well capacity (assumed ~500 gpm per quarter-section pivot) and pumping lift/fuel (natural gas, 300 ft) are not known for this field.",
-     "Wind erosion not modelled (RUSLE is water-only); in SW Kansas wind erosion can dominate on bare soil.",
-     "Single soil bucket, no runoff; water use is irrigation need, not metered pumping.",
-     "Ogallala aquifer saturated thickness / well capacity and water-right limits (Kansas WIMAS) not considered.",
-     "Soil index is a simplified, uncalibrated version of the NRCS Soil Conditioning Index."
-    ],
-    "verify_locally": [
-     "Does your water right / well capacity support this rotation in a dry year?",
-     "Local elevator or contract prices and basis.",
-     "Herbicide carryover restrictions between the crops in this sequence.",
-     "Soybean yield on your soil (iron-deficiency chlorosis on high-pH soils)."
     ]
    }
   ],

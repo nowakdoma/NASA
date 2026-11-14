@@ -21,7 +21,7 @@ cross-team needs under **Blockers / requests**.
 | `done` soil-conditioning index (residue, OM, tillage)    | `done` SSURGO soil props per field (texture, OM, K, AWC)    | `done` strategy comparison: interval chart per metric           |
 | `done` income model (price source per crop, placeholder) | `done` SRTM slope per field                                 | `done` P(best) + "verify locally" box copy                      |
 | `→P3` MCDA + Dirichlet weights, P(best) in export       | `done` MODIS NDVI → bare-soil periods per field-year        | `done` mobile layout / accessibility pass                       |
-| `done` `engine.export` → contracts format                | `todo` SMAP soil moisture → water-stress windows            | `done` "about the data" / uncertainty page                      |
+| `done` `engine.export` → contracts format                | `done` SMAP → water stress (superseded, see note)           | `done` "about the data" / uncertainty page                      |
 | `todo` pitch deck + demo script                          | `done` heat-stress windows (POWER Tmax > threshold)         | `done` deploy static build                                      |
 | `todo` pitch only (rest reassigned to person 3, 2026-11-14)  |                                                             | `todo` (from P1) P(best): close as "computed live in web", keep `engine/mcda.py` in sync with `src/lib/ranking.ts` |
 |                                                          |                                                             | `todo` (from P1) crops.csv contract proposal for triticale, double crops, oats, other hay (see Blockers) |
