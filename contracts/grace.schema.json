@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fieldshift.local/contracts/grace.schema.json",
+  "title": "FieldShift regional water-storage trend (GRACE/GRACE-FO)",
+  "description": "Monthly terrestrial water storage (TWS) anomaly for the county area from NASA JPL GRACE/GRACE-FO mascons, plus its linear trend. TOTAL water storage (groundwater + soil moisture + snow + surface water), regional (~300 km mascons) — never a per-field or per-well value. Produced by pipeline/grace.py, copied by engine.export, read by web/ (start screen).",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "source",
+    "units",
+    "region",
+    "trend",
+    "series",
+    "data_gaps"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": { "type": "string", "pattern": "^\\d+\\.\\d+$" },
+    "mock": {
+      "type": "boolean",
+      "description": "true when the file contains invented values"
+    },
+    "source": { "type": "string", "minLength": 1 },
+    "units": { "type": "string", "minLength": 1 },
+    "region": {
+      "type": "object",
+      "required": ["name", "fips", "bbox"],
+      "properties": {
+        "name": { "type": "string" },
+        "fips": { "type": "string", "pattern": "^\\d{5}$" },
+        "bbox": {
+          "type": "array",
+          "items": { "type": "number" },
+          "minItems": 4,
+          "maxItems": 4
+        }
+      }
+    },
+    "trend": {
+      "type": "object",
+      "required": ["cm_per_year", "r2"],
+      "properties": {
+        "cm_per_year": { "type": "number" },
+        "r2": { "type": "number", "minimum": 0, "maximum": 1 },
+        "stderr_cm_per_year": { "type": "number", "minimum": 0 }
+      }
+    },
+    "series": {
+      "type": "array",
+      "minItems": 12,
+      "items": {
+        "type": "object",
+        "required": ["date", "tws_cm"],
+        "additionalProperties": false,
+        "properties": {
+          "date": { "type": "string", "format": "date" },
+          "tws_cm": { "type": "number" },
+          "uncertainty_cm": { "type": "number", "minimum": 0 }
+        }
+      }
+    },
+    "data_gaps": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 },
+      "description": "Must state at least: total storage not groundwater; regional (~300 km) resolution."
+    }
+  }
+}
