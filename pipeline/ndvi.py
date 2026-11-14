@@ -26,7 +26,8 @@ from rasterio.features import rasterize
 
 from pipeline.config import INTERIM, Config
 
-PC = "https://planetarycomputer.microsoft.com/api/stac/v1"
+PC_ROOT = "https://planetarycomputer.microsoft.com"
+PC = f"{PC_ROOT}/api/stac/v1"
 COLLECTION = "modis-13Q1-061"
 NDVI_ASSET = "250m_16_days_NDVI"
 QA_ASSET = "250m_16_days_VI_Quality"
@@ -35,6 +36,16 @@ NDVI_FILL = -3000
 BARE_NDVI_MAX = 0.30
 MIN_BARE_COMPOSITES = 2  # one 16-day composite below threshold is weather noise
 QA_MAX_OK = 1  # SummaryQA bits 0-1: 0 good, 1 marginal, 2 snow/ice, 3 cloudy
+
+# Per-composite cache. A full 2008-2025 run is ~414 composites x 2 assets and does not fit
+# in one execution window, so each finished composite is appended here and later runs skip
+# it. Keyed by field_id so a changed field set invalidates naturally.
+CACHE_NAME = "composite_means.jsonl"
+
+# The SAS signing endpoint rate-limits (HTTP 429). Pace calls and back off on 429 rather
+# than treating it as a per-asset failure, which silently drops composites.
+SIGN_MIN_INTERVAL_S = 0.35
+_last_sign_at = 0.0
 
 # Signed URLs are reusable for the whole run; re-signing per read is what trips the
 # endpoint into transient 404s under bursts.
@@ -49,25 +60,44 @@ def _get(url: str, data: bytes | None = None, timeout: float = 120.0) -> dict:
         return json.load(response)
 
 
-def search_items(cfg: Config, *, start: str, end: str, limit: int = 500) -> list[dict]:
-    """All MOD13Q1 items intersecting the region over [start, end)."""
-    query = {
-        "collections": [COLLECTION],
-        "bbox": list(cfg.region.bbox),
-        "datetime": f"{start}/{end}",
-        "limit": 100,
-    }
-    url = f"{PC}/search"
+def search_items(cfg: Config, *, start: str, end: str, limit: int = 2000) -> list[dict]:
+    """All MOD13Q1 items intersecting the region over [start, end).
+
+    Queried one year at a time on purpose. PC's POST search returns a ``next`` link with no
+    token and no pagination field, so a single wide query silently stops at the first page
+    (100 items); following the link with GET drops the bbox filter and returns the whole
+    planet. A year is ~23 composites, comfortably under the page limit.
+    """
+    from shapely.geometry import box, shape
+
+    first_year = int(start[:4])
+    last_year = int(end[:4])
+    region = box(*cfg.region.bbox)
     items: list[dict] = []
-    while url and len(items) < limit:
-        page = _get(url, data=json.dumps(query).encode() if url == f"{PC}/search" else None)
-        items.extend(page.get("features", []))
-        url = next(
-            (link["href"] for link in page.get("links", []) if link.get("rel") == "next"), None
-        )
-        if url and "limit" not in url:
-            url += "&limit=100"
-    return items[:limit]
+    for year in range(first_year, last_year + 1):
+        query = {
+            "collections": [COLLECTION],
+            "bbox": list(cfg.region.bbox),
+            "datetime": f"{year}-01-01/{year}-12-31",
+            "limit": 100,
+        }
+        page = _get(f"{PC}/search", data=json.dumps(query).encode())
+        for item in page.get("features", []):
+            geometry = item.get("geometry")
+            if geometry and not shape(geometry).intersects(region):
+                continue
+            items.append(item)
+
+    # Terra only: the collection also serves Aqua (MYD13Q1), whose composites interleave
+    # with Terra's and whose assets this signing endpoint does not sign.
+    items = [item for item in items if item["id"].startswith("MOD13Q1")]
+    # One granule per composite date: reprocessed versions share a date and would
+    # otherwise be counted twice.
+    items.sort(key=item_date)
+    unique: dict[str, dict] = {}
+    for item in items:
+        unique.setdefault(item_date(item), item)
+    return list(unique.values())[:limit]
 
 
 def item_date(item: dict) -> str:
@@ -80,36 +110,60 @@ def item_date(item: dict) -> str:
 def sign(href: str, *, retries: int = 4) -> str:
     """SAS-sign an asset URL (anonymous, no account required).
 
-    The signing endpoint intermittently 404s on assets it has just listed, so retry a
-    couple of times before treating it as a real failure.
+    NOTE: the signing API lives at the host root, not under /api/stac/v1 — building it from
+    the STAC base URL yields a 404 that looks exactly like a missing asset.
     """
+    global _last_sign_at
     cached = _SIGNED.get(href)
     if cached:
         return cached
-    url = f"{PC}/api/sas/v1/sign?href={urllib.parse.quote(href, safe='')}"
+    url = f"{PC_ROOT}/api/sas/v1/sign?href={urllib.parse.quote(href, safe='')}"
     last: Exception | None = None
     for attempt in range(retries):
+        wait = SIGN_MIN_INTERVAL_S - (time.monotonic() - _last_sign_at)
+        if wait > 0:
+            time.sleep(wait)
         try:
             signed = _get(url)["href"]
             _SIGNED[href] = signed
             return signed
         except urllib.error.HTTPError as err:
             last = err
-            if err.code != 404:
+            if err.code not in (404, 429):
                 raise
-            time.sleep(2.0 * (attempt + 1) ** 2)  # 2 s, 8 s, 18 s
+            retry_after = err.headers.get("Retry-After") if err.headers else None
+            try:
+                delay = float(retry_after)
+            except (TypeError, ValueError):
+                delay = 5.0 * (attempt + 1)
+            time.sleep(min(delay, 60.0))
+        finally:
+            _last_sign_at = time.monotonic()
     raise RuntimeError(f"could not sign {href[:80]}") from last
 
 
 def read_band(url: str, bounds: tuple[float, float, float, float], dtype: str = "int16"):
-    """Read just the window covering bounds; returns (array, transform, crs)."""
+    """Read just the window covering WGS84 ``bounds``; returns (array, transform, crs).
+
+    The bounds are lon/lat but MOD13Q1 is in MODIS sinusoidal metres, so they must be
+    reprojected before the pixel window is computed — otherwise the window is empty.
+    """
+    from rasterio.warp import transform_bounds
     from rasterio.windows import from_bounds
 
-    with rasterio.open(url) as src:
-        window = from_bounds(*bounds, transform=src.transform)
-        arr = src.read(1, window=window, boundless=True, fill_value=0)
-        transform = src.window_transform(window)
-        return arr.astype(dtype), transform, src.crs
+    # Without these, GDAL probes the remote COG with directory listings on every open,
+    # which dominates the runtime across hundreds of composites.
+    with rasterio.Env(
+        GDAL_DISABLE_READDIR_ON_OPEN="EMPTY_DIR",
+        CPL_VSIL_CURL_ALLOWED_EXTENSIONS=".tif",
+        GDAL_HTTP_MULTIPLEX="YES",
+    ):
+        with rasterio.open(url) as src:
+            native = transform_bounds("EPSG:4326", src.crs, *bounds)
+            window = from_bounds(*native, transform=src.transform)
+            arr = src.read(1, window=window, boundless=True, fill_value=0)
+            transform = src.window_transform(window)
+            return arr.astype(dtype), transform, src.crs
 
 
 def field_means(labels: np.ndarray, values: np.ndarray, n_fields: int) -> np.ndarray:
@@ -122,25 +176,78 @@ def field_means(labels: np.ndarray, values: np.ndarray, n_fields: int) -> np.nda
     return means
 
 
-def ndvi_series(
-    fields: list[dict], cfg: Config, years: list[int], *, progress: bool = False
-) -> tuple[np.ndarray, list[str]]:
-    """NDVI per field per 16-day composite. Returns (n_fields x n_dates, date strings)."""
-    items = search_items(cfg, start=f"{years[0]}-01-01", end=f"{years[-1]}-12-31")
-    items.sort(key=lambda item: item_date(item))
-    bounds = cfg.region.bbox
+def load_cache(cfg: Config) -> dict[str, dict]:
+    """date -> {"field_id": mean} from previous runs."""
+    from pipeline.config import RAW
 
-    labels = None
-    values = []
-    dates = []
-    for idx, item in enumerate(items):
+    path = RAW / "ndvi" / CACHE_NAME
+    if not path.exists():
+        return {}
+    out: dict[str, dict] = {}
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        row = json.loads(line)
+        out[row["date"]] = row["fields"]
+    return out
+
+
+def append_cache(cfg: Config, date: str, means: dict[str, float | None]) -> None:
+    from pipeline.config import RAW
+
+    path = RAW / "ndvi" / CACHE_NAME
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a", encoding="utf-8") as fh:
+        fh.write(json.dumps({"date": date, "fields": means}) + "\n")
+
+
+def ndvi_series(
+    fields: list[dict],
+    cfg: Config,
+    years: list[int],
+    *,
+    progress: bool = False,
+    force: bool = False,
+) -> tuple[np.ndarray, list[str]]:
+    """NDVI per field per composite, newest composites first.
+
+    Resumable and rate-limit aware: composites already cached are skipped, and the newest
+    uncached ones are fetched first so a partial run still covers the recent years that the
+    passport actually shows.
+    """
+    items = search_items(cfg, start=f"{years[0]}-01-01", end=f"{years[-1]}-12-31")
+    field_ids = [f["properties"]["field_id"] for f in fields]
+    cache = {} if force else load_cache(cfg)
+
+    results: dict[str, list[float]] = {}
+    todo: list[dict] = []
+    for item in items:
         if NDVI_ASSET not in item["assets"]:
             continue
+        date = item_date(item)
+        cached = cache.get(date)
+        if cached and all(fid in cached for fid in field_ids):
+            results[date] = [cached.get(fid, np.nan) for fid in field_ids]
+        else:
+            todo.append(item)
+    todo.sort(key=item_date, reverse=True)
+
+    if progress:
+        already = len(results)
+        print(f"[ndvi] {already} cached, {len(todo)} to fetch (newest first)", flush=True)
+
+    labels = None
+    for idx, item in enumerate(todo):
+        date = item_date(item)
         try:
-            ndvi_raw, transform, crs = read_band(sign(item["assets"][NDVI_ASSET]["href"]), bounds)
-            qa_raw, _, _ = read_band(sign(item["assets"][QA_ASSET]["href"]), bounds)
+            signed_ndvi = sign(item["assets"][NDVI_ASSET]["href"])
+            # One signature covers the whole container, so the QA band rides on it.
+            query = signed_ndvi.split("?", 1)[1] if "?" in signed_ndvi else ""
+            qa_url = item["assets"][QA_ASSET]["href"] + (f"?{query}" if query else "")
+            ndvi_raw, transform, crs = read_band(signed_ndvi, cfg.region.bbox)
+            qa_raw, _, _ = read_band(qa_url, cfg.region.bbox)
         except Exception as err:  # noqa: BLE001 - one bad composite must not kill the run
-            print(f"[ndvi] skip {item['id']}: {type(err).__name__}")
+            print(f"[ndvi] skip {item['id']}: {type(err).__name__} {str(err)[:70]}", flush=True)
             continue
         if labels is None:
             from rasterio.warp import transform_geom
@@ -150,21 +257,26 @@ def ndvi_series(
                 for i, f in enumerate(fields)
             ]
             labels = rasterize(
-                shapes,
-                out_shape=ndvi_raw.shape,
-                transform=transform,
-                fill=0,
-                dtype="int32",
+                shapes, out_shape=ndvi_raw.shape, transform=transform, fill=0, dtype="int32"
             )
         ndvi = np.where(ndvi_raw == NDVI_FILL, np.nan, ndvi_raw * NDVI_SCALE)
-        qa = qa_raw & 0b11
-        ndvi = np.where(qa <= QA_MAX_OK, ndvi, np.nan)
-        values.append(field_means(labels, ndvi, len(fields)))
-        dates.append(item_date(item))
-        if progress and idx % 50 == 0:
-            print(f"[ndvi] {idx}/{len(items)} composites")
+        ndvi = np.where((qa_raw & 0b11) <= QA_MAX_OK, ndvi, np.nan)
+        means = field_means(labels, ndvi, len(fields))
+        results[date] = list(means[1:])
+        append_cache(
+            cfg,
+            date,
+            {
+                fid: (None if not np.isfinite(means[i + 1]) else round(float(means[i + 1]), 4))
+                for i, fid in enumerate(field_ids)
+            },
+        )
+        if progress and idx % 10 == 0:
+            print(f"[ndvi] {idx + 1}/{len(todo)} fetched ({date})", flush=True)
 
-    return np.array(values).T, dates  # shape (n_fields, n_dates)
+    dates = sorted(results)
+    series = np.array([results[d] for d in dates], dtype=float).T
+    return series, dates
 
 
 def bare_periods(

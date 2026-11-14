@@ -20,7 +20,7 @@ cross-team needs under **Blockers / requests**.
 | `done` simplified RUSLE (R from POWER precip, K, LS, C)  | `done` CDL 2008–2025 clip to Finney + field polygons        | `done` passport: timeline of bare/stress windows                |
 | `done` soil-conditioning index (residue, OM, tillage)    | `done` SSURGO soil props per field (texture, OM, K, AWC)    | `done` strategy comparison: interval chart per metric           |
 | `done` income model (price source per crop, placeholder) | `done` SRTM slope per field                                 | `done` P(best) + "verify locally" box copy                      |
-| `→P3` MCDA + Dirichlet weights, P(best) in export       | `todo` MODIS NDVI → bare-soil periods per field-year        | `done` mobile layout / accessibility pass                       |
+| `→P3` MCDA + Dirichlet weights, P(best) in export       | `done` MODIS NDVI → bare-soil periods per field-year        | `done` mobile layout / accessibility pass                       |
 | `done` `engine.export` → contracts format                | `todo` SMAP soil moisture → water-stress windows            | `done` "about the data" / uncertainty page                      |
 | `todo` pitch deck + demo script                          | `done` heat-stress windows (POWER Tmax > threshold)         | `done` deploy static build                                      |
 | `todo` pitch only (rest reassigned to person 3, 2026-11-14)  |                                                             | `todo` (from P1) P(best): close as "computed live in web", keep `engine/mcda.py` in sync with `src/lib/ranking.ts` |
