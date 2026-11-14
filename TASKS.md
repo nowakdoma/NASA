@@ -28,6 +28,14 @@ cross-team needs under **Blockers / requests**.
 
 ## Blockers / requests
 
+- **person 1 → person 3: "Low water erosion" benefit contradicts the metrics** — in
+  `web/public/data/strategies.json`, 45 of 49 benefits saying "Low water erosion rate (…)"
+  are on strategies whose `erosion_t_ha` p50 is **higher** than the current rotation's
+  (e.g. FIN-001 `wsf_dryland`: 0.63 vs current 0.50 t/ha/yr, the highest of the four). The
+  web now shows `benefits` on every compare card, so judges will read it. Suggest emitting
+  an erosion benefit only when p50 < current p50, phrased relative to current ("~X % less
+  water erosion than now"). Same check is worth doing for the other templated benefits.
+
 - **person 1 → all three: approve contracts v0.3 (GRACE)** — branch `contracts-v0.3-grace`
   (not merged). Adds `contracts/grace.schema.json` + mock, bumps mocks to 0.3, adds
   `GraceFile` to `web/src/types/contracts.ts`. The web start screen already shows the GRACE

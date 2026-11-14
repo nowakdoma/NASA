@@ -1,4 +1,4 @@
-import type { MetricKey, MetricMeta } from '../types/contracts';
+import type { MetricKey, MetricMeta, Strategy } from '../types/contracts';
 import type { RankedStrategy } from '../lib/ranking';
 import { cropLabel } from '../lib/colors';
 import {
@@ -16,6 +16,35 @@ interface Props {
   presetLabel: string;
   waterLimitIn: WaterLimitIn;
   onOpenAbout: () => void;
+}
+
+/** Soil-health traits from the engine (brief: N-fixing, pest-cycle break, forage). Only
+ *  traits a rotation has are shown, so a missing chip never reads as a negative claim. */
+function TraitChips({ s }: { s: Strategy }) {
+  const t = s.soil_health_traits;
+  if (!t) return null;
+  const chips: { label: string; title: string }[] = [];
+  if (t.n_fixing_years > 0)
+    chips.push({
+      label: `Fixes nitrogen · ${t.n_fixing_years} of ${s.rotation.length} yrs`,
+      title: 'Legume years that add nitrogen for the next crop',
+    });
+  if (t.pest_break)
+    chips.push({
+      label: 'Breaks pest cycles',
+      title: 'Two or more crop families, so pests and weeds adapted to one crop lose their host',
+    });
+  if (t.forage) chips.push({ label: 'Forage', title: 'Produces hay, silage or grazing' });
+  if (!chips.length) return null;
+  return (
+    <ul className="trait-chips" aria-label="Soil-health traits">
+      {chips.map((c) => (
+        <li key={c.label} title={c.title}>
+          {c.label}
+        </li>
+      ))}
+    </ul>
+  );
 }
 
 const SHOWN: MetricKey[] = ['water_use_mm', 'income_usd_ha', 'erosion_t_ha'];
@@ -86,7 +115,13 @@ export function CompareStep({
                 </span>
               </div>
               <div className="card-seq">{s.rotation.map(cropLabel).join(' → ')}</div>
-              {s.description && <p className="card-why">{s.description}</p>}
+              {(s.why_considered ?? s.description) && (
+                <p className="card-why">
+                  <span className="card-why-label">Why it's here: </span>
+                  {s.why_considered ?? s.description}
+                </p>
+              )}
+              <TraitChips s={s} />
               {flag && (
                 <p className="card-flag" role="note">
                   ⚠ {WATER_FLAG_TEXT[flag]}
@@ -131,7 +166,20 @@ export function CompareStep({
               </div>
 
               <details className="card-details">
-                <summary>Check locally, evidence and what we don't know</summary>
+                <summary>
+                  {s.benefits?.length ? 'Benefits, ' : ''}what to check locally and what we don't
+                  know
+                </summary>
+                {s.benefits && s.benefits.length > 0 && (
+                  <div className="card-benefits">
+                    <h4>Benefits</h4>
+                    <ul>
+                      {s.benefits.map((b) => (
+                        <li key={b}>{b}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
                 <div className="card-details-grid">
                   <div>
                     <h4>Check locally</h4>

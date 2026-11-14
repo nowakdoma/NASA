@@ -935,3 +935,41 @@
     display: none;
   }
 }
+
+.card-why-label {
+  font-weight: 600;
+}
+
+.trait-chips {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.trait-chips li {
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--primary-light);
+  color: #1f5e78;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.card-benefits {
+  font-size: 0.82rem;
+  line-height: 1.45;
+  margin-bottom: 10px;
+}
+
+.card-benefits h4 {
+  margin: 0 0 2px;
+  font-size: 0.85rem;
+}
+
+.card-benefits ul {
+  margin: 0;
+  padding-left: 16px;
+}
