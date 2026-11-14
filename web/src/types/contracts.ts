@@ -1,4 +1,4 @@
-// Hand-written mirror of contracts/*.schema.json (v0.1).
+// Hand-written mirror of contracts/*.schema.json (v0.3).
 // Change only together with the schemas (human approval required, see AGENTS.md).
 
 export type CropCode = string;
@@ -111,4 +111,16 @@ export interface StrategiesFile {
   weather_years: [number, number];
   metric_meta: Record<MetricKey, MetricMeta>;
   fields: Record<string, Strategy[]>;
+}
+
+/** contracts/grace.schema.json (v0.3): regional TOTAL water storage, not groundwater. */
+export interface GraceFile {
+  schema_version: string;
+  mock?: boolean;
+  source: string;
+  units: string;
+  region: { name: string; fips: string; bbox: [number, number, number, number] };
+  trend: { cm_per_year: number; r2: number; stderr_cm_per_year?: number };
+  series: { date: string; tws_cm: number; uncertainty_cm?: number }[];
+  data_gaps: string[];
 }

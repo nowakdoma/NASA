@@ -1,4 +1,6 @@
-import type { FieldCollection, StrategiesFile } from '../types/contracts';
+import type { FieldCollection, GraceFile, StrategiesFile } from '../types/contracts';
+
+export type { GraceFile };
 
 const BASE = `${import.meta.env.BASE_URL}data`;
 
@@ -6,15 +8,6 @@ async function getJson<T>(path: string): Promise<T> {
   const res = await fetch(`${BASE}/${path}`);
   if (!res.ok) throw new Error(`Failed to load ${path}: ${res.status}`);
   return (await res.json()) as T;
-}
-
-/** Optional regional context from pipeline/grace.py (not yet in contracts/ — see TASKS.md). */
-export interface GraceFile {
-  source: string;
-  units: string;
-  trend: { cm_per_year: number; r2: number };
-  series: { date: string; tws_cm: number; uncertainty_cm?: number }[];
-  data_gaps?: string[];
 }
 
 export interface AppData {

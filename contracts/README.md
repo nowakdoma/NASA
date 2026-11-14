@@ -1,15 +1,17 @@
 # contracts/ — the integration point
 
 Everything that crosses a team boundary is defined here. **Changes need explicit approval
-from all three humans** (see `AGENTS.md`). Current version: **0.2**.
+from all three humans** (see `AGENTS.md`). Current version: **0.3** (proposal, pending approval).
 
-| File                     | Producer                     | Consumer          |
-| ------------------------ | ---------------------------- | ----------------- |
-| `fields.schema.json`     | pipeline → engine.export     | web               |
-| `strategies.schema.json` | engine.export                | web               |
-| `crops.csv`              | humans (person 1)            | engine, pipeline  |
-| `mock/fields.geojson`    | hand-tuned, `"mock": true`   | web, tests        |
-| `mock/strategies.json`   | hand-tuned, `"mock": true`   | web, tests        |
+| File                            | Producer                         | Consumer           |
+| ------------------------------- | -------------------------------- | ------------------ |
+| `fields.schema.json`            | pipeline → engine.export         | web                |
+| `strategies.schema.json`        | engine.export                    | web                |
+| `crops.csv`                     | humans (person 1)                | engine, pipeline   |
+| `mock/fields.geojson`           | hand-tuned, `"mock": true`       | web, tests         |
+| `mock/strategies.json`          | hand-tuned, `"mock": true`       | web, tests         |
+| `grace.schema.json`             | pipeline/grace.py → export       | web (start screen) |
+| `mock/grace_water_storage.json` | yearly subsample, `"mock": true` | web, tests         |
 
 Validate: `uv run python -m engine.validate [fields.geojson strategies.json]` (defaults to
 the mocks). Same checks run on `web/public/data/` in `make check`.
@@ -56,3 +58,12 @@ water use for those years; they are `placeholder=true` and say so in `source`.
 
 Non-crop CDL classes (shrubland 152, developed, water) are deliberately **not** added: a
 year of shrubland is not a crop, and coercing it to one would falsify the rotation.
+
+### v0.3 — regional water-storage trend (GRACE/GRACE-FO) — proposal
+
+Adds `grace.schema.json` for `grace_water_storage.json` (written by `pipeline grace`), so the
+web start screen can show the NASA groundwater story with a validated file. The file is
+**total** water storage on ~300 km mascons: `data_gaps` must say so, and the UI labels it
+"regional signal, not your well". Extra keys from the pipeline (`baseline`, `period`,
+`trend_last_10_years`, …) are allowed. Needs: pipeline writes `schema_version: "0.3"`;
+`engine.export` copies the file to `web/public/data/` and `engine.validate` checks it.
