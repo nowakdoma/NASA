@@ -16,7 +16,7 @@ cross-team needs under **Blockers / requests**.
 | Person 1 — engine / design / pitch                       | Person 2 — pipeline                                         | Person 3 — web                                                  |
 | -------------------------------------------------------- | ----------------------------------------------------------- | --------------------------------------------------------------- |
 | `done` scaffold, contracts v0.1, mocks                   | `todo` Earthdata login + `.env`                             | `done` scaffold renders mocks                                   |
-| `todo` FAO-56 ET0 (POWER daily) + Kc curves → water_use  | `todo` NASA POWER daily 1995–2025 for county centroid       | `todo` map polish: legend, hover tooltip, county outline        |
+| `todo` FAO-56 ET0 (POWER daily) + Kc curves → water_use  | `done` NASA POWER daily 1995–2025 for county centroid       | `todo` map polish: legend, hover tooltip, county outline        |
 | `todo` simplified RUSLE (R from POWER precip, K, LS, C)  | `todo` CDL 2008–2025 clip to Finney + field polygons        | `todo` passport: timeline of bare/stress windows                |
 | `todo` soil-conditioning index (residue, OM, tillage)    | `todo` SSURGO soil props per field (texture, OM, K, AWC)    | `todo` strategy comparison: interval chart per metric           |
 | `todo` income model (price source per crop, placeholder) | `todo` SRTM slope per field                                 | `todo` P(best) + "verify locally" box copy                      |
@@ -26,7 +26,12 @@ cross-team needs under **Blockers / requests**.
 
 ## Blockers / requests
 
-- _(none yet)_
+- **pipeline (person 2):** raster work (CDL zonal-majority, SSURGO, SRTM slope) needs
+  `rasterio` + `pyproj`/`shapely` added to `pyproject.toml`. AGENTS.md bans new deps without
+  human sign-off, so CDL/SSURGO/SRTM/NDVI/SMAP stay `NotImplementedError` until approved.
+  Interim `data/interim/*.csv` can be produced with stdlib + pandas only.
+- **pipeline:** MODIS NDVI + SMAP + SRTM downloads need `EARTHDATA_USERNAME` /
+  `EARTHDATA_PASSWORD` in `.env`. POWER needs no login and is done.
 
 ## Decisions log
 
