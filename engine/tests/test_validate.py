@@ -83,6 +83,17 @@ def test_grace_dates_not_chronological_detected(tmp_path):
     assert any("chronological" in e for e in errs)
 
 
+def test_grace_duplicate_dates_detected(tmp_path):
+    fields, strategies = _mocks()
+    f, s = _write(tmp_path, fields, strategies)
+    grace = _grace_mock()
+    grace["series"][1]["date"] = grace["series"][0]["date"]
+    g = tmp_path / "grace_water_storage.json"
+    g.write_text(json.dumps(grace))
+    errs = validate_all(f, s, g)
+    assert any("duplicate dates" in e or "chronological" in e for e in errs)
+
+
 def test_grace_fips_mismatch_detected(tmp_path):
     fields, strategies = _mocks()
     f, s = _write(tmp_path, fields, strategies)

@@ -124,7 +124,16 @@ def build(fields_path: Path, weather_path: Path | None = None) -> tuple[dict, di
 def export(out_dir: Path = WEB_DATA, fields_path: Path | None = None) -> list[str]:
     """Build, write and validate. Returns validation errors (empty = OK)."""
     mock_fields = CONTRACTS / "mock" / FILES[0]
-    src = fields_path or (INTERIM_FIELDS if INTERIM_FIELDS.exists() else mock_fields)
+    if fields_path:
+        src = fields_path
+    elif INTERIM_FIELDS.exists():
+        src = INTERIM_FIELDS
+    elif (out_dir / FILES[0]).exists() and not json.loads(
+        (out_dir / FILES[0]).read_text(encoding="utf-8")
+    ).get("mock", False):
+        src = out_dir / FILES[0]
+    else:
+        src = mock_fields
     print(f"fields: {src.relative_to(REPO_ROOT) if src.is_relative_to(REPO_ROOT) else src}")
     fields, strategies = build(src)
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -152,12 +161,13 @@ def export(out_dir: Path = WEB_DATA, fields_path: Path | None = None) -> list[st
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(prog="python -m engine.export", description=__doc__)
     ap.add_argument("--mock", action="store_true", help="copy contracts/mock/* instead")
+    ap.add_argument("--fields", type=Path, default=None, help="path to input fields.geojson")
     ap.add_argument("--out", type=Path, default=WEB_DATA)
     args = ap.parse_args(argv)
     if args.mock:
         export_mock(args.out)
         return 0
-    errors = export(args.out)
+    errors = export(args.out, fields_path=args.fields)
     for e in errors:
         print(e, file=sys.stderr)
     return 1 if errors else 0

@@ -80,8 +80,13 @@ def grace_semantic_errors(grace: dict, fields: dict | None = None) -> list[str]:
     errs: list[str] = []
     series = grace.get("series", [])
     dates = [r.get("date") for r in series if isinstance(r, dict)]
-    if dates and dates != sorted(dates):
-        errs.append("grace: series dates not strictly chronological")
+    if dates:
+        if len(dates) != len(set(dates)):
+            errs.append("grace: series contains duplicate dates")
+        if dates != sorted(dates) or any(
+            d1 >= d2 for d1, d2 in zip(dates[:-1], dates[1:], strict=False)
+        ):
+            errs.append("grace: series dates not strictly chronological")
     if fields is not None:
         county_fips = fields.get("county", {}).get("fips")
         grace_fips = grace.get("region", {}).get("fips")
