@@ -16,6 +16,7 @@ import rasterio
 from pipeline.config import INTERIM, RAW, Config
 from pipeline.fields import cdl_tif
 from pipeline.net import download
+from pipeline.terrain import fetch_srtm as terrain_fetch_srtm
 
 # POWER daily point API: one row per day, DOY-indexed, no date column.
 POWER_URL = "https://power.larc.nasa.gov/api/temporal/daily/point"
@@ -152,9 +153,9 @@ def fetch_smap(cfg: Config) -> None:
     raise NotImplementedError
 
 
-def fetch_srtm(cfg: Config) -> None:
-    """SRTM GL1 30 m DEM (Earthdata) -> slope per field."""
-    raise NotImplementedError
+def fetch_srtm(cfg: Config, *, force: bool = False) -> list[Path]:
+    """SRTM GL1 30 m DEM for the region — public skadi bucket, no credentials needed."""
+    return terrain_fetch_srtm(cfg, force=force)
 
 
 def fetch_cdl(cfg: Config, *, force: bool = False) -> list[Path]:
