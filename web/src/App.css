@@ -1,0 +1,261 @@
+:root {
+  --bg: #f7f7f4;
+  --fg: #1f2420;
+  --muted: #69706a;
+  --panel: #ffffff;
+  --border: #dde0da;
+  --accent: #5b8c5a;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
+  color: var(--fg);
+  background: var(--bg);
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+.status {
+  padding: 2rem;
+}
+.status.error {
+  color: #a11;
+}
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.app-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.app-header h1 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+.subtitle {
+  color: var(--muted);
+}
+.badge-mock {
+  background: #f3c33b;
+  padding: 0.1rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.app-main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 440px);
+  min-height: 0;
+}
+.map-col {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+}
+.map {
+  flex: 1;
+  min-height: 300px;
+}
+.map-controls {
+  padding: 0.5rem 1rem;
+  border-top: 1px solid var(--border);
+  background: var(--panel);
+}
+.year-slider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.year-slider input {
+  flex: 1;
+}
+.legend {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  font-size: 0.8rem;
+}
+.swatch {
+  display: inline-block;
+  width: 0.8rem;
+  height: 0.8rem;
+  margin-right: 0.3rem;
+  border: 1px solid #0003;
+  vertical-align: middle;
+}
+.side-col {
+  overflow-y: auto;
+  border-left: 1px solid var(--border);
+  padding: 0.5rem;
+}
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+.panel h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1.1rem;
+}
+.panel h3 {
+  margin: 0.75rem 0 0.35rem;
+  font-size: 0.95rem;
+}
+.panel h3:first-child {
+  margin-top: 0;
+}
+.muted {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.history-strip {
+  display: grid;
+  grid-template-columns: repeat(18, 1fr);
+  gap: 2px;
+}
+.history-cell {
+  font-size: 0.6rem;
+  text-align: center;
+  padding: 0.3rem 0;
+  border-radius: 2px;
+}
+.history-cell.current {
+  outline: 2px solid var(--fg);
+}
+.kv {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.15rem 0.75rem;
+  margin: 0;
+  font-size: 0.85rem;
+}
+.kv dt {
+  color: var(--muted);
+}
+.kv dd {
+  margin: 0;
+}
+.windows {
+  padding-left: 1rem;
+  font-size: 0.85rem;
+}
+.tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  padding: 0 0.35rem;
+  margin: 0 0.3rem;
+  border-radius: 3px;
+  background: #e5e8e2;
+}
+.tag.bare {
+  background: #e8dcc0;
+}
+.tag.water {
+  background: #cfe0f5;
+}
+.tag.heat {
+  background: #f5d2c8;
+}
+.priority {
+  display: grid;
+  grid-template-columns: 9rem 1fr 1.5rem;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+}
+.strategy-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+.strategy-table th,
+.strategy-table td {
+  text-align: left;
+  padding: 0.3rem 0.25rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.strategy-table tr.current td:first-child {
+  font-weight: 600;
+}
+.pbest {
+  position: relative;
+  width: 5rem;
+  height: 1.1rem;
+  background: #eef0ea;
+  border-radius: 3px;
+}
+.pbest-bar {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--accent);
+  opacity: 0.6;
+  border-radius: 3px;
+}
+.pbest span {
+  position: relative;
+  padding-left: 0.3rem;
+  font-size: 0.75rem;
+}
+.note {
+  font-size: 0.85rem;
+  background: #f1f5ee;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+.metric-chart {
+  margin-top: 0.5rem;
+}
+.metric-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.unknowns {
+  margin-top: 0.75rem;
+  background: #fff8e6;
+  border: 1px solid #f0dca8;
+  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.82rem;
+}
+.unknowns h4 {
+  margin: 0.4rem 0 0.2rem;
+}
+.unknowns ul {
+  margin: 0;
+  padding-left: 1rem;
+}
+.hint {
+  padding: 1rem;
+}
+@media (max-width: 800px) {
+  .app {
+    height: auto;
+  }
+  .app-main {
+    grid-template-columns: 1fr;
+  }
+  .map {
+    height: 55vh;
+  }
+  .side-col {
+    border-left: 0;
+  }
+}

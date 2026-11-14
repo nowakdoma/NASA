@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fieldshift.local/contracts/strategies.schema.json",
+  "title": "FieldShift rotation strategies per field",
+  "description": "For every field_id: exactly 4 strategies (1 current + 3 alternatives). Each metric is a distribution summary over simulated weather years (p10/p50/p90). Produced by engine.export, read by web/. These are decision-support scenarios, not recommendations.",
+  "type": "object",
+  "required": ["schema_version", "generated_by", "weather_years", "metric_meta", "fields"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "type": "string", "pattern": "^\\d+\\.\\d+$" },
+    "mock": { "type": "boolean" },
+    "generated_by": { "type": "string", "description": "Tool + version/commit that produced the file" },
+    "generated_at": { "type": "string" },
+    "weather_years": {
+      "description": "Inclusive [first, last] weather years sampled for the intervals.",
+      "type": "array",
+      "items": { "type": "integer" },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "metric_meta": {
+      "description": "Units and direction for each metric. 'higher' = higher is better for the farmer.",
+      "type": "object",
+      "required": ["water_use_mm", "erosion_t_ha", "soil_index", "income_usd_ha", "labour_index"],
+      "additionalProperties": false,
+      "properties": {
+        "water_use_mm": { "$ref": "#/$defs/meta" },
+        "erosion_t_ha": { "$ref": "#/$defs/meta" },
+        "soil_index": { "$ref": "#/$defs/meta" },
+        "income_usd_ha": { "$ref": "#/$defs/meta" },
+        "labour_index": { "$ref": "#/$defs/meta" }
+      }
+    },
+    "fields": {
+      "type": "object",
+      "propertyNames": { "pattern": "^[A-Z]{3}-\\d{3}$" },
+      "additionalProperties": {
+        "type": "array",
+        "minItems": 4,
+        "maxItems": 4,
+        "items": { "$ref": "#/$defs/strategy" }
+      }
+    }
+  },
+  "$defs": {
+    "meta": {
+      "type": "object",
+      "required": ["label", "unit", "better"],
+      "additionalProperties": false,
+      "properties": {
+        "label": { "type": "string" },
+        "unit": { "type": "string" },
+        "better": { "enum": ["higher", "lower"] },
+        "priority": {
+          "description": "Which farmer priority slider this metric feeds",
+          "enum": ["water", "income", "soil", "erosion", "labour"]
+        },
+        "description": { "type": "string" }
+      }
+    },
+    "interval": {
+      "description": "Quantiles across weather years. engine.validate checks p10 <= p50 <= p90.",
+      "type": "object",
+      "required": ["p10", "p50", "p90"],
+      "additionalProperties": false,
+      "properties": {
+        "p10": { "type": "number" },
+        "p50": { "type": "number" },
+        "p90": { "type": "number" }
+      }
+    },
+    "strategy": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "is_current",
+        "rotation",
+        "metrics",
+        "evidence",
+        "data_gaps",
+        "verify_locally"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "is_current": { "type": "boolean" },
+        "rotation": {
+          "description": "Crop sequence, one entry per season; crop codes from contracts/crops.csv.",
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" }
+        },
+        "metrics": {
+          "type": "object",
+          "required": ["water_use_mm", "erosion_t_ha", "soil_index", "income_usd_ha", "labour_index"],
+          "additionalProperties": false,
+          "properties": {
+            "water_use_mm": {
+              "$ref": "#/$defs/interval",
+              "description": "Irrigation water applied, mm/yr averaged over the rotation (lower better)"
+            },
+            "erosion_t_ha": {
+              "$ref": "#/$defs/interval",
+              "description": "Simplified RUSLE soil loss, t/ha/yr (lower better)"
+            },
+            "soil_index": {
+              "$ref": "#/$defs/interval",
+              "description": "Soil-conditioning index proxy for SOM trend, -1..1 (higher better)"
+            },
+            "income_usd_ha": {
+              "$ref": "#/$defs/interval",
+              "description": "Net return over variable costs, USD/ha/yr (higher better)"
+            },
+            "labour_index": {
+              "$ref": "#/$defs/interval",
+              "description": "Relative labour/management load, 0..1 (lower better)"
+            }
+          }
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["dataset", "note"],
+            "additionalProperties": false,
+            "properties": {
+              "dataset": { "type": "string" },
+              "note": { "type": "string" },
+              "url": { "type": "string" }
+            }
+          }
+        },
+        "data_gaps": { "type": "array", "items": { "type": "string" } },
+        "verify_locally": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

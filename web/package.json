@@ -1,0 +1,37 @@
+{
+  "name": "fieldshift-web",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -b --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check:data": "node scripts/check-mocks.mjs"
+  },
+  "dependencies": {
+    "@deck.gl/core": "9.0.38",
+    "@deck.gl/layers": "9.0.38",
+    "@deck.gl/mapbox": "9.0.38",
+    "maplibre-gl": "4.7.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "recharts": "2.15.0"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.18",
+    "@types/react-dom": "18.3.5",
+    "@vitejs/plugin-react": "4.3.4",
+    "ajv": "8.17.1",
+    "prettier": "3.4.2",
+    "typescript": "5.7.2",
+    "vite": "6.0.7"
+  }
+}

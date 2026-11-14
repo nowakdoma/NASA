@@ -1,0 +1,29 @@
+# secrets
+.env
+!.env.example
+
+# data (raw + interim never committed)
+data/*
+!data/.gitkeep
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+.ipynb_checkpoints/
+
+# web
+web/node_modules/
+web/dist/
+web/*.tsbuildinfo
+node_modules/
+
+# os / editors
+.DS_Store
+Thumbs.db
+*:Zone.Identifier
+.idea/
+.vscode/

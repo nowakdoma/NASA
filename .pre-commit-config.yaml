@@ -1,0 +1,15 @@
+# Optional: `uv run pre-commit install` (done by `make setup`).
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.4
+    hooks:
+      - id: ruff
+      - id: ruff-format
+  - repo: local
+    hooks:
+      - id: prettier
+        name: prettier (web)
+        language: system
+        entry: bash -c 'cd web && pnpm exec prettier --check "${@#web/}"' --
+        files: ^web/.*\.(ts|tsx|css|json|html|mjs)$
+        exclude: ^web/public/data/
