@@ -82,20 +82,20 @@ cross-team needs under **Blockers / requests**.
   - GPM IMERG (optional, item 3) not done — say the word.
   - **`Makefile` needs `grace`, `groundwater` and `frost` added to `PIPELINE_STEPS`** (root
     file, yours) or `make data` will not produce them.
-- **pipeline: h5py added (approved) but GPM/SMAP status changed — read this before asking again.**
-  `h5py==3.16.0` is installed, so HDF5/HDF-EOS5 products are now *readable*. Two consequences,
-  both measured rather than assumed:
-  - **SMAP is out on volume, not readability.** A single SPL3SMP_E daily granule is **704 MB**
-    (measured, not the ~80 MB I guessed earlier), 1624 x 3856 x float32, so the 2002-2025
-    record would be ~4.6 TB. Even sampling summer months for 10 years is ~150 GB. The one day
-    I sampled (2022-07-05) also had **zero valid retrievals in the county box** — daily SMAP
-    at one location is patchy by swath. Water stress stays with the engine's FAO-56 balance.
-  - **GPM IMERG is blocked on authorisation, not data.** IMERG monthly is a sane 18 MB per
-    month, but `data.gesdisc.earthdata.nasa.gov` returns **401 with username/password and 403
-    with the EDL token** — the "NASA GES DISC" application is not authorised for this account,
-    unlike LP DAAC and NSIDC which work. Approve it at Earthdata Login -> Applications ->
-    Authorized Apps, then `python -m pipeline gpm` will work. Not built yet because I will not
-    write an HDF5 parser I cannot test against a real file.
+- **pipeline: SMAP and GPM IMERG are CLOSED — do not re-open without a new decision.**
+  Both were investigated to the point of a measured answer, and the team chose not to
+  pursue either (2026-11-14). The findings, so nobody repeats the work:
+  - **SMAP is out on volume.** One SPL3SMP_E daily granule is **704 MB** (measured: 1624 x
+    3856 float32, ~822k valid retrievals), so 2002-2025 would be ~4.6 TB. The sampled day
+    (2022-07-05) also had zero valid retrievals inside the county box — daily SMAP at one
+    location is patchy by swath. Water stress therefore stays with the engine's FAO-56
+    balance (`stress_days` from Ks < 1), which needs no SMAP.
+  - **GPM IMERG is blocked on authorisation, not data.** IMERG monthly is a workable 18 MB
+    per month, but GES DISC returns 401/403 for this account (MERRA-2 too, so it is
+    account-level): the "GES DISC" application is not approved at Earthdata Login. If it is
+    ever approved, the "satellite vs model" sentence becomes a small job.
+  - `h5py` was added for this work and **removed again** once both were dropped, so the
+    dependency allow-list stays truthful. Nothing imports it.
 - **person 1 → person 2: NASA-data depth for judging ("Relevance" criterion)** — the brief
   names SMAP, GPM, GRACE/GRACE-FO, ECOSTRESS, Landsat; we currently show POWER, MODIS, SRTM.
   In priority order, each as a small static JSON in `data/interim/` (person 1 wires the UI):
