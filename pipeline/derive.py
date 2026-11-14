@@ -18,6 +18,7 @@ import pandas as pd
 from pipeline.assemble import derive_fields_contract
 from pipeline.config import INTERIM, Config
 from pipeline.fields import derive_fields
+from pipeline.frost import derive_frost
 from pipeline.ndvi import derive_ndvi
 from pipeline.soil import derive_soil
 from pipeline.terrain import derive_terrain
@@ -143,6 +144,7 @@ def derive_heat_stress(cfg: Config) -> Path:
 
 DERIVATIONS = {
     "heat": derive_heat_stress,
+    "frost": derive_frost,
     "fields": derive_fields,
     "terrain": derive_terrain,
     "soil": derive_soil,
