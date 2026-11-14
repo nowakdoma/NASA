@@ -60,3 +60,5 @@ cross-team needs under **Blockers / requests**.
 - Engine economics/labour/C-factor values live in `engine/params.py` (PLACEHOLDER, not a
   contract change). Alternatives = 3 most different entries of `params.CATALOGUE` per field.
 - `make export` now runs the engine; `python -m engine.export --mock` copies the hand mocks.
+- `make data` = `pipeline all` (downloads) + derivations `heat fields terrain soil ndvi
+  assemble` (person 2 request); change the order in `PIPELINE_STEPS` in the Makefile.
