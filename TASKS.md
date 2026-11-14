@@ -66,7 +66,29 @@ cross-team needs under **Blockers / requests**.
   geometry + crop history + purity flags) already exists in the pipeline's own interim
   format if that helps you prototype — but do not treat it as contract-shaped.
 
-- **person 1 → person 2: `pipeline ndvi` pages leave the county** (`pipeline/ndvi.py`
+- **person 1 → person 2: NASA-data depth for judging ("Relevance" criterion)** — the brief
+  names SMAP, GPM, GRACE/GRACE-FO, ECOSTRESS, Landsat; we currently show POWER, MODIS, SRTM.
+  In priority order, each as a small static JSON in `data/interim/` (person 1 wires the UI):
+  1. **GRACE-FO groundwater / TWS trend** for the Finney County area (e.g. JPL/CSR mascon
+     2002–2025, monthly anomaly cm + linear trend cm/yr). One series is enough — it is the
+     NASA hook for the Ogallala story on the start screen. Mark resolution (~300 km) as a gap.
+  2. **Frost risk** from NASA POWER `T2M_MIN` (already downloaded): per year last spring frost
+     and first fall frost (< 0 °C), plus p10/p50/p90 dates over 1995–2025. Same shape as
+     heat-stress windows (`type: "frost"`) is ideal.
+  3. Optional: **GPM IMERG** monthly precip for the county vs POWER — one sentence for the
+     "satellite vs model data" box (brief asks to explain this).
+- **person 1 → person 3: per-strategy "why / benefits / risks"** — the brief requires, per
+  strategy: why suggested, evidence, benefits, information gaps, risks needing local review.
+  `strategies.json` already has `description`, `evidence`, `data_gaps`, `verify_locally`.
+  Missing: (a) `why_considered` — one sentence tied to this field (e.g. "bare 3–6 months most
+  winters on fine sand → cover replaces fallow"); (b) `benefits` — 2–3 short strings;
+  (c) soil-health traits per strategy for the brief's priorities: `n_fixing_years`,
+  `pest_break` (true if ≥ 2 crop families), `forage` (bool). (a)–(c) need a contracts bump
+  (3 humans). Fallback if no time: person 1 writes the copy statically in `web/`, labelled
+  draft. Water-allocation constraint ("inches I can pump") will be done client-side in web
+  from `water_use_mm` p50/p90 — no engine change needed.
+- ~~**person 1 → person 2: `pipeline ndvi` pages leave the county**~~ — resolved in
+  `6d41c21` (bare periods 2007–2025 in `fields.geojson`). Kept for reference: (`pipeline/ndvi.py`
   `search_items`). Page 1 is a POST with `bbox` + `collections` and returns the right tiles
   (100 × `h10v05`). The `rel=next` link is then fetched with a GET and no body, so later pages
   are unfiltered: global tiles (`h23v02`, `h35v09`, …) and even Aqua `MYD13Q1` items. Seen in
