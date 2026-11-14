@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { FieldFeature } from '../types/contracts';
 import type { RankedStrategy } from '../lib/ranking';
+import { outOfTen, type LeadExplanation } from '../lib/explain';
 import { WATER_FLAG_TEXT, waterFlag, waterLimitLabel, type WaterLimitIn } from '../lib/flow';
 
 interface Props {
@@ -8,10 +9,11 @@ interface Props {
   ranked: RankedStrategy[];
   presetLabel: string;
   waterLimitIn: WaterLimitIn;
+  explanation: LeadExplanation;
 }
 
 /** Step 4: a clear end state — what was explored, what to verify, how to take it along. */
-export function SummaryStep({ field, ranked, presetLabel, waterLimitIn }: Props) {
+export function SummaryStep({ field, ranked, presetLabel, waterLimitIn, explanation }: Props) {
   const [copied, setCopied] = useState<'ok' | 'fail' | null>(null);
   const lead = ranked[0];
   const checks = [...new Set(ranked.flatMap((r) => r.strategy.verify_locally))];
@@ -41,8 +43,13 @@ export function SummaryStep({ field, ranked, presetLabel, waterLimitIn }: Props)
         </li>
         {lead && (
           <li>
-            <strong>{lead.strategy.name}</strong> scored highest in {Math.round(lead.pBest * 100)} %
-            of samples. All four rotations, with ranges and data gaps, are in the printout.
+            {explanation.noneFits ?? (
+              <>
+                <strong>{lead.strategy.name}</strong> came out on top in {outOfTen(lead.pBest)}.{' '}
+                {explanation.why}
+              </>
+            )}{' '}
+            All four rotations, with ranges and data gaps, are in the printout.
           </li>
         )}
         {flagged.map((r) => (

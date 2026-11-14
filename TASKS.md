@@ -36,7 +36,7 @@ Shared top finding: **on the example field the current rotation wins under every
 do?" with "nothing". Priority order within each owner = list order. `[ ]` open, `[x]` done.
 
 ### Person 1 — web
-- [ ] **W1 Water limit counts in the ranking** (`lib/ranking.ts`): a sample where a rotation
+- [x] **W1 Water limit counts in the ranking** (`lib/ranking.ts`): a sample where a rotation
   exceeds the limit cannot be "best"; headline adds why the winner wins ("mainly on soil score
   and labour; alfalfa–corn needs ~17 in, over your 8 in"). Small tolerance (±5 %) before
   flagging (459 mm vs 457 mm limit was flagged).
@@ -95,6 +95,8 @@ do?" with "nothing". Priority order within each owner = list order. `[ ]` open, 
   USDA CDL history" — CDL does not say how much was irrigated.
 - [ ] **E6 Identical net returns** for alfalfa–corn, sorghum–wheat–cover and dryland on
   FIN-001 and FIN-026 — check field-specific yield response.
+- [ ] E9 (info) Web ranking now applies the farmer's water limit (`rankWithLimit` in
+  `web/src/lib/ranking.ts`); `engine/mcda.py` parity holds only for the no-limit case.
 - [ ] E7 (later) Export per-weather-year metrics so web can sample whole years (see W8).
 - [ ] E8 (later, adviser asks) Yield & price assumptions per crop (bu/ac, t/ac) and transition
   costs (breaking/establishing alfalfa, N credit) visible in data for the printout.

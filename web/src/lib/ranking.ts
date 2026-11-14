@@ -22,8 +22,22 @@ export const PRIORITY_TO_METRIC: Record<PriorityKey, MetricKey> = {
 export interface RankedStrategy {
   strategy: Strategy;
   medianScore: number; // weighted score at p50 with exact slider weights, 0..1
-  pBest: number; // 0..1
+  pBest: number; // 0..1, share of samples where this rotation is best AND within the water limit
+  /** Share of samples whose drawn irrigation water stays within the limit (1 without a limit). */
+  pWithinLimit: number;
+  /** Normalised 0..1 score per metric at p50 (1 = best of the four), for "why it wins". */
+  p50Scores: Record<MetricKey, number>;
 }
+
+export interface Ranking {
+  ranked: RankedStrategy[];
+  /** Share of samples in which none of the four rotations fits the water limit. */
+  pNoneFits: number;
+  weights: Record<MetricKey, number>;
+}
+
+/** A rotation may exceed the farmer's limit by this fraction before it counts as over. */
+export const WATER_TOLERANCE = 0.05;
 
 const Z90 = 1.2815515655446004;
 
@@ -95,19 +109,35 @@ function normalise(values: number[][], meta: Record<MetricKey, MetricMeta>): num
 
 const weighted = (row: number[], w: number[]) => row.reduce((s, x, j) => s + x * w[j], 0);
 
-export function rankStrategies(
+/**
+ * P(best) under uncertain weather and priorities. With `waterLimitMm`, a rotation whose drawn
+ * irrigation water exceeds the limit (+ WATER_TOLERANCE) cannot win that sample — the farmer
+ * cannot pump it — and samples where nothing fits are counted in `pNoneFits` instead.
+ */
+export function rankWithLimit(
   strategies: Strategy[],
   meta: Record<MetricKey, MetricMeta>,
   priorities: Priorities,
+  waterLimitMm: number | null,
   { samples = 2000, concentration = 20, seed = 42 } = {},
-): RankedStrategy[] {
+): Ranking {
   const w = weightsFromPriorities(priorities);
+  const weights = Object.fromEntries(METRIC_KEYS.map((m, j) => [m, w[j]])) as Record<
+    MetricKey,
+    number
+  >;
+  if (strategies.length === 0) return { ranked: [], pNoneFits: 0, weights };
   const p50 = strategies.map((s) => METRIC_KEYS.map((m) => s.metrics[m].p50));
-  const median = normalise(p50, meta).map((row) => weighted(row, w));
+  const p50Norm = normalise(p50, meta);
+  const median = p50Norm.map((row) => weighted(row, w));
+  const cap = waterLimitMm === null ? Infinity : waterLimitMm * (1 + WATER_TOLERANCE);
+  const iWater = METRIC_KEYS.indexOf('water_use_mm');
 
   const rand = mulberry32(seed);
   const alpha = w.map((x) => Math.max(concentration * x, 1e-3));
   const wins = new Array(strategies.length).fill(0);
+  const within = new Array(strategies.length).fill(0);
+  let noneFits = 0;
   for (let n = 0; n < samples; n++) {
     const draw = strategies.map((s) =>
       METRIC_KEYS.map((m) => {
@@ -118,9 +148,36 @@ export function rankStrategies(
     );
     const wn = dirichlet(alpha, rand);
     const scores = normalise(draw, meta).map((row) => weighted(row, wn));
-    wins[scores.indexOf(Math.max(...scores))]++;
+    let best = -1;
+    scores.forEach((sc, i) => {
+      if (draw[i][iWater] > cap) return;
+      within[i]++;
+      if (best < 0 || sc > scores[best]) best = i;
+    });
+    if (best < 0) noneFits++;
+    else wins[best]++;
   }
-  return strategies
-    .map((strategy, i) => ({ strategy, medianScore: median[i], pBest: wins[i] / samples }))
+  const ranked = strategies
+    .map((strategy, i) => ({
+      strategy,
+      medianScore: median[i],
+      pBest: wins[i] / samples,
+      pWithinLimit: within[i] / samples,
+      p50Scores: Object.fromEntries(METRIC_KEYS.map((m, j) => [m, p50Norm[i][j]])) as Record<
+        MetricKey,
+        number
+      >,
+    }))
     .sort((a, b) => b.pBest - a.pBest || b.medianScore - a.medianScore);
+  return { ranked, pNoneFits: noneFits / samples, weights };
+}
+
+/** Back-compatible: no water limit (mirrors engine/mcda.py rank_strategies). */
+export function rankStrategies(
+  strategies: Strategy[],
+  meta: Record<MetricKey, MetricMeta>,
+  priorities: Priorities,
+  opts: { samples?: number; concentration?: number; seed?: number } = {},
+): RankedStrategy[] {
+  return rankWithLimit(strategies, meta, priorities, null, opts).ranked;
 }

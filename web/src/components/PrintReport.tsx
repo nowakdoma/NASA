@@ -3,6 +3,7 @@ import { METRIC_KEYS, PRIORITY_KEYS } from '../types/contracts';
 import type { RankedStrategy, Priorities } from '../lib/ranking';
 import type { GraceFile } from '../data/load';
 import { cropLabel, cropShort } from '../lib/colors';
+import { outOfTen, tenths, type LeadExplanation } from '../lib/explain';
 import { bareHeadline, bareSummary, DAYS_PER_MONTH } from '../lib/bare';
 import { WATER_FLAG_TEXT, waterFlag, waterLimitLabel, type WaterLimitIn } from '../lib/flow';
 
@@ -16,6 +17,7 @@ interface Props {
   meta: Record<MetricKey, MetricMeta>;
   weatherYears: [number, number];
   grace: GraceFile | null;
+  explanation: LeadExplanation;
 }
 
 const PRIORITY_LABEL: Record<(typeof PRIORITY_KEYS)[number], string> = {
@@ -47,6 +49,7 @@ export function PrintReport({
   meta,
   weatherYears,
   grace,
+  explanation,
 }: Props) {
   const p = field.properties;
   const lead = ranked[0];
@@ -175,16 +178,28 @@ export function PrintReport({
         </h2>
         {lead && (
           <p className="print-finding">
-            Under <strong>{presetLabel}</strong> priorities, <strong>{lead.strategy.name}</strong>{' '}
-            scored highest in <strong>{Math.round(lead.pBest * 100)} %</strong> of 2,000 weather ×
-            priority samples. Values: typical year, with 1-in-10 low – 1-in-10 high in brackets.
+            {explanation.noneFits ?? (
+              <>
+                Under <strong>{presetLabel}</strong> priorities
+                {waterLimitIn !== null
+                  ? waterLimitIn === 0
+                    ? ' with no irrigation'
+                    : ` and a ${waterLimitIn} in water limit`
+                  : ''}
+                , <strong>{lead.strategy.name}</strong> came out on top in{' '}
+                <strong>{outOfTen(lead.pBest)}</strong> (2,000 runs of {nWeather} weather years with
+                slightly varied priorities). {explanation.why}
+              </>
+            )}{' '}
+            {explanation.excluded.join(' ')} Values: typical year, with 1-in-10 low – 1-in-10 high
+            in brackets.
           </p>
         )}
         <table className="print-table strat-print-table">
           <thead>
             <tr>
               <th>Rotation</th>
-              <th>Scores highest</th>
+              <th>On top (of 10 runs)</th>
               {METRIC_KEYS.map((m) => (
                 <th key={m}>
                   {meta[m].label}
@@ -202,7 +217,7 @@ export function PrintReport({
                   <div className="print-rot-col">{s.rotation.map(cropLabel).join(' → ')}</div>
                 </td>
                 <td>
-                  <strong>{Math.round(pBest * 100)} %</strong>
+                  <strong>{tenths(pBest)}</strong>
                 </td>
                 {METRIC_KEYS.map((m) => {
                   const q = s.metrics[m];

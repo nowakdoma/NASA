@@ -1,7 +1,7 @@
 // Guided-flow state (step, field, priorities, water limit) kept in the URL hash so progress
 // survives a reload and the adviser summary can be shared as a link.
 import { PRIORITY_KEYS } from '../types/contracts';
-import type { Priorities } from './ranking';
+import { WATER_TOLERANCE, type Priorities } from './ranking';
 
 export const STEPS = ['Your field', 'What matters', 'Compare', 'Adviser summary'] as const;
 export type Step = 0 | 1 | 2 | 3;
@@ -54,7 +54,7 @@ export type WaterFlag = 'typical' | 'dry' | null;
 /** Compare a strategy's irrigation interval (mm) with the farmer's limit. */
 export function waterFlag(water: { p50: number; p90: number }, limitIn: WaterLimitIn): WaterFlag {
   if (limitIn === null) return null;
-  const limit = limitIn * MM_PER_IN;
+  const limit = limitIn * MM_PER_IN * (1 + WATER_TOLERANCE);
   if (water.p50 > limit) return 'typical';
   if (water.p90 > limit) return 'dry';
   return null;

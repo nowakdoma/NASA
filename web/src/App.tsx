@@ -12,12 +12,14 @@ import { FieldStep } from './components/FieldStep';
 import { PrioritiesStep, presetName } from './components/PrioritiesStep';
 import { CompareStep } from './components/CompareStep';
 import { SummaryStep } from './components/SummaryStep';
-import { readHash, writeHash, type Step, type WaterLimitIn } from './lib/flow';
+import { MM_PER_IN, readHash, writeHash, type Step, type WaterLimitIn } from './lib/flow';
 import './flow.css';
 import { StrategyComparison } from './components/StrategyComparison';
 import { AboutModal } from './components/AboutModal';
 import { PrintReport } from './components/PrintReport';
-import { rankStrategies, type Priorities } from './lib/ranking';
+import { rankWithLimit, type Priorities, type Ranking } from './lib/ranking';
+import { explainLead } from './lib/explain';
+import type { MetricKey, MetricMeta } from './types/contracts';
 import { IconClipboard, IconMap, IconSatellite, IconSprout } from './components/Icons';
 
 type MobileTab = 'map' | 'steps';
@@ -72,11 +74,17 @@ export default function App() {
     [data, selectedId],
   );
 
-  const ranked = useMemo(() => {
-    if (!data || !selectedId) return [];
-    const strategies = data.strategies.fields[selectedId] ?? [];
-    return rankStrategies(strategies, data.strategies.metric_meta, priorities);
-  }, [data, selectedId, priorities]);
+  const ranking = useMemo<Ranking>(() => {
+    const strategies = (data && selectedId && data.strategies.fields[selectedId]) || [];
+    return rankWithLimit(
+      strategies,
+      data?.strategies.metric_meta ?? ({} as Record<MetricKey, MetricMeta>),
+      priorities,
+      waterLimitIn === null ? null : waterLimitIn * MM_PER_IN,
+    );
+  }, [data, selectedId, priorities, waterLimitIn]);
+  const ranked = ranking.ranked;
+  const explanation = useMemo(() => explainLead(ranking, waterLimitIn), [ranking, waterLimitIn]);
 
   const closeAbout = useCallback(() => setIsAboutOpen(false), []);
   const presetLabel = (presetName(priorities) ?? 'your custom').toLowerCase();
@@ -268,6 +276,7 @@ export default function App() {
                       weatherYears={data.strategies.weather_years}
                       presetLabel={presetLabel}
                       waterLimitIn={waterLimitIn}
+                      explanation={explanation}
                       onOpenAbout={() => setIsAboutOpen(true)}
                     />
                     <details className="flow-details flow-details-wide">
@@ -287,6 +296,7 @@ export default function App() {
                     ranked={ranked}
                     presetLabel={presetLabel}
                     waterLimitIn={waterLimitIn}
+                    explanation={explanation}
                   />
                 )}
                 <footer className="side-footer">
@@ -361,6 +371,7 @@ export default function App() {
           meta={data.strategies.metric_meta}
           weatherYears={data.strategies.weather_years}
           grace={data.grace}
+          explanation={explanation}
         />
       )}
     </div>

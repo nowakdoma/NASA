@@ -1,5 +1,6 @@
 import type { MetricKey, MetricMeta, Strategy } from '../types/contracts';
 import type { RankedStrategy } from '../lib/ranking';
+import { outOfTen, tenths, type LeadExplanation } from '../lib/explain';
 import { cropLabel } from '../lib/colors';
 import {
   MM_PER_IN,
@@ -15,6 +16,7 @@ interface Props {
   weatherYears: [number, number];
   presetLabel: string;
   waterLimitIn: WaterLimitIn;
+  explanation: LeadExplanation;
   onOpenAbout: () => void;
 }
 
@@ -65,6 +67,7 @@ export function CompareStep({
   weatherYears,
   presetLabel,
   waterLimitIn,
+  explanation,
   onOpenAbout,
 }: Props) {
   if (ranked.length === 0) return <p className="flow-sub">No rotations computed for this field.</p>;
@@ -89,11 +92,33 @@ export function CompareStep({
   return (
     <div className="flow-step">
       <div className="flow-eyebrow">Step 3 · Compare four rotations</div>
-      <p className="compare-lead" aria-live="polite">
-        Under <strong>{presetLabel}</strong> priorities, <strong>{lead.strategy.name}</strong>{' '}
-        scores highest in <strong>{Math.round(lead.pBest * 100)} %</strong> of weather and priority
-        samples.
-      </p>
+      <div className="compare-lead" aria-live="polite">
+        {explanation.noneFits ? (
+          <p className="compare-nonefits">{explanation.noneFits}</p>
+        ) : (
+          <p>
+            Under <strong>{presetLabel}</strong> priorities
+            {waterLimitIn !== null
+              ? waterLimitIn === 0
+                ? ' with no irrigation'
+                : ` and your ${waterLimitIn} in limit`
+              : ''}
+            , <strong>{lead.strategy.name}</strong> came out on top in{' '}
+            <strong>{outOfTen(lead.pBest)}</strong>
+            {explanation.close ? ', only just ahead of the next one' : ''}.
+          </p>
+        )}
+        {explanation.why && !explanation.noneFits && (
+          <p className="compare-why">{explanation.why}</p>
+        )}
+        {explanation.excluded.length > 0 && (
+          <ul className="compare-excluded">
+            {explanation.excluded.map((e) => (
+              <li key={e}>{e}</li>
+            ))}
+          </ul>
+        )}
+      </div>
       <p className="flow-sub">
         Water limit: {waterLimitLabel(waterLimitIn)}. Bars run from a 1-in-10 low to a 1-in-10 high
         year ({weatherYears[0]}–{weatherYears[1]} weather); the tick is a typical year. Decision
@@ -112,9 +137,10 @@ export function CompareStep({
                 </span>
                 <span
                   className="card-pct"
-                  title="Share of weather × priority samples in which this rotation scores highest"
+                  title={`On top in ${Math.round(pBest * 100)} % of 2,000 runs (31 weather years × slightly varied priorities)`}
                 >
-                  {Math.round(pBest * 100)} %
+                  {tenths(pBest)}
+                  <small> in 10 runs</small>
                 </span>
               </div>
               <div className="card-seq">{s.rotation.map(cropLabel).join(' → ')}</div>
