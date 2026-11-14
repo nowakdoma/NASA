@@ -121,17 +121,20 @@ cross-team needs under **Blockers / requests**.
     ever approved, the "satellite vs model" sentence becomes a small job.
   - `h5py` was added for this work and **removed again** once both were dropped, so the
     dependency allow-list stays truthful. Nothing imports it.
-- **person 1 → person 2: NASA-data depth for judging ("Relevance" criterion)** — the brief
-  names SMAP, GPM, GRACE/GRACE-FO, ECOSTRESS, Landsat; we currently show POWER, MODIS, SRTM.
-  In priority order, each as a small static JSON in `data/interim/` (person 1 wires the UI):
-  1. **GRACE-FO groundwater / TWS trend** for the Finney County area (e.g. JPL/CSR mascon
-     2002–2025, monthly anomaly cm + linear trend cm/yr). One series is enough — it is the
-     NASA hook for the Ogallala story on the start screen. Mark resolution (~300 km) as a gap.
-  2. **Frost risk** from NASA POWER `T2M_MIN` (already downloaded): per year last spring frost
-     and first fall frost (< 0 °C), plus p10/p50/p90 dates over 1995–2025. Same shape as
-     heat-stress windows (`type: "frost"`) is ideal.
-  3. Optional: **GPM IMERG** monthly precip for the county vs POWER — one sentence for the
-     "satellite vs model data" box (brief asks to explain this).
+- ~~**person 1 → person 2: NASA-data depth for judging ("Relevance" criterion)**~~ —
+  **items 1 and 2 delivered (2026-11-14); item 3 dropped by team decision.**
+  1. **GRACE-FO TWS trend** — done, `data/interim/grace_water_storage.json`, contracts
+     **v0.3** (`contracts/grace.schema.json`), wired into the start screen by person 1/3.
+     259 months 2002-04..2026-09, trend **-0.86 cm/yr (R² 0.80)** full period and -0.80 over
+     the last 10 years. Marked as TOTAL water storage (not groundwater) on ~300 km mascons.
+  2. **Frost risk** — done, `data/interim/frost_windows.json` + `.csv`: spring/fall frost
+     dates and p10/p50/p90 (1995-2025). Caveat in the file: MERRA-2 smoothing makes the
+     season read long (~199 d vs ~155-170 documented), so use it for relative risk.
+  3. **GPM IMERG** — dropped; see the SMAP/IMERG entry above (GES DISC not authorised).
+
+  Verified after the ownership swap and the v0.3 edits (2026-11-14): `assemble` and
+  `groundwater` still run, `fields.geojson` (60 fields) and `grace_water_storage.json`
+  (259 months) both validate at 0.3 with `mock: false`.
 - ~~**person 1 → person 3: per-strategy "why / benefits / risks"**~~ — resolved (person 3):
   `contracts/strategies.schema.json` and `web/src/types/contracts.ts` gained `why_considered`
   (field-specific rationale tied to soil/history/water), `benefits` (2–3 quantified strings),
@@ -146,6 +149,11 @@ cross-team needs under **Blockers / requests**.
   outside Kansas). Fix ideas: follow the next link with the method/body it specifies (STAC
   POST paging), or filter items by `collection` and tile/bbox before downloading. The
   `URLError`s on the in-county granules may be a separate signing/network issue.
+  **Re-verified 2026-11-14 after the fix:** 2024-05..08 returns 22 items, all `MOD13Q1`
+  (Terra), and 8/8 sign+read attempts succeed, so both symptoms came from the bad pages.
+  The remaining failure mode is HTTP 429 rate limiting on the PC signing endpoint, which
+  the code now paces, honours `Retry-After` for, and resumes around via the per-composite
+  cache — a fresh `make data` may need a second `pipeline ndvi` pass to finish, by design.
 
 - **pipeline → person 3 (web):** two observations from opening the dev server with real data.
   The 26 fields load correctly (legend tallies match: alfalfa 13, corn 7, wheat 2, fallow 2,
