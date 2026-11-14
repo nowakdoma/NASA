@@ -22,16 +22,15 @@ cross-team needs under **Blockers / requests**.
 | `todo` income model (price source per crop, placeholder) | `todo` SRTM slope per field                                 | `todo` P(best) + "verify locally" box copy                      |
 | `todo` MCDA + Dirichlet weights, P(best) in export       | `todo` MODIS NDVI → bare-soil periods per field-year        | `todo` mobile layout / accessibility pass                       |
 | `todo` `engine.export` → contracts format                | `todo` SMAP soil moisture → water-stress windows            | `todo` "about the data" / uncertainty page                      |
-| `todo` pitch deck + demo script                          | `todo` heat-stress windows (POWER Tmax > threshold)         | `todo` deploy static build                                      |
+| `todo` pitch deck + demo script                          | `done` heat-stress windows (POWER Tmax > threshold)         | `todo` deploy static build                                      |
 
 ## Blockers / requests
 
-- **pipeline (person 2):** raster work (CDL zonal-majority, SSURGO, SRTM slope) needs
-  `rasterio` + `pyproj`/`shapely` added to `pyproject.toml`. AGENTS.md bans new deps without
-  human sign-off, so CDL/SSURGO/SRTM/NDVI/SMAP stay `NotImplementedError` until approved.
-  Interim `data/interim/*.csv` can be produced with stdlib + pandas only.
-- **pipeline:** MODIS NDVI + SMAP + SRTM downloads need `EARTHDATA_USERNAME` /
-  `EARTHDATA_PASSWORD` in `.env`. POWER needs no login and is done.
+- **pipeline:** `rasterio==1.4.4` + `pyproj==3.7.2` + `shapely==2.2.0` approved and added
+  (GDAL 3.10.3 wheels import cleanly on Windows). CDL zonal stats, SSURGO and SRTM are
+  unblocked.
+- **pipeline:** MODIS NDVI + SMAP + SRTM downloads still need `EARTHDATA_USERNAME` /
+  `EARTHDATA_PASSWORD` in `.env`. POWER and SSURGO (Soil Data Access JSON) need no login.
 
 ## Decisions log
 
