@@ -1,7 +1,9 @@
 # FieldShift — 3-minute pitch (7 slides)
 
-Deck (web slides, present full screen; PDF/PPTX export from its Share menu):
-https://claude.ai/artifact/5jxJkDPHP1LpFa72Gqy5zn — private until shared from its Share menu.
+Deck (Figma Slides, the version submitted globally; speaker notes per slide):
+https://www.figma.com/slides/BwBCfFOnQlypsikuAxev7I
+Earlier web version: https://claude.ai/artifact/5jxJkDPHP1LpFa72Gqy5zn (slide 4 not updated).
+Live app: https://nowakdoma.github.io/NASA/ · Polish local script: `reports/PITCH_PL.md`.
 
 Rules for whoever presents: decision support, never "you should plant". Every number below is
 from the app's current data (FIN-030, contracts v0.4). Do not add numbers that are not here.
@@ -11,7 +13,7 @@ from the app's current data (FIN-030, contracts v0.4). Do not add numbers that a
 | 0:00–0:15 | 1 FieldShift           | Finney County, Kansas, pivots on the Ogallala. One question: what could a different rotation do for my field, with less water to pump?                                                                   |
 | 0:15–0:40 | 2 Water from orbit     | NASA GRACE/GRACE-FO, 259 months: about −0.86 cm a year, ~21 cm since 2002 on the trend line (R² 0.80). Regional ~300 km signal, total water storage, not one well. Every rotation is now a water choice. |
 | 0:40–1:00 | 3 Four steps           | Your field → what matters (incl. how much you can pump) → compare as ranges → adviser summary. We say "came out on top in about N of 10 weather runs", never "plant X".                                  |
-| 1:00–1:25 | 4 Four NASA datasets   | POWER (weather, heat), MODIS (months without green cover), GRACE (water trend), SRTM (slope) + USDA crop map and soil. Each with where it can be wrong. FAO-56 + RUSLE, no black-box AI.                 |
+| 1:00–1:25 | 4 How it works         | Data → models → ranking. POWER, MODIS, GRACE, SRTM + USDA crops/soil. FAO-56 water balance (+ Ky yield → income), RUSLE, soil conditioning index; no black-box AI. 31 weather years → p10/p50/p90; 2,000 Monte Carlo draws (Dirichlet weights) → "on top in N of 10". |
 | 1:25–1:55 | 5 Field 30             | Real pivot by the Arkansas River (satellite view). 18 years of crops, nine of alfalfa. No green cover: about 3 months a year in 2008–2012, under 1 in 2021–2025.                                           |
 | 1:55–2:35 | 6 One constraint       | Balanced, no limit: alfalfa–corn on top in about 5 of 10 runs (needs ~18 in). Click. 14 in limit: sorghum–wheat–cover on top in about 8 of 10. Honest cost: ~$12,400 vs ~$54,000 typical-year net.       |
 | 2:35–3:00 | 7 Ranges, not promises | 1-in-10 low/high on every value, "check locally" (water district, K-State, NRCS), "what we don't know". Next: whole weather years, validation, more counties. Supports judgment, never replaces it.       |
